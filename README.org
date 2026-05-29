@@ -1,0 +1,17 @@
+* nazg
+one flake to rule all of my physical and virtual machines
+
+* Building Hosts
+#+begin_quote
+=--impure= will be gone in the future
+#+end_quote
+
+- xkarna ::
+  #+begin_src sh
+sudo nixos-rebuild switch --flake .#xkarna --impure
+  #+end_src
+
+- fiat ::
+  #+begin_src sh
+sudo nixos-rebuild switch --flake .#fiat --impure
+  #+end_src
