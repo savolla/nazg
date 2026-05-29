@@ -13,5 +13,5 @@ sudo nixos-rebuild switch --flake .#xkarna --impure
 
 - fiat ::
   #+begin_src sh
-sudo nixos-rebuild switch --flake .#fiat --impure
+home-manager switch --flake .#fiat --impure
   #+end_src
