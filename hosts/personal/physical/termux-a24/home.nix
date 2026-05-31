@@ -10,111 +10,6 @@
   ...
 }:
 
-# for android emulator
-let
-  android = pkgs.androidenv.composeAndroidPackages {
-    platformVersions = [ "34" ];
-    abiVersions = [ "x86_64" ];
-    systemImageTypes = [ "google_apis" ];
-
-    includeEmulator = true;
-    includeSystemImages = true;
-  };
-
-  dwmFlexipatch = pkgs.stdenv.mkDerivation {
-    pname = "dwm-flexipatch";
-    version = "6.8";
-
-    src = builtins.path {
-      path = /home/kkoc/project/repos/one-ring/tools/suckless/dwm-flexipatch;
-      name = "dwm-flexipatch-src";
-    };
-
-    nativeBuildInputs = [ pkgs.gnumake pkgs.gcc pkgs.pkg-config ];
-    buildInputs = [
-      pkgs.libx11
-      pkgs.imlib2
-      pkgs.libxcb
-      pkgs.libxft
-      pkgs.libxinerama
-      pkgs.libxrandr
-      pkgs.libxcursor
-      pkgs.libxrender
-    ];
-    installPhase = ''
-      mkdir -p $out/bin
-      rm config.h patches.h
-      make clean
-      make
-      cp dwm $out/bin/
-    '';
-  };
-
-  stFlexipatch = pkgs.stdenv.mkDerivation {
-    pname = "st-flexipatch";
-    version = "9.3";
-    src = builtins.path {
-      path = /home/kkoc/project/repos/one-ring/tools/suckless/st-flexipatch;
-      name = "st-flexipatch-src";
-    };
-    nativeBuildInputs = [ pkgs.gnumake pkgs.gcc pkgs.pkg-config ];
-    buildInputs = [
-      pkgs.libx11
-      pkgs.libxft
-      pkgs.libxinerama
-      pkgs.libxrandr
-      pkgs.libxcursor
-      pkgs.imlib2
-      pkgs.libsixel
-      pkgs.fontconfig
-      pkgs.freetype
-    ];
-    buildPhase = ''
-      cp config.def.h config.h
-    cp patches.def.h patches.h
-    make
-    '';
-    installPhase = ''
-      mkdir -p $out/bin
-    cp st $out/bin/
-    '';
-  };
-
-  slockFlexipatch = pkgs.stdenv.mkDerivation {
-    pname = "slock-flexipatch";
-    version = "1.6";
-    src = builtins.path {
-      path = /home/kkoc/project/repos/one-ring/tools/suckless/slock-flexipatch;
-      name = "slock-flexipatch-src";
-    };
-    nativeBuildInputs = [ pkgs.gnumake pkgs.pkg-config ];
-    buildInputs = [
-      pkgs.xorg.libX11
-      pkgs.xorg.libXext
-      pkgs.xorg.libXinerama
-      pkgs.xorg.libXrandr
-      pkgs.imlib2
-      pkgs.xorg.libXScrnSaver
-      pkgs.libxcrypt
-      pkgs.pam
-    ];
-    postPatch = ''
-      sed -i 's/^LIBS =.*/LIBS = -lc -lcrypt -lX11 -lXext -lXrandr -lXinerama -lXss/' Makefile
-    '';
-    buildPhase = ''
-      cp config.def.h config.h
-    cp patches.def.h patches.h
-    make
-    '';
-    installPhase = ''
-      mkdir -p $out/bin
-    cp slock $out/bin/
-    '';
-    meta = {
-      mainProgram = "slock";
-    };
-  };
-in
 {
 
   # custom modules from one-ring/modules/home-manager
@@ -130,74 +25,68 @@ in
   };
 
   home = {
-    stateVersion = "25.05"; # change this if you change the root flake.nix
-    username = "kkoc";
-    homeDirectory = "/home/kkoc";
-
-    activation.stow-dotfiles = ''
-      echo "stowing dotfiles..."
-
-      cd ${dotfilesPath}/$HOSTNAME || exit 1
-      ${pkgs.stow}/bin/stow --target=$HOME . --restow
-
-      echo "stowing tools..."
-      cd ${dotfilesPath}/../tools || exit 1
-      ${pkgs.stow}/bin/stow --target=$HOME/project . --restow
-    '';
-
+    stateVersion = "24.05"; # change this if you change the root flake.nix
+    username = "savolla";
+    # homeDirectory = "/home/savolla";
   };
   programs = {
+
+    fish = {
+      enable = true;
+    };
+
+    # pretty shell
+    starship = {
+      enable = true;
+    };
+
+    # manage environments depending on current directory (doom emacs dep)
+    direnv = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true; # use gpg key as your ssh key
+      pinentryPackage = pkgs.pinentry-curses;
+    };
+
+    tmux = {
+      enable = true;
+    };
+
+
+    ssh = {
+      enableAskPassword = true;
+    };
+
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
     emacs = {
       enable = true;
       package = pkgs.emacs;
       extraPackages = emacsPackages: [
         emacsPackages.pdf-tools
         emacsPackages.vterm
-        emacsPackages.omnisharp # csharp lsp
       ];
-    };
-
-    rofi = {
-      enable = true;
-      theme = "gruvbox-dark-hard";
-      font = "IosevkaTerm Nerd Font Mono 14";
-      pass.enable = true;
-      plugins = [
-        pkgs.rofi-calc # awesome calculator
-        pkgs.rofi-nerdy # search nerd-icons
-        pkgs.rofi-emoji # search emoji
-        pkgs.rofi-bluetooth
-      ];
-      extraConfig = {
-        kb-remove-to-eol = "";
-        kb-element-next = "";
-        kb-accept-entry = "Tab";
-        kb-row-down = "Control+j";
-        kb-row-up = "Control+k";
-      };
     };
   };
 
-  # for android emulator
+  # ~/.xprofile or ~/.profile
   home.sessionVariables = {
-    ANDROID_HOME = "${android.androidsdk}/libexec/android-sdk";
-    ANDROID_SDK_ROOT = "${android.androidsdk}/libexec/android-sdk";
+    # EXAMPLE = "value"
   };
 
   home.packages =
     with pkgs;
     [
-      slockFlexipatch # custom slock
-      stFlexipatch # custom st
-      dwmFlexipatch # custom dwm
-      qutebrowser # keyboard centric web browser
       kitty # terminal emulator
-      autossh # watch and re-open ssh connections
       sesh # session manager for tmux
       fzf # fuzzy finder both for zshrc command history and tmux session finder and more
-      skim # faster fzf written in rust
-      gum # tasty interactive script creator
-      psmisc # optional dependency for fzf-tmux
 
       # doom emacs dependencies
       emacs-lsp-booster # for eglot
@@ -219,10 +108,8 @@ in
       python312Packages.pyyaml # yaml library
 
       # general
-      weechat # irc stuff
       yazi # file manager that I use in neovim
       lua # dep for lua neovim
-      xorg.xbacklight # set brightness on laptop
       pass # terminal passwork manager
 
       ssh-askpass-fullscreen
@@ -230,60 +117,6 @@ in
       direnv # execute commands once you enter into a directory
       fish # better zsh (make it your daily driver one day)
       fishPlugins.done # get notified when jobs finish
-
-      # for android emulator
-      androidsdk
-      qemu
-      libGL
-      gtk3
-
-      # devops
-      ## devops/database
-      dbeaver-bin
-      mysql84
-      cassandra
-      postgresql
-
-      ## devops/monitoring
-      prometheus
-      glances
-      # grafana (disabled due to home manager cannot run system services.. use nixos for this!)
-      grafterm # grafana on terminal
-
-      ## devops/docker
-      # docker # can't work with home-manager since it requires systemd service
-      # docker-buildx # newer build tool for docker (you need to fix the docker issue first)
-      docker-compose
-      ctop # watch container metrics
-      lazydocker # manage your docker containers without friction
-      dive # inspect docker images
-
-      ## devops/kubernetes
-      popeye # cluster scanner for misconfigurations
-      kustomize # pure pain
-      kubepug # before upgraing kubernetes
-      kubetail # kubernetes logs
-      litmus # kubernetes chaos engineering
-      litmusctl # manager litrmux
-
-      kube-capacity # get CPU, RAM, storage info of kubernetes nodes and pods
-      cadvisor # kubernetes daemonset for resource usage monitoring
-      kubectx # kubectl conetxt switcher + kubens
-      kube-bench # security scanner for kubernetes
-      kubectl # k8s api communicator
-      k9s # tui kubernetes manager
-      kubecolor # colorize kubectl output
-      kubescape # scan security issues of kubernetes cluster
-      rakkess # check what access do you have on a kubernetes cluster
-      # NOTE: I disabled datree due to datree.io resolve errors. I installed it manually
-      # datree # ensure K8s manifests and Helm charts follow best practices
-      kubectl-doctor # get k8s diagnostics
-      k8sgpt # llm for k8s
-      dyff # better yaml file differ
-      ktop # monitor kubernetes node usage
-      kubeconform
-      kubent # find deprecated api versions
-      pluto # like kubent
 
       # eglot lsp packages
       bash-language-server # lsp for bash
@@ -311,15 +144,6 @@ in
       yaml-language-server # yaml lsp
       zls # zig lsp
 
-      ### kubectl plugins
-      kubectl-graph
-      kubectl-images
-      kubectl-gadget
-      kubectl-explore # fuzzy find in describe
-      kubectl-evict-pod # good for testing pod distruption budgets
-      kubectl-node-shell # exec into node
-      kubectl-view-secret # decode kubernetes secret
-      kubectl-convert # convert old deprecated api manifest to newer one
 
       ### devops/helm
       # helm # disabled bc it crashed on ubuntu. installed via snap instead
@@ -371,195 +195,31 @@ in
       k6 # test
       ggh # ssh session manager
 
-      # devops/cac
-      # ansible # installed from apt for kubespray to work...
-      salt
-      terraform # manage infra as code
-      terraform-lsp # lsp for emacs terraform mode
-      terraformer # reverse terraform!
-      tftui # interractive terraform state browser
-
       # arandr
       asciinema # record your terminal sessions
       asciinema-agg # asciinema gif generator
       asciinema-scenario # create videos from asciinema files
 
       # misc
-      fuse # some appimages require it
-      gccgo # gcc for go
-      xcolor
       yt-dlp # to watch youtube from mpv
       wkhtmltopdf # convert webpages to pdf (for emacs note taking using pdf-tools and org-noter)
       buku # bookmark manager
       mpv # video player for life
       vim-full # for gvim to be installed (needed for qutebrowser default editor)
-      pcmanfm # lightweight file manager
-      astroterm # watch the sky from your terminal
       atuin # shell history on steroids
-      bagels # expanse tracker in tui
-      bluetui # tui bluetooth manager
       browsr # browse remote file systems
-      caligula # disk imaging (tui balena-etcher/rufus)
-      carbon-now-cli # generate images from your code
-      turbovnc
-      cariddi # crawl urls. good for discovery
-      dstp # run networking tests to your site
-      castero # podcasts in tui
-      chawan # tui web browser
-      circumflex # hackernews in your browser
-      cotp # tui otp
-      cpufetch # get cpu info fast
-      croc # easily send files between hosts
-      csvlens # pretty print your csv files
-      dua # better ncdu
-      duf # free alternative
-      fclones # remove file duplicates
-      arandr # manage multiple monitors with gui
       bat # better cat
-      jamesdsp # better music listening experience
-      newsboat # rss viewer
       tmuxp # declarative tmux sessions (disabled due to compilation errors..)
       tmux-xpanes # run multiple commands on multiple tmux panes at once
       tree # file trees
-      tabbed # make any tool tabbed
-
-      # zsh
-      zsh
-      zsh-autosuggestions
-      zsh-fast-syntax-highlighting
-      zsh-abbr # abbreviations just like fish
-
-      # personal/music
-      timidity # play midi files usin mpd
-      rmpc
-      cava # auto visualizer
-      mpc # control mpd
-
-      # personal/misc
-      remmina # remote desktop for openshift
-      vpnc-scripts # for vpn
-      opencode # claude-code open source alt.
-      libva-utils # list VAAPI capabie devices on your system (needed for optimizing sunshine)
-      tiddlywiki
-      rust-petname # generate random names (useful for server hostnames)
-      syncthing
-      delta # bat like diff
-      libx11 # for suckless tools to be compiled
-      zoxide # cd on steroids
-      translate-shell # needed for using rofi as translate engine
-      virt-viewer # display spice vms from proxmox
-      rustdesk # better rdp
-      moonlight-qt # sunshine client for superior RDP
-      sunshine # better rdp
-      terminal-parrot # wow
-      p7zip # 7z
-      gvfs
-      libmtp
-      mtpfs # mount android filesystem
-      nautilus # just in case file manager
-      wtfutil # build customized tui dashboards
-      qalculate-gtk # dependency for rofi-calc
-      xdotool # autotype things (requirement for legolas script)
-      libqalculate # awesome calculator qalculate
-      libxml2 # for xmllint to installed (for soap cli)
-      xsel # clipboard for xorg
-      screenkey # display keys pressed
-      simplescreenrecorder # screen recorder
-      gpu-screen-recorder-gtk # screen recorder using gpu with gui
-      gpu-screen-recorder # screen recorder using gpu
-      # go-jira # command line jira for my rofi script
-      # skim # skim instead of fzf
-      hexyl # command line hex viewer (for ranger and yazi)
-      zathura # pdf reader
-      serpl # find and replace
-      unp # archive agnostic uncompressor
-      xsct # adjust screen temperature
-      xournalpp # draw shapes
-      lunarvim # neovim ide
-      neovim # better vim
-      iamb # matrix client for terminal
-      gdu # fancy ncdu
-      stow # manage dotfiles
-      scrcpy # control your android from your pc
-      nchat # tui whatsapp/telegram
-      mapscii # google maps in tui
-      tlock # 2FA tui
-      profanity # tui xmpp
-      insomnia # rest client
-      slack-term # tui slack
-      nethack # best roguelike
-      youtube-tui
-      browsh # terminal browser that rocks
-      firefox # okay browser
-      mcfly # super ctrl+r
-      mcfly-fzf # super ctrl+r with fzf (you must install mcfly first)
-      # mynav # better session management on top of tmux (not in nixpkgs)
-      # sshm # better than lazyssh (not in nixpkgs)
-      termscp # use SCP/SFTP/FTP/S3/SMB from tui
-      # carbonyl # chromium in your terminal (seriously) (not in nixpkgs)
-      # fancy-cat # tui pdf reader (broken)
-      invidtui # youtube in tui
-
-      libreoffice
-      picom
-      reader # render curl output better
-      below # what's eating my ram right now?!
-
-      banner
-      # testing
-      jmeter # testing framework
-      pulseaudioFull
-
-      # programming/languages
-      go
-
-    ]
-    ++ (with nixpkgs-unstable; [
-      clickhouse
-    ]);
-
-  # nixpkgs.config.allowBroken = true;
-
-  # nixpkgs = {
-  #   config = {
-  #     allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-  #       "terraform"
-  #       "slack"
-  #       "lens" # kubernetes ide
-  #     ];
-  #   };
-  # };
+    ];
 
   nixpkgs.config = {
     allowUnfree = true;
-    android_sdk.accept_license = true;
   };
 
   # services
   services = {
-    betterlockscreen.enable = true;
 
-    mpd = {
-      enable = true;
-      musicDirectory = "/home/kkoc/resource/music";
-      playlistDirectory = "/home/kkoc/.config/mpd/playlists";
-      dbFile = "/home/kkoc/.config/mpd/database";
-      network = {
-        port = 6600;
-      };
-      extraConfig = ''
-        audio_output {
-          type        "pulse"
-          name        "PulseAudio Output"
-        }
-
-        audio_output {
-          type        "fifo"
-          name        "rmpc-cava"
-          path        "/tmp/mpd.fifo"
-          format      "44100:16:2"
-        }
-      '';
-    };
   };
 }

@@ -935,6 +935,7 @@ in
       unstable.zsh-autosuggestions
       unstable.zsh-fast-syntax-highlighting
       unstable.zstd # extract .zst files
+      unstable.fishPlugins.done # get notified when jobs finish
 
       (unstable.pass.withExtensions (exts: [
         exts.pass-otp
