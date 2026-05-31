@@ -5,6 +5,9 @@
   environment.packages = with pkgs; [
     # User-facing stuff that you really really want to have
     vim # or some other editor, e.g. nano or neovim
+    neovim
+    termux
+    pinentry-curses
 
     # Some common stuff that people expect to have
     procps
@@ -27,17 +30,53 @@
     git
   ];
 
-  # Backup etc files instead of failing to activate generation if a file already exists in /etc
+  # backup etc files instead of failing to activate generation if a file already exists in /etc
   environment.etcBackupExtension = ".bak";
 
-  # Read the changelog before changing this value
+  # read the changelog before changing this value
   system.stateVersion = "24.05";
 
-  # Set up nix for flakes
+  # set up nix for flakes
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
 
-  # Set your time zone
-  #time.timeZone = "Europe/Berlin";
+  # set your time zone
+  time.timeZone = "Europe/Istanbul";
+
+  programs = {
+    mtr.enable = true;
+
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true; # use gpg key as your ssh key
+      pinentryPackage = pkgs.pinentry-curses;
+    };
+
+    tmux = {
+      enable = true;
+    };
+
+    ssh = {
+      enableAskPassword = true;
+    };
+
+    fish = {
+      enable = true;
+    };
+
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+    direnv = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    # pretty shell
+    starship = {
+      enable = true;
+    };
+  };
 }
