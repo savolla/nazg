@@ -17,7 +17,7 @@
 
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs-25_11";
     };
   };
 
@@ -81,11 +81,10 @@
       nixOnDroidConfigurations = {
 
         a24 = nix-on-droid.lib.nixOnDroidConfiguration {
-          pkgs = mkUnstable "aarch64-linux";
-          modules = [ ./hosts/personal/mobile/a24/default.nix ];
+          pkgs = mkStable "aarch64-linux";
+          modules = [ ./hosts/personal/mobile/a24/home.nix ];
           extraSpecialArgs = {
             stable = mkStable "aarch64-linux";
-            unstable = mkUnstable "aarch64-linux";
           };
           home-manager-path = home-manager-25_11.outPath;
         };
