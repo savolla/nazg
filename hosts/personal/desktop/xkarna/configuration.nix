@@ -1245,6 +1245,7 @@ in
       enable = true;
       allowedTCPPorts = [
         22    # allow ssh
+        2234  # nicotine-plus downloads
         22000 # allow syncthing
       ];
       allowedUDPPorts = [

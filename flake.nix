@@ -54,7 +54,7 @@
             stable = mkStable "x86_64-linux";
             unstable = mkUnstable "x86_64-linux";
           };
-          modules = [ ./hosts/personal/physical/xkarna/configuration.nix ];
+          modules = [ ./hosts/personal/desktop/xkarna/configuration.nix ];
         };
 
         rpi3b = nixpkgs-unstable.lib.nixosSystem {
@@ -63,7 +63,7 @@
             stable = mkStable "aarch64-linux";
             unstable = mkUnstable "aarch64-linux";
           };
-          modules = [ ./hosts/personal/physical/rpi3b/configuration.nix ];
+          modules = [ ./hosts/personal/embedded/rpi3b/configuration.nix ];
         };
 
       };
