@@ -190,52 +190,52 @@ in
       slockFlexipatch # custom slock
       stFlexipatch # custom st
       dwmFlexipatch # custom dwm
-      qutebrowser # keyboard centric web browser
-      kitty # terminal emulator
-      autossh # watch and re-open ssh connections
-      sesh # session manager for tmux
-      fzf # fuzzy finder both for zshrc command history and tmux session finder and more
-      skim # faster fzf written in rust
-      gum # tasty interactive script creator
-      psmisc # optional dependency for fzf-tmux
+      stable.qutebrowser # keyboard centric web browser
+      stable.kitty # terminal emulator
+      stable.autossh # watch and re-open ssh connections
+      stable.sesh # session manager for tmux
+      stable.fzf # fuzzy finder both for zshrc command history and tmux session finder and more
+      stable.skim # faster fzf written in rust
+      stable.gum # tasty interactive script creator
+      stable.psmisc # optional dependency for fzf-tmux
 
       # doom emacs dependencies
-      emacs-lsp-booster # for eglot
-      rust-analyzer # doom emacs dependency
-      stylelint # doom emacs web module dep
-      nodePackages.js-beautify # doom emacs web module dep
-      rocmPackages.clang # for clang-format. doom emacs java and cc module dep
-      glslang # for glslangValidator. doom emacs cc module dep
-      nil # nix language server for doom emacs
-      iconv # fix emacs cannot find home directory on non-nixo distros (ubuntu)
-      fd # dependency for doom emacs and tmux session switcher
-      nixfmt-rfc-style # doom emacs depENDENCY for nix buffer formatting
+      stable.emacs-lsp-booster # for eglot
+      stable.rust-analyzer # doom emacs dependency
+      stable.stylelint # doom emacs web module dep
+      stable.nodePackages.js-beautify # doom emacs web module dep
+      stable.rocmPackages.clang # for clang-format. doom emacs java and cc module dep
+      stable.glslang # for glslangValidator. doom emacs cc module dep
+      stable.nil # nix language server for doom emacs
+      stable.iconv # fix emacs cannot find home directory on non-nixo distros (ubuntu)
+      stable.fd # dependency for doom emacs and tmux session switcher
+      stable.nixfmt-rfc-style # doom emacs depENDENCY for nix buffer formatting
 
       # pyton modules
-      python312Packages.pyflakes # doom emacs dependency
-      python312Packages.pytest # doom emacs dependency
-      python312Packages.nose2 # doom emacs dependency
-      python312Packages.libtmux # manage tmux from python
-      python312Packages.pyyaml # yaml library
+      stable.python312Packages.pyflakes # doom emacs dependency
+      stable.python312Packages.pytest # doom emacs dependency
+      stable.python312Packages.nose2 # doom emacs dependency
+      stable.python312Packages.libtmux # manage tmux from python
+      stable.python312Packages.pyyaml # yaml library
 
       # general
-      weechat # irc stuff
-      yazi # file manager that I use in neovim
-      lua # dep for lua neovim
-      xorg.xbacklight # set brightness on laptop
-      pass # terminal passwork manager
+      stable.weechat # irc stuff
+      stable.yazi # file manager that I use in neovim
+      stable.lua # dep for lua neovim
+      stable.xorg.xbacklight # set brightness on laptop
+      stable.pass # terminal passwork manager
 
-      ssh-askpass-fullscreen
+      stable.ssh-askpass-fullscreen
 
-      direnv # execute commands once you enter into a directory
-      fish # better zsh (make it your daily driver one day)
-      fishPlugins.done # get notified when jobs finish
+      stable.direnv # execute commands once you enter into a directory
+      stable.fish # better zsh (make it your daily driver one day)
+      stable.fishPlugins.done # get notified when jobs finish
 
       # for android emulator
-      androidsdk
-      qemu
-      libGL
-      gtk3
+      stable.androidsdk
+      stable.qemu
+      stable.libGL
+      stable.gtk3
 
       # devops
       ## devops/database
