@@ -339,7 +339,8 @@ in
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
-    motd = ""; # disable MotD globally for all users
+    motd = "";
+    motdFile = null; # disable MotD globally for all users
 
     users = {
       savolla = {
@@ -405,6 +406,9 @@ in
   qt.style = "adwaita-dark";
 
   environment = {
+
+    etc."issue".text = ""; # clear /etc/issue for disabling messages in Motd
+
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/savolla/.steam/root/compatibilitytools.d";
       GTK_THEME = "Adwaita:dark";
@@ -1074,6 +1078,12 @@ in
 
   # List services that you want to enable:
   services = {
+
+    # silence the agetty "Welcome to NixOS" banner on tty
+    getty = {
+      greetingLine = "";
+      helpLine = "";   # removes the "run nixos-help" line
+    };
 
     # SSD/NVME healthcare
     fstrim = {
