@@ -82,7 +82,7 @@
 
         a24 = nix-on-droid.lib.nixOnDroidConfiguration {
           pkgs = mkStable "aarch64-linux";
-          modules = [ ./hosts/personal/mobile/a24/home.nix ];
+          modules = [ ./hosts/personal/mobile/a24/default.nix ];
           extraSpecialArgs = {
             stable = mkStable "aarch64-linux";
           };

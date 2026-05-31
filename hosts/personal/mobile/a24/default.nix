@@ -6,15 +6,14 @@
     # User-facing stuff that you really really want to have
     vim # or some other editor, e.g. nano or neovim
     neovim
-    termux
-    pinentry-curses
+    tmux
 
     # Some common stuff that people expect to have
     procps
     killall
     diffutils
     findutils
-    utillinux
+    util-linux
     tzdata
     hostname
     man
@@ -45,7 +44,6 @@
   time.timeZone = "Europe/Istanbul";
 
   programs = {
-    mtr.enable = true;
 
     gnupg.agent = {
       enable = true;
@@ -58,7 +56,7 @@
     };
 
     ssh = {
-      enableAskPassword = true;
+      enable = true;
     };
 
     fish = {
