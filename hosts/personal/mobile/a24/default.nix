@@ -4,7 +4,7 @@
   environment.packages = with pkgs; [
     # personal
     vim neovim tmux git zoxide fish direnv starship
-    emacs-nox ncurses
+    emacs-nox ncurses busybox
 
     # essential
     procps killall diffutils findutils util-linux
