@@ -329,25 +329,31 @@ in
   console.keyMap = "trq";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.savolla = {
-    isNormalUser = true;
-    description = "savolla";
-    extraGroups = [
-      "networkmanager" # wifi etc.
-      "wheel" # sudo
-      "input" # xorg
-      "video" # xorg
-      "audio" # pipewire
-      "libvirtd" # virtualization
-      "docker" # run docker commands withour sudo
-      "podman" # run podman commmands without sudo
-      "vboxusers" # vbox guest additions and clipboard share
-      "kvm" # android emulation with kvm (faster)
-      "adbusers" # interact with android and emulators with adb
-      "systemd-journal" # watch system logs with `journalctl -f` witout sudo password
-    ];
+  users = {
+    motd = ""; # disable MotD globally for all users
 
-    shell = pkgs.fish;
+    users = {
+      savolla = {
+        isNormalUser = true;
+        description = "savolla";
+        extraGroups = [
+          "networkmanager" # wifi etc.
+          "wheel" # sudo
+          "input" # xorg
+          "video" # xorg
+          "audio" # pipewire
+          "libvirtd" # virtualization
+          "docker" # run docker commands withour sudo
+          "podman" # run podman commmands without sudo
+          "vboxusers" # vbox guest additions and clipboard share
+          "kvm" # android emulation with kvm (faster)
+          "adbusers" # interact with android and emulators with adb
+          "systemd-journal" # watch system logs with `journalctl -f` witout sudo password
+        ];
+
+        shell = pkgs.fish;
+      };
+    };
   };
 
   # Allow unfree packages
