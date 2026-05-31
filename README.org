@@ -8,10 +8,18 @@ one flake to rule all of my physical and virtual machines
 
 - xkarna ::
   #+begin_src sh
+cd ~/project/dev/nazg
 sudo nixos-rebuild switch --flake .#xkarna --impure
   #+end_src
 
 - fiat ::
   #+begin_src sh
+cd ~/project/dev/nazg
 home-manager switch --flake .#fiat --impure
+  #+end_src
+
+- a24 ::
+  #+begin_src sh
+cd ~/project/dev/nazg
+nix-on-droid switch --flake .#a24
   #+end_src
