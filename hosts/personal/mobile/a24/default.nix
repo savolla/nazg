@@ -20,5 +20,4 @@
   '';
 
   time.timeZone = "Europe/Istanbul";
-  };
 }
