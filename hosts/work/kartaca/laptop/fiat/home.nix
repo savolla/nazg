@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  dotfilesPath,
   self,
   nixpkgs-unstable,
   stable,
@@ -30,7 +29,11 @@ let
       name = "dwm-flexipatch-src";
     };
 
-    nativeBuildInputs = [ pkgs.gnumake pkgs.gcc pkgs.pkg-config ];
+    nativeBuildInputs = [
+      pkgs.gnumake
+      pkgs.gcc
+      pkgs.pkg-config
+    ];
     buildInputs = [
       pkgs.libx11
       pkgs.imlib2
@@ -57,7 +60,11 @@ let
       path = /home/kkoc/project/repos/one-ring/tools/suckless/st-flexipatch;
       name = "st-flexipatch-src";
     };
-    nativeBuildInputs = [ pkgs.gnumake pkgs.gcc pkgs.pkg-config ];
+    nativeBuildInputs = [
+      pkgs.gnumake
+      pkgs.gcc
+      pkgs.pkg-config
+    ];
     buildInputs = [
       pkgs.libx11
       pkgs.libxft
@@ -70,13 +77,13 @@ let
       pkgs.freetype
     ];
     buildPhase = ''
-      cp config.def.h config.h
-    cp patches.def.h patches.h
-    make
+        cp config.def.h config.h
+      cp patches.def.h patches.h
+      make
     '';
     installPhase = ''
-      mkdir -p $out/bin
-    cp st $out/bin/
+        mkdir -p $out/bin
+      cp st $out/bin/
     '';
   };
 
@@ -87,7 +94,10 @@ let
       path = /home/kkoc/project/repos/one-ring/tools/suckless/slock-flexipatch;
       name = "slock-flexipatch-src";
     };
-    nativeBuildInputs = [ pkgs.gnumake pkgs.pkg-config ];
+    nativeBuildInputs = [
+      pkgs.gnumake
+      pkgs.pkg-config
+    ];
     buildInputs = [
       pkgs.xorg.libX11
       pkgs.xorg.libXext
@@ -102,13 +112,13 @@ let
       sed -i 's/^LIBS =.*/LIBS = -lc -lcrypt -lX11 -lXext -lXrandr -lXinerama -lXss/' Makefile
     '';
     buildPhase = ''
-      cp config.def.h config.h
-    cp patches.def.h patches.h
-    make
+        cp config.def.h config.h
+      cp patches.def.h patches.h
+      make
     '';
     installPhase = ''
-      mkdir -p $out/bin
-    cp slock $out/bin/
+        mkdir -p $out/bin
+      cp slock $out/bin/
     '';
     meta = {
       mainProgram = "slock";
@@ -133,17 +143,6 @@ in
     stateVersion = "25.05"; # change this if you change the root flake.nix
     username = "kkoc";
     homeDirectory = "/home/kkoc";
-
-    activation.stow-dotfiles = ''
-      echo "stowing dotfiles..."
-
-      cd ${dotfilesPath}/$HOSTNAME || exit 1
-      ${pkgs.stow}/bin/stow --target=$HOME . --restow 
-
-      echo "stowing tools..."
-      cd ${dotfilesPath}/../tools || exit 1
-      ${pkgs.stow}/bin/stow --target=$HOME/project . --restow 
-    '';
 
   };
   programs = {
@@ -233,7 +232,6 @@ in
 
       # for android emulator
       stable.androidsdk
-      stable.qemu
       stable.libGL
       stable.gtk3
 
@@ -352,7 +350,6 @@ in
       nixos-rebuild-ng # rebuild remote nixos machines from non-nixos hosts
       nixos-generators # create various images from nixos configuration files
       mkpasswd # gene rate hashes
-      qemu # virtualization for good
       lazyssh # ssh but lazy
       jiratui # tui version of jira
       regex-tui # try regex interactively
@@ -514,7 +511,7 @@ in
       go
 
     ]
-    ++ (with nixpkgs-unstable; [
+    ++ (with stable; [
       clickhouse
     ]);
 

@@ -27,7 +27,7 @@ nix store optimise
 - a24 ::
   #+begin_src sh
 cd ~/project/dev/nazg
-nix-on-droid switch --flake .#a24
+NIXPKGS_ACCEPT_ANDROID_SDK_LICENSE=1 home-manager switch --flake .#fiat --impure
 nix store gc
 nix store gc
 nix store optimise

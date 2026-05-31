@@ -57,16 +57,6 @@
           modules = [ ./hosts/personal/physical/xkarna/configuration.nix ];
         };
 
-        fiat = nixpkgs-unstable.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            stable = mkStable "x86_64-linux";
-            unstable = mkUnstable "x86_64-linux";
-            inherit home-manager-25_11;
-          };
-          modules = [ ./hosts/work/kartaca/physical/fiat/configuration.nix ];
-        };
-
         rpi3b = nixpkgs-unstable.lib.nixosSystem {
           system = "aarch64-linux";
           specialArgs = {
@@ -78,6 +68,7 @@
 
       };
 
+      # samsung galaxy a24 uses termux via nix-on-droid
       nixOnDroidConfigurations = {
 
         a24 = nix-on-droid.lib.nixOnDroidConfiguration {
@@ -89,6 +80,18 @@
           home-manager-path = home-manager-25_11.outPath;
         };
 
+      };
+
+      # fiat runs Ubuntu — standalone home-manager only
+      homeConfigurations = {
+        fiat = home-manager-25_11.lib.homeManagerConfiguration {
+          pkgs = mkStable "x86_64-linux";
+          extraSpecialArgs = {
+            stable = mkStable "x86_64-linux";
+            unstable = mkUnstable "x86_64-linux";
+          };
+          modules = [ ./hosts/work/kartaca/laptop/fiat/home.nix ];
+        };
       };
     };
 }
