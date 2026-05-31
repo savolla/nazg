@@ -10,16 +10,25 @@ one flake to rule all of my physical and virtual machines
   #+begin_src sh
 cd ~/project/dev/nazg
 sudo nixos-rebuild switch --flake .#xkarna --impure
+nix store gc
+nix store gc
+nix store optimise
   #+end_src
 
 - fiat ::
   #+begin_src sh
 cd ~/project/dev/nazg
 home-manager switch --flake .#fiat --impure
+nix store gc
+nix store gc
+nix store optimise
   #+end_src
 
 - a24 ::
   #+begin_src sh
 cd ~/project/dev/nazg
 nix-on-droid switch --flake .#a24
+nix store gc
+nix store gc
+nix store optimise
   #+end_src
