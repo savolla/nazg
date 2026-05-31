@@ -231,6 +231,8 @@ in
       "systemd.show_status=auto"
       "resume=UUID=2954f857-a502-4b6c-837c-4250349bd469" # swap UUID, not LUKS UUID (for hibernation to work)
 
+      "mitigations=off" # leave cpu alone! this is not a server macnine (spectre/meltdown vunls etc.)
+
       # fix suspend problems
       "mem_sleep_default=deep"
       "amdgpu.sg_display=0"
@@ -243,9 +245,9 @@ in
   };
 
   # Bootloader.
-  # boot.kernelPackages = pkgs.linuxPackages_zen; # this kernel is the only one that sees my eno1 ethernet interface on gmktek g10
+  boot.kernelPackages = pkgs.linuxPackages_zen; # this kernel is the only one that sees my eno1 ethernet interface on gmktek g10
   # boot.kernelPackages = pkgs.linuxPackages-rt_latest; # linux realtime kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest; # latest kernel. trying to fix type-c and eno1 interfaces on nix machine (worked)
+  # boot.kernelPackages = pkgs.linuxPackages_latest; # fix type-c and eno1 interfaces on nix machine GMKTek Nucbox G10
   # boot.kernelPackages = pkgs.linuxPackages; # LTS (for stability)
 
   boot.loader.systemd-boot.enable = true;
@@ -267,6 +269,13 @@ in
   boot.resumeDevice = "/dev/disk/by-uuid/2954f857-a502-4b6c-837c-4250349bd469";
 
   # boot.initrd.kernelModules = [ "amdgpu" ]; # make the kernel use the correct driver early. fix those blury boot messages and hibernation problems
+
+  # improve performance for heavy tab usage in browsers (qutebrowser setting)
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;  # up to ~5.8GB of compressed swap from your 11.6GB RAM
+  };
 
   networking = {
     nameservers = [
@@ -936,14 +945,16 @@ in
       stable.lutris # install and launch windows and linux games
 
       (stable.retroarch.withCores (cores: with cores; [
-        mesen         # nes
-        snes9x        # snes
-        beetle-psx-hw # ps1
-        pcsx2         # ps2
-        fbneo         # arcade (MAME)
-        mgba          # gba
-        genesis-plus-gx # sega genesis/megadrive
-        mupen64plus-next # nintendo 64
+        mesen              # nes
+        snes9x             # snes
+        beetle-psx-hw      # ps1
+        pcsx2              # ps2
+        fbneo              # arcade (MAME)
+        mgba               # gba
+        genesis-plus-gx    # sega genesis/megadrive
+        sameboy            # gb + gbc
+        mupen64plus        # n64
+        melonds            # nds
       ]))
 
       # failing nix packages
@@ -1111,6 +1122,16 @@ in
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
+
+      # fix retroarch playstation audio cracklings
+      extraConfig.pipewire."92-low-latency" = {
+        context.properties = {
+          default.clock.rate = 48000;
+          default.clock.quantum = 512;
+          default.clock.min-quantum = 512;
+          default.clock.max-quantum = 512;
+        };
+      };
     };
 
     openssh.enable = true;
@@ -1221,6 +1242,9 @@ in
       ];
     };
   };
+
+  # increase performance for gaming and emulation
+  powerManagement.cpuFreqGovernor = "performance";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
