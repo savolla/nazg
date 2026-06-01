@@ -336,3 +336,87 @@ try:
 
 except ImportError:
     pass
+
+
+
+
+
+
+# THESE ADDED BY CLAUDE FOR QUTEBROWSER OPTIMIZATIONS. (consider removing if these don't work)
+# ── Performance & Memory ──────────────────────────────────────────
+
+# Don't restore all tabs at once on startup — load them on demand
+config.set('session.lazy_restore', True)
+
+# Cap the HTTP disk cache (default is uncapped and grows forever)
+# 52428800 = 50MB
+config.set('content.cache.size', 52428800)
+
+# Cap in-memory page cache — how many pages to keep rendered in RAM
+# Default is determined by Qt; 2 is safe for your 11GB system
+config.set('content.cache.maximum_pages', 2)
+
+# Disable DNS prefetching — saves background CPU on many-tab setups
+config.set('content.dns_prefetch', False)
+
+# ── Tab behaviour ─────────────────────────────────────────────────
+
+# Mute all tabs by default — prevents background video/audio draining CPU
+# config.set('content.mute', True, '*') # do we really need this?
+
+# Disable autoplay — biggest single source of background CPU usage
+config.set('content.autoplay', False)
+
+# ── Rendering ─────────────────────────────────────────────────────
+
+# Disable smooth scrolling — saves GPU compositing work on Vega 8
+config.set('scrolling.smooth', False)
+
+# Request reduced motion from websites (respects prefers-reduced-motion)
+# Stops animation-heavy sites from thrashing your iGPU
+config.set('content.prefers_reduced_motion', True)
+
+# Disable canvas fingerprinting reads — also slightly reduces GPU work
+config.set('content.canvas_reading', False)
+
+# ── Ad & tracker blocking ─────────────────────────────────────────
+
+config.set('content.blocking.enabled', True)
+
+# adblock method uses the Brave/uBO filter engine — much faster than hosts
+config.set('content.blocking.method', 'adblock')
+
+config.set('content.blocking.adblock.lists', [
+    'https://easylist.to/easylist/easylist.txt',
+    'https://easylist.to/easylist/easyprivacy.txt',
+    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt',
+    'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances.txt',
+])
+
+# ── JavaScript ────────────────────────────────────────────────────
+
+# Suppress JS console noise from being processed by qutebrowser's Python layer
+config.set('content.javascript.log_message.levels', {
+    'qutebrowser': ['error'],
+    'js-error': ['error'],
+    'js-warning': [],
+    'js-info': [],
+    'js-debug': [],
+})
+
+# Clipboard access: 'ask' prompts on Qt 6.8+, behaves like 'none' on older Qt
+config.set('content.javascript.clipboard', 'access')
+
+# ── Completion / UI ───────────────────────────────────────────────
+
+# Limit history shown in completion to reduce SQLite query size
+config.set('completion.web_history.max_items', 1000)
+
+# Delay before completion updates — reduces CPU on fast typing
+config.set('completion.delay', 300)
+
+# ── Qt workarounds (relevant for your Mesa/Vega stack) ───────────
+
+# Disable accelerated 2D canvas — fixes graphical glitches in
+# Google Sheets and PDF.js on Mesa/QtWebEngine combinations
+config.set('qt.workarounds.disable_accelerated_2d_canvas', 'always')

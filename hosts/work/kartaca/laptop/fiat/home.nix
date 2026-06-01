@@ -157,7 +157,7 @@ in
 
       stowDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         echo "stowing dotfiles"
-        stow -t $HOME dotfiles
+        ${pkgs.stow}/bin/stow -t $HOME -d "$HOME/project/dev/nazg/hosts/work/kartaca/laptop/fiat" dotfiles
       '';
     };
 
