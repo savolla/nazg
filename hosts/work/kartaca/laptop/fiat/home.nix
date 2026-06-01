@@ -148,11 +148,16 @@ in
 
       # fix gpu-screen-recorder-gtk's recording failure errors
       # using absolute paths is necessary for ubuntu commands
-      gsrKmsServerCap = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        GSR_KMS=$(readlink -f ${pkgs.gpu-screen-recorder}/bin/gsr-kms-server 2>/dev/null || true)
-  if [ -n "$GSR_KMS" ]; then
-    /usr/bin/sudo /usr/sbin/setcap cap_sys_admin+ep "$GSR_KMS" || true
-  fi
+      gsrKmsServerCap = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+              GSR_KMS=$(readlink -f ${pkgs.gpu-screen-recorder}/bin/gsr-kms-server 2>/dev/null || true)
+        if [ -n "$GSR_KMS" ]; then
+          /usr/bin/sudo /usr/sbin/setcap cap_sys_admin+ep "$GSR_KMS" || true
+        fi
+      '';
+
+      stowDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        echo "stowing dotfiles"
+        stow -t $HOME ../dotfiles
       '';
     };
 
