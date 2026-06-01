@@ -157,7 +157,7 @@ in
 
       stowDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         echo "stowing dotfiles"
-        stow -t $HOME ../dotfiles
+        stow -t $HOME dotfiles
       '';
     };
 
