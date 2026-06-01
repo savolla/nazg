@@ -938,6 +938,8 @@ in
       unstable.oath-toolkit # calculate OTP using secrets
       unstable.pre-commit # scan for problems before committing
       unstable.fishPlugins.done # get notified when jobs finish
+      unstable.chafa # view images in terminal
+      unstable.gnutls # doom emacs dependency for irs to work
 
       (unstable.pass.withExtensions (exts: [
         exts.pass-otp
