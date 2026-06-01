@@ -5,6 +5,12 @@ set -x GOOGLE_APPLICATION_CREDENTIALS "$HOME/.config/gcloud/legacy_credentials/k
 set -x FZF_DEFAULT_OPTS --height=10% --preview-window=top,1,wrap --preview-window=border-none --no-list-border --no-input-border --reverse --ansi "--bind=esc:abort" "--bind=tab:accept" "--bind=ctrl-space:toggle+down"
 set -U fish_history_limit 10000000
 
+# settings for using GPG as SSH authentication
+set -e SSH_AGENT_PID
+if not set -q gnupg_SSH_AUTH_SOCK_by; or test "$gnupg_SSH_AUTH_SOCK_by" -ne $fish_pid
+    set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+end
+
 # aliases
 alias kubectl="kubecolor"
 alias r="ranger"
@@ -123,7 +129,7 @@ end
 function _legolas_register_abbr
     set -l token $argv[1]
     function __legolas_$token --inherit-variable token
-        legolas --abbr $token  # stdout becomes the expanded text
+        legolas --abbr $token # stdout becomes the expanded text
     end
     abbr -a $token --function __legolas_$token
 end
@@ -134,6 +140,7 @@ end
 
 # key bindings
 function fish_user_key_bindings
+    fish_vi_key_bindings # ← add this; initializes insert/normal modes
     bind -M insert \cr fzf_history_search
     bind -M normal \cr fzf_history_search
     bind -M insert \cf '__legolas; commandline -f repaint'
@@ -144,7 +151,7 @@ end
 
 # done plugin settings
 # set -U __done_min_cmd_duration 1200000  # notify if process finished after 30 mins
-set -U __done_min_cmd_duration 5000  # notify if process finished after 30 mins
+set -U __done_min_cmd_duration 5000 # notify if process finished after 30 mins
 set -U __done_notify_sound 1 # play sound when process finishes
 set -U __done_notification_urgency_level critical
 set -U __done_notification_urgency_level_failure critical
@@ -153,4 +160,4 @@ set -U __done_notification_duration -1 # never expire the notification
 # init
 zoxide init fish | source
 starship init fish | source
-source /home/$USER/.nix-profile/etc/profile.d/nix.fish
+# source /home/$USER/.nix-profile/etc/profile.d/nix.fish
