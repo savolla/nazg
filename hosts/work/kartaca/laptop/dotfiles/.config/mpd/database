@@ -1,0 +1,3476 @@
+info_begin
+format: 2
+mpd_version: 0.24.6
+fs_charset: UTF-8
+tag: Artist
+tag: ArtistSort
+tag: Album
+tag: AlbumSort
+tag: AlbumArtist
+tag: AlbumArtistSort
+tag: Title
+tag: TitleSort
+tag: Track
+tag: Name
+tag: Genre
+tag: Mood
+tag: Date
+tag: OriginalDate
+tag: Composer
+tag: ComposerSort
+tag: Performer
+tag: Conductor
+tag: Work
+tag: Movement
+tag: MovementNumber
+tag: ShowMovement
+tag: Ensemble
+tag: Location
+tag: Grouping
+tag: Disc
+tag: Label
+tag: MUSICBRAINZ_ARTISTID
+tag: MUSICBRAINZ_ALBUMID
+tag: MUSICBRAINZ_ALBUMARTISTID
+tag: MUSICBRAINZ_TRACKID
+tag: MUSICBRAINZ_RELEASETRACKID
+tag: MUSICBRAINZ_WORKID
+tag: MUSICBRAINZ_RELEASEGROUPID
+info_end
+directory: (1997) - The Final Chapter
+mtime: 1762521137
+begin: (1997) - The Final Chapter
+song_begin: 01. Inseminated Adaption.mp3
+Time: 274.8
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Inseminated Adaption
+Album: The Final Chapter
+Track: 1
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762520682
+added: 1762524124
+song_end
+song_begin: 02. A Coming Race.mp3
+Time: 308.533
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: A Coming Race
+Album: The Final Chapter
+Track: 2
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762520708
+added: 1762524124
+song_end
+song_begin: 03. Dominion.mp3
+Time: 213.866
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Dominion
+Album: The Final Chapter
+Track: 3
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762520734
+added: 1762524124
+song_end
+song_begin: 04. Inquire Within.mp3
+Time: 347.466
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Inquire Within
+Album: The Final Chapter
+Track: 4
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762520779
+added: 1762524124
+song_end
+song_begin: 05. Last Vanguard.mp3
+Time: 205.16
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Last Vanguard
+Album: The Final Chapter
+Track: 5
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762520808
+added: 1762524124
+song_end
+song_begin: 06. Request Denied.mp3
+Time: 292.933
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Request Denied
+Album: The Final Chapter
+Track: 6
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762520871
+added: 1762524124
+song_end
+song_begin: 07. Through the Window of Time.mp3
+Time: 210.933
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Through the Window of Time
+Album: The Final Chapter
+Track: 7
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762520928
+added: 1762524124
+song_end
+song_begin: 08. Shamateur.mp3
+Time: 318.106
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Shamateur
+Album: The Final Chapter
+Track: 8
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762520981
+added: 1762524124
+song_end
+song_begin: 09. Adjusting the Sun.mp3
+Time: 283.693
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Adjusting the Sun
+Album: The Final Chapter
+Track: 9
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762521064
+added: 1762524124
+song_end
+song_begin: 10. Lies.mp3
+Time: 277.933
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Lies
+Album: The Final Chapter
+Track: 10
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762521092
+added: 1762524124
+song_end
+song_begin: 11. Evil Invaders (Razor cover).mp3
+Time: 229.933
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Evil Invaders (Razor cover)
+Album: The Final Chapter
+Track: 11
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762521111
+added: 1762524124
+song_end
+song_begin: 12. The Final Chapter.mp3
+Time: 321.973
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: The Final Chapter
+Album: The Final Chapter
+Track: 12
+Date: 1997
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762521137
+added: 1762524124
+song_end
+end: (1997) - The Final Chapter
+directory: 2004 - The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+mtime: 1762846193
+begin: 2004 - The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+song_begin: 01 - Born Dead Buried Alive.mp3
+Time: 250.98600000000002
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Born Dead Buried Alive
+Album: The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+Track: 1
+Date: 2004
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846080
+added: 1762846253
+song_end
+song_begin: 02 - Eraser.mp3
+Time: 266.52
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Eraser
+Album: The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+Track: 2
+Date: 2004
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846093
+added: 1762846253
+song_end
+song_begin: 03 - Stillborn.mp3
+Time: 204.28
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Stillborn
+Album: The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+Track: 3
+Date: 2004
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846103
+added: 1762846253
+song_end
+song_begin: 04 - Slave To The Parasites.mp3
+Time: 302.173
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Slave To The Parasites
+Album: The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+Track: 4
+Date: 2004
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846119
+added: 1762846253
+song_end
+song_begin: 05 - New World.mp3
+Time: 250.16
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: New World
+Album: The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+Track: 5
+Date: 2004
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846131
+added: 1762846253
+song_end
+song_begin: 06 - The Abyss.mp3
+Time: 264.666
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: The Abyss
+Album: The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+Track: 6
+Date: 2004
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846149
+added: 1762846253
+song_end
+song_begin: 07 - Dead Sky Dawning.mp3
+Time: 267.6
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: Dead Sky Dawning
+Album: The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+Track: 7
+Date: 2004
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846162
+added: 1762846253
+song_end
+song_begin: 08 - The Departure.mp3
+Time: 318.44
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: The Departure
+Album: The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+Track: 8
+Date: 2004
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846179
+added: 1762846253
+song_end
+song_begin: 09 - War Within.mp3
+Time: 292.50600000000003
+Artist: Hypocrisy
+AlbumArtist: Hypocrisy
+Title: War Within
+Album: The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+Track: 9
+Date: 2004
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846193
+added: 1762846253
+song_end
+end: 2004 - The Arrival (Digipak, Nuclear Blast - NB 1230-0, Nuclear Blast - 27361 1230, Germany)
+directory: 2006 - Akeldama
+mtime: 1762846158
+begin: 2006 - Akeldama
+song_begin: 01 - An Autopsy.flac
+Time: 191.226
+Artist: The Faceless
+Title: An Autopsy
+Album: Akeldama
+Date: 2006
+Track: 1
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762846033
+added: 1762846253
+song_end
+song_begin: 02 - Pestilence.flac
+Time: 234.186
+Artist: The Faceless
+Title: Pestilence
+Album: Akeldama
+Date: 2006
+Track: 2
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762846057
+added: 1762846253
+song_end
+song_begin: 03 - All Dark Granes.flac
+Time: 230.4
+Artist: The Faceless
+Title: All Dark Granes
+Album: Akeldama
+Date: 2006
+Track: 3
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762846010
+added: 1762846253
+song_end
+song_begin: 04 - Horizons Of Chaos I- Oracle Of The Onslaught.flac
+Time: 218.44
+Artist: The Faceless
+Title: Horizons Of Chaos I: Oracle Of The Onslaught
+Album: Akeldama
+Date: 2006
+Track: 4
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762846076
+added: 1762846253
+song_end
+song_begin: 05 - Horizons Of Chaos II- Hypocrisy.flac
+Time: 223.98600000000002
+Artist: The Faceless
+Title: Horizons Of Chaos II: Hypocrisy
+Album: Akeldama
+Date: 2006
+Track: 5
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762845923
+added: 1762846253
+song_end
+song_begin: 06 - Leica.flac
+Time: 312.666
+Artist: The Faceless
+Title: Leica
+Album: Akeldama
+Date: 2006
+Track: 6
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762846104
+added: 1762846253
+song_end
+song_begin: 07 - Akeldama.flac
+Time: 351.48
+Artist: The Faceless
+Title: Akeldama
+Album: Akeldama
+Date: 2006
+Track: 7
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762846136
+added: 1762846253
+song_end
+song_begin: 08 - The Ghost Of A Stranger.flac
+Time: 235.70600000000002
+Artist: The Faceless
+Title: The Ghost Of A Stranger
+Album: Akeldama
+Date: 2006
+Track: 8
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762846158
+added: 1762846253
+song_end
+playlist_begin: The Faceless - Akeldama.m3u
+mtime: 1762845901
+playlist_end
+playlist_begin: Akeldama.cue
+mtime: 1762845856
+playlist_end
+end: 2006 - Akeldama
+directory: 2007 - Rise Of The Tyrant
+mtime: 1762846428
+begin: 2007 - Rise Of The Tyrant
+song_begin: 01 - Blood On Your Hands.mp3
+Time: 283.386
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: Blood On Your Hands
+Album: Rise Of The Tyrant
+Track: 1
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846234
+added: 1762846254
+song_end
+song_begin: 02 - The Last Enemy.mp3
+Time: 257.56
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: The Last Enemy
+Album: Rise Of The Tyrant
+Track: 2
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846250
+added: 1762846254
+song_end
+song_begin: 03 - I Will Live Again.mp3
+Time: 214.08
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: I Will Live Again
+Album: Rise Of The Tyrant
+Track: 3
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846266
+added: 1763104156
+song_end
+song_begin: 04 - In This Shallow Grave.mp3
+Time: 296.306
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: In This Shallow Grave
+Album: Rise Of The Tyrant
+Track: 4
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846286
+added: 1763104156
+song_end
+song_begin: 05 - Revolution Begins.mp3
+Time: 253.586
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: Revolution Begins
+Album: Rise Of The Tyrant
+Track: 5
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846302
+added: 1763104156
+song_end
+song_begin: 06 - Rise Of The Tyrant.mp3
+Time: 275.44
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: Rise Of The Tyrant
+Album: Rise Of The Tyrant
+Track: 6
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846319
+added: 1763104156
+song_end
+song_begin: 07 - The Day You Died.mp3
+Time: 294.866
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: The Day You Died
+Album: Rise Of The Tyrant
+Track: 7
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846338
+added: 1763104156
+song_end
+song_begin: 08 - Intermezzo Liberté.mp3
+Time: 173.12
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: Intermezzo Liberté
+Album: Rise Of The Tyrant
+Track: 8
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846350
+added: 1763104156
+song_end
+song_begin: 09 - Night Falls Fast.mp3
+Time: 200.20000000000002
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: Night Falls Fast
+Album: Rise Of The Tyrant
+Track: 9
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846364
+added: 1763104156
+song_end
+song_begin: 10 - The Great Darkness.mp3
+Time: 288.613
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: The Great Darkness
+Album: Rise Of The Tyrant
+Track: 10
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846383
+added: 1763104156
+song_end
+song_begin: 11 - Vultures.mp3
+Time: 395.413
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: Vultures
+Album: Rise Of The Tyrant
+Track: 11
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846407
+added: 1763104156
+song_end
+song_begin: 12 - The Oath.mp3
+Time: 256.48
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+Title: The Oath (Kiss cover)
+Album: Rise Of The Tyrant
+Track: 12
+Date: 2007
+Date: 2007
+Genre: Melodic Death Metal
+Format: 44100:16:2
+mtime: 1762846426
+added: 1763104156
+song_end
+end: 2007 - Rise Of The Tyrant
+directory: 2007 - This Age Of Silence (320)
+mtime: 1762601702
+begin: 2007 - This Age Of Silence (320)
+song_begin: 01. Ghosts Of Dawn.mp3
+Time: 96.223
+Artist: Anterior
+Title: Ghosts Of Dawn
+Album: This Age Of Silence
+Track: 1
+Date: 2007
+Genre: Melodic Death Metal / Metalcore
+Format: 44100:16:2
+mtime: 1762601702
+added: 1762602064
+song_end
+song_begin: 02. The Silent Divide.mp3
+Time: 391.116
+Artist: Anterior
+Title: The Silent Divide
+Album: This Age Of Silence
+Track: 2
+Date: 2007
+Genre: Melodic Death Metal / Metalcore
+Format: 44100:16:2
+mtime: 1762601644
+added: 1762602064
+song_end
+song_begin: 03. Dead Divine.mp3
+Time: 355.915
+Artist: Anterior
+Title: Dead Divine
+Album: This Age Of Silence
+Track: 3
+Date: 2007
+Genre: Melodic Death Metal / Metalcore
+Format: 44100:16:2
+mtime: 1762601648
+added: 1762602064
+song_end
+song_begin: 04. Days Of Deliverance.mp3
+Time: 246.781
+Artist: Anterior
+Title: Days Of Deliverance
+Album: This Age Of Silence
+Track: 4
+Date: 2007
+Genre: Melodic Death Metal / Metalcore
+Format: 44100:16:2
+mtime: 1762601655
+added: 1762602064
+song_end
+song_begin: 05. Human Hive.mp3
+Time: 331.488
+Artist: Anterior
+Title: Human Hive
+Album: This Age Of Silence
+Track: 5
+Date: 2007
+Genre: Melodic Death Metal / Metalcore
+Format: 44100:16:2
+mtime: 1762601669
+added: 1762602064
+song_end
+song_begin: 06. Stir Of Echoes.mp3
+Time: 133.282
+Artist: Anterior
+Title: Stir Of Echoes
+Album: This Age Of Silence
+Track: 6
+Date: 2007
+Genre: Melodic Death Metal / Metalcore
+Format: 44100:16:2
+mtime: 1762601672
+added: 1762602064
+song_end
+song_begin: 07. Scar City.mp3
+Time: 371.89
+Artist: Anterior
+Title: Scar City
+Album: This Age Of Silence
+Track: 7
+Date: 2007
+Genre: Melodic Death Metal / Metalcore
+Format: 44100:16:2
+mtime: 1762601677
+added: 1762602064
+song_end
+song_begin: 08. Seraph.mp3
+Time: 390.559
+Artist: Anterior
+Title: Seraph
+Album: This Age Of Silence
+Track: 8
+Date: 2007
+Genre: Melodic Death Metal / Metalcore
+Format: 44100:16:2
+mtime: 1762601693
+added: 1762602064
+song_end
+song_begin: 09. This Age Of Silence.mp3
+Time: 269.537
+Artist: Anterior
+Title: This Age Of Silence
+Album: This Age Of Silence
+Track: 9
+Date: 2007
+Genre: Melodic Death Metal / Metalcore
+Format: 44100:16:2
+mtime: 1762601697
+added: 1762602064
+song_end
+end: 2007 - This Age Of Silence (320)
+directory: 2008 - Planetary Duality
+mtime: 1762846144
+begin: 2008 - Planetary Duality
+song_begin: 01 Prison Born.mp3
+Time: 124.501
+Artist: The Faceless
+AlbumArtist: The Faceless
+ArtistSort: Faceless, The
+AlbumArtistSort: Faceless, The
+Title: Prison Born
+Album: Planetary Duality
+Track: 1
+Date: 2008-11-11
+OriginalDate: 2008
+Genre: Technical Deathcore;Technical Death Metal;Deathcore
+Disc: 1
+Label: Sumerian Records
+MUSICBRAINZ_ALBUMID: cb94d57d-7bba-4ce5-8b31-a3f1ac901cf4
+MUSICBRAINZ_ARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_ALBUMARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_RELEASEGROUPID: 5373bf38-79fd-301e-8269-ff80b02a963d
+MUSICBRAINZ_RELEASETRACKID: 775772e3-7edf-365c-93aa-c3f7f48eef78
+MUSICBRAINZ_TRACKID: 00ebbcfa-0d81-4fd2-8965-a1e396c10b92
+Format: 44100:16:2
+mtime: 1762846016
+added: 1762846254
+song_end
+song_begin: 02 The Ancient Covenant.mp3
+Time: 246.806
+Artist: The Faceless
+AlbumArtist: The Faceless
+ArtistSort: Faceless, The
+AlbumArtistSort: Faceless, The
+Title: The Ancient Covenant
+Album: Planetary Duality
+Track: 2
+Date: 2008-11-11
+OriginalDate: 2008
+Genre: Technical Deathcore;Technical Death Metal;Deathcore
+Disc: 1
+Label: Sumerian Records
+MUSICBRAINZ_ALBUMID: cb94d57d-7bba-4ce5-8b31-a3f1ac901cf4
+MUSICBRAINZ_ARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_ALBUMARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_RELEASEGROUPID: 5373bf38-79fd-301e-8269-ff80b02a963d
+MUSICBRAINZ_RELEASETRACKID: ab673423-5896-3b5e-a740-712197512137
+MUSICBRAINZ_TRACKID: 238bd357-a8fb-4937-8496-a812a2f7e255
+Format: 44100:16:2
+mtime: 1762846032
+added: 1762846254
+song_end
+song_begin: 03 Shape Shifters.mp3
+Time: 49.111000000000004
+Artist: The Faceless
+AlbumArtist: The Faceless
+ArtistSort: Faceless, The
+AlbumArtistSort: Faceless, The
+Title: Shape Shifters
+Album: Planetary Duality
+Track: 3
+Date: 2008-11-11
+OriginalDate: 2008
+Genre: Technical Deathcore;Technical Death Metal;Deathcore
+Disc: 1
+Label: Sumerian Records
+MUSICBRAINZ_ALBUMID: cb94d57d-7bba-4ce5-8b31-a3f1ac901cf4
+MUSICBRAINZ_ARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_ALBUMARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_RELEASEGROUPID: 5373bf38-79fd-301e-8269-ff80b02a963d
+MUSICBRAINZ_RELEASETRACKID: 0442e19f-09f3-3a43-aff4-dcc6deb63c26
+MUSICBRAINZ_TRACKID: 7b093cde-3f12-49a9-af33-1b19d20b0ced
+Format: 44100:16:2
+mtime: 1762846036
+added: 1762846254
+song_end
+song_begin: 04 Coldly Calculated Design.mp3
+Time: 226.3
+Artist: The Faceless
+AlbumArtist: The Faceless
+ArtistSort: Faceless, The
+AlbumArtistSort: Faceless, The
+Title: Coldly Calculated Design
+Album: Planetary Duality
+Track: 4
+Date: 2008-11-11
+OriginalDate: 2008
+Genre: Technical Deathcore;Technical Death Metal;Deathcore
+Disc: 1
+Label: Sumerian Records
+MUSICBRAINZ_ALBUMID: cb94d57d-7bba-4ce5-8b31-a3f1ac901cf4
+MUSICBRAINZ_ARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_ALBUMARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_RELEASEGROUPID: 5373bf38-79fd-301e-8269-ff80b02a963d
+MUSICBRAINZ_RELEASETRACKID: caf35e8a-4467-3544-9213-875ebc3d61d9
+MUSICBRAINZ_TRACKID: fae8bd07-ccb8-4a5d-9db8-9922502d8d8e
+Format: 44100:16:2
+mtime: 1762846053
+added: 1762846254
+song_end
+song_begin: 05 XenoChrist.mp3
+Time: 306.6
+Artist: The Faceless
+AlbumArtist: The Faceless
+ArtistSort: Faceless, The
+AlbumArtistSort: Faceless, The
+Title: XenoChrist
+Album: Planetary Duality
+Track: 5
+Date: 2008-11-11
+OriginalDate: 2008
+Genre: Technical Deathcore;Technical Death Metal;Deathcore
+Disc: 1
+Label: Sumerian Records
+MUSICBRAINZ_ALBUMID: cb94d57d-7bba-4ce5-8b31-a3f1ac901cf4
+MUSICBRAINZ_ARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_ALBUMARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_RELEASEGROUPID: 5373bf38-79fd-301e-8269-ff80b02a963d
+MUSICBRAINZ_RELEASETRACKID: ebf1881a-aadc-34e0-86d9-b8cdb8874107
+MUSICBRAINZ_TRACKID: 69391648-87e5-4086-9c25-215a28730d00
+Format: 44100:16:2
+mtime: 1762846071
+added: 1762846254
+song_end
+song_begin: 06 Sons of Belial.mp3
+Time: 291.76300000000003
+Artist: The Faceless
+AlbumArtist: The Faceless
+ArtistSort: Faceless, The
+AlbumArtistSort: Faceless, The
+Title: Sons of Belial
+Album: Planetary Duality
+Track: 6
+Date: 2008-11-11
+OriginalDate: 2008
+Genre: Technical Deathcore;Technical Death Metal;Deathcore
+Disc: 1
+Label: Sumerian Records
+MUSICBRAINZ_ALBUMID: cb94d57d-7bba-4ce5-8b31-a3f1ac901cf4
+MUSICBRAINZ_ARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_ALBUMARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_RELEASEGROUPID: 5373bf38-79fd-301e-8269-ff80b02a963d
+MUSICBRAINZ_RELEASETRACKID: 52e8c9a7-e30c-3b09-91c8-2baf3a3fb333
+MUSICBRAINZ_TRACKID: 3567ae5f-72cd-42e1-a4e2-bb90eff67d9d
+Format: 44100:16:2
+mtime: 1762846090
+added: 1762846254
+song_end
+song_begin: 07 Legion of the Serpent.mp3
+Time: 272.589
+Artist: The Faceless
+AlbumArtist: The Faceless
+ArtistSort: Faceless, The
+AlbumArtistSort: Faceless, The
+Title: Legion of the Serpent
+Album: Planetary Duality
+Track: 7
+Date: 2008-11-11
+OriginalDate: 2008
+Genre: Technical Deathcore;Technical Death Metal;Deathcore
+Disc: 1
+Label: Sumerian Records
+MUSICBRAINZ_ALBUMID: cb94d57d-7bba-4ce5-8b31-a3f1ac901cf4
+MUSICBRAINZ_ARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_ALBUMARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_RELEASEGROUPID: 5373bf38-79fd-301e-8269-ff80b02a963d
+MUSICBRAINZ_RELEASETRACKID: 77c102e9-17db-3929-b244-203e83dac952
+MUSICBRAINZ_TRACKID: b028e672-c1c2-4dd2-b2ca-4710f2326b32
+Format: 44100:16:2
+mtime: 1762846106
+added: 1762846254
+song_end
+song_begin: 08 Planetary Duality I (Hideous Revelation).mp3
+Time: 99.633
+Artist: The Faceless
+AlbumArtist: The Faceless
+ArtistSort: Faceless, The
+AlbumArtistSort: Faceless, The
+Title: Planetary Duality, Part I: Hideous Revelation
+Album: Planetary Duality
+Track: 8
+Date: 2008-11-11
+OriginalDate: 2008
+Genre: Technical Deathcore;Technical Death Metal;Deathcore
+Disc: 1
+Label: Sumerian Records
+MUSICBRAINZ_ALBUMID: cb94d57d-7bba-4ce5-8b31-a3f1ac901cf4
+MUSICBRAINZ_ARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_ALBUMARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_RELEASEGROUPID: 5373bf38-79fd-301e-8269-ff80b02a963d
+MUSICBRAINZ_RELEASETRACKID: 116c52e4-58e9-3359-9f8d-286f318c223c
+MUSICBRAINZ_TRACKID: 816a9656-091b-4f84-a520-1e74e55ddddd
+Format: 44100:16:2
+mtime: 1762846114
+added: 1762846254
+song_end
+song_begin: 09 Planetary Duality II (A Prophecies Fruition).mp3
+Time: 333.063
+Artist: The Faceless
+AlbumArtist: The Faceless
+ArtistSort: Faceless, The
+AlbumArtistSort: Faceless, The
+Title: Planetary Duality, Part II: A Prophecies Fruition
+Album: Planetary Duality
+Track: 9
+Date: 2008-11-11
+OriginalDate: 2008
+Genre: Technical Deathcore;Technical Death Metal;Deathcore
+Disc: 1
+Label: Sumerian Records
+MUSICBRAINZ_ALBUMID: cb94d57d-7bba-4ce5-8b31-a3f1ac901cf4
+MUSICBRAINZ_ARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_ALBUMARTISTID: 28df1bc6-60e4-4423-9c7d-c0e7466b9300
+MUSICBRAINZ_RELEASEGROUPID: 5373bf38-79fd-301e-8269-ff80b02a963d
+MUSICBRAINZ_RELEASETRACKID: 1c00e260-643a-300c-a6f2-ac89ac4fac1a
+MUSICBRAINZ_TRACKID: 28fadac4-e22b-49b5-a825-1271f3d780ec
+Format: 44100:16:2
+mtime: 1762846134
+added: 1762846254
+song_end
+end: 2008 - Planetary Duality
+directory: 2011 - Glorification of a Myth
+mtime: 1762602240
+begin: 2011 - Glorification of a Myth
+song_begin: 01 - Black Hole Generator.mp3
+Time: 377.68
+Artist: Ouroboros
+AlbumArtist: Ouroboros
+ArtistSort: Ouroboros
+AlbumArtistSort: Ouroboros
+Title: Black Hole Generator
+Album: Glorification of a Myth
+Track: 1
+Date: 2011
+OriginalDate: 2011-06-01
+Genre: Thrash Metal
+Disc: 1
+MUSICBRAINZ_ALBUMID: 47288080-c733-4703-8aa6-e22ca2541e73
+MUSICBRAINZ_ARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_ALBUMARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_RELEASEGROUPID: ff621c75-2bd1-4084-b8e9-e0f12e5e51fe
+MUSICBRAINZ_RELEASETRACKID: 7fe07bcd-8725-3265-9236-4108c5ee3d85
+MUSICBRAINZ_TRACKID: f7cdd5b3-0307-4c24-9ffb-573da3c746d9
+Format: 44100:16:2
+mtime: 1762601821
+added: 1762602064
+song_end
+song_begin: 02 - Lashing of the Flames.mp3
+Time: 322.253
+Artist: Ouroboros
+AlbumArtist: Ouroboros
+ArtistSort: Ouroboros
+AlbumArtistSort: Ouroboros
+Title: Lashing of the Flames
+Album: Glorification of a Myth
+Track: 2
+Date: 2011
+OriginalDate: 2011-06-01
+Genre: Thrash Metal
+Disc: 1
+MUSICBRAINZ_ALBUMID: 47288080-c733-4703-8aa6-e22ca2541e73
+MUSICBRAINZ_ARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_ALBUMARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_RELEASEGROUPID: ff621c75-2bd1-4084-b8e9-e0f12e5e51fe
+MUSICBRAINZ_RELEASETRACKID: efe9e205-1bb7-3d7d-812e-c6cc5715ad19
+MUSICBRAINZ_TRACKID: 3b086d16-9c1b-4012-af63-a3382a6e081d
+Format: 44100:16:2
+mtime: 1762601848
+added: 1762602064
+song_end
+song_begin: 03 - Animal, Man... Machine.mp3
+Time: 295.493
+Artist: Ouroboros
+AlbumArtist: Ouroboros
+ArtistSort: Ouroboros
+AlbumArtistSort: Ouroboros
+Title: Animal, Man... Machine
+Album: Glorification of a Myth
+Track: 3
+Date: 2011
+OriginalDate: 2011-06-01
+Genre: Thrash Metal
+Disc: 1
+MUSICBRAINZ_ALBUMID: 47288080-c733-4703-8aa6-e22ca2541e73
+MUSICBRAINZ_ARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_ALBUMARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_RELEASEGROUPID: ff621c75-2bd1-4084-b8e9-e0f12e5e51fe
+MUSICBRAINZ_RELEASETRACKID: 6867e91a-287f-3916-b1e3-30a304c1bc6b
+MUSICBRAINZ_TRACKID: 7cee29bc-1171-4240-9992-7b00bc502da7
+Format: 44100:16:2
+mtime: 1762602126
+added: 1762602147
+song_end
+song_begin: 04 - Sanctuary.mp3
+Time: 267.733
+Artist: Ouroboros
+AlbumArtist: Ouroboros
+ArtistSort: Ouroboros
+AlbumArtistSort: Ouroboros
+Title: Sanctuary
+Album: Glorification of a Myth
+Track: 4
+Date: 2011
+OriginalDate: 2011-06-01
+Genre: Thrash Metal
+Disc: 1
+MUSICBRAINZ_ALBUMID: 47288080-c733-4703-8aa6-e22ca2541e73
+MUSICBRAINZ_ARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_ALBUMARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_RELEASEGROUPID: ff621c75-2bd1-4084-b8e9-e0f12e5e51fe
+MUSICBRAINZ_RELEASETRACKID: 2ea567e5-da07-3af6-8327-901ae0e02c2c
+MUSICBRAINZ_TRACKID: 50029776-e65d-4cf2-8f84-791530525b4a
+Format: 44100:16:2
+mtime: 1762601924
+added: 1762602064
+song_end
+song_begin: 05 - Sea to Summit.mp3
+Time: 342.813
+Artist: Ouroboros
+AlbumArtist: Ouroboros
+ArtistSort: Ouroboros
+AlbumArtistSort: Ouroboros
+Title: Sea to Summit
+Album: Glorification of a Myth
+Track: 5
+Date: 2011
+OriginalDate: 2011-06-01
+Genre: Thrash Metal
+Disc: 1
+MUSICBRAINZ_ALBUMID: 47288080-c733-4703-8aa6-e22ca2541e73
+MUSICBRAINZ_ARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_ALBUMARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_RELEASEGROUPID: ff621c75-2bd1-4084-b8e9-e0f12e5e51fe
+MUSICBRAINZ_RELEASETRACKID: 6deb2884-72fa-36dc-a679-b52a9d9950ec
+MUSICBRAINZ_TRACKID: 91997e48-4ded-4172-911a-fd820b8937c9
+Format: 44100:16:2
+mtime: 1762602149
+added: 1762602310
+song_end
+song_begin: 06 - Disembodied Mind.mp3
+Time: 329.89300000000003
+Artist: Ouroboros
+AlbumArtist: Ouroboros
+ArtistSort: Ouroboros
+AlbumArtistSort: Ouroboros
+Title: Disembodied Mind
+Album: Glorification of a Myth
+Track: 6
+Date: 2011
+OriginalDate: 2011-06-01
+Genre: Thrash Metal
+Disc: 1
+MUSICBRAINZ_ALBUMID: 47288080-c733-4703-8aa6-e22ca2541e73
+MUSICBRAINZ_ARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_ALBUMARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_RELEASEGROUPID: ff621c75-2bd1-4084-b8e9-e0f12e5e51fe
+MUSICBRAINZ_RELEASETRACKID: a3bdefaa-1c67-34b8-a30d-1595672db01f
+MUSICBRAINZ_TRACKID: ac6ad725-3d41-4bf4-afb8-666f902587ce
+Format: 44100:16:2
+mtime: 1762602172
+added: 1762602310
+song_end
+song_begin: 07 - Dissolve.mp3
+Time: 279.573
+Artist: Ouroboros
+AlbumArtist: Ouroboros
+ArtistSort: Ouroboros
+AlbumArtistSort: Ouroboros
+Title: Dissolve
+Album: Glorification of a Myth
+Track: 7
+Date: 2011
+OriginalDate: 2011-06-01
+Genre: Thrash Metal
+Disc: 1
+MUSICBRAINZ_ALBUMID: 47288080-c733-4703-8aa6-e22ca2541e73
+MUSICBRAINZ_ARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_ALBUMARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_RELEASEGROUPID: ff621c75-2bd1-4084-b8e9-e0f12e5e51fe
+MUSICBRAINZ_RELEASETRACKID: fc3128f8-6df9-3707-894c-9c1550da1747
+MUSICBRAINZ_TRACKID: b7de3fc2-97b8-46ef-ad89-f931e3071140
+Format: 44100:16:2
+mtime: 1762602200
+added: 1762602310
+song_end
+song_begin: 08 - Panacea.mp3
+Time: 273.6
+Artist: Ouroboros
+AlbumArtist: Ouroboros
+ArtistSort: Ouroboros
+AlbumArtistSort: Ouroboros
+Title: Panacea
+Album: Glorification of a Myth
+Track: 8
+Date: 2011
+OriginalDate: 2011-06-01
+Genre: Thrash Metal
+Disc: 1
+MUSICBRAINZ_ALBUMID: 47288080-c733-4703-8aa6-e22ca2541e73
+MUSICBRAINZ_ARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_ALBUMARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_RELEASEGROUPID: ff621c75-2bd1-4084-b8e9-e0f12e5e51fe
+MUSICBRAINZ_RELEASETRACKID: 58dc12ee-eb2b-39e7-9a63-7cca9196cecc
+MUSICBRAINZ_TRACKID: ac13a5de-8b52-4ed4-ab45-044b2ec788b5
+Format: 44100:16:2
+mtime: 1762602219
+added: 1762602310
+song_end
+song_begin: 09 - Edifice of Tyranny.mp3
+Time: 464.92
+Artist: Ouroboros
+AlbumArtist: Ouroboros
+ArtistSort: Ouroboros
+AlbumArtistSort: Ouroboros
+Title: Edifice of Tyranny
+Album: Glorification of a Myth
+Track: 9
+Date: 2011
+OriginalDate: 2011-06-01
+Genre: Thrash Metal
+Disc: 1
+MUSICBRAINZ_ALBUMID: 47288080-c733-4703-8aa6-e22ca2541e73
+MUSICBRAINZ_ARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_ALBUMARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_RELEASEGROUPID: ff621c75-2bd1-4084-b8e9-e0f12e5e51fe
+MUSICBRAINZ_RELEASETRACKID: 4d2939d4-61f6-3529-97af-5d266aac2cfe
+MUSICBRAINZ_TRACKID: 0aa3350a-0632-418d-8228-e394af5e27bf
+Format: 44100:16:2
+mtime: 1762602121
+added: 1762602121
+song_end
+song_begin: 10 - Absent From Entity.mp3
+Time: 302.12
+Artist: Ouroboros
+AlbumArtist: Ouroboros
+ArtistSort: Ouroboros
+AlbumArtistSort: Ouroboros
+Title: Absent From Entity
+Album: Glorification of a Myth
+Track: 10
+Date: 2011
+OriginalDate: 2011-06-01
+Genre: Thrash Metal
+Disc: 1
+MUSICBRAINZ_ALBUMID: 47288080-c733-4703-8aa6-e22ca2541e73
+MUSICBRAINZ_ARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_ALBUMARTISTID: 00a8516a-f006-4d60-96c6-0f8b5761e0c2
+MUSICBRAINZ_RELEASEGROUPID: ff621c75-2bd1-4084-b8e9-e0f12e5e51fe
+MUSICBRAINZ_RELEASETRACKID: 8f4451bd-0c2e-3477-b8cd-b5c5e4371198
+MUSICBRAINZ_TRACKID: cbf54418-3ca3-4db9-b244-d7b8282e3736
+Format: 44100:16:2
+mtime: 1762602240
+added: 1762602310
+song_end
+end: 2011 - Glorification of a Myth
+directory: 2014 - The Path of Apotheosis
+mtime: 1762601930
+begin: 2014 - The Path of Apotheosis
+song_begin: Inferi - The Path of Apotheosis - 01 Those Who From The Heavens Came.mp3
+Time: 359.88
+Artist: Inferi
+AlbumArtist: Inferi
+ArtistSort: Inferi
+AlbumArtistSort: Inferi
+Title: Those Who From the Heavens Came
+Album: The Path of Apotheosis
+Track: 1
+Date: 2014-01-28
+OriginalDate: 2014-01-28
+Genre: Melodic Death Metal
+Genre: Technical Death Metal
+Disc: 1
+Label: The Artisan Era
+MUSICBRAINZ_ALBUMID: 2c110ec4-fdd5-4461-b0f1-22a4105f75a5
+MUSICBRAINZ_ARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_ALBUMARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_RELEASEGROUPID: 5b42404d-7f53-46d0-a5c5-6b131edf2bf2
+MUSICBRAINZ_RELEASETRACKID: 4bbda293-d1f2-4512-a517-ea6944c376ed
+MUSICBRAINZ_TRACKID: 67100487-c422-4fdc-9ffa-d91ceeb1f1e2
+Format: 44100:16:2
+mtime: 1762601555
+added: 1762602064
+song_end
+song_begin: Inferi - The Path of Apotheosis - 02 The Promethean Kings.mp3
+Time: 369.053
+Artist: Inferi
+AlbumArtist: Inferi
+ArtistSort: Inferi
+AlbumArtistSort: Inferi
+Title: The Promethean Kings
+Album: The Path of Apotheosis
+Track: 2
+Date: 2014-01-28
+OriginalDate: 2014-01-28
+Genre: Melodic Death Metal
+Genre: Technical Death Metal
+Disc: 1
+Label: The Artisan Era
+MUSICBRAINZ_ALBUMID: 2c110ec4-fdd5-4461-b0f1-22a4105f75a5
+MUSICBRAINZ_ARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_ALBUMARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_RELEASEGROUPID: 5b42404d-7f53-46d0-a5c5-6b131edf2bf2
+MUSICBRAINZ_RELEASETRACKID: 4416b8ea-1d06-4135-866b-0126a61b2526
+MUSICBRAINZ_TRACKID: fc98363e-b770-4fb7-9de8-38b162b85785
+Format: 44100:16:2
+mtime: 1762601569
+added: 1762602064
+song_end
+song_begin: Inferi - The Path of Apotheosis - 03 A Betrayal Unforetold (Feat. Ralph Santolla).mp3
+Time: 320.093
+Artist: Inferi
+AlbumArtist: Inferi
+ArtistSort: Inferi
+AlbumArtistSort: Inferi
+Title: A Betrayal Unfortold
+Album: The Path of Apotheosis
+Track: 3
+Date: 2014-01-28
+OriginalDate: 2014-01-28
+Genre: Melodic Death Metal
+Genre: Technical Death Metal
+Disc: 1
+Label: The Artisan Era
+MUSICBRAINZ_ALBUMID: 2c110ec4-fdd5-4461-b0f1-22a4105f75a5
+MUSICBRAINZ_ARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_ALBUMARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_RELEASEGROUPID: 5b42404d-7f53-46d0-a5c5-6b131edf2bf2
+MUSICBRAINZ_RELEASETRACKID: 04efaefc-90e1-4413-9e81-937c4222c587
+MUSICBRAINZ_TRACKID: 7eae8912-8e54-457e-998d-3bfcdf83fd9d
+Format: 44100:16:2
+mtime: 1762601686
+added: 1762602064
+song_end
+song_begin: Inferi - The Path of Apotheosis - 04 Wrath of The Fallen One.mp3
+Time: 255.906
+Artist: Inferi
+AlbumArtist: Inferi
+ArtistSort: Inferi
+AlbumArtistSort: Inferi
+Title: Wrath of the Fallen One
+Album: The Path of Apotheosis
+Track: 4
+Date: 2014-01-28
+OriginalDate: 2014-01-28
+Genre: Melodic Death Metal
+Genre: Technical Death Metal
+Disc: 1
+Label: The Artisan Era
+MUSICBRAINZ_ALBUMID: 2c110ec4-fdd5-4461-b0f1-22a4105f75a5
+MUSICBRAINZ_ARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_ALBUMARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_RELEASEGROUPID: 5b42404d-7f53-46d0-a5c5-6b131edf2bf2
+MUSICBRAINZ_RELEASETRACKID: 018c534f-fec0-4cad-8c1c-d99b45083fe3
+MUSICBRAINZ_TRACKID: c3d3cd84-b400-423b-b8f0-3bba329d0493
+Format: 44100:16:2
+mtime: 1762601700
+added: 1762602064
+song_end
+song_begin: Inferi - The Path of Apotheosis - 05 The Ophidian Form.mp3
+Time: 337.62600000000003
+Artist: Inferi
+AlbumArtist: Inferi
+ArtistSort: Inferi
+AlbumArtistSort: Inferi
+Title: The Ophidian Form
+Album: The Path of Apotheosis
+Track: 5
+Date: 2014-01-28
+OriginalDate: 2014-01-28
+Genre: Melodic Death Metal
+Genre: Technical Death Metal
+Disc: 1
+Label: The Artisan Era
+MUSICBRAINZ_ALBUMID: 2c110ec4-fdd5-4461-b0f1-22a4105f75a5
+MUSICBRAINZ_ARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_ALBUMARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_RELEASEGROUPID: 5b42404d-7f53-46d0-a5c5-6b131edf2bf2
+MUSICBRAINZ_RELEASETRACKID: b11032df-46b6-4e90-b72d-0c3ed0372c1d
+MUSICBRAINZ_TRACKID: 17b5f34e-b311-4875-9c2e-f94c36256352
+Format: 44100:16:2
+mtime: 1762601730
+added: 1762602064
+song_end
+song_begin: Inferi - The Path of Apotheosis - 06 Prelude to A Perilous Fate.mp3
+Time: 357.24
+Artist: Inferi
+AlbumArtist: Inferi
+ArtistSort: Inferi
+AlbumArtistSort: Inferi
+Title: Prelude to a Perilous Fate
+Album: The Path of Apotheosis
+Track: 6
+Date: 2014-01-28
+OriginalDate: 2014-01-28
+Genre: Melodic Death Metal
+Genre: Technical Death Metal
+Disc: 1
+Label: The Artisan Era
+MUSICBRAINZ_ALBUMID: 2c110ec4-fdd5-4461-b0f1-22a4105f75a5
+MUSICBRAINZ_ARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_ALBUMARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_RELEASEGROUPID: 5b42404d-7f53-46d0-a5c5-6b131edf2bf2
+MUSICBRAINZ_RELEASETRACKID: b4c4623e-6793-45c3-ba8f-b6392b16e3ac
+MUSICBRAINZ_TRACKID: 6c3c5956-d8c0-4a58-870d-242051406643
+Format: 44100:16:2
+mtime: 1762601760
+added: 1762602064
+song_end
+song_begin: Inferi - The Path of Apotheosis - 07 Destroyer.mp3
+Time: 384.92
+Artist: Inferi
+AlbumArtist: Inferi
+ArtistSort: Inferi
+AlbumArtistSort: Inferi
+Title: Destroyer
+Album: The Path of Apotheosis
+Track: 7
+Date: 2014-01-28
+OriginalDate: 2014-01-28
+Genre: Melodic Death Metal
+Genre: Technical Death Metal
+Disc: 1
+Label: The Artisan Era
+MUSICBRAINZ_ALBUMID: 2c110ec4-fdd5-4461-b0f1-22a4105f75a5
+MUSICBRAINZ_ARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_ALBUMARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_RELEASEGROUPID: 5b42404d-7f53-46d0-a5c5-6b131edf2bf2
+MUSICBRAINZ_RELEASETRACKID: c05fc67d-f6c9-433b-9a2c-006686159c23
+MUSICBRAINZ_TRACKID: 8d671b52-5cec-4198-be54-c03dbf8dcdd3
+Format: 44100:16:2
+mtime: 1762601773
+added: 1762602064
+song_end
+song_begin: Inferi - The Path of Apotheosis - 08 Onslaught of The Covenant.mp3
+Time: 381.68
+Artist: Inferi
+AlbumArtist: Inferi
+ArtistSort: Inferi
+AlbumArtistSort: Inferi
+Title: Onslaught of the Covenant
+Album: The Path of Apotheosis
+Track: 8
+Date: 2014-01-28
+OriginalDate: 2014-01-28
+Genre: Melodic Death Metal
+Genre: Technical Death Metal
+Disc: 1
+Label: The Artisan Era
+MUSICBRAINZ_ALBUMID: 2c110ec4-fdd5-4461-b0f1-22a4105f75a5
+MUSICBRAINZ_ARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_ALBUMARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_RELEASEGROUPID: 5b42404d-7f53-46d0-a5c5-6b131edf2bf2
+MUSICBRAINZ_RELEASETRACKID: 02319601-adc8-4b93-a3ab-d0a3c88432cd
+MUSICBRAINZ_TRACKID: 9e30e742-4adb-4f6f-bca6-d95f1e9b3233
+Format: 44100:16:2
+mtime: 1762601790
+added: 1762602064
+song_end
+song_begin: Inferi - The Path of Apotheosis - 09 Marching Through The Flames of Tyranny.mp3
+Time: 359.64
+Artist: Inferi
+AlbumArtist: Inferi
+ArtistSort: Inferi
+AlbumArtistSort: Inferi
+Title: Marching Through the Flames of Tyranny
+Album: The Path of Apotheosis
+Track: 9
+Date: 2014-01-28
+OriginalDate: 2014-01-28
+Genre: Melodic Death Metal
+Genre: Technical Death Metal
+Disc: 1
+Label: The Artisan Era
+MUSICBRAINZ_ALBUMID: 2c110ec4-fdd5-4461-b0f1-22a4105f75a5
+MUSICBRAINZ_ARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_ALBUMARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_RELEASEGROUPID: 5b42404d-7f53-46d0-a5c5-6b131edf2bf2
+MUSICBRAINZ_RELEASETRACKID: ae57fd55-ac5e-40e2-9499-4824a812495b
+MUSICBRAINZ_TRACKID: efdf869f-cc84-4765-bbe5-2de3cd3ba7fa
+Format: 44100:16:2
+mtime: 1762601830
+added: 1762602064
+song_end
+song_begin: Inferi - The Path of Apotheosis - 10 The Ancients of Shattered Thrones.mp3
+Time: 354.64
+Artist: Inferi
+AlbumArtist: Inferi
+ArtistSort: Inferi
+AlbumArtistSort: Inferi
+Title: The Ancients of Shattered Thrones
+Album: The Path of Apotheosis
+Track: 10
+Date: 2014-01-28
+OriginalDate: 2014-01-28
+Genre: Melodic Death Metal
+Genre: Technical Death Metal
+Disc: 1
+Label: The Artisan Era
+MUSICBRAINZ_ALBUMID: 2c110ec4-fdd5-4461-b0f1-22a4105f75a5
+MUSICBRAINZ_ARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_ALBUMARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_RELEASEGROUPID: 5b42404d-7f53-46d0-a5c5-6b131edf2bf2
+MUSICBRAINZ_RELEASETRACKID: bae5c49d-c41f-4771-9c93-2c8678712bda
+MUSICBRAINZ_TRACKID: ef970e31-592e-4185-a648-57ee3389bab4
+Format: 44100:16:2
+mtime: 1762601863
+added: 1762602064
+song_end
+song_begin: Inferi - The Path of Apotheosis - 11 The Path of Apotheosis.mp3
+Time: 394.32
+Artist: Inferi
+AlbumArtist: Inferi
+ArtistSort: Inferi
+AlbumArtistSort: Inferi
+Title: The Path of Apotheosis
+Album: The Path of Apotheosis
+Track: 11
+Date: 2014-01-28
+OriginalDate: 2014-01-28
+Genre: Melodic Death Metal
+Genre: Technical Death Metal
+Disc: 1
+Label: The Artisan Era
+MUSICBRAINZ_ALBUMID: 2c110ec4-fdd5-4461-b0f1-22a4105f75a5
+MUSICBRAINZ_ARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_ALBUMARTISTID: 7408e3bd-87a9-41f5-be26-05c3777fa97b
+MUSICBRAINZ_RELEASEGROUPID: 5b42404d-7f53-46d0-a5c5-6b131edf2bf2
+MUSICBRAINZ_RELEASETRACKID: 5ec73dec-02cb-44d7-a8d0-fd8defa44c1f
+MUSICBRAINZ_TRACKID: 97e600b2-288e-4da4-9355-27058c8b58a8
+Format: 44100:16:2
+mtime: 1762601930
+added: 1762602064
+song_end
+playlist_begin: Inferi - The Path of Apotheosis.m3u
+mtime: 1762601537
+playlist_end
+end: 2014 - The Path of Apotheosis
+directory: Anthems of Rebellion
+mtime: 1762607257
+begin: Anthems of Rebellion
+song_begin: 01 Tear Down the Walls (intro).mp3
+Time: 32.44
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Tear Down the Walls (intro)
+Album: Anthems of Rebellion
+Track: 1
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Death Metal
+Composer: Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 46445e6e-02d1-43fc-aa5b-9699f50aa388
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: 51e42116-7bff-453f-bbe0-0e7753038c55
+MUSICBRAINZ_TRACKID: ee5c230c-6325-4dd3-9a3f-d281f9e2ea86
+Format: 44100:16:2
+mtime: 1762607256
+added: 1762846252
+song_end
+song_begin: 02 Silent Wars.mp3
+Time: 254.893
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Silent Wars
+Album: Anthems of Rebellion
+Track: 2
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 6d79b760-a627-4f94-8ed6-28e08f61a393
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: 86d8b8ea-cac8-4564-872d-4719f9d97ea0
+MUSICBRAINZ_TRACKID: b2c42aff-02c0-4837-b45c-69c08298dce8
+Format: 44100:16:2
+mtime: 1762607107
+added: 1762607167
+song_end
+song_begin: 03 We Will Rise.mp3
+Time: 246.70600000000002
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: We Will Rise
+Album: Anthems of Rebellion
+Track: 3
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 54c9bffd-f81f-375f-bbd9-e1aedb54ae26
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: a9fb70bf-bbc1-4ad0-8777-50ce41a38c0c
+MUSICBRAINZ_TRACKID: c7876509-80c8-49e1-a1dc-b47165a9fc41
+Format: 44100:16:2
+mtime: 1762607146
+added: 1762607167
+song_end
+song_begin: 04 Dead Eyes See No Future.mp3
+Time: 254.946
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Dead Eyes See No Future
+Album: Anthems of Rebellion
+Track: 4
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 8d0d211f-35c3-3049-9c21-5a88d602fee3
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: 1c79d121-4038-4815-9349-c73483c051c7
+MUSICBRAINZ_TRACKID: 85d9097a-be0f-49b7-8761-c5c1d32d5441
+Format: 44100:16:2
+mtime: 1762607120
+added: 1762607167
+song_end
+song_begin: 05 Instinct.mp3
+Time: 216.64000000000001
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Instinct
+Album: Anthems of Rebellion
+Track: 5
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Death Metal
+Composer: Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 1fe21891-a990-4204-a745-7029e8e76f54
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: 0ff2c5f0-2c6a-47cb-b079-bb6cc201d804
+MUSICBRAINZ_TRACKID: a8cb68e2-1920-4686-be2f-e2944c9660b6
+Format: 44100:16:2
+mtime: 1762607162
+added: 1762607167
+song_end
+song_begin: 06 Leader of the Rats.mp3
+Time: 260.693
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Leader of the Rats
+Album: Anthems of Rebellion
+Track: 6
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott, Sharlee D’Angelo
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 0b514a22-2ab1-4443-8cba-8faadf45332c
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: d87f93b4-da7e-4ca9-91c0-1c70177fd286
+MUSICBRAINZ_TRACKID: be0acb53-9048-4d71-aad9-2c3ce5d2133f
+Format: 44100:16:2
+mtime: 1762607156
+added: 1762607167
+song_end
+song_begin: 07 Exist to Exit.mp3
+Time: 322.573
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Exist to Exit
+Album: Anthems of Rebellion
+Track: 7
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott, Daniel Erlandsson
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 825c34c2-18b9-4b2e-bd57-ad625db1caa0
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: 385f7e16-e42b-41e8-a3be-e12ab1f3afe2
+MUSICBRAINZ_TRACKID: 018bfa46-24c9-486e-af3d-874875f88a87
+Format: 44100:16:2
+mtime: 1762607151
+added: 1762607167
+song_end
+song_begin: 08 Marching on a Dead End Road.mp3
+Time: 76.21300000000001
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Marching on a Dead End Road
+Album: Anthems of Rebellion
+Track: 8
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 63a9abcd-71aa-46c6-a981-b22cbbc3c0ec
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: 3c2df36c-4bc7-466c-8dbc-f1066be406e2
+MUSICBRAINZ_TRACKID: 2cb6e05f-8cb1-4930-aef3-e15f8f638117
+Format: 44100:16:2
+mtime: 1762607110
+added: 1762607167
+song_end
+song_begin: 09 Despicable Heroes.mp3
+Time: 132.4
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Despicable Heroes
+Album: Anthems of Rebellion
+Track: 9
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Death Metal
+Composer: Michael Amott, Daniel Erlandsson
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: a69d6acd-9f87-4319-94ca-32cc9add2728
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: 376e12bb-28fe-40e1-88a9-a3bf53a49c74
+MUSICBRAINZ_TRACKID: b14bb5fc-0f2a-499e-a93c-56f99e226714
+Format: 44100:16:2
+mtime: 1762607083
+added: 1762607167
+song_end
+song_begin: 10 End of the Line.mp3
+Time: 215.8
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: End of the Line
+Album: Anthems of Rebellion
+Track: 10
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 96cd173a-f124-435a-8327-68c6c20685f5
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: 5884fa75-d04a-41b0-8fe4-6336b87b4367
+MUSICBRAINZ_TRACKID: 59094673-70bc-4760-9b90-efa6be1599b9
+Format: 44100:16:2
+mtime: 1762607166
+added: 1762607167
+song_end
+song_begin: 11 Dehumanization.mp3
+Time: 255.186
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Dehumanization
+Album: Anthems of Rebellion
+Track: 11
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Death Metal
+Composer: Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 70bc0da9-e7f6-4e2a-8cec-2105e4005596
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: 38011c8e-62b0-466e-a38c-492e3f192c15
+MUSICBRAINZ_TRACKID: 2d466095-4217-4146-afae-d5c51ce66aee
+Format: 44100:16:2
+mtime: 1762607079
+added: 1762607167
+song_end
+song_begin: 12 Anthem.mp3
+Time: 56.52
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Anthem
+Album: Anthems of Rebellion
+Track: 12
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Metal
+Composer: Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: cd1bae0f-815d-4456-b01c-a5ca44094969
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: bf0e0fa4-f25e-4da9-972e-5389b66e5242
+MUSICBRAINZ_TRACKID: fbeb03cc-a7b5-4cdf-abc4-24213db5e974
+Format: 44100:16:2
+mtime: 1762607158
+added: 1762607167
+song_end
+song_begin: 13 Saints and Sinners.mp3
+Time: 281.586
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Saints and Sinners
+Album: Anthems of Rebellion
+Track: 13
+Date: 2003-08-25
+OriginalDate: 2003-07-30
+Genre: Melodic Death Metal, Death Metal
+Composer: Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: dd108a2e-b374-4b09-a8b2-85585e0559aa
+MUSICBRAINZ_ALBUMID: 07fd1314-a1c3-45b9-b53a-5cf5760c53b2
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: f3d65616-3061-3497-b795-2068a6c03f1e
+MUSICBRAINZ_RELEASETRACKID: 7af12699-a331-4747-91eb-36c51c439ae4
+MUSICBRAINZ_TRACKID: 5a5e9efb-899e-46c7-b4fa-4a9b9ad06b78
+Format: 44100:16:2
+mtime: 1762607115
+added: 1762607167
+song_end
+end: Anthems of Rebellion
+directory: Arch Enemy - 1998 - Stigmata
+mtime: 1762607230
+begin: Arch Enemy - 1998 - Stigmata
+song_begin: 01 Beast Of Man.mp3
+Time: 216.42600000000002
+Artist: Arch Enemy
+Title: Beast Of Man
+Album: Stigmata
+Track: 1
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607125
+added: 1762607167
+song_end
+song_begin: 02 Stigmata.mp3
+Time: 131.866
+Artist: Arch Enemy
+Title: Stigmata
+Album: Stigmata
+Track: 2
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607129
+added: 1762607167
+song_end
+song_begin: 03 Sinister Mephisto.mp3
+Time: 345.813
+Artist: Arch Enemy
+Title: Sinister Mephisto
+Album: Stigmata
+Track: 3
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607136
+added: 1762607167
+song_end
+song_begin: 04 Dark Of The Sun.mp3
+Time: 420.106
+Artist: Arch Enemy
+Title: Dark Of The Sun
+Album: Stigmata
+Track: 4
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607146
+added: 1762607167
+song_end
+song_begin: 05 Let The Killing Begin.mp3
+Time: 318.933
+Artist: Arch Enemy
+Title: Let The Killing Begin
+Album: Stigmata
+Track: 5
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607152
+added: 1762607167
+song_end
+song_begin: 06 Black Earth.mp3
+Time: 399.08
+Artist: Arch Enemy
+Title: Black Earth
+Album: Stigmata
+Track: 6
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607166
+added: 1762607167
+song_end
+song_begin: 07 Tears Of The Dead.mp3
+Time: 355.986
+Artist: Arch Enemy
+Title: Tears Of The Dead
+Album: Stigmata
+Track: 7
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607174
+added: 1762846254
+song_end
+song_begin: 08 Vox Stellarum.mp3
+Time: 128.453
+Artist: Arch Enemy
+Title: Vox Stellarum
+Album: Stigmata
+Track: 8
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607177
+added: 1762846254
+song_end
+song_begin: 09 Bridge Of Destiny.mp3
+Time: 465.18600000000004
+Artist: Arch Enemy
+Title: Bridge Of Destiny
+Album: Stigmata
+Track: 9
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607187
+added: 1762846254
+song_end
+song_begin: 10 Hydra.mp3
+Time: 56.733000000000004
+Artist: Arch Enemy
+Title: Hydra
+Album: Stigmata
+Track: 10
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607189
+added: 1762846254
+song_end
+song_begin: 11 Diva Satanica.mp3
+Time: 224.6
+Artist: Arch Enemy
+Title: Diva Satanica
+Album: Stigmata
+Track: 11
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607195
+added: 1762846254
+song_end
+song_begin: 12 Damnations Way.mp3
+Time: 227.479
+Artist: Arch Enemy
+Title: Damnations Way
+Album: Stigmata
+Track: 12
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607200
+added: 1762846254
+song_end
+song_begin: 13 Diva Satanica (Live).mp3
+Time: 245.213
+Artist: Arch Enemy
+Title: Diva Satanica (Live)
+Album: Stigmata
+Track: 13
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607206
+added: 1762846254
+song_end
+song_begin: 14 Beast Of Man (Live).mp3
+Time: 218.186
+Artist: Arch Enemy
+Title: Beast Of Man (Live)
+Album: Stigmata
+Track: 14
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607211
+added: 1762846254
+song_end
+song_begin: 15 Bass Intro-Tears Of The Dead (Live).mp3
+Time: 365.039
+Artist: Arch Enemy
+Title: Bass Intro-Tears Of The Dead (Live)
+Album: Stigmata
+Track: 15
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607220
+added: 1762846254
+song_end
+song_begin: 16 Bridge Of Destiny (Live).mp3
+Time: 342.08
+Artist: Arch Enemy
+Title: Bridge Of Destiny (Live)
+Album: Stigmata
+Track: 16
+Date: 1998
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607228
+added: 1762846254
+song_end
+end: Arch Enemy - 1998 - Stigmata
+directory: Arch Enemy - 1999 - Burning Bridges
+mtime: 1762607120
+begin: Arch Enemy - 1999 - Burning Bridges
+song_begin: 01 The Immortal.mp3
+Time: 222.03900000000002
+Artist: Arch Enemy
+Title: The Immortal
+Album: Burning Bridges
+Track: 1
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762606971
+added: 1762607167
+song_end
+song_begin: 02 Dead Inside.mp3
+Time: 251.333
+Artist: Arch Enemy
+Title: Dead Inside
+Album: Burning Bridges
+Track: 2
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762606977
+added: 1762607167
+song_end
+song_begin: 03 Pilgrim.mp3
+Time: 271.72
+Artist: Arch Enemy
+Title: Pilgrim
+Album: Burning Bridges
+Track: 3
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762606983
+added: 1762607167
+song_end
+song_begin: 04 Silverwing.mp3
+Time: 246.866
+Artist: Arch Enemy
+Title: Silverwing
+Album: Burning Bridges
+Track: 4
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762606989
+added: 1762607167
+song_end
+song_begin: 05 Demonic Science.mp3
+Time: 322.119
+Artist: Arch Enemy
+Title: Demonic Science
+Album: Burning Bridges
+Track: 5
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762606995
+added: 1762607167
+song_end
+song_begin: 06 Seed Of Hate.mp3
+Time: 247.84
+Artist: Arch Enemy
+Title: Seed Of Hate
+Album: Burning Bridges
+Track: 6
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607002
+added: 1762607167
+song_end
+song_begin: 07 Angelclaw.mp3
+Time: 244.226
+Artist: Arch Enemy
+Title: Angelclaw
+Album: Burning Bridges
+Track: 7
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607008
+added: 1762607167
+song_end
+song_begin: 08 Burning Bridges.mp3
+Time: 330.76
+Artist: Arch Enemy
+Title: Burning Bridges
+Album: Burning Bridges
+Track: 8
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607016
+added: 1762607167
+song_end
+song_begin: 09 Fields Of Desolation '99.mp3
+Time: 362.01300000000003
+Artist: Arch Enemy
+Title: Fields Of Desolation '99
+Album: Burning Bridges
+Track: 9
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607024
+added: 1762607167
+song_end
+song_begin: 10 Star Breaker (Judas Priest Cover).mp3
+Time: 203.746
+Artist: Arch Enemy
+Title: Star Breaker (Judas Priest Cover)
+Album: Burning Bridges
+Track: 10
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607028
+added: 1762607167
+song_end
+song_begin: 11 Aces High (Iron Maiden Cover).mp3
+Time: 264.319
+Artist: Arch Enemy
+Title: Aces High (Iron Maiden Cover)
+Album: Burning Bridges
+Track: 11
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607035
+added: 1762607167
+song_end
+song_begin: 12 Scream Of Anger (Europe Cover).mp3
+Time: 226.786
+Artist: Arch Enemy
+Title: Scream Of Anger (Europe Cover)
+Album: Burning Bridges
+Track: 12
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607040
+added: 1762607167
+song_end
+song_begin: 13 The Immortal (Live In Japan '99).mp3
+Time: 235.359
+Artist: Arch Enemy
+Title: The Immortal (Live In Japan '99)
+Album: Burning Bridges
+Track: 13
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607045
+added: 1762607167
+song_end
+song_begin: 14 Dead Inside (Live In Japan '99).mp3
+Time: 274.826
+Artist: Arch Enemy
+Title: Dead Inside (Live In Japan '99)
+Album: Burning Bridges
+Track: 14
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607052
+added: 1762607167
+song_end
+song_begin: 15 Pilgrim (Live In Japan '99).mp3
+Time: 273.52
+Artist: Arch Enemy
+Title: Pilgrim (Live In Japan '99)
+Album: Burning Bridges
+Track: 15
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607058
+added: 1762607167
+song_end
+song_begin: 16 Silverwing (Live In Japan '99).mp3
+Time: 256.24
+Artist: Arch Enemy
+Title: Silverwing (Live In Japan '99)
+Album: Burning Bridges
+Track: 16
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607066
+added: 1762607167
+song_end
+song_begin: 17 Angelclaw (Live In Japan '99).mp3
+Time: 279.45300000000003
+Artist: Arch Enemy
+Title: Angelclaw (Live In Japan '99)
+Album: Burning Bridges
+Track: 17
+Date: 1999
+Genre: Death Metal
+Format: 44100:16:2
+mtime: 1762607119
+added: 1762607167
+song_end
+end: Arch Enemy - 1999 - Burning Bridges
+directory: ARCH ENEMY 2005 Doomsday Machine
+mtime: 1762602068
+begin: ARCH ENEMY 2005 Doomsday Machine
+song_begin: 01 Enter The Machine.mp3
+Time: 123.026
+Artist: ARCH ENEMY
+Title: Enter The Machine
+Album: Doomsday Machine
+Track: 1
+Date: 2005
+Format: 44100:16:2
+mtime: 1762601718
+added: 1762602064
+song_end
+song_begin: 02 Taking Back My Soul.mp3
+Time: 275.40000000000003
+Artist: ARCH ENEMY
+Title: Taking Back My Soul
+Album: Doomsday Machine
+Track: 2
+Date: 2005
+Format: 44100:16:2
+mtime: 1762601727
+added: 1762602064
+song_end
+song_begin: 03 Nemesis.mp3
+Time: 252.106
+Artist: ARCH ENEMY
+Title: Nemesis
+Album: Doomsday Machine
+Track: 3
+Date: 2005
+Format: 44100:16:2
+mtime: 1762601767
+added: 1762602064
+song_end
+song_begin: 04 My Apocalypse.mp3
+Time: 325.62600000000003
+Artist: ARCH ENEMY
+Title: My Apocalypse
+Album: Doomsday Machine
+Track: 4
+Date: 2005
+Format: 44100:16:2
+mtime: 1762601821
+added: 1762602064
+song_end
+song_begin: 05 Carry The Cross.mp3
+Time: 252.106
+Artist: ARCH ENEMY
+Title: Carry The Cross
+Album: Doomsday Machine
+Track: 5
+Date: 2005
+Format: 44100:16:2
+mtime: 1762601855
+added: 1762602064
+song_end
+song_begin: 06 I Am Legend _ Out For Blood.mp3
+Time: 298.40000000000003
+Artist: ARCH ENEMY
+Title: I Am Legend / Out For Blood
+Album: Doomsday Machine
+Track: 6
+Date: 2005
+Format: 44100:16:2
+mtime: 1762601866
+added: 1762602064
+song_end
+song_begin: 07 Skeleton Dance.mp3
+Time: 274.533
+Artist: ARCH ENEMY
+Title: Skeleton Dance
+Album: Doomsday Machine
+Track: 7
+Date: 2005
+Format: 44100:16:2
+mtime: 1762601924
+added: 1762602064
+song_end
+song_begin: 08 Hybrids Of Steel.mp3
+Time: 229.826
+Artist: ARCH ENEMY
+Title: Hybrids Of Steel
+Album: Doomsday Machine
+Track: 8
+Date: 2005
+Format: 44100:16:2
+mtime: 1762601984
+added: 1762602064
+song_end
+song_begin: 09 Machanic God Creation.mp3
+Time: 359
+Artist: ARCH ENEMY
+Title: Machanic God Creation
+Album: Doomsday Machine
+Track: 9
+Date: 2005
+Format: 44100:16:2
+mtime: 1762601997
+added: 1762602064
+song_end
+song_begin: 10 Machtkampf.mp3
+Time: 256.2
+Artist: ARCH ENEMY
+Title: Machtkampf
+Album: Doomsday Machine
+Track: 10
+Date: 2005
+Format: 44100:16:2
+mtime: 1762602011
+added: 1762602064
+song_end
+song_begin: 11 Slaves Of Yesterday.mp3
+Time: 306.133
+Artist: ARCH ENEMY
+Title: Slaves Of Yesterday
+Album: Doomsday Machine
+Track: 11
+Date: 2005
+Format: 44100:16:2
+mtime: 1762602023
+added: 1762602064
+song_end
+song_begin: 12 Heart Of Darkness (Live).mp3
+Time: 290.466
+Artist: ARCH ENEMY
+Title: Heart Of Darkness (LIVE)
+Album: Doomsday Machine
+Track: 12
+Date: 2005
+Format: 44100:16:2
+mtime: 1762602052
+added: 1762602064
+song_end
+song_begin: 13 Bridge Of Destiny (Live).mp3
+Time: 483.2
+Artist: ARCH ENEMY
+Title: Bridge Of Destiny (LIVE)
+Album: Doomsday Machine
+Track: 13
+Date: 2005
+Format: 44100:16:2
+mtime: 1762602068
+added: 1762602073
+song_end
+end: ARCH ENEMY 2005 Doomsday Machine
+directory: Cynic - Focus
+mtime: 1762602274
+begin: Cynic - Focus
+song_begin: 01 - Veil of Maya.mp3
+Time: 320.56
+Artist: Cynic
+AlbumArtist: Cynic
+Title: Veil of Maya
+Album: Focus
+Track: 1
+Date: 1993-06-13
+Genre: Progressive Metal
+Format: 44100:16:2
+mtime: 1762602137
+added: 1762602147
+song_end
+song_begin: 02 - Celestial Voyage.mp3
+Time: 217.346
+Artist: Cynic
+AlbumArtist: Cynic
+Title: Celestial Voyage
+Album: Focus
+Track: 2
+Date: 1993-06-13
+Genre: Progressive Metal
+Format: 44100:16:2
+mtime: 1762602144
+added: 1762602147
+song_end
+song_begin: 03 - The Eagle Nature.mp3
+Time: 208
+Artist: Cynic
+AlbumArtist: Cynic
+Title: The Eagle Nature
+Album: Focus
+Track: 3
+Date: 1993-06-13
+Genre: Progressive Metal
+Format: 44100:16:2
+mtime: 1762602170
+added: 1762602310
+song_end
+song_begin: 04 - Sentiment.mp3
+Time: 264.293
+Artist: Cynic
+AlbumArtist: Cynic
+Title: Sentiment
+Album: Focus
+Track: 4
+Date: 1993-06-13
+Genre: Progressive Metal
+Format: 44100:16:2
+mtime: 1762602188
+added: 1762602310
+song_end
+song_begin: 05 - I'm But a Wave To....mp3
+Time: 327.96
+Artist: Cynic
+AlbumArtist: Cynic
+Title: I'm But a Wave To...
+Album: Focus
+Track: 5
+Date: 1993-06-13
+Genre: Progressive Metal
+Format: 44100:16:2
+mtime: 1762602199
+added: 1762602310
+song_end
+song_begin: 06 - Uroboric Forms.mp3
+Time: 210.12
+Artist: Cynic
+AlbumArtist: Cynic
+Title: Uroboric Forms
+Album: Focus
+Track: 6
+Date: 1993-06-13
+Genre: Progressive Metal
+Format: 44100:16:2
+mtime: 1762602222
+added: 1762602310
+song_end
+song_begin: 07 - Textures.mp3
+Time: 280.266
+Artist: Cynic
+AlbumArtist: Cynic
+Title: Textures
+Album: Focus
+Track: 7
+Date: 1993-06-13
+Genre: Progressive Metal
+Format: 44100:16:2
+mtime: 1762602245
+added: 1762602310
+song_end
+song_begin: 08 - How Could I.mp3
+Time: 327.76
+Artist: Cynic
+AlbumArtist: Cynic
+Title: How Could I
+Album: Focus
+Track: 8
+Date: 1993-06-13
+Genre: Progressive Metal
+Format: 44100:16:2
+mtime: 1762602272
+added: 1762602310
+song_end
+end: Cynic - Focus
+directory: Defiant Imagination
+mtime: 1762527860
+begin: Defiant Imagination
+song_begin: 01 Silence Calls the Storm.mp3
+Time: 302.96
+Artist: Quo Vadis
+Title: Silence Calls the Storm
+Album: Defiant Imagination
+Track: 1
+Date: 2004
+Genre: Metal
+Format: 44100:16:2
+mtime: 1762527680
+added: 1762528203
+song_end
+song_begin: 02 In Contempt.mp3
+Time: 215.786
+Artist: Quo Vadis
+Title: In Contempt
+Album: Defiant Imagination
+Track: 2
+Date: 2004
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762527694
+added: 1762528203
+song_end
+song_begin: 03 Break the Cycle.mp3
+Time: 365.24
+Artist: Quo Vadis
+Title: Break the Cycle
+Album: Defiant Imagination
+Track: 3
+Date: 2004
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762527729
+added: 1762528203
+song_end
+song_begin: 04 Tunnel Effect (Element of the Ensemble IV).mp3
+Time: 339.053
+Artist: Quo Vadis
+Title: Tunnel Effect (Element of the Ensemble IV)
+Album: Defiant Imagination
+Track: 4
+Date: 2004
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762527756
+added: 1762528203
+song_end
+song_begin: 05 To the Bitter End.mp3
+Time: 419.36
+Artist: Quo Vadis
+Title: To the Bitter End
+Album: Defiant Imagination
+Track: 5
+Date: 2004
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762527802
+added: 1762528203
+song_end
+song_begin: 06 In Articulo Mortis.mp3
+Time: 67.2
+Artist: Quo Vadis
+Title: In Articulo Mortis
+Album: Defiant Imagination
+Track: 6
+Date: 2004
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762527816
+added: 1762528203
+song_end
+song_begin: 07 Fate's Descent.mp3
+Time: 275.52
+Artist: Quo Vadis
+Title: Fate's Descent
+Album: Defiant Imagination
+Track: 7
+Date: 2004
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762527840
+added: 1762528203
+song_end
+song_begin: 08 Dead Man's Diary.mp3
+Time: 325.89300000000003
+Artist: Quo Vadis
+Title: Dead Man's Diary
+Album: Defiant Imagination
+Track: 8
+Date: 2004
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762527860
+added: 1762528203
+song_end
+end: Defiant Imagination
+directory: Machine Head - 2007 - The Blackening @320
+mtime: 1762846279
+begin: Machine Head - 2007 - The Blackening @320
+song_begin: 01 - Machine Head - Clenching the Fists of Dissent.mp3
+Time: 636.865
+Artist: Machine Head
+AlbumArtist: Machine Head
+ArtistSort: Machine Head
+AlbumArtistSort: Machine Head
+Title: Clenching the Fists of Dissent
+Album: The Blackening
+Track: 1
+Date: 2007-03-27
+OriginalDate: 2007
+Genre: Groove Metal
+Composer: Phil DemmelRobert FlynnDave McClain
+Grouping: Metal
+Disc: 1
+Label: Roadrunner Records
+MUSICBRAINZ_WORKID: a594e75f-5144-39b5-b123-4c67d09e11bb
+MUSICBRAINZ_ALBUMID: 24160025-f8c0-314c-84cd-35c52ac7f1ce
+MUSICBRAINZ_ARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_ALBUMARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_RELEASEGROUPID: b5464da8-ed5e-35fc-ba5d-bfc9b92ee33c
+MUSICBRAINZ_RELEASETRACKID: 75462774-85a6-3475-8416-919e6482accb
+MUSICBRAINZ_TRACKID: 485ee095-b155-4e94-b406-2622d759b35f
+Format: 44100:16:2
+mtime: 1762846163
+added: 1762846253
+song_end
+song_begin: 02 - Machine Head - Beautiful Mourning.mp3
+Time: 286.511
+Artist: Machine Head
+AlbumArtist: Machine Head
+ArtistSort: Machine Head
+AlbumArtistSort: Machine Head
+Title: Beautiful Mourning
+Album: The Blackening
+Track: 2
+Date: 2007-03-27
+OriginalDate: 2007
+Genre: Groove Metal
+Composer: Phil DemmelRobert Flynn
+Grouping: Metal
+Disc: 1
+Label: Roadrunner Records
+MUSICBRAINZ_WORKID: 582b0aed-2fdf-39f2-9e6c-aeb453cb80b6
+MUSICBRAINZ_ALBUMID: 24160025-f8c0-314c-84cd-35c52ac7f1ce
+MUSICBRAINZ_ARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_ALBUMARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_RELEASEGROUPID: b5464da8-ed5e-35fc-ba5d-bfc9b92ee33c
+MUSICBRAINZ_RELEASETRACKID: 56bee900-eec0-38f6-8213-1e394f24be20
+MUSICBRAINZ_TRACKID: 89c08396-4e8c-42e1-b923-5dbdc68bf26c
+Format: 44100:16:2
+mtime: 1762846175
+added: 1762846253
+song_end
+song_begin: 03 - Machine Head - Aesthetics of Hate.mp3
+Time: 390.373
+Artist: Machine Head
+AlbumArtist: Machine Head
+ArtistSort: Machine Head
+AlbumArtistSort: Machine Head
+Title: Aesthetics of Hate
+Album: The Blackening
+Track: 3
+Date: 2007-03-27
+OriginalDate: 2007
+Genre: Groove Metal
+Composer: Robert Flynn
+Grouping: Metal
+Disc: 1
+Label: Roadrunner Records
+MUSICBRAINZ_WORKID: ee2438f7-b3a1-3244-8421-14d2ba43fbe1
+MUSICBRAINZ_ALBUMID: 24160025-f8c0-314c-84cd-35c52ac7f1ce
+MUSICBRAINZ_ARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_ALBUMARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_RELEASEGROUPID: b5464da8-ed5e-35fc-ba5d-bfc9b92ee33c
+MUSICBRAINZ_RELEASETRACKID: 53ead2e5-d30b-396c-be83-42a5287e0074
+MUSICBRAINZ_TRACKID: 26ba54a5-91fb-46fb-a26b-75e975bdbde9
+Format: 44100:16:2
+mtime: 1762846189
+added: 1762846253
+song_end
+song_begin: 04 - Machine Head - Now I Lay Thee Down.mp3
+Time: 334.706
+Artist: Machine Head
+AlbumArtist: Machine Head
+ArtistSort: Machine Head
+AlbumArtistSort: Machine Head
+Title: Now I Lay Thee Down
+Album: The Blackening
+Track: 4
+Date: 2007-03-27
+OriginalDate: 2007
+Genre: Groove Metal
+Composer: Phil DemmelRobert Flynn
+Grouping: Metal
+Disc: 1
+Label: Roadrunner Records
+MUSICBRAINZ_WORKID: e4538bc5-b2ac-30f0-bed0-4970ce052ad1
+MUSICBRAINZ_ALBUMID: 24160025-f8c0-314c-84cd-35c52ac7f1ce
+MUSICBRAINZ_ARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_ALBUMARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_RELEASEGROUPID: b5464da8-ed5e-35fc-ba5d-bfc9b92ee33c
+MUSICBRAINZ_RELEASETRACKID: 5bca4f67-1dee-3b3a-a5d8-f8d62f5174a4
+MUSICBRAINZ_TRACKID: c8f5f14f-4add-4e7e-a77b-1744470aba00
+Format: 44100:16:2
+mtime: 1762846201
+added: 1762846253
+song_end
+song_begin: 05 - Machine Head - Slanderous.mp3
+Time: 316.995
+Artist: Machine Head
+AlbumArtist: Machine Head
+ArtistSort: Machine Head
+AlbumArtistSort: Machine Head
+Title: Slanderous
+Album: The Blackening
+Track: 5
+Date: 2007-03-27
+OriginalDate: 2007
+Genre: Groove Metal
+Composer: Phil DemmelRobert Flynn
+Grouping: Metal
+Disc: 1
+Label: Roadrunner Records
+MUSICBRAINZ_WORKID: 2215b7dd-4661-39a7-b7e5-2ca3c26cf73f
+MUSICBRAINZ_ALBUMID: 24160025-f8c0-314c-84cd-35c52ac7f1ce
+MUSICBRAINZ_ARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_ALBUMARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_RELEASEGROUPID: b5464da8-ed5e-35fc-ba5d-bfc9b92ee33c
+MUSICBRAINZ_RELEASETRACKID: a35f48f7-5057-37bd-9373-7fd8ab17780e
+MUSICBRAINZ_TRACKID: 8dda7af4-9665-437a-8e9f-45ced3d0e56a
+Format: 44100:16:2
+mtime: 1762846214
+added: 1762846253
+song_end
+song_begin: 06 - Machine Head - Halo.mp3
+Time: 543.477
+Artist: Machine Head
+AlbumArtist: Machine Head
+ArtistSort: Machine Head
+AlbumArtistSort: Machine Head
+Title: Halo
+Album: The Blackening
+Track: 6
+Date: 2007-03-27
+OriginalDate: 2007
+Genre: Groove Metal
+Composer: Phil DemmelAdam DuceRobert FlynnDave McClain
+Grouping: Metal
+Disc: 1
+Label: Roadrunner Records
+MUSICBRAINZ_WORKID: c020c5fb-bd62-3ed8-9564-03a30fe4e062
+MUSICBRAINZ_ALBUMID: 24160025-f8c0-314c-84cd-35c52ac7f1ce
+MUSICBRAINZ_ARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_ALBUMARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_RELEASEGROUPID: b5464da8-ed5e-35fc-ba5d-bfc9b92ee33c
+MUSICBRAINZ_RELEASETRACKID: 977041dd-4067-371d-8330-99278276b8ea
+MUSICBRAINZ_TRACKID: 73d38b69-5c17-4fb9-ac1c-f705bd3e843d
+Format: 44100:16:2
+mtime: 1762846237
+added: 1762846253
+song_end
+song_begin: 07 - Machine Head - Wolves.mp3
+Time: 541.152
+Artist: Machine Head
+AlbumArtist: Machine Head
+ArtistSort: Machine Head
+AlbumArtistSort: Machine Head
+Title: Wolves
+Album: The Blackening
+Track: 7
+Date: 2007-03-27
+OriginalDate: 2007
+Genre: Groove Metal
+Composer: Phil DemmelAdam DuceRobert Flynn
+Grouping: Metal
+Disc: 1
+Label: Roadrunner Records
+MUSICBRAINZ_WORKID: 7726d1eb-ca6b-3263-a50d-f0742a99385b
+MUSICBRAINZ_ALBUMID: 24160025-f8c0-314c-84cd-35c52ac7f1ce
+MUSICBRAINZ_ARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_ALBUMARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_RELEASEGROUPID: b5464da8-ed5e-35fc-ba5d-bfc9b92ee33c
+MUSICBRAINZ_RELEASETRACKID: 321ffb83-21b7-33bb-a0fb-63cebf7e3dea
+MUSICBRAINZ_TRACKID: 88bac627-a0bd-4ad9-a521-2e1ae3079e94
+Format: 44100:16:2
+mtime: 1762846257
+added: 1763104155
+song_end
+song_begin: 08 - Machine Head - A Farewell to Arms.mp3
+Time: 612.78
+Artist: Machine Head
+AlbumArtist: Machine Head
+ArtistSort: Machine Head
+AlbumArtistSort: Machine Head
+Title: A Farewell to Arms
+Album: The Blackening
+Track: 8
+Date: 2007-03-27
+OriginalDate: 2007
+Genre: Groove Metal
+Composer: Phil DemmelRobert Flynn
+Grouping: Metal
+Disc: 1
+Label: Roadrunner Records
+MUSICBRAINZ_WORKID: af775372-4bf4-319d-892d-81aac12d0a0b
+MUSICBRAINZ_ALBUMID: 24160025-f8c0-314c-84cd-35c52ac7f1ce
+MUSICBRAINZ_ARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_ALBUMARTISTID: 22a1f4d7-81ff-4216-ac06-3387da6bc118
+MUSICBRAINZ_RELEASEGROUPID: b5464da8-ed5e-35fc-ba5d-bfc9b92ee33c
+MUSICBRAINZ_RELEASETRACKID: 26997c1c-0e62-330a-821d-1340781da8d8
+MUSICBRAINZ_TRACKID: 8e5cce79-86ef-47e2-be25-612c5c0e8d8d
+Format: 44100:16:2
+mtime: 1762846278
+added: 1763104155
+song_end
+end: Machine Head - 2007 - The Blackening @320
+directory: Marduk - Heaven Shall Burn... When We Are Gathered
+mtime: 1762601831
+begin: Marduk - Heaven Shall Burn... When We Are Gathered
+song_begin: Marduk 'Heaven Shall Burn... When We Are Gathered' 01. Summon The Darkness.mp3
+Time: 22.101
+Artist: Marduk
+Title: Summon The Darkness
+Album: Heaven Shall Burn... When We Are Gathered
+Track: 1
+Date: 1996
+Genre: Black Metal
+Format: 44100:16:2
+mtime: 1762601726
+added: 1762602064
+song_end
+song_begin: Marduk 'Heaven Shall Burn... When We Are Gathered' 02. Beyond The Grace Of God.mp3
+Time: 316.789
+Artist: Marduk
+Title: Beyond The Grace Of God
+Album: Heaven Shall Burn... When We Are Gathered
+Track: 2
+Date: 1996
+Genre: Black Metal
+Format: 44100:16:2
+mtime: 1762601745
+added: 1762602064
+song_end
+song_begin: Marduk 'Heaven Shall Burn... When We Are Gathered' 03. Infernal Eternal.mp3
+Time: 280.609
+Artist: Marduk
+Title: Infernal Eternal
+Album: Heaven Shall Burn... When We Are Gathered
+Track: 3
+Date: 1996
+Genre: Black Metal
+Format: 44100:16:2
+mtime: 1762601765
+added: 1762602064
+song_end
+song_begin: Marduk 'Heaven Shall Burn... When We Are Gathered' 04. Glorification Of The Black God.mp3
+Time: 292.443
+Artist: Marduk
+Title: Glorification Of The Black God
+Album: Heaven Shall Burn... When We Are Gathered
+Track: 4
+Date: 1996
+Genre: Black Metal
+Format: 44100:16:2
+mtime: 1762601774
+added: 1762602064
+song_end
+song_begin: Marduk 'Heaven Shall Burn... When We Are Gathered' 05. Darkness It Shall Be.mp3
+Time: 279.904
+Artist: Marduk
+Title: Darkness It Shall Be
+Album: Heaven Shall Burn... When We Are Gathered
+Track: 5
+Date: 1996
+Genre: Black Metal
+Format: 44100:16:2
+mtime: 1762601788
+added: 1762602064
+song_end
+song_begin: Marduk 'Heaven Shall Burn... When We Are Gathered' 06. The Black Tormentor Of Satan.mp3
+Time: 255.793
+Artist: Marduk
+Title: The Black Tormentor Of Satan
+Album: Heaven Shall Burn... When We Are Gathered
+Track: 6
+Date: 1996
+Genre: Black Metal
+Format: 44100:16:2
+mtime: 1762601796
+added: 1762602064
+song_end
+song_begin: Marduk 'Heaven Shall Burn... When We Are Gathered' 07. Dracul Va Domni Din Nou In Transilvania.mp3
+Time: 338.47
+Artist: Marduk
+Title: Dracul Va Domni Din Nou In Transilvania
+Album: Heaven Shall Burn... When We Are Gathered
+Track: 7
+Date: 1996
+Genre: Black Metal
+Format: 44100:16:2
+mtime: 1762601806
+added: 1762602064
+song_end
+song_begin: Marduk 'Heaven Shall Burn... When We Are Gathered' 08. Legion.mp3
+Time: 355.581
+Artist: Marduk
+Title: Legion
+Album: Heaven Shall Burn... When We Are Gathered
+Track: 8
+Date: 1996
+Genre: Black Metal
+Format: 44100:16:2
+mtime: 1762601831
+added: 1762602064
+song_end
+end: Marduk - Heaven Shall Burn... When We Are Gathered
+directory: The Faceless - 2012 - Autotheism
+mtime: 1762846179
+begin: The Faceless - 2012 - Autotheism
+song_begin: 01 - Autotheist Movement I Create.mp3
+Time: 224.007
+Artist: The Faceless
+Title: Autotheist Movement I: Create
+Album: Autotheism
+Track: 1
+Date: 2012
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762846023
+added: 1762846254
+song_end
+song_begin: 02 - Autotheist Movement II Emancipate.mp3
+Time: 440.286
+Artist: The Faceless
+Title: Autotheist Movement II: Emancipate
+Album: Autotheism
+Track: 2
+Date: 2012
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762846038
+added: 1762846254
+song_end
+song_begin: 03 - Autotheist Movement III Deconsecrate.mp3
+Time: 399.889
+Artist: The Faceless
+Title: Autotheist Movement III: Deconsecrate
+Album: Autotheism
+Track: 3
+Date: 2012
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762846051
+added: 1762846254
+song_end
+song_begin: 04 - Accelerated Evolution.mp3
+Time: 279.484
+Artist: The Faceless
+Title: Accelerated Evolution
+Album: Autotheism
+Track: 4
+Date: 2012
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762846125
+added: 1762846254
+song_end
+song_begin: 05 - The Eidolon Reality.mp3
+Time: 226.704
+Artist: The Faceless
+Title: The Eidolon Reality
+Album: Autotheism
+Track: 5
+Date: 2012
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762846133
+added: 1762846254
+song_end
+song_begin: 06 - Ten Billion Years.mp3
+Time: 354.909
+Artist: The Faceless
+Title: Ten Billion Years
+Album: Autotheism
+Track: 6
+Date: 2012
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762846145
+added: 1762846254
+song_end
+song_begin: 07 - Hail Science.mp3
+Time: 53.794000000000004
+Artist: The Faceless
+Title: Hail Science
+Album: Autotheism
+Track: 7
+Date: 2012
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762846161
+added: 1762846254
+song_end
+song_begin: 08 - Hymn Of Sanity.mp3
+Time: 94.632
+Artist: The Faceless
+Title: Hymn of Sanity
+Album: Autotheism
+Track: 8
+Date: 2012
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762846164
+added: 1762846254
+song_end
+song_begin: 09 - In Solitude.mp3
+Time: 387.829
+Artist: The Faceless
+Title: In Solitude
+Album: Autotheism
+Track: 9
+Date: 2012
+Genre: Technical Death Metal
+Format: 44100:16:2
+mtime: 1762846178
+added: 1762846254
+song_end
+end: The Faceless - 2012 - Autotheism
+directory: Wages of Sin
+mtime: 1762607254
+begin: Wages of Sin
+song_begin: 01 Enemy Within.mp3
+Time: 261.746
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Enemy Within
+Album: Wages of Sin
+Track: 1
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: f74de4cc-86e0-33d1-b3b1-96afc9943027
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: d2291d0b-1c50-44a6-a95a-cb341ecffcb6
+MUSICBRAINZ_TRACKID: 1a3aebd1-1643-41ac-8096-e6cfb55875d4
+Format: 44100:16:2
+mtime: 1762607219
+added: 1762846253
+song_end
+song_begin: 02 Burning Angel.mp3
+Time: 257.175
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Burning Angel
+Album: Wages of Sin
+Track: 2
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 83188325-fc70-3c57-8dc3-00403bfa6f54
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: 24957fd0-e254-4ca4-8472-73538a1e2f47
+MUSICBRAINZ_TRACKID: 730aead5-ebb4-4e4d-a327-a9143c4eb387
+Format: 44100:16:2
+mtime: 1762607186
+added: 1762846253
+song_end
+song_begin: 03 Heart of Darkness.mp3
+Time: 292.571
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Heart of Darkness
+Album: Wages of Sin
+Track: 3
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 2ddadbd6-553c-3958-910a-f589a97d20d8
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: 5850006f-3693-4450-9383-0359f83ea9c4
+MUSICBRAINZ_TRACKID: 949705af-bb24-4b95-9008-4829fde9dbf0
+Format: 44100:16:2
+mtime: 1762607211
+added: 1762846253
+song_end
+song_begin: 04 Ravenous.mp3
+Time: 246.073
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Ravenous
+Album: Wages of Sin
+Track: 4
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 250c0fde-088d-3f6a-8e8f-b24ed7140245
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: b2815b73-6481-47f8-b299-4c744d925fcd
+MUSICBRAINZ_TRACKID: 3ff32423-2446-4699-ad03-2a842f746bac
+Format: 44100:16:2
+mtime: 1762607191
+added: 1762846253
+song_end
+song_begin: 05 Savage Messiah.mp3
+Time: 318.354
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Savage Messiah
+Album: Wages of Sin
+Track: 5
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott, Sharlee D’Angelo
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 102caa59-5c7e-3c7d-884e-9a2d977bbcd2
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: 9d888146-4d97-468d-a379-bd296806cc8e
+MUSICBRAINZ_TRACKID: 3ecb73ca-ad57-4836-8aff-3a42b8c970b0
+Format: 44100:16:2
+mtime: 1762607203
+added: 1762846253
+song_end
+song_begin: 06 Dead Bury Their Dead.mp3
+Time: 235.049
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Dead Bury Their Dead
+Album: Wages of Sin
+Track: 6
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 3bb500b8-42b4-39cc-a197-e34cfa0b5444
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: b29e36e5-fe44-4396-975e-f78c1f3f0f18
+MUSICBRAINZ_TRACKID: 9e419e88-b3b5-4014-b59c-9d78b975c7f8
+Format: 44100:16:2
+mtime: 1762607238
+added: 1762846253
+song_end
+song_begin: 07 Web of Lies.mp3
+Time: 236.068
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Web of Lies
+Album: Wages of Sin
+Track: 7
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 25591ba1-7a91-307e-aff2-7cc34697fa06
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: 323e735e-1009-4692-9d61-0b2af1b23fa4
+MUSICBRAINZ_TRACKID: 7eedc80a-34c0-47a4-8cfd-382ab88d1f8a
+Format: 44100:16:2
+mtime: 1762607250
+added: 1762846253
+song_end
+song_begin: 08 The First Deadly Sin.mp3
+Time: 260.702
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: The First Deadly Sin
+Album: Wages of Sin
+Track: 8
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 57c5cf6d-e260-367f-a50e-d32a15e2158a
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: d04a6a88-b8b6-4ec0-9f89-5337c3ea861d
+MUSICBRAINZ_TRACKID: 32701a1f-ff71-4a0a-98e9-5c57303a8151
+Format: 44100:16:2
+mtime: 1762607223
+added: 1762846253
+song_end
+song_begin: 09 Behind the Smile.mp3
+Time: 208.352
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Behind the Smile
+Album: Wages of Sin
+Track: 9
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: f3b916fe-f746-3116-bb85-7e366d90ab00
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: ea5f5f67-2b04-49a2-ab41-3726df766f84
+MUSICBRAINZ_TRACKID: 8ed6bafe-07cc-48e3-8790-b0a5fdd44623
+Format: 44100:16:2
+mtime: 1762607242
+added: 1762846253
+song_end
+song_begin: 10 Snow Bound.mp3
+Time: 94.955
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Snow Bound
+Album: Wages of Sin
+Track: 10
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 563da76e-544d-32ea-af0c-cde4ac06681c
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: 8502a0a2-12a8-4763-b6eb-00d1374ee4a2
+MUSICBRAINZ_TRACKID: 9650475a-7c20-434f-bff6-d0680d849b29
+Format: 44100:16:2
+mtime: 1762607215
+added: 1762846253
+song_end
+song_begin: 11 Shadows and Dust.mp3
+Time: 268.956
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Shadows and Dust
+Album: Wages of Sin
+Track: 11
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: bd4d8515-de5f-3d63-9efa-bfe875c43570
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: 5f9a614f-8fde-4039-a7c6-31cbc776a86a
+MUSICBRAINZ_TRACKID: 4167524b-665f-4ffa-a333-c209666632b7
+Format: 44100:16:2
+mtime: 1762607179
+added: 1762846253
+song_end
+song_begin: 12 Lament of a Mortal Soul.mp3
+Time: 244.715
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Lament of a Mortal Soul
+Album: Wages of Sin
+Track: 12
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 73e601e6-59ed-3e80-b24d-7971d891f8f4
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: ceca04aa-11c7-4829-896d-bc0f97ff1038
+MUSICBRAINZ_TRACKID: 40c34d42-3087-4d80-9e44-da88fdcd8a8c
+Format: 44100:16:2
+mtime: 1762607254
+added: 1762846253
+song_end
+song_begin: 13 Starbreaker - cover version.mp3
+Time: 205.08700000000002
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Starbreaker - cover version
+Album: Wages of Sin
+Track: 13
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 4b16af75-90d3-45f9-b679-984b6d126868
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: 0f07d552-1864-46c0-9cbd-4fce5da1996a
+MUSICBRAINZ_TRACKID: c20ad37a-6120-492c-90f0-f621a5c733d7
+Format: 44100:16:2
+mtime: 1762607232
+added: 1762846253
+song_end
+song_begin: 14 Aces High - cover version.mp3
+Time: 264.594
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Aces High - cover version
+Album: Wages of Sin
+Track: 14
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal
+Composer: Steve Harris
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 1fbc42d5-0268-3fd4-8bf7-12853731ea48
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: bf6b393e-54fc-4f8a-9019-753b1896ded9
+MUSICBRAINZ_TRACKID: 46a7564b-d603-4153-a897-732850a4febf
+Format: 44100:16:2
+mtime: 1762607170
+added: 1762846253
+song_end
+song_begin: 15 Scream of Anger - cover version.mp3
+Time: 226.455
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Scream of Anger - cover version
+Album: Wages of Sin
+Track: 15
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Marcel Jacob, Joey Tempest
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: b6c73615-f4df-3864-ba66-e582672242db
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: df68c486-bf6a-4c26-8d7e-a4d090ad58df
+MUSICBRAINZ_TRACKID: 7f4ed9a6-25ed-45a5-8046-8e3848b1a8a2
+Format: 44100:16:2
+mtime: 1762607183
+added: 1762846253
+song_end
+song_begin: 16 Diva Satanica.mp3
+Time: 223.895
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Diva Satanica
+Album: Wages of Sin
+Track: 16
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: a3faca9c-7f58-38b4-9d03-a5be3de30dc8
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: eaf566ad-8bb0-4d8c-ad6f-94eac9747f6f
+MUSICBRAINZ_TRACKID: 7cd62114-d57f-463c-8997-833ad82fa76c
+Format: 44100:16:2
+mtime: 1762607174
+added: 1762846253
+song_end
+song_begin: 17 Fields of Desolation ’99.mp3
+Time: 362.396
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Fields of Desolation ’99
+Album: Wages of Sin
+Track: 17
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Christopher Amott, Michael Amott
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: c1733ad3-bb14-3dc1-be55-5e2f65faf21a
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: 9dc391f6-7ecd-44f2-a15e-e2d07a69968a
+MUSICBRAINZ_TRACKID: 78edc592-ce84-4695-931c-45cab8752681
+Format: 44100:16:2
+mtime: 1762607247
+added: 1762846253
+song_end
+song_begin: 18 Damnation’s Way.mp3
+Time: 227.448
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Damnation’s Way
+Album: Wages of Sin
+Track: 18
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Death Metal
+Composer: Michael Amott, Johan Liiva
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: cdba7989-b8a2-306f-a986-1198b1bb2eab
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: 27f0feda-a01e-4925-b89f-98e21637b421
+MUSICBRAINZ_TRACKID: f1b10de4-1151-44f0-a2d2-0b4c8abe5e0a
+Format: 44100:16:2
+mtime: 1762607207
+added: 1762846253
+song_end
+song_begin: 19 Hydra.mp3
+Time: 56.372
+Artist: Arch Enemy
+AlbumArtist: Arch Enemy
+ArtistSort: Arch Enemy
+Title: Hydra
+Album: Wages of Sin
+Track: 19
+Date: 2001-04-25
+OriginalDate: 2001-04-25
+Genre: Melodic Death Metal, Metal
+Composer: Christopher Amott, Michael Amott, Fredrik Nordström
+Disc: 1
+Label: Century Media
+AlbumArtistSort: Arch Enemy
+MUSICBRAINZ_WORKID: 5f6e2fac-5d79-3b84-b8e3-713d6ff389a7
+MUSICBRAINZ_ALBUMID: 93196f99-e700-42fa-9768-f1dde0952d24
+MUSICBRAINZ_ARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_ALBUMARTISTID: e631bb92-3e2b-43e3-a2cb-b605e2fb53bd
+MUSICBRAINZ_RELEASEGROUPID: 10078a3b-c70f-3a1c-b7ee-3540daf7c259
+MUSICBRAINZ_RELEASETRACKID: d3baa175-8552-4e8a-9043-07942e188f93
+MUSICBRAINZ_TRACKID: 81807bfd-f9c2-41c8-9025-99e4165de26c
+Format: 44100:16:2
+mtime: 1762607235
+added: 1762846253
+song_end
+end: Wages of Sin

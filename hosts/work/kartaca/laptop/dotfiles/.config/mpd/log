@@ -1,0 +1,23 @@
+Nov 07 15:54 : exception: Failed to open '/home/kkoc/.config/mpd/state': No such file or directory
+Nov 07 15:54 : exception: Failed to open '/home/kkoc/.config/mpd/state': No such file or directory
+2025-11-07T16:04:48 update: added (1997) - The Final Chapter/01. Inseminated Adaption.mp3
+2025-11-07T16:05:14 update: added (1997) - The Final Chapter/02. A Coming Race.mp3
+2025-11-07T16:05:40 update: added (1997) - The Final Chapter/03. Dominion.mp3
+2025-11-07T16:06:24 update: added (1997) - The Final Chapter/04. Inquire Within.mp3
+2025-11-07T16:06:54 update: added (1997) - The Final Chapter/05. Last Vanguard.mp3
+2025-11-07T16:07:56 update: added (1997) - The Final Chapter/06. Request Denied.mp3
+2025-11-07T16:08:54 update: added (1997) - The Final Chapter/07. Through the Window of Time.mp3
+2025-11-07T16:09:47 update: added (1997) - The Final Chapter/08. Shamateur.mp3
+2025-11-07T16:11:09 update: added (1997) - The Final Chapter/09. Adjusting the Sun.mp3
+2025-11-07T16:11:38 update: added (1997) - The Final Chapter/10. Lies.mp3
+2025-11-07T16:11:57 update: added (1997) - The Final Chapter/11. Evil Invaders (Razor cover).mp3
+2025-11-07T16:12:23 update: added (1997) - The Final Chapter/12. The Final Chapter.mp3
+WARNING: Unhandled message: interface=org.freedesktop.DBus, path=/org/freedesktop/DBus, member=ActivatableServicesChanged
+WARNING: Unhandled message: interface=org.freedesktop.DBus, path=/org/freedesktop/DBus, member=ActivatableServicesChanged
+WARNING: Unhandled message: interface=org.freedesktop.DBus, path=/org/freedesktop/DBus, member=ActivatableServicesChanged
+WARNING: Unhandled message: interface=org.freedesktop.DBus, path=/org/freedesktop/DBus, member=ActivatableServicesChanged
+WARNING: Unhandled message: interface=org.freedesktop.DBus, path=/org/freedesktop/DBus, member=ActivatableServicesChanged
+WARNING: Unhandled message: interface=org.freedesktop.DBus, path=/org/freedesktop/DBus, member=ActivatableServicesChanged
+2026-05-21T20:44:16 exception: Failed to commit /home/kkoc/.config/mpd/state: File exists
+2026-05-21T22:16:17 exception: Failed to commit /home/kkoc/.config/mpd/state: File exists
+2026-05-31T17:47:33 exception: Failed to commit /home/kkoc/.config/mpd/state: File exists

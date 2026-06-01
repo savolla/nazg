@@ -1,0 +1,121 @@
+add_newline = false
+
+# A minimal left prompt
+format = """$directory\n$os$username$hostname """
+
+# move the rest of the prompt to the right
+right_format = """$git_branch$git_status$all$status$kubernetes $gcloud"""
+
+[username]
+style_user = 'white bold'
+style_root = 'black bold'
+format = '[ $user@]($style)'
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+style = 'white bold'
+format = '[$hostname]($style)'
+disabled = false
+
+[character]
+disabled = true
+success_symbol = "[❯](green)"
+error_symbol = "[❯](red)"
+vicmd_symbol = "[❮](yellow)"
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style) '
+style = 'green'
+
+[python]
+# format = '[(\($virtualenv\) )]($style)'
+# style = 'white'
+symbol = ' '
+format = '[${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "#9dc847"
+
+[terraform]
+# format = '[(\($virtualenv\) )]($style)'
+# style = 'white'
+symbol = ' '
+format = '[${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "#8787ff"
+
+[git_status]
+format = '$all_status$ahead_behind '
+ahead = '[ $count](bold #ff00ff) '
+behind = '[ $count](bold #ff00ff) '
+staged = '[ $count](#00c310) '
+deleted = '[✖$count](#e10051) '
+renamed = '[ $count](#d100d8) '
+stashed = '[ $count](#d74b14) '
+untracked = '[ $count](#ffffff) '
+modified = '[ $count](#14ced7) '
+conflicted = '[  $count](#ff0000) '
+diverged = ' '
+up_to_date = ''
+
+[directory]
+format = '[$read_only]($read_only_style) [$path]($style) '
+style = "#00d7d7"
+fish_style_pwd_dir_length = 999
+read_only = '󰌾 '
+
+[cmd_duration]
+format = '[$duration]($style) '
+
+[line_break]
+disabled = false
+
+[status]
+disabled = false
+symbol = '✘ '
+
+[gcloud]
+symbol = '[󱇶 ](#f3b605) '
+format = '[$symbol($project) ($region)](#f3b605) '
+[gcloud.project_aliases]
+hopi-pretest-kartaca = 'hopi-pret'
+hopi-program-test = 'hopi-test'
+hopi-program-staging = 'hopi-stag'
+hopi-program = 'hopi-prod'
+[gcloud.region_aliases]
+europe-west1 = '🇧🇪'
+
+[nix_shell]
+format = '[$symbol$state( \($name\))]($style) '
+symbol = ' '
+
+[kubernetes]
+disabled = false
+symbol = '[󰠳 ](#6dbaff)'
+format = '[$symbol](bright-black) [$context(\($namespace\))]($style)'
+
+[[kubernetes.contexts]]
+context_pattern = "hopi-prod"
+context_alias = "PROD "
+style = "#ff0000"
+
+[[kubernetes.contexts]]
+context_pattern = "hopi-stag"
+context_alias = "STAG "
+style = "#f75c1e"
+
+[[kubernetes.contexts]]
+context_pattern = "hopi-test"
+context_alias = "TEST "
+style = "#00ffff"
+
+[[kubernetes.contexts]]
+context_pattern = "hopi-pret"
+context_alias = "PRET "
+style = "#00ff00"
+
+[os]
+disabled = false
+[os.symbols]
+Ubuntu = "[ ](#d64613)"
+NixOS = "[ ](#8ebee1)"
+Android = "[ ](#3DDC84)"

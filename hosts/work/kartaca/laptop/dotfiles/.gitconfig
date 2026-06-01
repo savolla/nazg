@@ -1,0 +1,12 @@
+[init]
+	defaultBranch = main
+[user]
+	email = kuzey.koc@kartaca.com
+	name = Kuzey Koç
+[core]
+	editor = vim
+[pager]
+	branch = false
+[delta]
+    side-by-side = true
+	line-numbers = true

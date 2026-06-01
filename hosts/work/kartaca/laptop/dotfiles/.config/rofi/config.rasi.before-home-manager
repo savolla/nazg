@@ -1,0 +1,19 @@
+@theme "/nix/store/qda1dx1sa0adn9g2c9xifk63pm19ylj4-rofi-2.0.0/share/rofi/themes/gruvbox-dark-hard.rasi"
+
+configuration {
+    font: "IosevkaTerm Nerd Font Mono 14";
+    modi: "drun,run,filebrowser";
+    kb-accept-entry: "";
+    kb-remove-to-eol: "";
+    kb-element-next: "";
+    kb-accept-entry: "Tab";
+    kb-row-down: "Control+j";
+    kb-row-up: "Control+k";
+}
+window {
+    width: 50%;
+    height: 25%;
+    border-color: transparent;
+    location: center;
+    padding: 0px;
+}

@@ -936,6 +936,7 @@ in
       unstable.zsh-fast-syntax-highlighting
       unstable.zstd # extract .zst files
       unstable.oath-toolkit # calculate OTP using secrets
+      unstable.pre-commit # scan for problems before committing
       unstable.fishPlugins.done # get notified when jobs finish
 
       (unstable.pass.withExtensions (exts: [

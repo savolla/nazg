@@ -1,0 +1,6 @@
+[submodule "hosts/work/kartaca/laptop/dotfiles/.config/tmux/plugins/tpm"]
+	path = hosts/work/kartaca/laptop/dotfiles/.config/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm.git
+[submodule "hosts/work/kartaca/laptop/dotfiles/.config/tmux/plugins/tmux-fzf"]
+	path = hosts/work/kartaca/laptop/dotfiles/.config/tmux/plugins/tmux-fzf
+	url = https://github.com/sainnhe/tmux-fzf.git
