@@ -935,6 +935,7 @@ in
       unstable.zsh-autosuggestions
       unstable.zsh-fast-syntax-highlighting
       unstable.zstd # extract .zst files
+      unstable.oath-toolkit # calculate OTP using secrets
       unstable.fishPlugins.done # get notified when jobs finish
 
       (unstable.pass.withExtensions (exts: [
@@ -949,6 +950,8 @@ in
       stable.vagrant # declarative virtual machines (too much compilation!)
       stable.lutris # install and launch windows and linux games
 
+      # emulation
+      unstable.xemu # xbox emulator
       (stable.retroarch.withCores (cores: with cores; [
         mesen              # nes
         snes9x             # snes
