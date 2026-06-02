@@ -1,3 +1,9 @@
 hosts/personal/desktop/xkarna/dotfiles/.ssh/known_hosts
 hosts/work/kartaca/laptop/fiat/dotfiles/.ssh/known_hosts
 hosts/work/kartaca/laptop/fiat/dotfiles/.config/fish/fish_variables
+hosts/work/kartaca/laptop/fiat/dotfiles/.config/mpd/database
+hosts/work/kartaca/laptop/fiat/dotfiles/.config/mpd/log
+hosts/work/kartaca/laptop/fiat/dotfiles/.config/mpd/pid
+hosts/work/kartaca/laptop/fiat/dotfiles/.config/mpd/state
+hosts/work/kartaca/laptop/fiat/dotfiles/.config/mpd/sticker.sql
+tmux-client-29717.log
