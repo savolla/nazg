@@ -1,55 +1,41 @@
 #!/usr/bin/env bash
-
-# FIX: Use 'return' instead of 'exit' so it doesn't kill your startx session!
 [ -n "$XPROFILE_SOURCED" ] && return 0
 export XPROFILE_SOURCED=1
 
-export PATH="$HOME/project/scripts/linux/:$PATH" # add my personal scripts to the path
+export PATH="$HOME/project/scripts/linux/:$PATH"
 export BROWSER="qutebrowser"
 export GNUPGHOME="$HOME/.gnupg"
 export EDITOR="nvim"
-
-# necessary for xdg-desktop-portal to work
 export XDG_SESSION_TYPE=x11
 export XDG_CURRENT_DESKTOP=dwm
 export DESKTOP_SESSION=dwm
 
-# =====================================================================
-# THE CURE: Tell Systemd & D-Bus about your X11 display context
-# =====================================================================
+# Import environment into systemd/dbus
 if [ -n "$DISPLAY" ]; then
-  systemctl --user import-environment DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+  systemctl --user import-environment DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE PATH
 fi
-
 if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-  dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+  dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE PATH
 fi
-# =====================================================================
 
-# fix xdg desktop portal problems
-systemctl --user start xdg-desktop-portal &
-systemctl --user start xdg-desktop-portal-gtk &
+# Hardware / input
+setxkbmap -option caps:swapescape &
+xset r rate 150 90 &
+xset s off &
+xset -dpms &
+xset -b &
 
-setxkbmap -option caps:swapescape & # swap esc with caps lock
-xset r rate 150 90 &                # increase speed of keyboard
-xset s off &                        # disable screen saver
-xset -dpms &                        # disable monitor shutdown
-xset -b &                           # disable annoying desktop bell sound
-sxhkd -m 1 &                        # keyboard shortcuts
-unclutter -idle 2 &                 # hide mouse cursor
-nixGL picom -b &                    # start compositor for opacity/fading stuff
-dunst &                             # start notification daemon
-mpd &                               # start mpd as normal user
-
-# adaptive-blue-light-filter &     # blue light filter
+# Apps (remove mpd & — managed by systemd now)
+sxhkd -m 1 &
+unclutter -idle 2 &
+picom -b &
 xsct 3500 &
-
-syncthing --no-browser &              # start synching files
-slstatus &                            # dwm status bar
-periodic-random-wallpaper-switcher &  # wallpaper service
-personal-website-periodic-update.sh & # auto push changes to github for savolla.github.io
+dunst &
+syncthing --no-browser &
+slstatus &
+periodic-random-wallpaper-switcher &
+personal-website-periodic-update.sh &
 song-change-notification.sh &
-udiskie &                                           # auto mount drives
-st sh -c '/home/kkoc/project/repos/sauron/sauron' & # run sauron
-nixGL qutebrowser --qt-flag ignore-gpu-blacklist --qt-flag enable-gpu-rasterization --qt-flag enable-native-gpu-memory-buffers --qt-flag num-raster-threads=4 &
-# conky &
+udiskie &
+st sh -c '/home/kkoc/project/repos/sauron/sauron' &
+qutebrowser --qt-flag enable-gpu-rasterization --qt-flag enable-zero-copy --qt-flag disable-gpu-driver-workarounds --qt-flag use-vulkan --qt-flag disable-features=UseChromeOSDirectVideoDecoder &

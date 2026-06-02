@@ -160,18 +160,18 @@ in
         ${pkgs.stow}/bin/stow -t $HOME -d "$HOME/project/dev/nazg/hosts/work/kartaca/laptop/fiat" dotfiles
       '';
 
-      linkSystemd = let
-        inherit (lib) hm;
-      in hm.dag.entryBefore [ "reloadSystemd" ] (''
-        find $HOME/.config/systemd/user/ \
-    -type l \
-    -exec bash -c "readlink {} | grep -q $HOME/.nix-profile/share/systemd/user/" \; \
-    -delete
+  #     linkSystemd = let
+  #       inherit (lib) hm;
+  #     in hm.dag.entryBefore [ "reloadSystemd" ] (''
+  #       find $HOME/.config/systemd/user/ \
+  #   -type l \
+  #   -exec bash -c "readlink {} | grep -q $HOME/.nix-profile/share/systemd/user/" \; \
+  #   -delete
 
-  find $HOME/.nix-profile/share/systemd/user/ \
-    \( -type f -o -type l \) \
-    -exec ln -s {} $HOME/.config/systemd/user/ \;
-      '');
+  # find $HOME/.nix-profile/share/systemd/user/ \
+  #   \( -type f -o -type l \) \
+  #   -exec ln -s {} $HOME/.config/systemd/user/ \;
+  #     '');
 
     };
 
@@ -214,14 +214,21 @@ in
     ANDROID_SDK_ROOT = "${android.androidsdk}/libexec/android-sdk";
   };
 
+  # configure the NixGL targets
+  targets.genericLinux = {
+    enable = true;
+    gpu.enable = true;
+  };
+
   home.packages =
     with pkgs;
     [
+      unstable.qutebrowser # qutebrowser with nixGL
       slockFlexipatch # custom slock
       stFlexipatch # custom st
       dwmFlexipatch # custom dwm
-      unstable.qutebrowser # keyboard centric web browser
-      unstable.dunst # notifications
+      unstable.vulkan-tools # display GPU info
+      # unstable.dunst # notifications
       stable.kitty # terminal emulator
       stable.autossh # watch and re-open ssh connections
       stable.sesh # session manager for tmux
@@ -566,7 +573,6 @@ in
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
     ];
     config = {
       common = {
@@ -584,7 +590,6 @@ in
 
   # services
   services = {
-    betterlockscreen.enable = true;
 
     mpd = {
       enable = true;

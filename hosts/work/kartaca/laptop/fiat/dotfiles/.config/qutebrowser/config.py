@@ -2,15 +2,10 @@ c = c
 config = config
 config.load_autoconfig(False)  # was True — dangerous, fixed
 c.auto_save.session = True
-c.content.autoplay = False
+c.content.autoplay = True # fix calendar/gmail/google chat notification sounds are muted
 config.set("content.cookies.accept", "all", "chrome-devtools://*")
 config.set("content.cookies.accept", "all", "devtools://*")
 config.set("content.headers.accept_language", "", "https://matchmaker.krunker.io/*")
-config.set(
-    "content.headers.user_agent",
-    "Mozilla/5.0 ({os_info}; rv:136.0) Gecko/20100101 Firefox/139.0",
-    "https://accounts.google.com/*",
-)
 
 config.set("content.pdfjs", True)
 
@@ -37,20 +32,37 @@ config.set(
 
 c.content.notifications.enabled = True
 c.content.notifications.presenter = "libnotify"  # explicit, reliable
+# c.content.notifications.presenter = "auto"  # testing (remove if no notifications shown)
 c.content.persistent_storage = True
 
+# slack settings
+config.set("content.notifications.enabled", True, "https://app.slack.com/*")
+config.set("content.media.audio_capture", True, "https://app.slack.com/*")
+config.set("content.register_protocol_handler", True, "https://app.slack.com/*")
+
+
 # website settings — fixed patterns with /*
-config.set("content.notifications.enabled", True, "https://chat.google.com/*")
+config.set("content.notifications.enabled", True, "https://chat.google.com")
 config.set("content.notifications.enabled", True, "https://calendar.google.com/*")
 config.set("content.notifications.enabled", True, "https://mail.google.com/*")
 config.set("content.notifications.enabled", True, "https://web.whatsapp.com/*")
 
+config.set("content.media.audio_capture", True, "https://chat.google.com")
+config.set("content.media.audio_capture", True, "https://calendar.google.com/*")
+config.set("content.media.audio_capture", True, "https://mail.google.com/*")
+config.set("content.media.audio_capture", True, "https://web.whatsapp.com/*")
+
+
 config.set("content.register_protocol_handler", True, "https://calendar.google.com?cid=%25s")
 config.set("content.register_protocol_handler", True, "https://mail.google.com?extsrc=mailto&url=%25s")
+config.set("content.register_protocol_handler", True, "https://chat.google.com?extsrc=mailto&url=%25s")
+
+config.set("content.media.audio_capture", True, "https://calendar.google.com?cid=%25s")
+config.set("content.media.audio_capture", True, "https://mail.google.com?extsrc=mailto&url=%25s")
+config.set("content.media.audio_capture", True, "https://chat.google.com?extsrc=mailto&url=%25s")
 
 c.content.media.audio_video_capture = True
 c.content.media.audio_capture = True
-c.content.javascript.clipboard = "access"
 
 c.completion.use_best_match = True
 c.tabs.position = "right"
@@ -70,7 +82,6 @@ c.tabs.select_on_remove = "next"
 c.tabs.title.format = "{audio}{index} {current_title}"
 c.tabs.undo_stack_size = 50
 
-c.session.lazy_restore = True
 c.session.default_name = "main"
 
 # adblockers
@@ -111,8 +122,6 @@ c.content.blocking.adblock.lists = [
     # uBlock Origin's privacy filters
     "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt",
 ]
-
-c.scrolling.smooth = False
 
 c.url.default_page = "https://savolla.github.io"
 c.url.start_pages = ["https://savolla.github.io"]
@@ -354,7 +363,7 @@ config.set('content.cache.size', 52428800)
 
 # Cap in-memory page cache — how many pages to keep rendered in RAM
 # Default is determined by Qt; 2 is safe for your 11GB system
-config.set('content.cache.maximum_pages', 2)
+# config.set('content.cache.maximum_pages', 2)
 
 # Disable DNS prefetching — saves background CPU on many-tab setups
 config.set('content.dns_prefetch', False)
@@ -363,6 +372,7 @@ config.set('content.dns_prefetch', False)
 
 # Mute all tabs by default — prevents background video/audio draining CPU
 # config.set('content.mute', True, '*') # do we really need this?
+c.content.mute = False;
 
 # Disable autoplay — biggest single source of background CPU usage
 # config.set('content.autoplay', False)
@@ -374,10 +384,10 @@ config.set('scrolling.smooth', False)
 
 # Request reduced motion from websites (respects prefers-reduced-motion)
 # Stops animation-heavy sites from thrashing your iGPU
-config.set('content.prefers_reduced_motion', True)
+config.set('content.prefers_reduced_motion', False) # websites will think you're a bot if you set it to True
 
 # Disable canvas fingerprinting reads — also slightly reduces GPU work
-config.set('content.canvas_reading', False)
+config.set('content.canvas_reading', True) # cloudflare's and other captchas must use this for I'm not robot. keep it True
 
 # ── Ad & tracker blocking ─────────────────────────────────────────
 
@@ -415,8 +425,4 @@ config.set('completion.web_history.max_items', 1000)
 # Delay before completion updates — reduces CPU on fast typing
 config.set('completion.delay', 300)
 
-# ── Qt workarounds (relevant for your Mesa/Vega stack) ───────────
-
-# Disable accelerated 2D canvas — fixes graphical glitches in
-# Google Sheets and PDF.js on Mesa/QtWebEngine combinations
-config.set('qt.workarounds.disable_accelerated_2d_canvas', 'always')
+config.set('qt.workarounds.disable_accelerated_2d_canvas', 'never') # for capthas and stability
