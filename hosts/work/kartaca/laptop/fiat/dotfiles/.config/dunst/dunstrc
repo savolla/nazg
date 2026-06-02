@@ -109,10 +109,10 @@
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 0
+    frame_width = 2
 
     # Defines color of the frame around the notification window.
-    frame_color = "#282828"
+    frame_color = "#a89984"
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
@@ -253,10 +253,10 @@
     ### Misc/Advanced ###
 
     # dmenu path.
-    dmenu = /usr/bin/dmenu -p dunst:
+    dmenu = /run/current-system/sw/bin/dmenu -p dunst:
 
     # Browser for opening urls in context menu.
-    browser = /usr/bin/xdg-open
+    browser = /run/current-system/sw/bin/qutebrowser
 
     # Always run rule-defined scripts, even if the notification is suppressed
     always_run_script = true
@@ -338,6 +338,8 @@
     # where there are multiple screens with very different dpi values.
     per_monitor_dpi = false
 
+    # Pause timeout on mouse hover (Wayland only, added in 1.13.1)
+    pause_on_mouse_over = true
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.

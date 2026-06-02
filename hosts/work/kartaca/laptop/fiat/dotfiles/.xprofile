@@ -18,13 +18,17 @@ export DESKTOP_SESSION=dwm
 # THE CURE: Tell Systemd & D-Bus about your X11 display context
 # =====================================================================
 if [ -n "$DISPLAY" ]; then
-    systemctl --user import-environment DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+  systemctl --user import-environment DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 fi
 
 if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-    dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+  dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 fi
 # =====================================================================
+
+# fix xdg desktop portal problems
+systemctl --user start xdg-desktop-portal &
+systemctl --user start xdg-desktop-portal-gtk &
 
 setxkbmap -option caps:swapescape & # swap esc with caps lock
 xset r rate 150 90 &                # increase speed of keyboard
@@ -40,12 +44,12 @@ mpd &                               # start mpd as normal user
 # adaptive-blue-light-filter &     # blue light filter
 xsct 3500 &
 
-syncthing --no-browser &                          # start synching files
-slstatus &                                        # dwm status bar
-periodic-random-wallpaper-switcher &              # wallpaper service
-personal-website-periodic-update.sh &             # auto push changes to github for savolla.github.io
+syncthing --no-browser &              # start synching files
+slstatus &                            # dwm status bar
+periodic-random-wallpaper-switcher &  # wallpaper service
+personal-website-periodic-update.sh & # auto push changes to github for savolla.github.io
 song-change-notification.sh &
-udiskie &                                         # auto mount drives
+udiskie &                                           # auto mount drives
 st sh -c '/home/kkoc/project/repos/sauron/sauron' & # run sauron
 nixGL qutebrowser --qt-flag ignore-gpu-blacklist --qt-flag enable-gpu-rasterization --qt-flag enable-native-gpu-memory-buffers --qt-flag num-raster-threads=4 &
 # conky &

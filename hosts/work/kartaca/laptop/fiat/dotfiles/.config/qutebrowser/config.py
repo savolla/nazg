@@ -365,7 +365,7 @@ config.set('content.dns_prefetch', False)
 # config.set('content.mute', True, '*') # do we really need this?
 
 # Disable autoplay — biggest single source of background CPU usage
-config.set('content.autoplay', False)
+# config.set('content.autoplay', False)
 
 # ── Rendering ─────────────────────────────────────────────────────
 

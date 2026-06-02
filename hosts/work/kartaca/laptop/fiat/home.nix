@@ -159,6 +159,20 @@ in
         echo "stowing dotfiles"
         ${pkgs.stow}/bin/stow -t $HOME -d "$HOME/project/dev/nazg/hosts/work/kartaca/laptop/fiat" dotfiles
       '';
+
+      linkSystemd = let
+        inherit (lib) hm;
+      in hm.dag.entryBefore [ "reloadSystemd" ] (''
+        find $HOME/.config/systemd/user/ \
+    -type l \
+    -exec bash -c "readlink {} | grep -q $HOME/.nix-profile/share/systemd/user/" \; \
+    -delete
+
+  find $HOME/.nix-profile/share/systemd/user/ \
+    \( -type f -o -type l \) \
+    -exec ln -s {} $HOME/.config/systemd/user/ \;
+      '');
+
     };
 
   };
@@ -206,7 +220,8 @@ in
       slockFlexipatch # custom slock
       stFlexipatch # custom st
       dwmFlexipatch # custom dwm
-      stable.qutebrowser # keyboard centric web browser
+      unstable.qutebrowser # keyboard centric web browser
+      unstable.dunst # notifications
       stable.kitty # terminal emulator
       stable.autossh # watch and re-open ssh connections
       stable.sesh # session manager for tmux
@@ -325,6 +340,7 @@ in
       texlab # LaTeX lsp
       yaml-language-server # yaml lsp
       zls # zig lsp
+      udiskie # mount disks without sudo
 
       ### kubectl plugins
       kubectl-graph
@@ -432,6 +448,7 @@ in
       bat # better cat
       jamesdsp # better music listening experience
       newsboat # rss viewer
+      unstable.tmux
       tmuxp # declarative tmux sessions (disabled due to compilation errors..)
       tmux-xpanes # run multiple commands on multiple tmux panes at once
       tree # file trees
@@ -543,6 +560,22 @@ in
   #     ];
   #   };
   # };
+
+  # fix most of the notification problems
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+    ];
+    config = {
+      common = {
+        default = [ "gtk" ];
+      };
+    };
+    # Add this if not already present:
+    xdgOpenUsePortal = true;
+  };
 
   nixpkgs.config = {
     allowUnfree = true;
