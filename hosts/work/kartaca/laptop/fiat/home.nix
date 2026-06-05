@@ -212,6 +212,7 @@ in
   home.sessionVariables = {
     ANDROID_HOME = "${android.androidsdk}/libexec/android-sdk";
     ANDROID_SDK_ROOT = "${android.androidsdk}/libexec/android-sdk";
+    LD_LIBRARY_PATH = "${pkgs.libnotify}/lib:${pkgs.xorg.libX11}/lib:${pkgs.dbus}/lib:\${LD_LIBRARY_PATH}";
   };
 
   # configure the NixGL targets
@@ -224,6 +225,9 @@ in
     with pkgs;
     [
       unstable.qutebrowser # qutebrowser with nixGL
+      unstable.libnotify # for qutebrowser notification fix?
+      unstable.oath-toolkit # get OTP from terminal
+      unstable.conky # watch system state
       slockFlexipatch # custom slock
       stFlexipatch # custom st
       dwmFlexipatch # custom dwm
@@ -249,12 +253,17 @@ in
       stable.fd # dependency for doom emacs and tmux session switcher
       stable.nixfmt-rfc-style # doom emacs depENDENCY for nix buffer formatting
 
-      # pyton modules
+      # python modules (standalone)
       stable.python312Packages.pyflakes # doom emacs dependency
       stable.python312Packages.pytest # doom emacs dependency
       stable.python312Packages.nose2 # doom emacs dependency
       stable.python312Packages.libtmux # manage tmux from python
       stable.python312Packages.pyyaml # yaml library
+
+      # python modules (importable)
+      (stable.python312.withPackages (ps: [
+        ps.tldextract # qute-pass dependency
+      ]))
 
       # general
       stable.weechat # irc stuff
@@ -262,6 +271,8 @@ in
       stable.lua # dep for lua neovim
       stable.xorg.xbacklight # set brightness on laptop
       stable.pass # terminal passwork manager
+      stable.gopass # pass on steroids
+      stable.tessen # dmenu that shows gopass entries
 
       stable.ssh-askpass-fullscreen
 

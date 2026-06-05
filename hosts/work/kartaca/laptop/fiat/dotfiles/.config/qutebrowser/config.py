@@ -3,8 +3,9 @@ config = config
 config.load_autoconfig(False)  # was True — dangerous, fixed
 c.auto_save.session = True
 c.content.autoplay = True # fix calendar/gmail/google chat notification sounds are muted
-config.set("content.cookies.accept", "all", "chrome-devtools://*")
-config.set("content.cookies.accept", "all", "devtools://*")
+config.set("content.cookies.accept", "all") # auto accept cookies
+config.set("content.cookies.store", True) # store cookies
+
 config.set("content.headers.accept_language", "", "https://matchmaker.krunker.io/*")
 
 config.set("content.pdfjs", True)
@@ -35,31 +36,45 @@ c.content.notifications.presenter = "libnotify"  # explicit, reliable
 # c.content.notifications.presenter = "auto"  # testing (remove if no notifications shown)
 c.content.persistent_storage = True
 
-# slack settings
-config.set("content.notifications.enabled", True, "https://app.slack.com/*")
-config.set("content.media.audio_capture", True, "https://app.slack.com/*")
-config.set("content.register_protocol_handler", True, "https://app.slack.com/*")
+#####################################################################
+# Notification permissions
+config.set("content.notifications.enabled", True, "https://app.slack.com")
+config.set("content.notifications.enabled", True, "https://calendar.google.com")
 
+# gmail/chat etc.
+config.set("content.notifications.enabled", True, "https://mail.google.com:433")
+config.set("content.notifications.enabled", True, "https://chat.google.com:433")
 
-# website settings — fixed patterns with /*
-config.set("content.notifications.enabled", True, "https://chat.google.com")
-config.set("content.notifications.enabled", True, "https://calendar.google.com/*")
-config.set("content.notifications.enabled", True, "https://mail.google.com/*")
-config.set("content.notifications.enabled", True, "https://web.whatsapp.com/*")
-
-config.set("content.media.audio_capture", True, "https://chat.google.com")
-config.set("content.media.audio_capture", True, "https://calendar.google.com/*")
-config.set("content.media.audio_capture", True, "https://mail.google.com/*")
-config.set("content.media.audio_capture", True, "https://web.whatsapp.com/*")
-
-
+# Protocol handler permissions
 config.set("content.register_protocol_handler", True, "https://calendar.google.com?cid=%25s")
 config.set("content.register_protocol_handler", True, "https://mail.google.com?extsrc=mailto&url=%25s")
-config.set("content.register_protocol_handler", True, "https://chat.google.com?extsrc=mailto&url=%25s")
+#####################################################################
 
-config.set("content.media.audio_capture", True, "https://calendar.google.com?cid=%25s")
-config.set("content.media.audio_capture", True, "https://mail.google.com?extsrc=mailto&url=%25s")
-config.set("content.media.audio_capture", True, "https://chat.google.com?extsrc=mailto&url=%25s")
+# # slack settings
+# config.set("content.notifications.enabled", True, "https://app.slack.com/*")
+# config.set("content.media.audio_capture", True, "https://app.slack.com/*")
+# config.set("content.register_protocol_handler", True, "https://app.slack.com/*")
+
+
+# # website settings — fixed patterns with /*
+# config.set("content.notifications.enabled", True, "https://chat.google.com")
+# config.set("content.notifications.enabled", True, "https://calendar.google.com/*")
+# config.set("content.notifications.enabled", True, "https://mail.google.com/*")
+# config.set("content.notifications.enabled", True, "https://web.whatsapp.com/*")
+
+# config.set("content.media.audio_capture", True, "https://chat.google.com")
+# config.set("content.media.audio_capture", True, "https://calendar.google.com/*")
+# config.set("content.media.audio_capture", True, "https://mail.google.com/*")
+# config.set("content.media.audio_capture", True, "https://web.whatsapp.com/*")
+
+
+# config.set("content.register_protocol_handler", True, "https://calendar.google.com?cid=%25s")
+# config.set("content.register_protocol_handler", True, "https://mail.google.com?extsrc=mailto&url=%25s")
+# config.set("content.register_protocol_handler", True, "https://chat.google.com?extsrc=mailto&url=%25s")
+
+# config.set("content.media.audio_capture", True, "https://calendar.google.com?cid=%25s")
+# config.set("content.media.audio_capture", True, "https://mail.google.com?extsrc=mailto&url=%25s")
+# config.set("content.media.audio_capture", True, "https://chat.google.com?extsrc=mailto&url=%25s")
 
 c.content.media.audio_video_capture = True
 c.content.media.audio_capture = True
@@ -68,13 +83,16 @@ c.completion.use_best_match = True
 c.tabs.position = "right"
 c.tabs.width = "20%"
 c.tabs.pinned.shrink = False
+c.tabs.title.format_pinned = "{audio}{index} {current_title}"
 c.tabs.show = "always"
 c.tabs.show_switching_delay = 2500
 c.window.transparent = True
 c.zoom.default = "120%"
+
 c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.algorithm = "lightness-cielab"
 c.colors.webpage.darkmode.policy.images = "never"
+
 c.fonts.default_size = "13pt"
 c.fonts.default_family = ["IosevkaTerm Nerd Font Mono"]
 
@@ -126,103 +144,402 @@ c.content.blocking.adblock.lists = [
 c.url.default_page = "https://savolla.github.io"
 c.url.start_pages = ["https://savolla.github.io"]
 
-# ---------------------------------------------------------------------------
-# Gruvbox Hard Dark color scheme
-# bg0_hard  #1d2021  ← new base (was #282828)
-# bg0       #282828  ← used sparingly for slight contrast
-# bg1       #32302f  ← alternating rows (was #3c3836)
-# bg2       #3c3836  ← selected/hover backgrounds
-# bg3       #504945  ← private/muted
-# fg        #ebdbb2
-# yellow    #b8bb26
-# orange    #fe8019
-# red       #fb4934
-# blue      #83a598
-# purple    #d3869b
-# ---------------------------------------------------------------------------
+# THEME
+# base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
+# Scheme name: Gruvbox Material Dark, Hard
+# Scheme author: Mayush Kumar (https://github.com/MayushKumar), sainnhe (https://github.com/sainnhe/gruvbox-material-vscode)
+# Template author: theova
+# Commentary: Tinted Theming: (https://github.com/tinted-theming)
 
-# Backgrounds
-c.colors.webpage.bg            = "#1d2021"
-c.colors.statusbar.normal.bg   = "#1d2021"
-c.colors.statusbar.insert.bg   = "#32302f"
-c.colors.statusbar.passthrough.bg = "#32302f"
-c.colors.statusbar.caret.bg    = "#d3869b"
-c.colors.statusbar.command.bg  = "#1d2021"
-c.colors.statusbar.private.bg  = "#504945"
+base00 = "#202020"
+base01 = "#2a2827"
+base02 = "#504945"
+base03 = "#5a524c"
+base04 = "#bdae93"
+base05 = "#ddc7a1"
+base06 = "#ebdbb2"
+base07 = "#fbf1c7"
+base08 = "#ea6962"
+base09 = "#e78a4e"
+base0A = "#d8a657"
+base0B = "#a9b665"
+base0C = "#89b482"
+base0D = "#7daea3"
+base0E = "#d3869b"
+base0F = "#bd6f3e"
 
-# Foregrounds
-c.colors.statusbar.normal.fg      = "#ebdbb2"
-c.colors.statusbar.insert.fg      = "#ebdbb2"
-c.colors.statusbar.caret.fg       = "#1d2021"
-c.colors.statusbar.command.fg     = "#ebdbb2"
-c.colors.statusbar.private.fg     = "#ebdbb2"
+# set qutebrowser colors
 
-# URL colors
-c.colors.statusbar.url.fg              = "#ebdbb2"
-c.colors.statusbar.url.hover.fg        = "#83a598"
-c.colors.statusbar.url.success.http.fg = "#ebdbb2"
-c.colors.statusbar.url.success.https.fg= "#b8bb26"
-c.colors.statusbar.url.error.fg        = "#fb4934"
-c.colors.statusbar.url.warn.fg         = "#fe8019"
+# Text color of the completion widget. May be a single color to use for
+# all columns or a list of three colors, one for each column.
+c.colors.completion.fg = base05
 
-# Completion widget
-c.colors.completion.fg                    = ["#ebdbb2", "#ebdbb2", "#ebdbb2"]
-c.colors.completion.odd.bg                = "#1d2021"
-c.colors.completion.even.bg               = "#32302f"
-c.colors.completion.item.selected.bg      = "#3c3836"
-c.colors.completion.item.selected.fg      = "#ebdbb2"
-c.colors.completion.match.fg              = "#fe8019"
-c.colors.completion.item.selected.match.fg= "#fe8019"
-c.colors.completion.scrollbar.fg          = "#b8bb26"
-c.colors.completion.scrollbar.bg          = "#32302f"
+# Background color of the completion widget for odd rows.
+c.colors.completion.odd.bg = base01
 
-# Prompts
-c.colors.prompts.bg          = "#32302f"
-c.colors.prompts.fg          = "#ebdbb2"
-c.colors.prompts.selected.bg = "#3c3836"
-c.colors.prompts.selected.fg = "#b8bb26"
+# Background color of the completion widget for even rows.
+c.colors.completion.even.bg = base00
 
-# Keyhints
+# Foreground color of completion widget category headers.
+c.colors.completion.category.fg = base0A
+
+# Background color of the completion widget category headers.
+c.colors.completion.category.bg = base00
+
+# Top border color of the completion widget category headers.
+c.colors.completion.category.border.top = base00
+
+# Bottom border color of the completion widget category headers.
+c.colors.completion.category.border.bottom = base00
+
+# Foreground color of the selected completion item.
+c.colors.completion.item.selected.fg = base05
+
+# Background color of the selected completion item.
+c.colors.completion.item.selected.bg = base02
+
+# Top border color of the selected completion item.
+c.colors.completion.item.selected.border.top = base02
+
+# Bottom border color of the selected completion item.
+c.colors.completion.item.selected.border.bottom = base02
+
+# Foreground color of the matched text in the selected completion item.
+c.colors.completion.item.selected.match.fg = base0B
+
+# Foreground color of the matched text in the completion.
+c.colors.completion.match.fg = base0B
+
+# Color of the scrollbar handle in the completion view.
+c.colors.completion.scrollbar.fg = base05
+
+# Color of the scrollbar in the completion view.
+c.colors.completion.scrollbar.bg = base00
+
+# Background color of disabled items in the context menu.
+c.colors.contextmenu.disabled.bg = base01
+
+# Foreground color of disabled items in the context menu.
+c.colors.contextmenu.disabled.fg = base04
+
+# Background color of the context menu. If set to null, the Qt default is used.
+c.colors.contextmenu.menu.bg = base00
+
+# Foreground color of the context menu. If set to null, the Qt default is used.
+c.colors.contextmenu.menu.fg =  base05
+
+# Background color of the context menu’s selected item. If set to null, the Qt default is used.
+c.colors.contextmenu.selected.bg = base02
+
+#Foreground color of the context menu’s selected item. If set to null, the Qt default is used.
+c.colors.contextmenu.selected.fg = base05
+
+# Background color for the download bar.
+c.colors.downloads.bar.bg = base00
+
+# Color gradient start for download text.
+c.colors.downloads.start.fg = base00
+
+# Color gradient start for download backgrounds.
+c.colors.downloads.start.bg = base0D
+
+# Color gradient end for download text.
+c.colors.downloads.stop.fg = base00
+
+# Color gradient stop for download backgrounds.
+c.colors.downloads.stop.bg = base0C
+
+# Foreground color for downloads with errors.
+c.colors.downloads.error.fg = base08
+
+# my custom hints
 c.colors.keyhint.bg        = "#32302f"
 c.colors.keyhint.fg        = "#ebdbb2"
 c.colors.keyhint.suffix.fg = "#fe8019"
-
-# Hints
 c.colors.hints.bg       = "#3c3836"
 c.colors.hints.fg       = "#ebdbb2"
 c.colors.hints.match.fg = "#fe8019"
 c.hints.border          = "0px solid #b8bb26"
 
-# Tabs
-c.colors.tabs.bar.bg             = "#1d2021"
-c.colors.tabs.odd.bg             = "#1d2021"
-c.colors.tabs.even.bg            = "#32302f"
-c.colors.tabs.odd.fg             = "#a89984"  # dimmed fg for inactive tabs
-c.colors.tabs.even.fg            = "#a89984"
-c.colors.tabs.selected.even.bg   = "#a89984"
-c.colors.tabs.selected.even.fg   = "#282828"
-c.colors.tabs.selected.odd.bg    = "#a89984"
-c.colors.tabs.selected.odd.fg    = "#282828"
+# Foreground color of an error message.
+c.colors.messages.error.fg = base00
 
-# Downloads
-c.colors.downloads.bar.bg   = "#1d2021"
-c.colors.downloads.error.bg = "#fb4934"
-c.colors.downloads.error.fg = "#1d2021"
-c.colors.downloads.start.bg = "#83a598"
-c.colors.downloads.start.fg = "#1d2021"
-c.colors.downloads.stop.bg  = "#b8bb26"
-c.colors.downloads.stop.fg  = "#1d2021"
+# Background color of an error message.
+c.colors.messages.error.bg = base08
 
-# Messages
-c.colors.messages.error.bg   = "#fb4934"
-c.colors.messages.error.fg   = "#1d2021"
-c.colors.messages.warning.bg = "#fe8019"
-c.colors.messages.warning.fg = "#1d2021"
-c.colors.messages.info.bg    = "#1d2021"
-c.colors.messages.info.fg    = "#ebdbb2"
+# Border color of an error message.
+c.colors.messages.error.border = base08
+
+# Foreground color of a warning message.
+c.colors.messages.warning.fg = base00
+
+# Background color of a warning message.
+c.colors.messages.warning.bg = base0E
+
+# Border color of a warning message.
+c.colors.messages.warning.border = base0E
+
+# Foreground color of an info message.
+c.colors.messages.info.fg = base05
+
+# Background color of an info message.
+c.colors.messages.info.bg = base00
+
+# Border color of an info message.
+c.colors.messages.info.border = base00
+
+# Foreground color for prompts.
+c.colors.prompts.fg = base05
+
+# Border used around UI elements in prompts.
+c.colors.prompts.border = base00
+
+# Background color for prompts.
+c.colors.prompts.bg = base00
+
+# Background color for the selected item in filename prompts.
+c.colors.prompts.selected.bg = base02
+
+# Foreground color for the selected item in filename prompts.
+c.colors.prompts.selected.fg = base05
+
+# Foreground color of the statusbar.
+c.colors.statusbar.normal.fg = base0B
+
+# Background color of the statusbar.
+c.colors.statusbar.normal.bg = base00
+
+# Foreground color of the statusbar in insert mode.
+c.colors.statusbar.insert.fg = base00
+
+# Background color of the statusbar in insert mode.
+c.colors.statusbar.insert.bg = base0D
+
+# Foreground color of the statusbar in passthrough mode.
+c.colors.statusbar.passthrough.fg = base00
+
+# Background color of the statusbar in passthrough mode.
+c.colors.statusbar.passthrough.bg = base0C
+
+# Foreground color of the statusbar in private browsing mode.
+c.colors.statusbar.private.fg = base00
+
+# Background color of the statusbar in private browsing mode.
+c.colors.statusbar.private.bg = base01
+
+# Foreground color of the statusbar in command mode.
+c.colors.statusbar.command.fg = base05
+
+# Background color of the statusbar in command mode.
+c.colors.statusbar.command.bg = base00
+
+# Foreground color of the statusbar in private browsing + command mode.
+c.colors.statusbar.command.private.fg = base05
+
+# Background color of the statusbar in private browsing + command mode.
+c.colors.statusbar.command.private.bg = base00
+
+# Foreground color of the statusbar in caret mode.
+c.colors.statusbar.caret.fg = base00
+
+# Background color of the statusbar in caret mode.
+c.colors.statusbar.caret.bg = base0E
+
+# Foreground color of the statusbar in caret mode with a selection.
+c.colors.statusbar.caret.selection.fg = base00
+
+# Background color of the statusbar in caret mode with a selection.
+c.colors.statusbar.caret.selection.bg = base0D
+
+# Background color of the progress bar.
+c.colors.statusbar.progress.bg = base0D
+
+# Default foreground color of the URL in the statusbar.
+c.colors.statusbar.url.fg = base05
+
+# Foreground color of the URL in the statusbar on error.
+c.colors.statusbar.url.error.fg = base08
+
+# Foreground color of the URL in the statusbar for hovered links.
+c.colors.statusbar.url.hover.fg = base05
+
+# Foreground color of the URL in the statusbar on successful load
+# (http).
+c.colors.statusbar.url.success.http.fg = base0C
+
+# Foreground color of the URL in the statusbar on successful load
+# (https).
+c.colors.statusbar.url.success.https.fg = base0B
+
+# Foreground color of the URL in the statusbar when there's a warning.
+c.colors.statusbar.url.warn.fg = base0E
+
+# Background color of the tab bar.
+c.colors.tabs.bar.bg = base00
+
+# Color gradient start for the tab indicator.
+c.colors.tabs.indicator.start = base0D
+
+# Color gradient end for the tab indicator.
+c.colors.tabs.indicator.stop = base0C
+
+# Color for the tab indicator on errors.
+c.colors.tabs.indicator.error = base08
+
+# Foreground color of unselected odd tabs.
+c.colors.tabs.odd.fg = base05
+
+# Background color of unselected odd tabs.
+c.colors.tabs.odd.bg = base01
+
+# Foreground color of unselected even tabs.
+c.colors.tabs.even.fg = base05
+
+# Background color of unselected even tabs.
+c.colors.tabs.even.bg = base00
+
+# Background color of pinned unselected even tabs.
+c.colors.tabs.pinned.even.bg = base00
+
+# Foreground color of pinned unselected even tabs.
+c.colors.tabs.pinned.even.fg = "#fe8019"
+
+# Background color of pinned unselected odd tabs.
+c.colors.tabs.pinned.odd.bg = base01
+
+# Foreground color of pinned unselected odd tabs.
+c.colors.tabs.pinned.odd.fg = "#fe8019"
+
+# Background color of pinned selected even tabs.
+c.colors.tabs.pinned.selected.even.bg = base02
+
+# Foreground color of pinned selected even tabs.
+c.colors.tabs.pinned.selected.even.fg = base05
+
+# Background color of pinned selected odd tabs.
+c.colors.tabs.pinned.selected.odd.bg = base02
+
+# Foreground color of pinned selected odd tabs.
+c.colors.tabs.pinned.selected.odd.fg = base05
+
+# Foreground color of selected odd tabs.
+c.colors.tabs.selected.odd.fg = base05
+
+# Background color of selected odd tabs.
+c.colors.tabs.selected.odd.bg = base02
+
+# Foreground color of selected even tabs.
+c.colors.tabs.selected.even.fg = base05
+
+# Background color of selected even tabs.
+c.colors.tabs.selected.even.bg = base02
+
+# Background color for webpages if unset (or empty to use the theme's
+# color).
+# c.colors.webpage.bg = base00
+
+
+# # ---------------------------------------------------------------------------
+# # Gruvbox Hard Dark color scheme
+# # bg0_hard  #1d2021  ← new base (was #282828)
+# # bg0       #282828  ← used sparingly for slight contrast
+# # bg1       #32302f  ← alternating rows (was #3c3836)
+# # bg2       #3c3836  ← selected/hover backgrounds
+# # bg3       #504945  ← private/muted
+# # fg        #ebdbb2
+# # yellow    #b8bb26
+# # orange    #fe8019
+# # red       #fb4934
+# # blue      #83a598
+# # purple    #d3869b
+# # ---------------------------------------------------------------------------
+
+# # pinned tabs
+# c.colors.tabs.pinned.selected.even.bg = '#282828'
+# c.colors.tabs.pinned.selected.odd.bg = '#ebdbb2'
+
+# # Backgrounds
+# c.colors.webpage.bg            = "#1d2021"
+# c.colors.statusbar.normal.bg   = "#1d2021"
+# c.colors.statusbar.insert.bg   = "#32302f"
+# c.colors.statusbar.passthrough.bg = "#32302f"
+# c.colors.statusbar.caret.bg    = "#d3869b"
+# c.colors.statusbar.command.bg  = "#1d2021"
+# c.colors.statusbar.private.bg  = "#504945"
+
+# # Foregrounds
+# c.colors.statusbar.normal.fg      = "#ebdbb2"
+# c.colors.statusbar.insert.fg      = "#ebdbb2"
+# c.colors.statusbar.caret.fg       = "#1d2021"
+# c.colors.statusbar.command.fg     = "#ebdbb2"
+# c.colors.statusbar.private.fg     = "#ebdbb2"
+
+# # URL colors
+# c.colors.statusbar.url.fg              = "#ebdbb2"
+# c.colors.statusbar.url.hover.fg        = "#83a598"
+# c.colors.statusbar.url.success.http.fg = "#ebdbb2"
+# c.colors.statusbar.url.success.https.fg= "#b8bb26"
+# c.colors.statusbar.url.error.fg        = "#fb4934"
+# c.colors.statusbar.url.warn.fg         = "#fe8019"
+
+# # Completion widget
+# c.colors.completion.fg                    = ["#ebdbb2", "#ebdbb2", "#ebdbb2"]
+# c.colors.completion.odd.bg                = "#1d2021"
+# c.colors.completion.even.bg               = "#32302f"
+# c.colors.completion.item.selected.bg      = "#3c3836"
+# c.colors.completion.item.selected.fg      = "#ebdbb2"
+# c.colors.completion.match.fg              = "#fe8019"
+# c.colors.completion.item.selected.match.fg= "#fe8019"
+# c.colors.completion.scrollbar.fg          = "#b8bb26"
+# c.colors.completion.scrollbar.bg          = "#32302f"
+
+# # Prompts
+# c.colors.prompts.bg          = "#32302f"
+# c.colors.prompts.fg          = "#ebdbb2"
+# c.colors.prompts.selected.bg = "#3c3836"
+# c.colors.prompts.selected.fg = "#b8bb26"
+
+# # Keyhints
+# c.colors.keyhint.bg        = "#32302f"
+# c.colors.keyhint.fg        = "#ebdbb2"
+# c.colors.keyhint.suffix.fg = "#fe8019"
+
+# # Hints
+# c.colors.hints.bg       = "#3c3836"
+# c.colors.hints.fg       = "#ebdbb2"
+# c.colors.hints.match.fg = "#fe8019"
+# c.hints.border          = "0px solid #b8bb26"
+
+# # Tabs
+# c.colors.tabs.bar.bg             = "#1d2021"
+# c.colors.tabs.odd.bg             = "#1d2021"
+# c.colors.tabs.even.bg            = "#32302f"
+# c.colors.tabs.odd.fg             = "#a89984"  # dimmed fg for inactive tabs
+# c.colors.tabs.even.fg            = "#a89984"
+# c.colors.tabs.selected.even.bg   = "#a89984"
+# c.colors.tabs.selected.even.fg   = "#282828"
+# c.colors.tabs.selected.odd.bg    = "#a89984"
+# c.colors.tabs.selected.odd.fg    = "#282828"
+
+# # Downloads
+# c.colors.downloads.bar.bg   = "#1d2021"
+# c.colors.downloads.error.bg = "#fb4934"
+# c.colors.downloads.error.fg = "#1d2021"
+# c.colors.downloads.start.bg = "#83a598"
+# c.colors.downloads.start.fg = "#1d2021"
+# c.colors.downloads.stop.bg  = "#b8bb26"
+# c.colors.downloads.stop.fg  = "#1d2021"
+
+# # Messages
+# c.colors.messages.error.bg   = "#fb4934"
+# c.colors.messages.error.fg   = "#1d2021"
+# c.colors.messages.warning.bg = "#fe8019"
+# c.colors.messages.warning.fg = "#1d2021"
+# c.colors.messages.info.bg    = "#1d2021"
+# c.colors.messages.info.fg    = "#ebdbb2"
 
 # Unbinds
-config.unbind("r")
+# config.unbind("r") # refresh with r
 
 # doom emacs keys
 config.bind("<Space>:", "cmd-set-text : ;; message-info 'M-x'")
@@ -253,6 +570,12 @@ config.bind("<Space>8", "tab-select 8")
 config.bind("<Space>9", "tab-select 9")
 config.bind("<Space>G", "tab-focus -1")
 
+# password manager
+config.bind('<Space><j><l>', 'spawn --userscript qute-pass')
+config.bind('<Space><j><u><l>', 'spawn --userscript qute-pass --username-only')
+config.bind('<Space><j><p><l>', 'spawn --userscript qute-pass --password-only')
+config.bind('<Space><j><o><l>', 'spawn --userscript qute-pass --otp-only')
+
 # Files
 config.bind("<Space>fh", "history --tab")
 config.bind("<Space>fbb", "bookmark-list --tab")
@@ -278,6 +601,9 @@ config.bind("<Space>fs", "cmd-set-text --space :session-save")
 c.url.searchengines = {
     "DEFAULT": "https://www.google.com/search?q={}",
 }
+
+# hints
+c.hints.chars = "asdfjkl"
 
 # search
 config.bind("<Space>ss", "cmd-set-text /")
@@ -317,38 +643,6 @@ config.bind(
     "spawn --detach wkhtmltopdf {url} /home/kkoc/resource/notes/org/roam/biblio/webpages/{title}.pdf"  # fixed username
 )
 config.bind("a", "mode-enter insert", mode="normal")
-
-# Domain → tab color mappings
-domain_colors = {
-    "uretimbandi.kartaca.com": "#ff69b4",
-    "github.com": "#24292e",
-    "google.com": "#4285f4",
-}
-default_color = "#1d2021"  # updated to match new base
-
-def set_tab_color(url):
-    if not url or not url.host():
-        return
-    host = url.host()
-    color = domain_colors.get(host, default_color)
-    config.set("colors.tabs.selected.even.bg", color)
-    config.set("colors.tabs.selected.odd.bg", color)
-    config.set("colors.tabs.selected.even.fg", "white")
-    config.set("colors.tabs.selected.odd.fg", "white")
-
-try:
-    from qutebrowser.api import hooks
-
-    @hooks.register("url_changed")
-    def on_url_change(tab, url):
-        set_tab_color(url)
-
-except ImportError:
-    pass
-
-
-
-
 
 
 # THESE ADDED BY CLAUDE FOR QUTEBROWSER OPTIMIZATIONS. (consider removing if these don't work)
@@ -423,6 +717,6 @@ config.set('content.javascript.clipboard', 'access')
 config.set('completion.web_history.max_items', 1000)
 
 # Delay before completion updates — reduces CPU on fast typing
-config.set('completion.delay', 300)
+config.set('completion.delay', 10)
 
 config.set('qt.workarounds.disable_accelerated_2d_canvas', 'never') # for capthas and stability
