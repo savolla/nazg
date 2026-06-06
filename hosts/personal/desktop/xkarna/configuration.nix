@@ -746,7 +746,7 @@ in
       unstable.pcmanfm # lightweight file manager
       unstable.peek # record desktop gifs
       unstable.picom # xorg compositor with animation support
-      unstable.pinentry-gnome3
+      stable.pinentry-gnome3
       unstable.pipenv
       unstable.pkg-config # needed for building ruby files
       unstable.plantuml-c4 # org-mode graph generation
@@ -957,6 +957,7 @@ in
 
       # emulation
       unstable.xemu # xbox emulator
+      stable.xenia-canary # xbox 360 emulator
       (stable.retroarch.withCores (cores: with cores; [
         mesen              # nes
         snes9x             # snes
@@ -982,7 +983,7 @@ in
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true; # use gpg key as your ssh key
-      pinentryPackage = pkgs.pinentry-gnome3;
+      pinentryPackage = stable.pinentry-gnome3;
     };
 
     tmux = {
@@ -1087,6 +1088,10 @@ in
 
   # List services that you want to enable:
   services = {
+
+    pcscd = {
+      enable = true;
+    };
 
     # silence the agetty "Welcome to NixOS" banner on tty
     getty = {
