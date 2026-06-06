@@ -1,34 +1,48 @@
 * nazg
-one flake to rule all of my physical and virtual machines
-
-* Building Hosts
-#+begin_quote
-=--impure= will be gone in the future
-#+end_quote
-
-- xkarna ::
-  #+begin_src sh
+one flake (ring) to rule all of my physical and virtual machines (other rings)
+* xkarna
+** rebuild
+#+begin_src sh
 cd ~/project/dev/nazg
+sudo nixos-rebuild switch --flake .#xkarna --impure
+#+end_src
+** upgrade
+#+begin_src sh
+cd ~/project/dev/nazg
+nix flake update
 sudo nixos-rebuild switch --flake .#xkarna --impure
 nix store gc
 nix store gc
 nix store optimise
-  #+end_src
-
-- fiat ::
-  #+begin_src sh
+#+end_src
+* fiat
+** rebuild
+#+begin_src sh
 cd ~/project/dev/nazg
 home-manager switch --flake .#fiat --impure
-nix store gc
-nix store gc
-nix store optimise
-  #+end_src
-
-- a24 ::
-  #+begin_src sh
+#+end_src
+** upgrade
+#+begin_src sh
 cd ~/project/dev/nazg
+nix flake update
 NIXPKGS_ACCEPT_ANDROID_SDK_LICENSE=1 home-manager switch --flake .#fiat --impure
 nix store gc
 nix store gc
 nix store optimise
-  #+end_src
+#+end_src
+* a24
+** rebuild
+#+begin_src sh
+cd ~/project/dev/nazg
+nix-on-droid switch --flake .#a24
+#+end_src
+** upgrade
+#+begin_src sh
+cd ~/project/dev/nazg
+nix flake update
+nix-on-droid switch --flake .#a24
+nix store gc
+nix store gc
+nix store optimise
+#+end_src
+

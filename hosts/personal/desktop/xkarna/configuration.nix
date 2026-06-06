@@ -687,7 +687,7 @@ in
       unstable.litmus # kubernetes chaos engineering
       unstable.litmusctl # manager litrmux
       unstable.localstack # local aws
-      unstable.logseq # note taking tool
+      # unstable.logseq # note taking tool (electron issues. disabled temporarily)
       unstable.lolcat
       unstable.love # awesome 2d game engine written in lua
       unstable.lsp-plugins # collection of open-source audio plugins
@@ -887,6 +887,7 @@ in
       unstable.vscodium # just in case ide
       unstable.vulkan-tools # gpu info viewer (lutris needs it)
       unstable.w3m # image display for terminal
+      unstable.yubikey-manager # manage hardware keys
       unstable.walker # better application launcher for wayland with bunch of features
       unstable.waybar # status bar for wayland
       unstable.weechat # overlayed my custom weechat with plugins
@@ -940,6 +941,7 @@ in
       unstable.fishPlugins.done # get notified when jobs finish
       unstable.chafa # view images in terminal
       unstable.gnutls # doom emacs dependency for irs to work
+      unstable.exfatprogs # fix gparted exfat grayed out
 
       (unstable.pass.withExtensions (exts: [
         exts.pass-otp
