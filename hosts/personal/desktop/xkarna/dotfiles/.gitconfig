@@ -1,0 +1,14 @@
+[init]
+	defaultBranch = main
+[user]
+	email = kuzey.koc7991@gmail.com
+	name = Kuzey Koç
+	signingKey = 0xCB5A65C413A6AA63
+[core]
+	editor = nvim
+[pager]
+	branch = false
+[gpg]
+	program = gpg
+[commit]
+	gpgSign = true
