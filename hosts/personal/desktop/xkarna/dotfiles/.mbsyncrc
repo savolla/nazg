@@ -1,0 +1,23 @@
+IMAPAccount personal
+Host imap.gmail.com
+Port 993
+User kuzey.koc7991@gmail.com
+PassCmd "gopass savolla/mail/gmail/kuzey.koc7991@gmail.com app_pass_emacs"
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-bundle.crt
+
+IMAPStore personal-remote
+Account personal
+
+MaildirStore personal-local
+SubFolders Verbatim
+Path ~/area/mail/personal/
+Inbox ~/area/mail/personal/Inbox
+
+Channel personal
+Far :personal-remote:
+Near :personal-local:
+Patterns * !Trash !Drafts
+Create Both
+Expunge Both
+SyncState *

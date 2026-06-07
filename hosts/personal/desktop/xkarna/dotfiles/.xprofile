@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+# FIX: Use 'return' instead of 'exit' so it doesn't kill your startx session!
+[ -n "$XPROFILE_SOURCED" ] && return 0
+export XPROFILE_SOURCED=1
+
+export PATH="$HOME/project/dev/nazg/tools/scripts:$PATH" # add my personal scripts to the path
+export BROWSER="qutebrowser"
+export GNUPGHOME="$HOME/.gnupg"
+export EDITOR="nvim"
+
+# necessary for xdg-desktop-portal to work
+export XDG_SESSION_TYPE=x11
+export XDG_CURRENT_DESKTOP=dwm
+export DESKTOP_SESSION=dwm
+
+# =====================================================================
+# THE CURE: Tell Systemd & D-Bus about your X11 display context
+# =====================================================================
+if [ -n "$DISPLAY" ]; then
+    systemctl --user import-environment DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+fi
+
+if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+    dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+fi
+# =====================================================================
+
+setxkbmap -option caps:swapescape & # swap esc with caps lock
+xset r rate 150 90 &                # increase speed of keyboard
+xset s off &                        # disable screen saver
+xset -dpms &                        # disable monitor shutdown
+xset -b &                           # disable annoying desktop bell sound
+sxhkd -m 1 &                        # keyboard shortcuts
+unclutter -idle 2 &                 # hide mouse cursor
+picom -b &                          # start compositor for opacity/fading stuff
+dunst &                             # start notification daemon
+mpd &                               # start mpd as normal user
+
+# adaptive-blue-light-filter &     # blue light filter
+xsct 3500 &
+
+syncthing --no-browser &              # start synching files
+slstatus &                            # dwm status bar
+periodic-random-wallpaper-switcher &  # wallpaper service
+personal-website-periodic-update.sh & # auto push changes to github for savolla.github.io
+song-change-notification.sh &         # display album art and song information
+udiskie &                             # auto mount drives
+st sh -c 'tmux-session-creator' &     # run tmux session
+qutebrowser --qt-flag enable-gpu-rasterization --qt-flag enable-zero-copy --qt-flag disable-gpu-driver-workarounds --qt-flag use-vulkan --qt-flag disable-features=UseChromeOSDirectVideoDecoder &
