@@ -1,3 +1,4 @@
+[[./ashnazg.png]]
 * nazg
 one flake (ring) to rule all of my physical and virtual machines (other rings)
 * xkarna
