@@ -1,0 +1,134 @@
+{
+  "window.restoreWindows": "none", // do not restore previous session on restart
+  "editor.formatOnSave": true, // auto format on save
+  "vim.easymotion": true,
+  "vim.useSystemClipboard": true,
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        ">"
+      ],
+      "commands": [
+        "editor.action.indentLines"
+      ]
+    },
+    {
+      "before": [
+        "<"
+      ],
+      "commands": [
+        "editor.action.outdentLines"
+      ]
+    }
+  ],
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "j",
+        "k"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    },
+  ],
+  "window.zoomLevel": 1,
+  "workbench.colorTheme": "Gruvbox Dark Hard",
+  "editor.minimap.enabled": false,
+  "editor.cursorBlinking": "solid",
+  "editor.fontSize": 23,
+  "editor.tabSize": 2,
+  "editor.cursorStyle": "block",
+  "editor.wordWrap": "on",
+  "editor.accessibilityPageSize": 13,
+  "workbench.colorCustomizations": {
+    "foreground": "#ffffff",
+    "editor.background": "#000000",
+    "menu.background": "#000000",
+    "badge.background": "#000000",
+    "terminal.background": "#000000",
+    "banner.background": "#000000",
+    "banner.foreground": "#ffffff",
+    // activity bar
+    "activityBar.background": "#000000", // files, search, ext. bar
+    "activityBar.border": "#000000",
+    // side bar
+    "sideBar.border": "#000000",
+    "sideBar.background": "#000000",
+    // status bar
+    "statusBar.background": "#000000",
+    "statusBar.border": "#000000",
+    // tab bar
+    "editorGroupHeader.tabsBackground": "#000000",
+    "editorGroupHeader.tabsBorder": "#000000",
+    "tab.inactiveBackground": "#000000",
+    "tab.activeBackground": "#222222",
+    "tab.activeBorder": "#000000",
+  },
+  "workbench.editor.tabSizing": "fixed",
+  "workbench.settings.applyToAllProfiles": [
+    "workbench.colorCustomizations"
+  ],
+  "workbench.sideBar.location": "right",
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "editor.lineNumbers": "relative",
+  "workbench.startupEditor": "none",
+  "terminal.integrated.profiles.linux": {
+    "tmux-profile-linux": {
+      "path": "tmux",
+      "args": [
+        "new-session",
+        "-A",
+        "-s",
+        "vscode:${workspaceFolder}"
+      ]
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "tmux-profile-linux",
+  "terminal.integrated.fontSize": 24,
+  "terminal.integrated.fontWeight": "500",
+  "terminal.integrated.fontFamily": "'IosevkaTerm Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace",
+  "terminal.integrated.lineHeight": 1.0,
+  "vim.history": 1000,
+  "vim.leader": "s",
+  "update.showReleaseNotes": false,
+  "window.menuBarVisibility": "toggle",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.fontFamily": "'IosevkaTerm Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace",
+  "editor.lineHeight": 30,
+  "editor.fontWeight": "500",
+  "breadcrumbs.enabled": false,
+  // chatgpt additions
+  "editor.multiCursorModifier": "ctrlCmd",
+  "commandVariable.variables": {
+    "isSidebarVisible": {
+      "type": "booleanContext",
+      "name": "sideBarVisible"
+    }
+  },
+  "macros.list": {
+    "conditionalToggleExplorer": [
+      {
+        "command": "command-variable.set",
+        "args": {
+          "name": "isSidebarVisible"
+        }
+      },
+      {
+        "command": "command-variable.if",
+        "args": {
+          "name": "isSidebarVisible",
+          "then": "workbench.action.toggleSidebarVisibility",
+          "else": [
+            "workbench.view.explorer",
+            "workbench.files.action.focusFilesExplorer"
+          ]
+        }
+      }
+    ]
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

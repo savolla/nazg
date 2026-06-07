@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+while read file; do
+  case "$1" in
+  "C-c")
+    echo -n "$file" | xclip -selection clipboard
+    ;;
+  "C-w")
+    feh --bg-scale "$file" && cp "$file" $HOME/.bg-image
+    ;;
+  "C-d")
+    rm "$file" && notify-send "$file deleted"
+    ;;
+  esac
+done

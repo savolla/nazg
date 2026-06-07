@@ -1,0 +1,548 @@
+{
+  "version": "1.5",
+  "default_core_path": "",
+  "default_core_name": "",
+  "label_display_mode": 0,
+  "right_thumbnail_mode": 0,
+  "left_thumbnail_mode": 0,
+  "thumbnail_match_mode": 0,
+  "sort_mode": 0,
+  "items": [
+    {
+      "path": "/home/savolla/resource/games/games/nds/Brain Age - Train Your Brain in Minutes a Day! - Calculation Battle x 30 (USA) (DS Broadcast).zip#Brain Age - Train Your Brain in Minutes a Day! - Calculation Battle x 30 (USA) (DS Broadcast).nds",
+      "label": "Brain Age - Train Your Brain in Minutes a Day! - Calculation Battle x 30 (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "76F24BEB|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Personal Trainer - Math - Study Together (USA) (DS Broadcast).zip#Personal Trainer - Math - Study Together (USA) (DS Broadcast).nds",
+      "label": "Personal Trainer - Math - Study Together (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "85196240|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/MaBoShi - The Three Shape Arcade (Europe) (WiiWare Broadcast).zip#MaBoShi - The Three Shape Arcade (Europe) (WiiWare Broadcast).nds",
+      "label": "MaBoShi - The Three Shape Arcade (Europe) (WiiWare Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "9C9AFFAB|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Professor Kageyama's Maths Training - The Hundred Cell Calculation Method - Study Together (Europe) (DS Broadcast).zip#Professor Kageyama's Maths Training - The Hundred Cell Calculation Method - Study Together (Europe) (DS Broadcast).nds",
+      "label": "Professor Kageyama's Maths Training - The Hundred Cell Calculation Method - Study Together (Europe) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "7A47CC16|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Legendary Starfy, The - Minigames (USA) (Multiplayer) (DS Broadcast).zip#Legendary Starfy, The - Minigames (USA) (Multiplayer) (DS Broadcast).nds",
+      "label": "Legendary Starfy, The - Minigames (USA) (Multiplayer) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "DA78D086|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Deutgo Sseugo Chinhaejineun - DS Yeongeo Sammaegyeong - Dictation Sprint (Korea) (DS Broadcast).zip#Deutgo Sseugo Chinhaejineun - DS Yeongeo Sammaegyeong - Dictation Sprint (Korea) (DS Broadcast).nds",
+      "label": "Deutgo Sseugo Chinhaejineun - DS Yeongeo Sammaegyeong - Dictation Sprint (Korea) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "00E76F9B|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Planet 51 - The Game - Multiplayer (USA) (DS Broadcast).zip#Planet 51 - The Game - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "Planet 51 - The Game - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "F81DDE89|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Magnetica - Multiplayer (USA) (DS Broadcast).zip#Magnetica - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "Magnetica - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "49530655|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Maboshi's Arcade (USA) (WiiWare Broadcast).zip#Maboshi's Arcade (USA) (WiiWare Broadcast).nds",
+      "label": "Maboshi's Arcade (USA) (WiiWare Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "EAED99AB|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Final Fantasy Fables - Chocobo Tales - Bonus Content (USA) (Save Data).zip#Final Fantasy Fables - Chocobo Tales - Bonus Content (USA) (Save Data).nds",
+      "label": "Final Fantasy Fables - Chocobo Tales - Bonus Content (USA) (Save Data)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "5B54E3BA|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Cooking Mama 2 - Dinner with Friends - Cook Off (USA) (DS Broadcast).zip#Cooking Mama 2 - Dinner with Friends - Cook Off (USA) (DS Broadcast).nds",
+      "label": "Cooking Mama 2 - Dinner with Friends - Cook Off (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "B4C328BB|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Puzzle League DS - Multiplayer (Europe) (DS Broadcast).zip#Puzzle League DS - Multiplayer (Europe) (DS Broadcast).nds",
+      "label": "Puzzle League DS - Multiplayer (Europe) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "5F9D4083|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Corvette Evolution GT - Multiplayer (USA) (DS Broadcast).zip#Corvette Evolution GT - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "Corvette Evolution GT - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "1EDAACCF|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/MySims SkyHeroes DS - Multiplayer (USA) (DS Broadcast).zip#MySims SkyHeroes DS - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "MySims SkyHeroes DS - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "6E67785D|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Big Beach Sports - Face Paint (USA, Europe) (Rev 1) (Wii Broadcast).zip#Big Beach Sports - Face Paint (USA, Europe) (Rev 1) (Wii Broadcast).nds",
+      "label": "Big Beach Sports - Face Paint (USA, Europe) (Rev 1) (Wii Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "E5CC76B5|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/MySims SkyHeroes - Multiplayer (Europe) (DS Broadcast).zip#MySims SkyHeroes - Multiplayer (Europe) (DS Broadcast).nds",
+      "label": "MySims SkyHeroes - Multiplayer (Europe) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "C0D82AB1|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Meteos - Vs. Anasaze (USA) (DS Broadcast).zip#Meteos - Vs. Anasaze (USA) (DS Broadcast).nds",
+      "label": "Meteos - Vs. Anasaze (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "69FCFBB7|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Nintendo DS Title Recommendation Program (USA) (Nintendo Channel).zip#Nintendo DS Title Recommendation Program (USA) (Nintendo Channel).nds",
+      "label": "Nintendo DS Title Recommendation Program (USA) (Nintendo Channel)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "5F729227|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/New York Times Crosswords, The - Multiplayer (USA) (DS Broadcast).zip#New York Times Crosswords, The - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "New York Times Crosswords, The - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "E094DBCA|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/English Training - Have Fun Improving Your Skills - Vs. Vocabulary (Europe) (DS Broadcast).zip#English Training - Have Fun Improving Your Skills - Vs. Vocabulary (Europe) (DS Broadcast).nds",
+      "label": "English Training - Have Fun Improving Your Skills - Vs. Vocabulary (Europe) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "C06CF8D7|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Meteos - Vs. Geolyte (USA) (DS Broadcast).zip#Meteos - Vs. Geolyte (USA) (DS Broadcast).nds",
+      "label": "Meteos - Vs. Geolyte (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "32C84C79|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Cooking Mama 2 - Cook Off (Europe) (DS Broadcast).zip#Cooking Mama 2 - Cook Off (Europe) (DS Broadcast).nds",
+      "label": "Cooking Mama 2 - Cook Off (Europe) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "D77CA68F|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Meteos - Vs. Firen (USA) (DS Broadcast).zip#Meteos - Vs. Firen (USA) (DS Broadcast).nds",
+      "label": "Meteos - Vs. Firen (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "67B8F374|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Animal Crossing - Let's Go to the City - Suitcase (Europe) (Wii Broadcast).zip#Animal Crossing - Let's Go to the City - Suitcase (Europe) (Wii Broadcast).nds",
+      "label": "Animal Crossing - Let's Go to the City - Suitcase (Europe) (Wii Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "8BE60E70|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Geometry Wars - Retro Evolved (USA) (Wii Broadcast).zip#Geometry Wars - Retro Evolved (USA) (Wii Broadcast).nds",
+      "label": "Geometry Wars - Retro Evolved (USA) (Wii Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "0C0D7598|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/DS Kageyama Method Dennou Hanpuku - Masu x Masu Hyaku Masu Keisan - Study Together (Japan) (DS Broadcast).zip#DS Kageyama Method Dennou Hanpuku - Masu x Masu Hyaku Masu Keisan - Study Together (Japan) (DS Broadcast).nds",
+      "label": "DS Kageyama Method Dennou Hanpuku - Masu x Masu Hyaku Masu Keisan - Study Together (Japan) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "95842D06|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Densetsu no Stafy - Taiketsu! Dile Kaizoku Dan - Multiplayer (Japan) (DS Broadcast).zip#Densetsu no Stafy - Taiketsu! Dile Kaizoku Dan - Multiplayer (Japan) (DS Broadcast).nds",
+      "label": "Densetsu no Starfy - Taiketsu! Dile Kaizoku Dan - Multiplayer (Japan) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "89B70894|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Machi He Ikouyo - Doubutsu no Mori - Suitcase (Japan) (Wii Broadcast).zip#Machi He Ikouyo - Doubutsu no Mori - Suitcase (Japan) (Wii Broadcast).nds",
+      "label": "Machi He Ikouyo - Doubutsu no Mori - Suitcase (Japan) (Wii Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "7DBED66A|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Brain Age 2 - More Training in Minutes a Day! - Vs. Training (USA) (DS Broadcast).zip#Brain Age 2 - More Training in Minutes a Day! - Vs. Training (USA) (DS Broadcast).nds",
+      "label": "Brain Age 2 - More Training in Minutes a Day! - Vs. Training (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "2657F3B4|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Meteos - Vs. Oleana (USA) (DS Broadcast).zip#Meteos - Vs. Oleana (USA) (DS Broadcast).nds",
+      "label": "Meteos - Vs. Oleana (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "2B9EDA5E|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Nicktoons - Battle for Volcano Island - Multiplayer (USA) (DS Broadcast).zip#Nicktoons - Battle for Volcano Island - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "Nicktoons - Battle for Volcano Island - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "0F0EBA09|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Cooking Mama 3 - Shop & Chop - Multiplayer (USA) (DS Broadcast).zip#Cooking Mama 3 - Shop & Chop - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "Cooking Mama 3 - Shop & Chop - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "DBEDFEAD|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Eigo ga Nigate na Otona no DS Training - Eigo Zuke - Vs. Vocabulary (Japan) (DS Broadcast).zip#Eigo ga Nigate na Otona no DS Training - Eigo Zuke - Vs. Vocabulary (Japan) (DS Broadcast).nds",
+      "label": "Eigo ga Nigate na Otona no DS Training - Eigo Zuke - Vs. Vocabulary (Japan) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "EF402102|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Geometry Wars - Retro Evolved (USA) (DS Broadcast).zip#Geometry Wars - Retro Evolved (USA) (DS Broadcast).nds",
+      "label": "Geometry Wars - Retro Evolved (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "2B9E5B3F|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Mega Man Star Force 2 - Battle Card - Le Mu (USA) (Rev 1) (Save Data).zip#Mega Man Star Force 2 - Battle Card - Le Mu (USA) (Rev 1) (Save Data).nds",
+      "label": "Mega Man Star Force 2 - Battle Card - Le Mu (USA) (Rev 1) (Save Data)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "954C111B|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Mega Man Star Force 2 - Brother - 1stMegaMan (USA) (Rev 1) (Save Data).zip#Mega Man Star Force 2 - Brother - 1stMegaMan (USA) (Rev 1) (Save Data).nds",
+      "label": "Mega Man Star Force 2 - Brother - 1stMegaMan (USA) (Rev 1) (Save Data)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "59184E47|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Animal Crossing - City Folk - Moving Van (USA) (Wii Broadcast).zip#Animal Crossing - City Folk - Moving Van (USA) (Wii Broadcast).nds",
+      "label": "Animal Crossing - City Folk - Moving Van (USA) (Wii Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "98B3CF22|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Panel de Pon DS - Multiplayer (Japan) (DS Broadcast).zip#Panel de Pon DS - Multiplayer (Japan) (DS Broadcast).nds",
+      "label": "Panel de Pon DS - Multiplayer (Japan) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "EF20B26C|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Dragon Quest Monsters - Joker 2 - Monster Haishin Data - Shinigami Slidark (Japan) (Rev 1) (Save Data).zip#Dragon Quest Monsters - Joker 2 - Monster Haishin Data - Shinigami Slidark (Japan) (Rev 1) (Save Data).nds",
+      "label": "Dragon Quest Monsters - Joker 2 - Monster Haishin Data - Shinigami Slidark (Japan) (Rev 1) (Save Data)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "675B893B|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Legendary Starfy, The (USA) (Multiplayer) (DS Broadcast).zip#Legendary Starfy, The (USA) (Multiplayer) (DS Broadcast).nds",
+      "label": "Legendary Starfy, The (USA) (Multiplayer) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "4287EF0B|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/My Word Coach - Develop Your Vocabulary - Multiplayer (Europe) (DS Broadcast).zip#My Word Coach - Develop Your Vocabulary - Multiplayer (Europe) (DS Broadcast).nds",
+      "label": "My Word Coach - Develop Your Vocabulary - Multiplayer (Europe) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "411E5760|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/LEGO Star Wars II - The Original Trilogy (USA) (Rev 1) (DS Broadcast) (Multiplayer).zip#LEGO Star Wars II - The Original Trilogy (USA) (Rev 1) (DS Broadcast) (Multiplayer).nds",
+      "label": "LEGO Star Wars II - The Original Trilogy (USA) (Rev 1) (DS Broadcast) (Multiplayer)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "0850BC56|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/America's Test Kitchen - Let's Get Cooking - Single Recipe Download Version (USA) (DS Broadcast).zip#America's Test Kitchen - Let's Get Cooking - Single Recipe Download Version (USA) (DS Broadcast).nds",
+      "label": "America's Test Kitchen - Let's Get Cooking - Single Recipe Download Version (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "57069BF6|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Glory of Heracles (USA) (Video).zip#Glory of Heracles (USA) (Video).nds",
+      "label": "Glory of Heracles (USA) (Video)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "5455A181|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Crafting Mama - Multiplayer (USA) (DS Broadcast).zip#Crafting Mama - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "Crafting Mama - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "1BFAD849|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Eigo ga Nigate na Otona no DS Training - Eigo Zuke - Dictation Sprint (Japan) (DS Broadcast).zip#Eigo ga Nigate na Otona no DS Training - Eigo Zuke - Dictation Sprint (Japan) (DS Broadcast).nds",
+      "label": "Eigo ga Nigate na Otona no DS Training - Eigo Zuke - Dictation Sprint (Japan) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "51B1CBAA|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Gardening Mama - Multiplayer (USA) (DS Broadcast).zip#Gardening Mama - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "Gardening Mama - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "5FB6D0D0|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Craft Mama - Multiplayer (Japan) (DS Broadcast).zip#Craft Mama - Multiplayer (Japan) (DS Broadcast).nds",
+      "label": "Craft Mama - Multiplayer (Japan) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "FD8D3D14|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Machi He Ikouyo - Doubutsu no Mori - Moving Van (Japan) (Wii Broadcast).zip#Machi He Ikouyo - Doubutsu no Mori - Moving Van (Japan) (Wii Broadcast).nds",
+      "label": "Machi He Ikouyo - Doubutsu no Mori - Moving Van (Japan) (Wii Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "CE2F90F2|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Deutgo Sseugo Chinhaejineun - DS Yeongeo Sammaegyeong - Vs. Vocabulary (Korea) (DS Broadcast).zip#Deutgo Sseugo Chinhaejineun - DS Yeongeo Sammaegyeong - Vs. Vocabulary (Korea) (DS Broadcast).nds",
+      "label": "Deutgo Sseugo Chinhaejineun - DS Yeongeo Sammaegyeong - Vs. Vocabulary (Korea) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "EF9D7364|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/My Word Coach - Improving Your Vocabulary - Multiplayer (USA) (DS Broadcast).zip#My Word Coach - Improving Your Vocabulary - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "My Word Coach - Improving Your Vocabulary - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "7AF19061|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Cooking Mama 3 - Multiplayer (Europe) (DS Broadcast).zip#Cooking Mama 3 - Multiplayer (Europe) (DS Broadcast).nds",
+      "label": "Cooking Mama 3 - Multiplayer (Europe) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "59560C17|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Taun-eulo - Nolleogayo Dongmul-ui Sup - Suitcase (Korea) (Wii Broadcast).zip#Taun-eulo - Nolleogayo Dongmul-ui Sup - Suitcase (Korea) (Wii Broadcast).nds",
+      "label": "Taun-eulo - Nolleogayo Dongmul-ui Sup - Suitcase (Korea) (Wii Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "CAD88040|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Mega Man Star Force 2 - Brother - L. M. Shin (USA) (Rev 1) (Save Data).zip#Mega Man Star Force 2 - Brother - L. M. Shin (USA) (Rev 1) (Save Data).nds",
+      "label": "Mega Man Star Force 2 - Brother - L. M. Shin (USA) (Rev 1) (Save Data)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "7A855B81|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Animal Crossing - City Folk - Suitcase (USA) (Wii Broadcast).zip#Animal Crossing - City Folk - Suitcase (USA) (Wii Broadcast).nds",
+      "label": "Animal Crossing - City Folk - Suitcase (USA) (Wii Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "C7B9F1CC|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Densetsu no Stafy - Taiketsu! Dile Kaizoku Dan - Minigame Multiplayer (Japan) (DS Broadcast).zip#Densetsu no Stafy - Taiketsu! Dile Kaizoku Dan - Minigame Multiplayer (Japan) (DS Broadcast).nds",
+      "label": "Densetsu no Starfy - Taiketsu! Dile Kaizoku Dan - Minigame Multiplayer (Japan) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "72D6FA2A|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Legend of Zelda - Spirit Tracks, The - Multiplayer (USA) (DS Broadcast).zip#Legend of Zelda - Spirit Tracks, The - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "Legend of Zelda - Spirit Tracks, The - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "2E72D972|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Sonic Colors (World) (Multiplayer) (DS Broadcast).zip#Sonic Colors (World) (Multiplayer) (DS Broadcast).nds",
+      "label": "Sonic Colors (World) (Multiplayer) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "D1CB210B|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Kids Learn - 2Think - A+ Edition - Multiplayer (USA) (DS Broadcast).zip#Kids Learn - 2Think - A+ Edition - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "Kids Learn - 2Think - A+ Edition - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "D30DAC77|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Planet Puzzle League - Multiplayer (USA) (DS Broadcast).zip#Planet Puzzle League - Multiplayer (USA) (DS Broadcast).nds",
+      "label": "Planet Puzzle League - Multiplayer (USA) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "642F13D5|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Taun-eulo - Nolleogayo Dongmul-ui Sup - Moving Van (Korea) (Wii Broadcast).zip#Taun-eulo - Nolleogayo Dongmul-ui Sup - Moving Van (Korea) (Wii Broadcast).nds",
+      "label": "Taun-eulo - Nolleogayo Dongmul-ui Sup - Moving Van (Korea) (Wii Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "B319DCC3|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Mega Man Star Force 2 - Battle Card - KngGrndeur (USA) (Rev 1) (Save Data).zip#Mega Man Star Force 2 - Battle Card - KngGrndeur (USA) (Rev 1) (Save Data).nds",
+      "label": "Mega Man Star Force 2 - Battle Card - KngGrndeur (USA) (Rev 1) (Save Data)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "18B2B9E6|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/8BallAllstars (Europe) (En,Fr,De,Es,It) (Multiplayer) (DS Broadcast).zip#8BallAllstars (Europe) (En,Fr,De,Es,It) (Multiplayer) (DS Broadcast).nds",
+      "label": "8BallAllstars (Europe) (En,Fr,De,Es,It) (Multiplayer) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "C4DE52D4|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/English Training - Have Fun Improving Your Skills - Dictation Sprint (Europe) (DS Broadcast).zip#English Training - Have Fun Improving Your Skills - Dictation Sprint (Europe) (DS Broadcast).nds",
+      "label": "English Training - Have Fun Improving Your Skills - Dictation Sprint (Europe) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "5E2032EE|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Ping Pals - Multiplayer (Europe) (DS Broadcast).zip#Ping Pals - Multiplayer (Europe) (DS Broadcast).nds",
+      "label": "Ping Pals - Multiplayer (Europe) (DS Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "A0F142A0|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Animal Crossing - Let's Go to the City - Moving Van (Europe) (Wii Broadcast).zip#Animal Crossing - Let's Go to the City - Moving Van (Europe) (Wii Broadcast).nds",
+      "label": "Animal Crossing - Let's Go to the City - Moving Van (Europe) (Wii Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "E713B5C5|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/nds/Simple Wii Series Vol. 3 - The Casino Party (Japan) (Wii Broadcast).zip#Simple Wii Series Vol. 3 - The Casino Party (Japan) (Wii Broadcast).nds",
+      "label": "Simple Wii Series Vol. 3 - The Casino Party (Japan) (Wii Broadcast)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "F687D1DA|crc",
+      "db_name": "Nintendo - Nintendo DS.lpl"
+    }
+  ]
+}

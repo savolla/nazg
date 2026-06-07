@@ -1,0 +1,56 @@
+auto-reload yes # reload feeds once newsboat is opened
+max-items 512
+show-read-feeds no # hide feeds where all the items are read.
+feed-sort-order unreadarticlecount-asc
+text-width 50 # Make the text width readable
+reload-threads 11 # Use multiple threads to download all the news faster.
+notify-always yes
+notify-program  /run/current-system/sw/bin/notify-send
+confirm-exit yes
+notify-format "newsboat:\n %n new feeds available!"
+
+# colors
+color info default default reverse
+color listnormal_unread yellow default
+color listfocus blue default reverse bold
+color listfocus_unread blue default reverse bold
+
+# externel browser
+# browser "$(which librewolf) --new-tab  %u"
+browser "xdg-open %u"
+# macro m set browser "$(which mpv) %u"; open-in-browser ; set browser "$(which librewolf) %u"
+# macro l set browser "/usr/local/bin/firefox %u"; open-in-browser ; set browser "$(which librewolf) %u"
+
+# macro
+macro . open-in-browser
+# macro v set browser "setsid nohup mpv"; open-in-browser ; set browser linkhandler
+macro v set browser "mpv --ytdl-format=best"; open-in-browser-and-mark-read
+
+# unbind keys
+unbind-key ENTER
+unbind-key j
+unbind-key k
+unbind-key J
+unbind-key K
+unbind-key o
+
+# bind keys - vim style
+bind-key j down
+bind-key k up
+bind-key l open
+bind-key h quit
+bind-key o open-in-browser-and-mark-read
+
+# solarized
+color background         default   default
+color listnormal         default   default
+color listnormal_unread  default   default
+color listfocus          black     yellow bold
+color listfocus_unread   black     yellow bold
+color info               default   black
+color article            default   default
+
+# highlights
+highlight article "^(Title):.*$" blue default
+highlight article "https?://[^ ]+" red default
+highlight article "\\[image\\ [0-9]+\\]" green default

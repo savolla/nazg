@@ -1,0 +1,149 @@
+{
+  "version": "1.5",
+  "default_core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+  "default_core_name": "Sony - PlayStation (Beetle PSX HW)",
+  "base_content_directory": "R\u0003\u001c",
+  "label_display_mode": 0,
+  "right_thumbnail_mode": 0,
+  "left_thumbnail_mode": 0,
+  "thumbnail_match_mode": 0,
+  "sort_mode": 0,
+  "items": [
+    {
+      "path": "/home/savolla/resource/games/games/psx/Ape Escape (USA)/Ape Escape (USA).cue",
+      "label": "Ape Escape (USA)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SCUS-94423|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Castlevania - Symphony of the Night (USA)/Castlevania - Symphony of the Night (USA).cue",
+      "label": "Castlevania - Symphony of the Night (USA)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SLUS-00067|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Chrono Cross (USA)/Chrono Cross (USA) (Disc 1).cue",
+      "label": "Chrono Cross (USA, Canada) (Disc 1)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SLUS-01041-0|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Crash Bandicoot 2 - Cortex Strikes Back/Crash Bandicoot 2 - Cortex Strikes Back (USA).cue",
+      "label": "Crash Bandicoot 2 - Cortex Strikes Back (USA)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SCUS-94154|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/CTR - Crash Team Racing/CTR - Crash Team Racing (USA).cue",
+      "label": "CTR - Crash Team Racing (USA)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SCUS-94426|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Final Fantasy IX (USA)/Final Fantasy IX (USA) (Disc 1) (v1.0).cue",
+      "label": "Final Fantasy IX (USA, Canada) (Disc 1)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SLUS-01251-0|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Final Fantasy Tactics (USA)/Final Fantasy Tactics (USA).cue",
+      "label": "Final Fantasy Tactics (USA)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SCUS-94221|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Final Fantasy VII (USA)/Final Fantasy VII (USA) (Disc 1).cue",
+      "label": "Final Fantasy VII (USA) (Disc 1)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SCUS-94163-0|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Final Fantasy VIII (USA)/Final Fantasy VIII (USA) (Disc 1).cue",
+      "label": "Final Fantasy VIII (USA) (Disc 1)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "SLUS-00892-0|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Gran Turismo 2 (USA)/Gran Turismo 2 (USA) (Arcade Mode) (v1.1).cue",
+      "label": "Gran Turismo 2 (USA) (Arcade Mode) (Rev 1)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SCUS-94455|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Metal Gear Solid (USA)/Metal Gear Solid (USA) (Disc 1) (v1.0).cue",
+      "label": "Metal Gear Solid (USA) (Disc 1) (Rev 1)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SLUS-00594-0|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Resident Evil 2 (USA)/Resident Evil 2 (USA) (Disc 1).cue",
+      "label": "Resident Evil 2 (USA) (Disc 1)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "SLUS-00421-0|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Silent Hill (USA)/Silent Hill (USA).cue",
+      "label": "Silent Hill (USA)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "SLUS-00707|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Suikoden II (USA)/Suikoden II (USA).cue",
+      "label": "Suikoden II (USA)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SLUS-00958|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Tekken 3 (USA)/Tekken 3 (USA).cue",
+      "label": "Tekken 3 (USA)",
+      "core_path": "DETECT",
+      "core_name": "DETECT",
+      "crc32": "SLUS-00402|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Tony Hawk's Pro Skater 2/Tony Hawk's Pro Skater 2 (USA).cue",
+      "label": "Tony Hawk's Pro Skater 2 (USA)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SLUS-01066|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    },
+    {
+      "path": "/home/savolla/resource/games/games/psx/Vagrant Story (USA)/Vagrant Story (USA).cue",
+      "label": "Vagrant Story (USA)",
+      "core_path": "/nix/store/gg3cdq19b7lwrm3p7ascrizknbwryh6v-libretro-mednafen-psx-hw-0-unstable-2025-11-14/lib/retroarch/cores/mednafen_psx_hw_libretro.so",
+      "core_name": "Sony - PlayStation (Beetle PSX HW)",
+      "crc32": "SLUS-01040|serial",
+      "db_name": "Sony - PlayStation.lpl"
+    }
+  ]
+}
