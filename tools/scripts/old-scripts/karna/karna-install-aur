@@ -1,0 +1,32 @@
+#!/bin/sh
+
+if [ $# -eq 0 ]; then
+    echo "KARNA: no parameter provided. select either 'paru' or 'yay'"
+    exit 1
+fi
+
+if [[ "$1" == "yay" ]]; then
+  command -v yay >/dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    echo "KARNA: yay is already installed!"
+    exit
+  else
+    echo -e "KARNA: yay will be installed!"
+    pacman -S --needed git
+    git clone https://aur.archlinux.org/yay-bin.git
+    cd yay-bin
+    makepkg -si
+  fi
+elif [[ "$1" == "paru" ]]; then
+  command -v paru >/dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    echo "KARNA: paru is already installed!"
+    exit
+  else
+    echo -e "KARNA: paru will be installed!"
+    pacman -S --needed git
+    git clone https://aur.archlinux.org/yay-bin.git
+    cd yay-bin
+    makepkg -si
+  fi
+fi

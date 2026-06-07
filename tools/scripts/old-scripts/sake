@@ -1,0 +1,10 @@
+# small and *stupid* alias for testing C++ code
+# sake stands for "savolla make" :P
+
+#!/bin/bash
+g++ -o prog *
+clear
+echo -e '########## EXECUTION STARTS ###########'
+./prog
+echo -e '########### EXECUTION ENDS ############'
+rm prog

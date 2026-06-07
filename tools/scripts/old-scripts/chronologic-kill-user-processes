@@ -1,0 +1,6 @@
+#!/bin/bash
+USER_PROCESSES_IN_CHRONOLOGIC_ORDER="$(ps -ef --sort=start_time | grep "^savolla" | grep tty2 | awk '{ print $2 }' | sort -rn)"
+for PROCESS in $USER_PROCESSES_IN_CHRONOLOGIC_ORDER
+do
+    kill -15 "$PROCESS"
+done

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+export DEFAULT_PORT=8080
+export DEFAULT_IP=0.0.0.0
+export PATH_TO_BROWSER=/usr/bin/firefox
+export TIME_TO_WAIT=3
+
+cd "$HOME"/area/ai/tools/ollama-webui/backend || exit
+source ./ollama-backend-env/bin/activate
+./start.sh &
+sleep $TIME_TO_WAIT
+$PATH_TO_BROWSER http://$DEFAULT_IP:$DEFAULT_PORT

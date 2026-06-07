@@ -1,0 +1,7 @@
+#!/bin/bash
+export BROWSER=/usr/bin/firefox
+
+cd "$HOME"/area/ai/tools/SDWUI || exit
+firejail --net=none ./webui.sh # disable update
+# sleep "$DELAY_BEFORE_BROWSER_LAUNCH"
+# "$BROWSER" http://127.0.0.1:"$DEFAULT_COMFYUI_PORT"

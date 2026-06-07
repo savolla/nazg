@@ -1,0 +1,7 @@
+#!/bin/bash
+IMAGE_PATHS=(
+    $HOME/resources/images/*
+    $HOME/archive/backup/xiaomi-redmi7-syncthing/*
+)
+
+nsxiv

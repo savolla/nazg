@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+flameshot gui -r -p ~/resource/images/screenshots \
+  | xclip -selection clipboard -t image/png

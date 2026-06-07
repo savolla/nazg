@@ -1,0 +1,6 @@
+#!/bin/bash
+xdotool keydown alt
+xdotool mousedown 1
+xdotool mousemove_relative --sync -- -25 0
+xdotool mouseup 1
+xdotool keyup alt

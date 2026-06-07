@@ -1,0 +1,999 @@
+#!/usr/bin/env bash
+
+function run_dmenu() {
+    dmenu -n \
+        -b \
+        -fn "IosevkaTerm NF:size=14:style=Regular" \
+        -nb "#222222" \
+        -nf "#bbbbbb" \
+        -sb "#005577" \
+        -sf "#eeeeee"
+}
+
+function run_dmenu_with_lines() {
+    dmenu -n \
+        -l 5 \
+        -b \
+        -fn "IosevkaTerm NF:size=14:style=Regular" \
+        -nb "#222222" \
+        -nf "#bbbbbb" \
+        -sb "#005577" \
+        -sf "#eeeeee"
+}
+
+function main() {
+    KEY=$(echo -e \
+        "l +LAUNCH
+p +PROFILE
+t +TOGGLE
+s +SESSION
+n +NIXOS
+i +INFO
+r +RESTART
+u +UTILS
+m +MUSIC
+b +BLUETOOTH
+g +GO TO
+w +TIDDLYWIKI
+: +ALL
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'l')
+        menu-launch
+        ;;
+    'p')
+        menu-profile
+        ;;
+    't')
+        menu-toggle
+        ;;
+    's')
+        menu-session
+        ;;
+    'n')
+        menu-nixos
+        ;;
+    'i')
+        menu-info
+        ;;
+    'r')
+        menu-restart
+        ;;
+    'u')
+        menu-utils
+        ;;
+    'm')
+        menu-music
+        ;;
+    'b')
+        menu-bluetooth
+        ;;
+    'g')
+        menu-goto
+        ;;
+    'w')
+        menu-tiddlywiki
+        ;;
+    ':')
+        list-all-scripts
+        ;;
+    esac
+}
+
+function menu-launch() {
+    KEY=$(echo -e \
+        "e: EMACS
+o: VSCODIUM
+l: LOGSEQ
+f: FERDIUM
+c: GCOLOR3
+p: PASSWORD MANAGER
+g: +GAMING
+b: +BROWSER
+v: +VM
+s: +SERVICE
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'e')
+        notify-send -r 27072 -i $ICONS_DIR/loading.svg "launching:" "emacs" && nixGL emacs &
+        ;;
+    'o')
+        notify-send -r 27072 -i $ICONS_DIR/loading.svg "launching:" "codium" && codium &
+        ;;
+    'l')
+        notify-send -r 27072 -i $ICONS_DIR/loading.svg "launching:" "logseq" && logseq &
+        ;;
+    'c')
+        notify-send -r 27072 -i $ICONS_DIR/loading.svg "launching:" "gcolor3" && gcolor3 &
+        ;;
+    'f')
+        notify-send -r 27072 -i $ICONS_DIR/loading.svg "launching:" "ferdium" && ferdium &
+        ;;
+    'g')
+        menu-gaming
+        ;;
+    'b')
+        menu-browser
+        ;;
+    'v')
+        menu-vm
+        ;;
+    'p')
+        launch-password-manager
+        ;;
+    esac
+}
+
+function menu-gaming() {
+    KEY=$(echo -e \
+        "m: MANGOHUD
+s: STEAM
+l: LUTRIS
+r: RUN A GAME
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'm')
+        mangohud &
+        ;;
+    's')
+        steam &
+        ;;
+    'l')
+        lutris &
+        ;;
+    'r')
+        run-lutris-game &
+        ;;
+    esac
+}
+
+function menu-browser() {
+    KEY=$(echo -e \
+        "f: FIREFOX
+d: FIREFOX-DEVELOPER
+l: LIBREWOLF
+q: QUTEBROWSER
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'f')
+        notify-send -r 27072 -i $ICONS_DIR/loading.svg "launching:" "firefox" && firefox &
+        ;;
+    'd')
+        firefox-devedition &
+        ;;
+    'l')
+        notify-send -r 27072 -i $ICONS_DIR/loading.svg "launching:" "librewolf" && librewolf &
+        ;;
+    'q')
+        notify-send -r 27072 -i $ICONS_DIR/loading.svg "launching:" "qutebrowser" && nixGL qutebrowser &
+        ;;
+    esac
+}
+
+function menu-nixos() {
+    KEY=$(echo -e \
+        "r: REBUILD
+u: UPGRADE
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'r')
+        rebuild-nixos &
+        ;;
+    'u')
+        upgrade-nixos &
+        ;;
+    esac
+}
+
+function menu-toggle() {
+    KEY=$(echo -e \
+        "p: PICOM
+s: SCREENKEY
+m: MECHVIBES
+v: PROTON_VPN
+c: COLOR_PICKER
+i: INTERNET
+x: SCREEN INVERTER
+r: +SERVICE
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'p')
+        toggle-picom &
+        ;;
+    's')
+        toggle-screenkey &
+        ;;
+    'v')
+        toggle-vpn &
+        ;;
+    'c')
+        color-picker-xorg &
+        ;;
+    'i')
+        toggle-internet-connection &
+        ;;
+    'x')
+        toggle-screen-inverter &
+        ;;
+    'r')
+        menu-service &
+        ;;
+    'm')
+        toggle-mechvibes &
+        ;;
+    esac
+}
+
+function menu-session() {
+    KEY=$(echo -e \
+        "r: RESTART
+h: HIBERNATE
+p: POWEROFF
+l: LOCK
+o: LOGOUT
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'r')
+        reboot-session
+        ;;
+    'p')
+        poweroff-session
+        ;;
+    'h')
+        hibernate-session
+        ;;
+    'l')
+        lock-screen-xorg &
+        ;;
+    'o')
+        logout &
+        ;;
+    esac
+}
+
+function menu-info() {
+    KEY=$(echo -e \
+        "d: NOTIFICATIONS
+m: +MOUSE
+n: +NETWORK
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'd')
+        menu-notifications &
+        ;;
+    'm')
+        menu-mouse &
+        ;;
+    'n')
+        menu-network &
+        ;;
+    esac
+}
+
+function menu-notifications() {
+    KEY=$(echo -e \
+        "l: LAST NOTIF
+c: CLEAR ALL" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'l')
+        display-last-dunst-notification &
+        ;;
+    'c')
+        dunstctl close &
+        ;;
+    esac
+}
+
+function menu-restart() {
+    KEY=$(echo -e \
+        "s: SLSTATUS
+x: SXHKD
+d: DUNST" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    's')
+        kill $(pidof slstatus) && slstatus &
+        ;;
+    'd')
+        kill $(pidof dunst) && dunst &
+        ;;
+    'x')
+        pkill -f sxhkd
+        sxhkd -m1
+        ;;
+    esac
+}
+
+function menu-utils() {
+    KEY=$(echo -e \
+        "v: YOUTUBE TO MPV
+c: +CRYPTOLOGY
+r: +SCREEN CAST
+t: +TIME
+s: +SCREEN SHOT
+g: +SCREEN GIF
+p: +PROCESSES
+w: +WALLPAPER
+d: +DRIVES
+f: +FIX
+k: +KEYBOARD
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'v')
+        open-youtube-video-with-mpv &
+        ;;
+    'r')
+        menu-screencast
+        ;;
+    's')
+        menu-screenshot
+        ;;
+    't')
+        menu-time
+        ;;
+    'g')
+        menu-gif
+        ;;
+    'p')
+        menu-process
+        ;;
+    'w')
+        menu-wallpapers
+        ;;
+    'd')
+        menu-drives
+        ;;
+    'c')
+        menu-cryptology
+        ;;
+    'f')
+        menu-fix
+        ;;
+    'k')
+        menu-keyboard
+        ;;
+    esac
+}
+
+function menu-screencast() {
+    KEY=$(echo -e \
+        "r: START
+x: STOP
+w: WEBCAM
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'r')
+        start-screen-recording-xorg
+        ;;
+    'x')
+        stop-screen-recording-xorg
+        ;;
+    'w')
+        webcam
+        ;;
+    esac
+}
+
+function menu-mouse() {
+    KEY=$(echo -e \
+        "c: CURRENT_COORDINATES" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'c')
+        get-mouse-coordinates &
+        ;;
+    esac
+}
+
+function menu-screenshot() {
+    KEY=$(echo -e \
+        "p: PARTIAL
+f: FULL
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'p')
+        # flameshot gui --path ~/resource/images/screenshots
+        take-partial-screenshot-and-copy-to-clipboard
+        # flameshot gui --path ~/resource/images/screenshots && sleep 1 && xclip -selection clipboard -t image/png -i ~/resource/images/screenshots/$(ls -t ~/resource/images/screenshots | tail -n 1)
+
+        ;;
+    'f')
+        flameshot full --path ~/resource/images/screenshots &
+        ;;
+    esac
+}
+
+function menu-music() {
+    KEY=$(echo -e \
+        "n: NEXT SONG
+p: PREV SONG
+s: TOGGLE
+l: SEEK FORWARD
+h: SEEK BACKWARD
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'n')
+        mpc next
+        ;;
+    'p')
+        mpc prev
+        ;;
+    's')
+        mpc toggle
+        ;;
+    'l')
+        mpc seek +5
+        ;;
+    'h')
+        mpc seek -5
+        ;;
+    esac
+}
+
+function menu-network() {
+    KEY=$(echo -e \
+        "l: LOCAL IP
+r: REMOTE IP
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'l')
+        LOCAL_IP=$(ifconfig | grep 'inet ' | awk '{print $2}' | head -n 1)
+        notify-send -r 27072 "Copied Local IP:" "$LOCAL_IP"
+        echo "$LOCAL_IP" | clip-copy
+        ;;
+    'r')
+        REMOTE_IP=$(curl ident.me)
+        notify-send -r 27072 "Copied Remote IP:" "$REMOTE_IP"
+        echo "$REMOTE_IP" | clip-copy
+        ;;
+    esac
+}
+
+function menu-vm() {
+    KEY=$(echo -e \
+        "q: QEMU
+v: VIRTUALBOX
+w: VMWARE
+g: GENYMOTION
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'q')
+        run-qemu-vm
+        ;;
+    'v') ;;
+    'w') ;;
+    'g')
+        run-android-vm
+        ;;
+    esac
+}
+
+function menu-gif() {
+    KEY=$(echo -e \
+        "r: START_RECORDING
+x: STOP_RECORDING
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'r')
+        start-record-fullscreen-gif
+        ;;
+    'x')
+        stop-record-fullscreen-gif
+        ;;
+    esac
+}
+
+function menu-process() {
+    KEY=$(echo -e \
+        "k: KILL PROCESS
+s: SUSPEND PROCESS
+a: SUSPEND ALL USER PROCESSES
+o: SUSPEND ALL BUT SELECTED USER PROCESS
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'k')
+        process-kill
+        ;;
+    's')
+        process-suspend
+        ;;
+    'k')
+        process-kill
+        ;;
+    'k')
+        process-kill
+        ;;
+    esac
+}
+
+function menu-service() {
+    KEY=$(echo -e \
+        "o: OPEN WEBUI
+p: PENPOT
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'o')
+        toggle-open-webui
+        ;;
+    'p')
+        toggle-penpot
+        ;;
+    esac
+}
+
+function menu-bluetooth() {
+    KEY=$(echo -e \
+        "d: DISCONNECT
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'd')
+        bluetooth-disconnect
+        ;;
+    esac
+}
+
+function menu-wallpapers() {
+    KEY=$(echo -e \
+        "r: SET RANDOM WP
+b: BROWSE WPs
+d: DELETE & REPLACE CURRENT
+f: MARK AS FAVORITE
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'r')
+        set-random-wallpaper
+        ;;
+    'b')
+        browse-wallpapers
+        ;;
+    'd')
+        delete-current-wallpaper-and-set-random-one
+        ;;
+    'f')
+        mark-current-wallpaper-as-favorite
+        ;;
+    esac
+}
+
+function menu-drives() {
+    KEY=$(echo -e \
+        "u: SAFE UNMOUNT
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'u')
+        safely-unmount-drive
+        ;;
+    esac
+}
+
+function menu-cryptology() {
+    KEY=$(echo -e \
+        "e: ENCODE
+d: DECODE
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'e')
+        passe
+        ;;
+    'd')
+        passd
+        ;;
+    esac
+}
+
+function menu-fix() {
+    KEY=$(echo -e \
+        "k: KEYBOARD
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'k')
+        fix-keyboard
+        ;;
+    esac
+}
+
+function menu-keyboard() {
+    KEY=$(echo -e \
+        "t: TYPE CLIPBOARD
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    't')
+        type-content-from-clipboard
+        ;;
+    esac
+}
+
+function menu-goto() {
+    KEY=$(echo -e \
+        "kartaca.thanos
+kartaca.jira.for-you
+kartaca.jira.timesheet_plugin
+kartaca.karbus
+kartaca.karbus.remote-work-req
+kartaca.calendar
+kartaca.bekci
+kartaca.bekci.explore
+kartaca.jenkins
+kartaca.jenkins.bird-usy.test-be-deploy
+kartaca.üretim_bandı
+kartaca.hopi.soap.delivery
+kartaca.gcloud.hopi.pretest
+kartaca.gcloud.hopi.pretest.uptime_checks
+kartaca.gcloud.hopi.test.uptime_checks
+kartaca.gcloud.hopi.staging.uptime_checks
+kartaca.gcloud.hopi.prod.uptime_checks
+kartaca.hopi.test.version
+kartaca.bitbucket
+kartaca.hopi.sürüm_notları
+kartaca.bitbucket.bird-usy
+kartaca.bird.event-catalog
+kartaca.confluence
+kartaca.gmail.chat
+kartaca.gmail.mail
+kartaca.reaper.pretest.chariot
+kartaca.reaper.test.dinnerlab
+kartaca.reaper.staging.inbloom
+kartaca.hopi.pretest.b2b
+kartaca.reaper.prod.backchat
+kartaca.reaper.prodip.poliana
+kartaca.hedefler
+kartaca.gcloud.artifacts
+kartaca.hopi.traveler
+kartaca.harbor
+nix options
+nix packages
+nixos wiki
+google
+yandex
+rutracker
+gluestack components
+arch wiki
+xml formatter
+youtube
+github
+russian keyboard
+1337x
+chatgpt
+protonmail
+suckless
+civitai
+freesound
+emoji finder
+libgen
+annas-archive
+wallhaven
+pixabay
+zettels
+terraform.docs.gcp
+" |
+        run_dmenu_with_lines)
+    case "$KEY" in
+    'nix options')
+        $BROWSER "https://search.nixos.org/options?"
+        ;;
+    'nix packages')
+        $BROWSER "https://search.nixos.org/packages"
+        ;;
+    'google')
+        $BROWSER "https://google.com"
+        ;;
+    'yandex')
+        $BROWSER "https://yandex.com"
+        ;;
+    'xml formatter')
+        $BROWSER "https://www.freeformatter.com/xml-formatter.html"
+        ;;
+    'rutracker')
+        $BROWSER "https://rutracker.org"
+        ;;
+    'gluestack components')
+        $BROWSER "https://gluestack.io/ui/docs/components/all-components"
+        ;;
+    'arch wiki')
+        $BROWSER "https://wiki.archlinux.org/title/Main_page"
+        ;;
+    'github')
+        $BROWSER "https://github.com/savolla"
+        ;;
+    'russian keyboard')
+        $BROWSER "https://www.lexilogos.com/keyboard/russian.htm"
+        ;;
+    '1337x')
+        $BROWSER "https://1337x.to/"
+        ;;
+    'chatgpt')
+        $BROWSER "https://chatgpt.com/"
+        ;;
+    'protonmail')
+        $BROWSER "https://account.proton.me/mail"
+        ;;
+    'youtube')
+        $BROWSER "https://www.youtube.com/"
+        ;;
+    'suckless')
+        $BROWSER "https://suckless.org/"
+        ;;
+    'nixos wiki')
+        $BROWSER "https://wiki.nixos.org/wiki/NixOS_Wiki"
+        ;;
+    'civitai')
+        $BROWSER "https://civitai.com/models"
+        ;;
+    'freesound')
+        $BROWSER "https://freesound.org/"
+        ;;
+    'emoji finder')
+        $BROWSER "https://emojifinder.com/"
+        ;;
+    'pixabay')
+        $BROWSER "https://pixabay.com/tr/"
+        ;;
+    'wallhaven')
+        $BROWSER "https://pixabay.com/tr/"
+        ;;
+    'annas-archive')
+        $BROWSER "https://annas-archive.org/"
+        ;;
+    'libgen')
+        $BROWSER "https://libgen.la/index.php"
+        ;;
+    'zettels')
+        $BROWSER "http://192.168.1.10:3333"
+        ;;
+    'terraform.docs.gcp')
+        $BROWSER "https://registry.terraform.io/providers/hashicorp/google/latest/docs"
+        ;;
+
+    # kartaca
+    'kartaca.calendar')
+        $BROWSER "https://calendar.google.com/calendar/u/0/r/week"
+        ;;
+    'kartaca.thanos')
+        $BROWSER "http://thanos.kartaca.com/"
+        ;;
+    'kartaca.gcloud.hopi.pretest')
+        $BROWSER "https://console.cloud.google.com/monitoring/dashboards?project=hopi-pretest-kartaca"
+        ;;
+    'kartaca.timesheet_plugin')
+        $BROWSER "https://kartaca.atlassian.net/plugins/servlet/ac/jira-timesheet-plugin/timereports"
+        ;;
+    'kartaca.karbus')
+        $BROWSER "https://karbus.kartaca.com/"
+        ;;
+    'kartaca.karbus.remote-work-req')
+        $BROWSER "https://karbus.kartaca.com/remote-work-request"
+        ;;
+    'kartaca.harbor')
+        $BROWSER "https://registry.kartaca.com/"
+        ;;
+    'kartaca.bekci')
+        $BROWSER "https://bekci.kartaca.com"
+        ;;
+    'kartaca.hopi.sürüm_notları')
+        $BROWSER "https://kartaca.atlassian.net/wiki/spaces/BIRD/pages/52604/BIRD-BE+S+r+mleri"
+        ;;
+    'kartaca.gcloud.artifacts')
+        $BROWSER "https://console.cloud.google.com/artifacts?referrer=search&project=hopi-program"
+        ;;
+
+    'kartaca.gcloud.hopi.pretest.uptime_checks')
+        $BROWSER "https://console.cloud.google.com/monitoring/uptime?project=hopi-pretest-kartaca"
+        ;;
+
+    'kartaca.gcloud.hopi.test.uptime_checks')
+        $BROWSER "https://console.cloud.google.com/monitoring/uptime?project=hopi-program-test"
+        ;;
+
+    'kartaca.gcloud.hopi.staging.uptime_checks')
+        $BROWSER "https://console.cloud.google.com/monitoring/uptime?project=hopi-program-staging"
+        ;;
+
+    'kartaca.gcloud.hopi.prod.uptime_checks')
+        $BROWSER "https://console.cloud.google.com/monitoring/uptime?project=hopi-program"
+        ;;
+
+    'kartaca.bird.event-catalog')
+        $BROWSER "https://kartaca.atlassian.net/wiki/spaces/BIRD/pages/9032529/BIRD+Event+Katalo+u"
+        ;;
+    'kartaca.bekci.explore')
+        $BROWSER "https://bekci.kartaca.com/explore"
+        ;;
+    'kartaca.hopi.soap.delivery')
+        $BROWSER "https://b2b.hopi.com.tr/soap/delivery.wsdl"
+        ;;
+    'kartaca.jenkins.bird-usy.test-be-deploy')
+        $BROWSER "https://uretimbandi.kartaca.com/job/bird-usy/job/test-be-deploy/"
+        ;;
+    'kartaca.üretim_bandı')
+        $BROWSER "https://uretimbandi.kartaca.com/"
+        ;;
+    'kartaca.hopi.test.version')
+        $BROWSER "https://bird.test.kartaca.com/bird-mobile/version"
+        ;;
+    'kartaca.jenkins')
+        $BROWSER "https://uretimbandi.kartaca.com/"
+        ;;
+    'kartaca.hedefler')
+        $BROWSER "https://kartaca.atlassian.net/wiki/spaces/MPTAKIM/pages/4742807570/ISTAKIBI-8030+Yeni+al+an+Kuzey+Ko"
+        ;;
+    'kartaca.google_cloud.hopi.pretest')
+        $BROWSER "https://console.cloud.google.com/monitoring/dashboards?project=hopi-pretest-kartaca"
+        ;;
+    'kartaca.hopi.traveler')
+        $BROWSER "https://traveler.hopi.com.tr/"
+        ;;
+    'kartaca.bitbucket')
+        $BROWSER "https://bitbucket.kartaca.com/dashboard"
+        ;;
+    'kartaca.bitbucket.bird-usy')
+        $BROWSER "https://bitbucket.kartaca.com/projects/BIRD/repos/bird-usy/browse"
+        ;;
+    'kartaca.hopi.pretest.b2b')
+        $BROWSER "https://bird-pretest.test.kartaca.com"
+        ;;
+    'kartaca.confluence')
+        $BROWSER "https://kartaca.atlassian.net/wiki/home"
+        ;;
+    'kartaca.jira.for-you')
+        $BROWSER "https://kartaca.atlassian.net/jira/for-you"
+        ;;
+    'kartaca.jira.timesheet_plugin')
+        $BROWSER "https://kartaca.atlassian.net/plugins/servlet/ac/jira-timesheet-plugin/timereports"
+        ;;
+    'kartaca.gmail.chat')
+        $BROWSER "https://mail.google.com/mail/u/0/#chat/home"
+        ;;
+    'kartaca.gmail.mail')
+        $BROWSER "https://mail.google.com/mail/u/0/#inbox"
+        ;;
+
+    'kartaca.reaper.pretest.chariot')
+        $BROWSER "http://chariot.kartaca.net:8080/webui/"
+        ;;
+    'kartaca.reaper.test.dinnerlab')
+        $BROWSER "http://dinnerlab.kartaca.net:8080/webui/"
+        ;;
+    'kartaca.reaper.staging.inbloom')
+        $BROWSER "http://inbloom.kartaca.net:8080/webui/"
+        ;;
+    'kartaca.reaper.prod.backchat')
+        $BROWSER "http://backchat.kartaca.net:8080/webui/"
+        ;;
+    'kartaca.reaper.prodip.poliana')
+        $BROWSER "http://poliana.kartaca.net:8080/webui/"
+        ;;
+
+    esac
+}
+
+function menu-time() {
+    KEY=$(echo -e \
+        "a: SET ALARM
+c: COUNTDOWN
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'a')
+        set-alarm
+        ;;
+    'c')
+        countdown
+        ;;
+    esac
+}
+
+function menu-profile() {
+    KEY=$(echo -e \
+        "s: SAVOLLA
+m: MINIMAL
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    's')
+        launch-savolla-profile
+        ;;
+    'm')
+        launch-minimal-profile
+        ;;
+    esac
+}
+
+function menu-tiddlywiki() {
+    KEY=$(echo -e \
+        "j: JOURNAL ENTRY
+n: NEW TIDLER
+" |
+        run_dmenu)
+    KEY="${KEY:0:1}"
+
+    case "$KEY" in
+    'j')
+        tiddlywiki-journal-entry
+        ;;
+    'n')
+        launch-minimal-profile
+        ;;
+    esac
+}
+
+main

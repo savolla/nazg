@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+dunstctl history-pop
+sleep 8
+dunstctl close

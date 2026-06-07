@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+SOURCE_DIR="$1"
+TARGET_DIR="$2"
+WAIT_TIME=5 # seconds
+
+while true
+do
+    rsync -av --delete "$SOURCE_DIR" "$TARGET_DIR"
+    sleep $WAIT_TIME
+done

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+music_dir="$HOME/resource/music"
+previewdir="$HOME/.config/ncmpcpp/previews"
+filename="$(mpc --format "$music_dir"/%file% current)"
+previewname="$previewdir/$(mpc --format %album% current | base64).png"
+MAX_CHAR_COUNT=40
+
+[ -e "$previewname" ] || ffmpeg -y -i "$filename" -an -vf scale=256:256 "$previewname" > /dev/null 2>&1
+
+if [[ $(mpc status | grep "^\[playing\]" | awk '{ print $1 }') ]]
+then
+    notify-send -r 27072 "Now Playing" "$(mpc --format '%title% \n%artist% - %album%' current)" -i "$previewname"
+fi

@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+KEY_PRESS_DELAY=180
+KEYS_PER_SECOND=60
+VIRTUAL_MACHINE_NAME="xkarna"
+
+xbacklight -set 30
+feh --bg-scale ~/resource/images/wallpapers/wp1.jpg
+unclutter --timeout 15 & # remove mouse cursor
+xprop -root -set WM_NAME $VIRTUAL_MACHINE_NAME
+xset r rate "$KEY_PRESS_DELAY" "$KEYS_PER_SECOND"

@@ -1,0 +1,7 @@
+#!/bin/bash
+sudo protonvpn c -f
+VPN_CONNECTION=$(sudo protonvpn s | grep -i "status" | awk '{ print $2 }')
+if [[ $VPN_CONNECTION == "Connected" ]]; then
+    VPN_COUNTRY=$(sudo protonvpn s | grep -i "country" | awk '{ print $2 }')
+    notify-send "VPN connected to $VPN_COUNTRY"
+fi

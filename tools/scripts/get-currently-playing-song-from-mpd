@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+MAX_CHAR_COUNT=60
+SEPARATOR=" │"
+ICON="   "
+
+# Check if MPD is playing
+if mpc status | grep -q "^\[playing\]"; then
+
+    # Get current song safely
+    current_song=$(mpc --format '%artist% - %title%' current 2>/dev/null)
+
+    SONG="${ICON}${current_song}"
+
+    # Truncate if too long (simple byte/char approximation)
+    if [ ${#SONG} -gt $MAX_CHAR_COUNT ]; then
+        SONG="${SONG:0:$((MAX_CHAR_COUNT-1))}... "
+    fi
+
+    # Always add separator
+    SONG="${SONG}${SEPARATOR}"
+
+    printf '%s' "$SONG"
+else
+    printf ''
+fi

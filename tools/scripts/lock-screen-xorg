@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+toggle-picom # disable picom
+xset dpms force off # shutdown monitor
+slock
+toggle-picom # re-enable picom

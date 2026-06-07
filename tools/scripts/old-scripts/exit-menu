@@ -1,0 +1,11 @@
+#!/bin/bash
+ANSWER=$(echo -e "hibernate\nreboot\npoweroff\nlogout" | dmenu -fn "FiraCode Nerd Font Ret:size=14" -nb "#222222" -nf "#bbbbbb" -sb "#68446a" -sf "#eeeeee" -i -p "exit:")
+if [[ $ANSWER == "poweroff" ]]; then
+    systemctl poweroff
+elif [[ $ANSWER == "hibernate" ]]; then
+    systemctl hibernate
+elif [[ $ANSWER == "reboot" ]]; then
+    systemctl reboot
+elif [[ $ANSWER == "logout" ]]; then
+	pkill -f Xorg
+fi

@@ -1,0 +1,166 @@
+#!/usr/bin/env bash
+
+### -------------------------------------------------------------
+### REQUIREMENTS CHECK
+### -------------------------------------------------------------
+for cmd in gum ffmpeg notify-send xrandr; do
+    if ! command -v $cmd &>/dev/null; then
+        echo "$cmd is required but not installed. Exiting."
+        exit 1
+    fi
+done
+
+### -------------------------------------------------------------
+### DETECT AUDIO BACKEND
+### -------------------------------------------------------------
+detect_audio_backend() {
+    if command -v pw-cli &>/dev/null && pgrep -x pipewire &>/dev/null; then
+        echo "pipewire"
+    elif command -v pactl &>/dev/null && pactl info &>/dev/null; then
+        echo "pulseaudio"
+    else
+        echo "alsa"
+    fi
+}
+
+AUDIO_BACKEND=$(detect_audio_backend)
+
+
+### -------------------------------------------------------------
+### GUM PROMPTS
+### -------------------------------------------------------------
+RESOLUTION=$(gum choose "1080p" "720p" "480p")
+MONITOR=$(gum choose $(xrandr --listmonitors | awk 'NR>1 {print $4}'))
+DESKTOP_SOUND=$(gum choose "Yes" "No")
+MIC_SOUND=$(gum choose "Yes" "No")
+FPS=$(gum input --placeholder "30" --prompt "FPS: ")
+QUALITY=$(gum choose "High" "Medium" "Low")
+OUTPUT_FILE=$(gum input --placeholder "recording" --prompt "Output file name: ")
+COMPRESSION=$(gum choose "Lossless" "High" "Medium" "Low")
+
+gum confirm "Start recording now?" || exit 0
+
+
+### -------------------------------------------------------------
+### RESOLUTION SIZE
+### -------------------------------------------------------------
+case $RESOLUTION in
+    "1080p") WIDTH=1920; HEIGHT=1080 ;;
+    "720p")  WIDTH=1280; HEIGHT=720 ;;
+    "480p")  WIDTH=854;  HEIGHT=480 ;;
+esac
+
+
+### -------------------------------------------------------------
+### QUALITY → CRF
+### -------------------------------------------------------------
+case $QUALITY in
+    "High") CRF=18 ;;
+    "Medium") CRF=23 ;;
+    "Low") CRF=28 ;;
+esac
+
+### -------------------------------------------------------------
+### COMPRESSION CRF
+### -------------------------------------------------------------
+case $COMPRESSION in
+    "Lossless") COMP_CRF=0 ;;
+    "High")     COMP_CRF=18 ;;
+    "Medium")   COMP_CRF=23 ;;
+    "Low")      COMP_CRF=30 ;;
+esac
+
+
+### -------------------------------------------------------------
+### FIXED MONITOR GEOMETRY
+### (Use ONLY xrandr --listmonitors)
+### -------------------------------------------------------------
+MONITOR_GEOMETRY=$(xrandr --listmonitors | awk -v mon="$MONITOR" '$0 ~ mon {print $3}')
+
+if [[ -z "$MONITOR_GEOMETRY" ]]; then
+    echo "Could not detect monitor geometry for $MONITOR"
+    exit 1
+fi
+
+# Extract +X+Y from end of geometry
+MONITOR_OFFSET=$(echo "$MONITOR_GEOMETRY" | grep -oE '\+[0-9]+\+[0-9]+')
+MONITOR_X=$(echo "$MONITOR_OFFSET" | cut -d+ -f2)
+MONITOR_Y=$(echo "$MONITOR_OFFSET" | cut -d+ -f3)
+
+
+### -------------------------------------------------------------
+### AUDIO SETUP
+### -------------------------------------------------------------
+DEFAULT_SINK=""
+DEFAULT_SOURCE=""
+AUDIO_INPUT=""
+
+if [[ "$AUDIO_BACKEND" =~ (pipewire|pulseaudio) ]]; then
+    DEFAULT_SINK=$(pactl info | awk '/Default Sink/ {print $3}')
+    DEFAULT_SOURCE=$(pactl info | awk '/Default Source/ {print $3}')
+else
+    DEFAULT_SINK="default"
+    DEFAULT_SOURCE="default"
+fi
+
+if [[ "$DESKTOP_SOUND" == "Yes" ]]; then
+    AUDIO_INPUT="$AUDIO_INPUT -f pulse -i $DEFAULT_SINK"
+fi
+
+if [[ "$MIC_SOUND" == "Yes" ]]; then
+    AUDIO_INPUT="$AUDIO_INPUT -f pulse -i $DEFAULT_SOURCE"
+fi
+
+
+### -------------------------------------------------------------
+### SEND NOTIFICATION
+### -------------------------------------------------------------
+notify-send "Screen Recording" "Recording started on $MONITOR at $RESOLUTION"
+
+
+### -------------------------------------------------------------
+### START RAW RECORDING
+### -------------------------------------------------------------
+RAW_FILE="${OUTPUT_FILE}_raw.mkv"
+
+echo "Recording… Press Ctrl+C to stop."
+
+ffmpeg \
+    -y \
+    -video_size ${WIDTH}x${HEIGHT} \
+    -framerate "$FPS" \
+    -f x11grab -i :0.0+$MONITOR_X,$MONITOR_Y \
+    $AUDIO_INPUT \
+    -c:v libx264 -crf "$CRF" -preset veryfast \
+    "$RAW_FILE"
+
+echo "Raw recording saved: $RAW_FILE"
+
+
+### -------------------------------------------------------------
+### CHECK RAW FILE
+### -------------------------------------------------------------
+if [[ ! -f "$RAW_FILE" ]]; then
+    echo "Recording failed — raw file missing. Skipping compression."
+    notify-send "Recording Failed" "No raw file created."
+    exit 1
+fi
+
+
+### -------------------------------------------------------------
+### COMPRESS TO FINAL MP4
+### -------------------------------------------------------------
+FINAL_FILE="${OUTPUT_FILE}.mp4"
+
+echo "Compressing to MP4 (CRF $COMP_CRF)…"
+
+ffmpeg \
+    -y \
+    -i "$RAW_FILE" \
+    -c:v libx264 -crf "$COMP_CRF" -preset slow \
+    -c:a aac -b:a 192k \
+    "$FINAL_FILE"
+
+notify-send "Recording Finished" "Saved as $FINAL_FILE"
+echo "Final video saved: $FINAL_FILE"
+echo "Done!"

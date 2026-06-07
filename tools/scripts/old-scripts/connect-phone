@@ -1,0 +1,2 @@
+#!/bin/bash
+scrcpy --turn-screen-off

@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+######################### Prepare the Environment ###########################
+SCRIPT_DEPENDENCIES=(xset setxkbmap xmodmap)
+
+isInstalled() {
+    which $1
+}
+
+install() {
+    sudo pacman -S $1 --noconfirm
+}
+
+checkDependencies() {
+    for i in ${SCRIPT_DEPS[@]} # for every program in SCRIPT_DEPENDENCIES
+    do
+        isInstalled $i
+        if [[ $? -ne 0 ]] # if not installed
+        then
+            install $(pkgfile $1 | head -n 1)
+        fi
+    done
+}
+
+checkDependencies $SCRIPT_DEPENCENCIES
+#############################################################################
+
+# re run below commands if i3 can't execute those
+# xset r rate 150 200
+setxkbmap tr
+xmodmap -e "keycode 108 = Escape"
+xmodmap -e "keycode 66 = ISO_Level3_Shift"
+xmodmap -e "keycode 50 = Alt_L"
+xmodmap -e "keycode 64 = Shift_L"
+
+

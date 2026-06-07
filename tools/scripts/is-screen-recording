@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+source /tmp/is-screen-recording
+
+if [[ $RECORDING_SCREEN_BY_USER -eq 1 ]]
+then
+    printf " [🔴REC]"
+else
+    printf ' '
+fi

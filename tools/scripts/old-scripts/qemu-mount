@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sudo modprobe nbd max_part=8
+sudo qemu-nbd --connect=/dev/nbd0 $1
+sudo fdisk /dev/nbd0 -l
+echo -n "which drive? [1,2,3..] : "
+read choise
+sudo mount /dev/nbd0$choise /mnt
+cd /mnt 
+echo "Success!"
+

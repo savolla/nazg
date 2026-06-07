@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Get the current session ID
+SESSION_ID=$(tmux display-message -p '#{session_id}')
+
+# Get the current window ID
+WINDOW_ID=$(tmux display-message -p '#{window_id}')
+
+# Store the current window ID for the current session
+tmux set-option -g "@last_window_$SESSION_ID" "$WINDOW_ID"
+
+# Switch to the last active window in the current session
+tmux select-window -t "$(tmux show-option -gqv "@last_window_$SESSION_ID")"

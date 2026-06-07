@@ -1,0 +1,19 @@
+#!/bin/bash
+RAM="12G"
+IMG_PATH="$HOME/vms/qemu/win10.img"
+IMG_FORMAT="qcow2"
+
+sudo qemu-system-x86_64 -boot c \
+  -enable-kvm \
+  -cpu host \
+  -smp sockets=1,cores=4,threads=4  \
+  -m $RAM \
+  -rtc base=localtime,clock=host \
+  -drive file=$IMG_PATH,format=$IMG_FORMAT \
+  -net nic,model=rtl8139  \
+  -net user  \
+  -usbdevice tablet \
+  -soundhw hda \
+  -device igd-passthrough-isa-bridge \
+  -display sdl 
+

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#CPU_FREQUENCY=1700000
+CPU_FREQUENCY=3500000
+
+		echo -n $CPU_FREQUENCY > /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
+		echo -n $CPU_FREQUENCY > /sys/devices/system/cpu/cpufreq/policy1/scaling_max_freq
+		echo -n $CPU_FREQUENCY > /sys/devices/system/cpu/cpufreq/policy2/scaling_max_freq
+		echo -n $CPU_FREQUENCY > /sys/devices/system/cpu/cpufreq/policy3/scaling_max_freq
+
+

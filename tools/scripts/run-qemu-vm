@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+function run_dmenu() {
+    dmenu -n \
+        -l -1 \
+        -b \
+        -fn "IosevkaTerm NF:size=14:style=Regular" \
+        -nb "#222222" \
+        -nf "#bbbbbb" \
+        -sb "#005577" \
+        -sf "#eeeeee"
+}
+
+VM_TO_RUN=$(virsh -c qemu:///system list --all | awk '{ print $2 }' | grep -v "^Name$" | grep -v "^$" | run_dmenu)
+notify-send -r "27072" "Launching VM:" "$VM_TO_RUN"
+virsh -c qemu:///system start $VM_TO_RUN
+virt-viewer -c qemu:///system -a $VM_TO_RUN

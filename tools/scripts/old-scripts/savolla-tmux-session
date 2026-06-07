@@ -1,0 +1,59 @@
+#!/bin/bash
+##################### Session 0
+tmux new-session -d -s tty
+tmux new-window -t tty
+tmux new-window -t tty
+
+tmux select-window -t 1 # switch to first window
+
+##################### Session 1
+tmux new-session -d -s programs
+# attach to the first session
+
+# window 0 (emacs)
+tmux rename-window -t programs:1 "doom"
+tmux send-keys -t programs:1 "doom run -nw" C-m
+
+# window 0 (weechat)
+tmux new-window -t programs
+tmux rename-window -t programs:2 "irc"
+tmux send-keys -t programs:2 "weechat" C-m
+
+# window 1 (newsboat)
+tmux new-window -t programs
+tmux rename-window -t programs:3 "rss"
+tmux send-keys -t programs:3 "newsboat" C-m
+
+# window 2 (ncmpcpp)
+tmux new-window -t programs
+tmux rename-window -t programs:4 "music"
+tmux send-keys -t programs:4 "ncmpcpp -s visualizer -c ~/.config/ncmpcpp/visualizer-config" C-m
+tmux split-window
+tmux resize-pane -t 1 -y 40%
+tmux send-keys -t programs:4 "ncmpcpp" C-m
+
+tmux select-window -t 1 # switch to first window
+
+##################### Session 2 (ssh)
+# tmux new-session -d -s ssh
+
+# # window 0 (lazydocker @ ssh)
+# tmux new-window -t ssh
+# tmux rename-window -t ssh:0 "lazydocker"
+# tmux send-keys -t ssh:0 "ssh root@192.168.111.36" C-m
+# tmux send-keys -t ssh:0 "lazydocker" C-m
+
+# # window 1 (tty @ ssh)
+# tmux new-window -t ssh
+# tmux rename-window -t ssh:1 "tty1"
+# tmux send-keys -t ssh:1 "ssh root@192.168.111.36" C-m
+
+# # window 2 (tty @ ssh)
+# tmux new-window -t ssh
+# tmux rename-window -t ssh:2 "tty2"
+# tmux send-keys -t ssh:2 "ssh root@192.168.111.36" C-m
+
+# tmux select-window -t 0 # switch to first window
+
+tmux attach-session -t programs
+# tmux attach-session -t tty

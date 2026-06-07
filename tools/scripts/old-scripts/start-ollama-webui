@@ -1,0 +1,9 @@
+#!/bin/bash
+OLLAMA_WEBUI_INSTALL_LOCATION="$HOME/area/ai/tools/ollama-webui"
+OLLAMA_URL="http://localhost:8080"
+WEB_BROWSER="/usr/bin/firefox"
+
+sudo systemctl start ollama.service
+source "$OLLAMA_WEBUI_INSTALL_LOCATION"/backend/ollama_webui_env/bin/activate
+"$OLLAMA_WEBUI_INSTALL_LOCATION"/backend/start.sh &
+$WEB_BROWSER $OLLAMA_URL &

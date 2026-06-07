@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+lutris -l 2>/dev/null | awk -F '|' '{ print $3 }' | sed 's/^ //' | sed 's/[[:space:]]*$//'

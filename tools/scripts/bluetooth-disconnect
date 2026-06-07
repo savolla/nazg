@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+function run_dmenu() {
+    dmenu -l 10 \
+        -b \
+        -fn "IosevkaTerm NF:size=14:style=Regular" \
+        -nb "#222222" \
+        -nf "#bbbbbb" \
+        -sb "#005577" \
+        -sf "#eeeeee"
+}
+
+DEVICE_TO_DISCONNECT=$(bluetoothctl devices Connected)
+
+if [ -z "$DEVICE_TO_DISCONNECT" ]; then
+    notify-send "No Bluetooth device connected"
+    exit 1
+fi
+
+DEVICE_TO_DISCONNECT=$(bluetoothctl devices Connected | sed 's/Device //' | run_dmenu)
+MAC=$(echo "$DEVICE_TO_DISCONNECT" | awk '{ print $1 }')
+DEVICE=$(echo "$DEVICE_TO_DISCONNECT" | sed 's/..:..:..:..:..:..//')
+bluetoothctl disconnect "$MAC"
+notify-send "$DEVICE disconnected"

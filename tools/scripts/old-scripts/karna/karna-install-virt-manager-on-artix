@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+echo -e "KARNA: this script will install virt-manager on OPENRC deal?"
+read -r ANSWER
+if [[ $ANSWER == "Y" ]]
+then
+    echo -e "KARNA: installing dependencies!"
+    sudo pacman -Sy
+    sudo pacman -S archlinux-keyring
+    sudo pacman -S qemu virt-manager dnsmasq vde2 bridge-utils openbsd-netcat
+    sudo pacman -S ebtables iptables
+    sudo pacman -S libvirt-openrc
+
+    echo -e "KARNA: enabling services!"
+    sudo rc-update add libvirtd
+    sudo rc-service libvirtd start
+
+    echo -e "KARNA: enabling default network!"
+    sudo virsh net-autostart default
+
+    echo -e "KARNA: changing permissions of /run/media"
+    sudo chmod a+x /run/media/"$USER"
+
+    sudo pacman -S acpilight
+
+    echo -e "KARNA: I think thats it. Here is virt-manager"
+    sudo virt-manager
+
+else
+    echo -e "ok."
+fi

@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+CURRENT_USER="$(whoami)"
+for group in $(karna-show-available-groups)
+do
+    if [[ "$1" == "$group" ]]
+    then
+        sudo gpasswd --delete "$CURRENT_USER" "$1"
+        echo -e "KARNA: I removed you from $1!"
+        exit
+    fi
+done
+
+echo -e "KARNA: I could not find any group named $1. Maybe you miss spelled it?"

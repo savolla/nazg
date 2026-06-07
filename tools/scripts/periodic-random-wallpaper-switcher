@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+TIME_INTERVAL=15m
+
+# Set a cron job to run the script every hour
+while true; do
+  set-random-wallpaper
+  sleep "$TIME_INTERVAL"
+done

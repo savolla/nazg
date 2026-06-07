@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SYSCALL=$( echo $(cat /usr/include/asm-generic/unistd.h | egrep "\ [0-9]*$" | sed "s/#define __NR_//" | sed "s/#define __NR3264_//" | sed "s/         / /" | rofi -dmenu -lines 20 -width 15 -e "syscalls for x86") | awk '{ print $1 }')
+
+man 2 $SYSCALL | rofi -dmenu -lines 40 -width 45 -cycle false -fake-transparency true
+
+

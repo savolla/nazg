@@ -1,0 +1,5 @@
+#!/bin/bash
+ANSWER=$(echo -e "no\nyes" | dmenu -i -p "shutdown?")
+if [[ $ANSWER == "yes" ]]; then
+    systemctl poweroff
+fi

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+notify-send "󰿎  Screen Recording Stopped"
+echo "RECORDING_SCREEN_BY_USER=0" > /tmp/is-screen-recording
+toggle-screenkey
+mv ~/.zsh-history.before-screen-recording ~/.zsh-history
+pkill -f Mechvibes-2.3.6-hotfix.AppImage

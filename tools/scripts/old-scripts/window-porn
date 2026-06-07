@@ -1,0 +1,69 @@
+#!/bin/bash
+CHAT_PROGRAM=weechat
+FILE_MANAGER=ranger
+TEXT_EDITOR=emacs
+RSS_READER=newsboat
+MUSIC_PLAYER=cmus
+WIKI_PATH="$HOME/project/org-roam/20240222125555-index.org"
+
+# create programs session
+# tmux rename-session programs # name current session workbench
+TMUX='' tmux new-session -d -s "programs"
+
+# chat
+tmux new-window # create a new window
+tmux rename-window weechat # raneme window
+tmux send-keys "$CHAT_PROGRAM" enter # send command to current window
+
+# news
+tmux new-window # create a new window
+tmux rename-window newsboat # raneme window
+tmux send-keys "$RSS_READER" enter # send command to current window
+
+# file manager
+tmux new-window # create a new window
+tmux rename-window FILES # raneme window
+tmux send-keys "$FILE_MANAGER" enter # send command to current window
+
+# music
+tmux new-window # create a new window
+tmux rename-window cmus # raneme window
+tmux send-keys "$MUSIC_PLAYER" enter # send command to current window
+
+# editor
+# tmux rename-window emacs # raneme window
+# tmux send-keys "$TEXT_EDITOR -nw" enter # send command to current window
+
+# main term
+# tmux new-window # create a new window
+# tmux rename-window scratch # raneme window
+
+# # term2
+# tmux new-window # create a new window
+# tmux rename-window term2 # raneme window
+# tmux split-window -h # split window horizontally
+
+# # term3
+# tmux new-window # create a new window
+# tmux rename-window term3 # raneme window
+
+# wiki
+# tmux new-window # create a new window
+# tmux rename-window WIKI # raneme window
+# tmux send-keys "$TEXT_EDITOR -nw $WIKI_PATH" enter # send command to current window
+
+# create terminals session
+TMUX='' tmux new-session -d -s "tty"
+for i in $(seq 9); do
+    tmux new-window # create a new window
+done
+
+# create terminals session
+TMUX='' tmux new-session -d -s "ssh"
+for i in $(seq 9); do
+    tmux new-window # create a new window
+done
+
+# finalize
+tmux select-window -t 1
+tmux send-keys "clear" enter

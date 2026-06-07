@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [[ $(ps aux | grep -w ".screenkey-wrapped" | grep -v "grep"  > /dev/null && echo 1 || echo 0) -eq 1 ]]
+then
+    pkill screenkey
+    notify-send -r 27072 "toggling:" "screenkey is killed"
+else
+    screenkey &
+    notify-send -r 27072 "toggling:" "screenkey is running"
+fi

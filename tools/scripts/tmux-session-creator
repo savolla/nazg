@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+tmux new-session -d -s main -n "  emacs" "fish"
+tmux send-keys -t main:1 "emacs -nw" C-m
+
+tmux new-window -t main -n "  irc" "fish"
+tmux send-keys -t main:2 "weechat" C-m
+
+tmux new-window -t main -n "  rss" "fish"
+tmux send-keys -t main:3 "eilmeldung" C-m
+
+tmux new-window -t main -n "  music" "fish"
+tmux send-keys -t main:4 "rmpc" C-m
+
+tmux new-session -d -s scratch -n " " "fish"
+
+tmux select-window -t main:1
+tmux attach-session -t "main"

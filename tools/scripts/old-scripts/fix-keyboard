@@ -1,0 +1,4 @@
+#!/bin/bash
+setxkbmap tr  # set keyboard layout to turkish
+setxkbmap -option caps:swapescape # replace Caps Lock with Esc
+xset r rate 180 60 # set keyboard speed

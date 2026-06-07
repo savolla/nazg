@@ -1,0 +1,6 @@
+#!/bin/bash
+
+IMAGE_VIEWER=sxiv
+MIND_MAP_PATH=~/ref/mindmap/savolla-mm.jpg
+
+$IMAGE_VIEWER -b -f -q $MIND_MAP_PATH

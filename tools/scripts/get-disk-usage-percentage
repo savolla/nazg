@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+printf '%s' "$(df -h / --output=pcent | grep -v "Use" | sed 's/^ //')"

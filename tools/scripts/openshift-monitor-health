@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+CRC="$HOME/resource/tools/bin/crc-linux-2.53.0-amd64/crc"
+
+CLUSTER_READINESS_COMMAND="watch --color -t -n 10 'echo \"# Cluster Readiness\"; oc get clusterversion'"
+UNHEALTHY_NODES_COMMAND="watch --color -t -n 10 'echo \"# Unhealthy Nodes\"; oc get nodes | awk '\''NR==1 || \$2 != \"Ready\"'\'' '"
+UNHEALTHY_CLUSTER_OPERATORS_COMMAND="watch --color -t -n 10 'echo \"# Unhealthy Cluster Operators\"; oc get co | awk '\''NR==1 || \$3 != \"True\" || \$4 == \"True\" || \$5 == \"True\"'\'' '"
+
+# Setup environment variables for oc from crc
+eval "$($CRC oc-env)"
+
+# Send commands to first pane (window 0, pane 0)
+tmux send-keys "$CLUSTER_READINESS_COMMAND" C-m
+
+# Split window vertically, send second command to new pane (pane 1)
+tmux split-window -v -t crc_monitor:0
+tmux send-keys -t crc_monitor:0.1 "$UNHEALTHY_NODES_COMMAND" C-m
+
+# Split again vertically, send third command to new pane (pane 2)
+tmux split-window -v -t crc_monitor:0
+tmux send-keys -t crc_monitor:0.2 "$UNHEALTHY_CLUSTER_OPERATORS_COMMAND" C-m
+
+# Arrange panes evenly vertical
+tmux select-layout -t crc_monitor:0 even-vertical
+
+# Attach to the session so user can see output
+tmux attach -t crc_monitor

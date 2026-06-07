@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+SPEED_FACTOR=0.8  # This variable controls the overall speed of typing (increase value for faster typing)
+
+type() {
+    text="$1"
+    for (( i=0; i<${#text}; i++ )); do
+        char="${text:i:1}"
+
+        # Introduce slower typing for spaces, punctuation, and capital letters
+        if [[ "$char" == " " ]]; then
+            # Space is often typed slower
+            sleep_time=$(awk -v min=0.1 -v max=0.25 'BEGIN{srand(); print min+((max-min)*rand())}')
+        elif [[ "$char" =~ [[:punct:]] ]]; then
+            # Punctuation (.,?!;) tends to be typed slower
+            sleep_time=$(awk -v min=0.15 -v max=0.3 'BEGIN{srand(); print min+((max-min)*rand())}')
+        elif [[ "$char" =~ [A-Z] ]]; then
+            # Capital letters are typed slower than lowercase
+            sleep_time=$(awk -v min=0.08 -v max=0.2 'BEGIN{srand(); print min+((max-min)*rand())}')
+        else
+            # Lowercase letters and numbers are typed at a moderate speed
+            sleep_time=$(awk -v min=0.05 -v max=0.13 'BEGIN{srand(); print min+((max-min)*rand())}')
+        fi
+
+        # Multiply sleep time by SPEED_FACTOR to adjust overall typing speed
+        sleep_time=$(echo "$sleep_time * $SPEED_FACTOR" | bc)
+
+        # Send the character
+        xdotool type "$char"
+        # Apply the random delay
+        sleep "$sleep_time"
+
+        # Occasionally introduce a pause after punctuation or sentence-ending
+        if [[ "$char" == "." || "$char" == "?" || "$char" == "!" || "$char" == "," ]]; then
+            # Pause after punctuation to simulate a thought or break
+            pause_time=$(awk -v min=0.3 -v max=0.6 'BEGIN{srand(); print min+((max-min)*rand())}')
+            # Multiply pause time by SPEED_FACTOR to adjust overall typing speed
+            pause_time=$(echo "$pause_time * $SPEED_FACTOR" | bc)
+            sleep "$pause_time"
+        fi
+    done
+    # Short pause after typing is done
+    sleep 0.3
+}
+
+TEXT_TO_TYPE=$(xclip -out -selection clipboard)
+type "$TEXT_TO_TYPE"

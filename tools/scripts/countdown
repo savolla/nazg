@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+function run_dmenu1() {
+    dmenu -l 10 \
+      -p "Countdown from minutes:" -l 1 \
+        -b \
+        -fn "IosevkaTerm NF:size=14:style=Regular" \
+        -nb "#222222" \
+        -nf "#bbbbbb" \
+        -sb "#005577" \
+        -sf "#eeeeee"
+}
+
+function run_dmenu2() {
+    dmenu -l 10 \
+      -p "Optional note for timer:" -l 1 \
+        -b \
+        -fn "IosevkaTerm NF:size=14:style=Regular" \
+        -nb "#222222" \
+        -nf "#bbbbbb" \
+        -sb "#005577" \
+        -sf "#eeeeee"
+}
+
+# Prompt for input using dmenu for minutes
+minutes=$(echo -n "" | run_dmenu1 )
+
+# Check if a valid input is provided
+if [[ ! "$minutes" =~ ^[0-9]+$ ]]; then
+  notify-send -r 27072 -i "$ICONS_DIR"/error.svg "Countdown:" "Invalid input. Please enter a number."
+  exit 1
+fi
+
+# Prompt for an optional note using dmenu
+note=$(echo -n "" | run_dmenu2 )
+
+# Convert minutes to seconds
+total_seconds=$((minutes * 60))
+
+notify-send -r 27072 -i "$ICONS_DIR"/time.svg "Countdown" "countdown set for $minutes minutes with note: $note"
+
+# Countdown loop
+while [ $total_seconds -gt 0 ]; do
+  # Calculate minutes and seconds left
+  minutes_left=$((total_seconds / 60))
+  seconds_left=$((total_seconds % 60))
+
+  # Clear the line and display the countdown in the terminal without newlines
+  printf "\r%02d:%02d" $minutes_left $seconds_left
+
+  # Sleep for 1 second
+  sleep 1
+
+  # Decrease the total seconds by 1
+  ((total_seconds--))
+done
+
+# Send final notification once the timer reaches 0, including the optional note if provided
+if [ -n "$note" ]; then
+  notify-send -r 27072 -i "$ICONS_DIR"/time.svg -u critical "Countdown" "Note: $note"
+else
+  notify-send -r 27072 -i "$ICONS_DIR"/time.svg -u critical "Countdown" "Timer finished after $minutes minutes"
+fi
+
+mpv "$HOME"/resource/audio/notification/notification001.wav
+# Print final message
+printf "\n"

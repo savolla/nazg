@@ -1,0 +1,3 @@
+#!/bin/bash
+g++ -g -o program "$1" && clear && ./program && rm program
+

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+for session in $(tmux list-sessions -F '#S'); do
+    tmux attach-session -t "$session"
+done

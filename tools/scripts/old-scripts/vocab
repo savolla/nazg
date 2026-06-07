@@ -1,0 +1,3 @@
+#!/bin/bash
+echo $(xsel) >> ~/lan/russian/vocabulary/unknown-words.txt
+

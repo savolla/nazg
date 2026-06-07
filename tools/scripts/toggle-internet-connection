@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Check if NetworkManager is running
+if ! command -v nmcli &> /dev/null
+then
+    echo "nmcli not found. Please make sure NetworkManager is installed."
+    notify-send "nmcli not found. Please make sure NetworkManager is installed."
+    exit 1
+fi
+
+# Get the current status of the network connection
+status=$(nmcli networking)
+
+if [ "$status" == "enabled" ]; then
+    echo "Disabling the network connection..."
+    notify-send "Disabling the network connection..."
+    nmcli networking off
+    echo "Network connection disabled."
+    notify-send "Network connection disabled."
+else
+    echo "Enabling the network connection..."
+    notify-send "Enabling the network connection..."
+    nmcli networking on
+    echo "Network connection enabled."
+    notify-send "Network connection enabled."
+fi

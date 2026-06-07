@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ $1 == '-b' ]; then
+	trans --brief :tr "$2"
+else
+	trans :tr "$1"
+fi

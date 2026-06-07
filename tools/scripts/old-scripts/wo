@@ -1,0 +1,42 @@
+#!/bin/bash
+wo()
+{
+# VARIABLES
+WORKSTATION='Workstation'
+
+# CHECKING FIRST PARAMETER $1
+if [ $1 == -s ]; then
+param="scratchpad"
+
+elif [ $1 == -p ]; then
+param="projects"
+
+elif [ $1 == -l ]; then
+echo "List of Project Files:"
+ls -l $WORKSTATION | awk '{print $9}'
+
+elif [ $1 == -h ]; then
+echo "usage: w <operation> <language>"
+echo ""
+echo "operations:"
+echo "  -h --> Display this help and exit"
+echo "  -s --> Open scratchpad directory of workspace"
+echo "  -p --> Open project directory of workspace"
+echo "  -l --> List all workspaces"
+echo ""
+echo "example 'w -s cpp' opens scratchpad directory of c++ workspace"
+echo "example 'w -p python' opens project directory of python workspace"
+echo "example 'w -l ' lists all workspaces in $WORKSTATION directory"
+
+else
+w -h
+fi
+
+# GOES TO WORKSPACE AND LISTS THE CONTENT
+cd ~/$WORKSTATION\/$2/$param
+echo "Available Files:"
+ls -l | awk '{print $9}'
+}
+
+
+

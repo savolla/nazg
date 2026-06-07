@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+export PATH_TO_REPOS="$HOME/project"
+echo -e "KARNA: These are your repos!"
+ls -l "$PATH_TO_REPOS" | awk '{ print $9 }'

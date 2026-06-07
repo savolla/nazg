@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Define the path to the lock file
+LOCK_FILE="/tmp/start-screen-recording-xorg.lock"
+
+# Check if the lock file already exists
+if [ -e "$LOCK_FILE" ]; then
+    echo "Script is already running."
+    notify-send -r 27072 "screen recorder" "ERROR: script is already running"
+    exit 1
+fi
+
+# Create the lock file
+touch "$LOCK_FILE"
+
+# Add a trap to delete the lock file on exit (even if the script fails)
+trap "rm -f $LOCK_FILE" EXIT
+
+DATE_PREFIX="$(date +'%Y-%m-%d_%H-%M-%S')"
+
+peek &
+sleep 1
+peek -s
+xdotool key alt+j
+xdotool key alt+s
+xdotool key alt+j
+
+echo "RECORDING_SCREEN_BY_USER=1" > /tmp/is-screen-recording
+screenkey &

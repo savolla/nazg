@@ -1,0 +1,17 @@
+#!/bin/bash
+CURRENT_KEYBOARD_LAYOUT=$(setxkbmap -query | grep layout | cut -d ":" -f 2 | tr -d '[:space:]')
+
+if [[ $CURRENT_KEYBOARD_LAYOUT == "tr" ]]; then
+    setxkbmap us
+    notify-send "keyboard layout switched to American English"
+
+elif [[ $CURRENT_KEYBOARD_LAYOUT == "us" ]]; then
+    setxkbmap ru
+    notify-send "keyboard layout switched to Russian"
+
+elif [[ $CURRENT_KEYBOARD_LAYOUT == "ru" ]]; then
+    setxkbmap tr
+    notify-send "keyboard layout switched to Turkish"
+fi
+
+setxkbmap -option caps:swapescape

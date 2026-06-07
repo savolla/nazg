@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+PORT=5000
+BROWSER="brave"
+dotnet run --project $1 &
+$BROWSER http://localhost:$PORT
+
+
+
+

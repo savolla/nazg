@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+notify-send -r 27072 "Session:" "unmount your drives first"
+
+for DRIVE in $(df -h | grep "/run/media/$USERNAME" | awk '{ print $1 }')
+do
+    pkexec umount "$DRIVE"
+    udisksctl power-off -b "$DRIVE"
+done
+
+notify-send -r 27072 "Session:" "rebooting system"
+
+# just in case if forgot you were recording your screen
+# preventing corrupted screencast file
+pkill -f ffmpeg
+
+# remove all running containers before shutdown
+remove-all-containers
+
+echo "RECORDING_SCREEN_BY_USER=0" > /tmp/is-screen-recording
+systemctl reboot

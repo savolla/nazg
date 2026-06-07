@@ -1,0 +1,8 @@
+#!/bin/bash
+echo '~~~~~ Main Usage ~~~~~~'
+echo 'echo \"# blah blah\" >> README.md'
+echo 'git init'
+echo 'git add README.md'
+echo 'git commit -m "first commit"'
+echo 'git remote add origin https://github.com/savolla/blah.git'
+echo 'git push -u origin master'

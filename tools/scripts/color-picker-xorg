@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+xcolor | tr -d '\n' | xclip -sel clip # copy selected hex color to clipboard
+notify-send "$(xclip -sel clip -o) color is copied" # send notification

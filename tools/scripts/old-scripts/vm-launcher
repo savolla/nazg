@@ -1,0 +1,4 @@
+#!/bin/bash
+VM=$(sudo virsh list --inactive  | grep "^ -" | awk '{ print $2 }' | dmenu -fn "FiraCode Nerd Font Ret:size=14" -nb "#222222" -nf "#bbbbbb" -sb "#68446a" -sf "#eeeeee" -i -p "vm:")
+sudo virsh start $VM
+sudo virt-viewer --attach --wait $VM

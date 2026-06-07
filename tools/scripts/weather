@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+VERSION="$1"
+CITY="$2"
+
+while true
+do
+    curl -s "v${VERSION}d.wttr.in/${CITY}" | \
+        grep -v "│                                                                        │" | \
+        grep -v "Follow" | \
+        grep -v "^ *$"
+    sleep 1h
+done

@@ -1,0 +1,5 @@
+#!/bin/bash
+VPN_CONNECTION=$(sudo protonvpn s | grep -i "status" | awk '{ print $2 }')
+if [[ $VPN_CONNECTION == "Connected" ]]; then
+    echo "│ 󰖂 vpn"
+fi

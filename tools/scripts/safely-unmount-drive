@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+function run_dmenu() {
+    dmenu -b \
+        -l 5 \
+        -fn "IosevkaTerm NF:size=14:style=Regular" \
+        -nb "#222222" \
+        -nf "#bbbbbb" \
+        -sb "#005577" \
+        -sf "#eeeeee"
+}
+
+notify-send -r 27072 "Safe Drive Remover" "Select the drive to disconnect"
+
+DRIVE_TO_DISCONNECT=$(df -h | grep "/run/media/$USERNAME" | awk -F "/" '{ print $NF }')
+
+if [ -z "$DRIVE_TO_DISCONNECT" ]; then
+    notify-send -r 27072 "Safe Drive Remover" "No drives are mounted. Exiting"
+else
+    DRIVE_TO_DISCONNECT=$(df -h | grep "/run/media/$USERNAME" | awk -F "/" '{ print $NF }' | run_dmenu)
+    DRIVE_PATH=$(df -h | grep "$DRIVE_TO_DISCONNECT" | awk '{ print $1 }')
+
+    notify-send -r 27072 "Safe Drive Remover" "Unmounting the drive"
+
+    if ! pkexec umount "$DRIVE_PATH"; then
+        notify-send -r 27072 -u critical "Safe Drive Remover" "Failed to unmount $DRIVE_TO_DISCONNECT: Resource is busy"
+        exit 1
+    fi
+
+    notify-send -r 27072 "Safe Drive Remover" "Powering down the drive. Please wait"
+    udisksctl power-off -b "$DRIVE_PATH"
+    notify-send -r 27072 "Safe Drive Remover" "Drive is powered off. You can disconnect it now."
+fi

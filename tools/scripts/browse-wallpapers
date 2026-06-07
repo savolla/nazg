@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+$IMAGE_VIEWER "$WALLPAPER_DIR"/*/*

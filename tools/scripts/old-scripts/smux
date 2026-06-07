@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# savolla tmux
+# if custom tmux session is already running in the background
+# then attach the session. if not then run savolla-tmux-session
+# script
+# tmux a -t programs || exec savolla-tmux-session
+
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    tmux a -t tty || exec "$HOME"/project/scripts/savolla-tmux-session && exit;
+fi

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+setxkbmap tr # set keyboard layout
+setxkbmap -option caps:swapescape # swap esc with caps lock
+xset r rate 150 90 # increase speed of keyboard

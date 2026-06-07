@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+function run_dmenu() {
+    dmenu -b \
+        -fn "IosevkaTerm NF:size=14:style=Regular" \
+        -nb "#222222" \
+        -nf "#bbbbbb" \
+        -sb "#005577" \
+        -sf "#eeeeee"
+}
+
+STRING_TO_DECODE=$(echo | run_dmenu)
+STRING_TO_DECODE=$(echo -n "$STRING_TO_DECODE" | rev | md5sum | awk '{print $1}')
+echo -n "$STRING_TO_DECODE" | xclip  -sel clip

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+WALLPAPER_DIR="$HOME/resource/images/wallpapers/favorites"
+RANDOM_WALLPAPER="$(find "$WALLPAPER_DIR" -type f -iname "*.jpg" -o -iname "*.png" | shuf -n 1)"
+echo "$RANDOM_WALLPAPER" >"/tmp/current-wallpaper-path"
+feh --bg-scale "$RANDOM_WALLPAPER"
+
+# gsettings set org.gnome.desktop.background picture-uri "file://$RANDOM_WALLPAPER"
+# gsettings set org.gnome.desktop.background picture-options 'scaled'
+# else
+#   if [ "$XDG_SESSION_TYPE" == "tty" ]
+#   then
+#     swaybg -i "$RANDOM_WALLPAPER"
+#   else
+#     feh --bg-scale "$RANDOM_WALLPAPER"
+#   fi
+# fi

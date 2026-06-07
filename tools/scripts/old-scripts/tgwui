@@ -1,0 +1,6 @@
+#!/bin/bash
+cd /home/savolla/area/ai/tools/text-generation-webui || exit
+./start_linux.sh &
+sleep 3
+/usr/bin/firefox http://127.0.0.1:7860 &
+notify-send "navigate to firefox http:127.0.0.1:7860 to interact with tgwui"

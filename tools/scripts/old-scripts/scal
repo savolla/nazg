@@ -1,0 +1,20 @@
+#!/bin/bash
+ans=0
+scale=2  # Set the desired precision here
+while true; do
+    read -p "> " input
+    if [[ $input == "clear" ]]; then
+        clear
+    elif [[ $input == "quit" ]]; then
+        echo "bye $USER"
+        exit
+    else
+        # Replace "ans" with the last result in the input
+        input=$(echo "$input" | sed "s/ans/$ans/g")
+        # Evaluate the modified input using bc with the specified scale
+        result=$(echo "scale=$scale; $input" | bc -l)
+        # Update the last result variable
+        ans=$result
+        echo "$result"
+    fi
+done

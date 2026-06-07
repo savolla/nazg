@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+SOURCE_DIR="/home/savolla/project/devel/endeku/assist-mobile-rn" # don't put trailing slash!
+TARGET_DIR="/Users/savolla/savolla/project/"                     # trailing slash is mendatory
+
+MACOS_VM_IP="localhost"
+MACOS_VM_USER="savolla"
+PORT=22220
+WAIT_TIME=2 # seconds
+
+while true; do
+  rsync -av \
+    --exclude="android/" \
+    --exclude=".metro-health-check*" \
+    --exclude="*.orig.*" \
+    --exclude="*.jks" \
+    --exclude="*.p8" \
+    --exclude="*.p12" \
+    --exclude="*.key" \
+    --exclude="*.mobileprovision" \
+    --exclude="node_modules/" \
+    --exclude=".expo/" \
+    --exclude="dist/" \
+    --exclude="web-build/" \
+    --exclude="expo-env.d.ts" \
+    -e "ssh -p $PORT" \
+    "$SOURCE_DIR" \
+    "$MACOS_VM_USER"@"$MACOS_VM_IP":"$TARGET_DIR"
+  sleep $WAIT_TIME
+done

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+mv "$(cat /tmp/current-wallpaper-path)" ~/.trash
+set-random-wallpaper

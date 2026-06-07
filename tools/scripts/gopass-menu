@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+DMENU=(dmenu -i -fn 'IosevkaTerm NF:size=12:style=Regular' -nb '#282828' -nf '#a89984' -sb '#a89984' -sf '#282828')
+
+# 1. Select the account/entry
+entry=$(gopass list --flat | "${DMENU[@]}" -p "Select Account:")
+[ -n "$entry" ] || exit
+
+# 2. Extract the raw secret file
+raw_output=$(gopass show --unsafe --noparsing "$entry")
+[ -n "$raw_output" ] || exit
+
+# 3. Parse keys — only match "word: " (colon followed by space)
+fields=$(echo "$raw_output" | grep -oP '^[a-zA-Z0-9_-]+(?=:\s)')
+
+# 4. Prepend "password" if first line is not a key-value pair
+first_line=$(echo "$raw_output" | head -1)
+if echo "$first_line" | grep -qP '^[a-zA-Z0-9_-]+:\s'; then
+  menu_options=$(printf "%s\n" "$fields")
+else
+  menu_options=$(printf "password\n%s\n" "$fields")
+fi
+
+# 5. Select which field to copy
+selected_field=$(echo "$menu_options" | "${DMENU[@]}" -p "$entry:")
+[ -n "$selected_field" ] || exit
+
+# 6. Copy to clipboard
+if [ "$selected_field" = "password" ]; then
+  gopass show --clip "$entry"
+elif [ "$selected_field" = "otp" ]; then
+  otp_uri=$(echo "$raw_output" | grep -oP "(?<=^otp:\s).*" | tr -d '\n')
+  otp_code=$(oathtool --base32 --totp "$(echo "$otp_uri" | grep -oP '(?<=secret=)[^&]+')")
+  echo -n "$otp_code" | xclip -selection clipboard
+  notify-send "gopass" "Copied OTP to clipboard."
+else
+  value=$(echo "$raw_output" | grep -oP "(?<=^${selected_field}:\s).*" | tr -d '\n')
+  echo -n "$value" | xclip -selection clipboard
+  notify-send "gopass" "Copied $selected_field to clipboard."
+fi

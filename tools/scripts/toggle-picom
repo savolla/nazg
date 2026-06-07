@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [[ -z $(pidof picom) ]]
+then
+    picom -b
+    notify-send -r 27072 "toggle picom:" "picom is running."
+else
+    kill "$(pidof picom)"
+    notify-send -r 27072 "toggle picom:" "picom is killed."
+fi

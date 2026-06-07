@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# This script will create a network namespace with no internet connection
+# and will run your program in safe environment. good when you want to
+# violate some licences >:)
+# 
+sudo ip netns add nonet
+echo "$1 $2 $3 $4 $5 $6 $7 $8 $9" | sudo ip netns exec nonet bash
+sudo ip netns delete nonet

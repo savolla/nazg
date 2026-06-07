@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+export PACKAGE="python-pywal"
+export PACKAGE_ALIAS="wal"
+
+if [[ $(which "$PACKAGE_ALIAS" 2> /dev/null) ]]
+then
+    wal -i "$HOME/.config/background-image"
+else
+    echo -e "$PACKAGE_ALIAS is not installed. Do you want me to install it for you? Y/n"
+    read -r ANSWER
+    if [[ $ANSWER == "n" ]]
+    then
+        echo -e "well.."
+        exit
+    else
+        karna-install "$PACKAGE"
+    fi
+fi

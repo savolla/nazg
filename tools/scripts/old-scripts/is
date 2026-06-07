@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ "$1" == "dump" ]; then
+    cat interests.txt
+
+elif [ "$1" == "push" ]; then
+    echo "$2" >> interests.txt
+
+elif [ "$1" == "top" ]; then
+    tail -n 1 interests.txt
+
+elif [ "$1" == "pop" ]; then
+    echo -e $(sed '$d' interests.txt) > interests.txt
+    sed 's/ /\n/g' interests.txt > file
+    rm interests.txt
+    mv file interests.txt
+fi

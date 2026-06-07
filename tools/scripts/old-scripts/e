@@ -1,0 +1,7 @@
+#!/bin/bash
+if [ $# -ne 1 ]
+then
+	echo -e "\nutility for securely encripting files\n\nexample usage:\ne password-file.txt\n"
+else
+	openssl enc -aes-256-cbc -in $1 -out $(ls $1 | awk -F '.reveal' '{print $1}').secret
+fi

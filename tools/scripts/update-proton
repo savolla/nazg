@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+protonup -d  "~/.steam/root/compatabilitytools.d/" # set download directory
+protonup # install

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+xdotool getmouselocation | awk '{print $1, $2}' | sed 's/x://;s/y://' | xclip -sel clip
+notify-send "$(xclip -sel clip -o) mouse coordinates copied"

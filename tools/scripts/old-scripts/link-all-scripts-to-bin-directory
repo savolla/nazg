@@ -1,0 +1,4 @@
+#!/bin/bash
+for script in *; do
+    sudo ln -sf "$(pwd)/$script" /bin/
+done

@@ -1,0 +1,4 @@
+#!/bin/bash
+# this script toggles programs. use it like this: "toggle your_program"
+# this is specially for window managers
+kill $(ps aux | grep $1 | grep -v grep | awk '{ print $2 }') 2> /dev/null || $1 &

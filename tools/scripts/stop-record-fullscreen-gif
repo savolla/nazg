@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+toggle-screenkey
+peek -p
+echo "RECORDING_SCREEN_BY_USER=0" > /tmp/is-screen-recording

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+FAVORITE_WALLPAPER_DIR="$HOME/resource/images/wallpapers/favorites"
+cp "$(cat /tmp/current-wallpaper-path)" "$FAVORITE_WALLPAPER_DIR"
+notify-send "current wallpaper marked as favorite!"

@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+touch /etc/X11/xorg.conf.d/touchpad-tap.conf
+
+echo "
+Section \"InputClass\"
+        Identifier \"libinput touchpad catchall\"
+        MatchIsTouchpad \"on\"
+        MatchDevicePath \"/dev/input/event*\"
+        Driver \"libinput\"
+        Option \"Tapping\" \"on\"
+EndSection
+" > /etc/X11/xorg.conf.d/touchpad-tap.conf

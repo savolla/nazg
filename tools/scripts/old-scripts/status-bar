@@ -1,0 +1,20 @@
+#!/bin/bash
+LC_TIME=en_US.UTF-8
+while true
+do
+    ram_usage=$(free -m | awk '/^Mem/ {print $3}')
+
+    if [ $ram_usage -lt 1024 ]; then
+        ram_usage="$ram_usage MB"
+    else
+        ram_usage=$(awk "BEGIN {printf \"%.2f\", $ram_usage/1024}")
+        ram_usage="$ram_usage GB"
+    fi
+
+    xprop -root -set WM_NAME "\
+│  $ram_usage \
+│   $(iwconfig wlp2s0 | sed -n 's/.*ESSID:"\(.*\)".*/\1/p') \
+│  $(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d "." -f 2)% \
+│ $(date "+%a %d.%m.%Y | %H:%M") "
+sleep 3
+done

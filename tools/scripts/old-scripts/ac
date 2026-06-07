@@ -1,0 +1,33 @@
+#!/bin/bash
+
+browser=w3m
+
+#if [ !$1 ]; then
+#echo "ac -a: to add account"
+#echo "ac -s: to show passwords"
+
+if [ $1 == "-a" ]; then
+echo "website:"
+read WEBSITE
+
+echo "username::email:"
+read USERNAME
+
+echo "password:"
+read PASS
+
+echo "link:"
+read LINK
+
+jrnl @account "| $WEBSITE | $USERNAME | $PASS | $LINK |"
+
+elif [ $1 == "-s" ]; then
+
+touch tempor.md
+echo "| garbage | site | user/email | pass | link |" >> tempor.md
+echo "| ------- | ---- | ---------- | ---- | ---- |" >> tempor.md
+jrnl @account | egrep @account | awk -F "@account" '{print $2}' >> tempor.md
+pandoc -f markdown tempor.md >> tempor.html
+$browser tempor.html
+rm tempor*
+fi

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+WAIT_TIME="30m"
+
+while true; do
+    cd "$REPO_DIR" || exit
+
+    for repo in ./*; do
+        cd "$repo" || exit
+        echo "[INFO] pulling latest changes for $repo"
+        git pull
+        cd ..
+    done
+    sleep "$WAIT_TIME" # wait after boot
+done

@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Initialize the chronometer start time (in seconds and milliseconds)
+start_time=$(date +%s%3N)  # Seconds and milliseconds (e.g., 1632271591234)
+
+clear # clear screen once
+
+# Start chronometer loop
+while true; do
+  # Get the current time in seconds and milliseconds
+  current_time=$(date +%s%3N)
+
+  # Calculate the elapsed time in milliseconds
+  elapsed_ms=$((current_time - start_time))
+
+  # Extract hours, minutes, seconds, and the last digit of milliseconds
+  hours=$((elapsed_ms / 3600000))
+  minutes=$(((elapsed_ms % 3600000) / 60000))
+  seconds=$(((elapsed_ms % 60000) / 1000))
+  milliseconds=$((elapsed_ms % 1000))
+
+  # Get the last digit of milliseconds (0-9)
+  ms_digit=$((milliseconds / 100))
+
+  # Clear the line and display the chronometer in the terminal without newlines
+  printf "\r󱎫 %02d:%02d:%02d.%01d" $hours $minutes $seconds $ms_digit
+  # xsetroot -name "$(printf "\r󱎫 %02d:%02d:%02d.%01d" $hours $minutes $seconds $ms_digit)"
+
+  # Sleep for a short time (100 milliseconds) to reduce CPU usage
+  sleep 0.1
+done

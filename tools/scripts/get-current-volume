@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# assuming pipewire
+printf '%s' "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/Volume: 0.//')"
+
+# # assuming alsa
+# amixer get Master | egrep -o '[0-9]{1,3}%' | uniq
+
+# # assuming pulseaudio
+# TODO

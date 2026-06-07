@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# flatpak aliases
+
+FAVORITE_APPLICATIONS=(
+    arandr
+    anki
+    bitwarden-desktop
+    blender
+    calibre
+    emacs
+    filezilla
+    firefox
+    flameshot
+    foliate
+    fontforge
+    font-manager
+    galculator
+    gcolor3
+    gimp
+    grub-customizer
+    inkscape
+    kdenlive
+    krita
+    libreoffice
+    librewolf
+    logseq
+    lutris
+    lxappearance
+    mousepad
+    nicotine
+    obs
+    peek
+    steam
+    thunar
+    transmission-gtk
+    virt-manager
+    com.google.AndroidStudio
+    anydesk
+    mediawriter
+    org.ferdium.Ferdium
+    com.github.tchx84.Flatseal
+    rest.insomnia.Insomnia
+    com.opera.Opera
+    re.sonny.Playhouse
+    com.getpostman.Postman
+    com.github.taiko2k.tauonmb
+    com.visualstudio.code
+    com.vscodium.codium
+)
+
+# get the answer from the user
+ANSWER=$(printf "%s\n" "${FAVORITE_APPLICATIONS[@]}" | dmenu -fn "FiraCode Nerd Font Ret:size=14" -nb "#222222" -nf "#bbbbbb" -sb "#68446a" -sf "#eeeeee" -i -p "run:")
+
+# launch the application
+$ANSWER
