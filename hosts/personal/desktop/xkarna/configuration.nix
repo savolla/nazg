@@ -576,7 +576,7 @@ in
       unstable.git # version control
       unstable.glslang # for glslangValidator. doom emacs cc module dep
       unstable.gnumake # make for all
-      unstable.gnupg # encryption and stuff
+      stable.gnupg # encryption and stuff
       unstable.go
       unstable.godot_4 # 3d and 2d game engine
       unstable.gonzo # log inspecting
@@ -849,7 +849,13 @@ in
       unstable.texlivePackages.xcolor # Driver-independent color extensions for LaTeX and pdfLaTeX
       unstable.tftui # interractive terraform state browser
       unstable.tiddlywiki
+      unstable.sops # encrypt values in yaml, ini, json etc.
+      unstable.kustomize-sops # use sops with kustomize (very neat)
+      unstable.gopass # better pass alternative with multi user support
+      unstable.pre-commit-hook-ensure-sops # check if sops is enabled before pushing
+      unstable.chezmoi # encrypt values in dotfiles
       unstable.timidity # play midi files usin mpd
+      unstable.git-crypt # encrypt sensitive files using git
       unstable.tldr # too long didn't read the manual
       unstable.tlock # 2FA tui
       unstable.tmux # life saver
@@ -947,7 +953,6 @@ in
         exts.pass-otp
         exts.pass-import
       ]))
-
 
       # nixos 25.11 packages
       stable.glances
