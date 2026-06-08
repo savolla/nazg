@@ -499,7 +499,7 @@ in
       virt-viewer # display spice vms from proxmox
       rustdesk # better rdp
       moonlight-qt # sunshine client for superior RDP
-      sunshine # better rdp
+      unstable.sunshine # better rdp
       terminal-parrot # wow
       p7zip # 7z
       gvfs

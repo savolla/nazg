@@ -2,6 +2,7 @@
   "version": "1.5",
   "default_core_path": "",
   "default_core_name": "",
+  "base_content_directory": "R\u0003\u001c",
   "label_display_mode": 0,
   "right_thumbnail_mode": 0,
   "left_thumbnail_mode": 0,

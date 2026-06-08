@@ -278,11 +278,25 @@ in
   };
 
   networking = {
+    interfaces = {
+
+      # builtin ethernet interface
+      eno1 = {
+        ipv4.addresses = [{
+          address = "192.168.1.20";
+          prefixLength = 24;
+        }];
+      };
+    };
     nameservers = [
       "127.0.0.1"
       "::1"
     ];
-    networkmanager.dns = "none"; # for dnscrypt
+    networkmanager = {
+      enable = true;
+      dns = "none"; # for dnscrypt
+      unmanaged = [ "eno1" ];  # don't touch my static ip on eno1 !!
+    };
     hostName = "xkarna";
   };
 
@@ -291,24 +305,6 @@ in
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking = {
-    networkmanager = {
-      enable = true;
-      # connectionConfig = {
-      #   "Wired connection 2" = {
-      #     ipv4.route-metric = 100;
-      #     ipv6.route-metric = 100;
-      #   };
-      #
-      #   "Wired connection 1" = {
-      #     ipv4.route-metric = 500;
-      #     ipv6.route-metric = 500;
-      #   };
-      # };
-    };
-  };
 
   # Set your time zone.
   time.timeZone = "Europe/Istanbul";
@@ -1094,9 +1090,10 @@ in
   # List services that you want to enable:
   services = {
 
-    pcscd = {
-      enable = true;
-    };
+    ## yubikey service but they fight with gpg for yubikey access. delete it later
+    # pcscd = {
+    #   enable = true;
+    # };
 
     # silence the agetty "Welcome to NixOS" banner on tty
     getty = {

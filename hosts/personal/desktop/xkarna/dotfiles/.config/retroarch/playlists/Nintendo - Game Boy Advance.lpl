@@ -659,8 +659,8 @@
     {
       "path": "/home/savolla/resource/games/games/gba/Back to Stone (USA) (En,Fr).zip#Back to Stone (USA) (En,Fr).gba",
       "label": "Back to Stone (USA) (En,Fr)",
-      "core_path": "DETECT",
-      "core_name": "DETECT",
+      "core_path": "/nix/store/x28q145a75y88b4dp73bwrzxbgpq2bxl-libretro-mgba-0-unstable-2025-10-13/lib/retroarch/cores/mgba_libretro.so",
+      "core_name": "Nintendo - Game Boy Advance (mGBA)",
       "crc32": "4C29C9C8|crc",
       "db_name": "Nintendo - Game Boy Advance.lpl"
     },

@@ -2,6 +2,7 @@
   "version": "1.5",
   "default_core_path": "",
   "default_core_name": "",
+  "base_content_directory": "R\u0003\u001c",
   "label_display_mode": 0,
   "right_thumbnail_mode": 0,
   "left_thumbnail_mode": 0,
@@ -1347,24 +1348,24 @@
     {
       "path": "/home/savolla/resource/games/games/n64/Legend of Zelda, The - Majora's Mask (USA).zip#Legend of Zelda, The - Majora's Mask (USA).z64",
       "label": "Legend of Zelda, The - Majora's Mask (USA)",
-      "core_path": "DETECT",
-      "core_name": "DETECT",
+      "core_path": "/nix/store/pcrzznj1i8salnadwdvxn18azr4ych1z-libretro-mupen64plus-next-0-unstable-2025-11-14/lib/retroarch/cores/mupen64plus_next_libretro.so",
+      "core_name": "Nintendo - Nintendo 64 (Mupen64Plus-Next)",
       "crc32": "B428D8A7|crc",
       "db_name": "Nintendo - Nintendo 64.lpl"
     },
     {
       "path": "/home/savolla/resource/games/games/n64/Legend of Zelda, The - Ocarina of Time (USA) (Rev 2).zip#Legend of Zelda, The - Ocarina of Time (USA) (Rev 2).z64",
       "label": "Legend of Zelda, The - Ocarina of Time (USA) (Rev 2)",
-      "core_path": "DETECT",
-      "core_name": "DETECT",
+      "core_path": "/nix/store/pcrzznj1i8salnadwdvxn18azr4ych1z-libretro-mupen64plus-next-0-unstable-2025-11-14/lib/retroarch/cores/mupen64plus_next_libretro.so",
+      "core_name": "Nintendo - Nintendo 64 (Mupen64Plus-Next)",
       "crc32": "32120C23|crc",
       "db_name": "Nintendo - Nintendo 64.lpl"
     },
     {
       "path": "/home/savolla/resource/games/games/n64/Legend of Zelda, The - Ocarina of Time - Master Quest (USA) (GameCube).zip#Legend of Zelda, The - Ocarina of Time - Master Quest (USA) (GameCube).z64",
       "label": "Legend of Zelda, The - Ocarina of Time - Master Quest (USA) (GameCube)",
-      "core_path": "DETECT",
-      "core_name": "DETECT",
+      "core_path": "/nix/store/pcrzznj1i8salnadwdvxn18azr4ych1z-libretro-mupen64plus-next-0-unstable-2025-11-14/lib/retroarch/cores/mupen64plus_next_libretro.so",
+      "core_name": "Nintendo - Nintendo 64 (Mupen64Plus-Next)",
       "crc32": "C744C4DB|crc",
       "db_name": "Nintendo - Nintendo 64.lpl"
     },
@@ -1483,8 +1484,8 @@
     {
       "path": "/home/savolla/resource/games/games/n64/Mario Kart 64 (USA).zip#Mario Kart 64 (USA).z64",
       "label": "Mario Kart 64 (USA)",
-      "core_path": "DETECT",
-      "core_name": "DETECT",
+      "core_path": "/nix/store/pcrzznj1i8salnadwdvxn18azr4ych1z-libretro-mupen64plus-next-0-unstable-2025-11-14/lib/retroarch/cores/mupen64plus_next_libretro.so",
+      "core_name": "Nintendo - Nintendo 64 (Mupen64Plus-Next)",
       "crc32": "434389C1|crc",
       "db_name": "Nintendo - Nintendo 64.lpl"
     },
@@ -1563,8 +1564,8 @@
     {
       "path": "/home/savolla/resource/games/games/n64/Midway's Greatest Arcade Hits - Volume 1 (USA).zip#Midway's Greatest Arcade Hits - Volume 1 (USA).z64",
       "label": "Midway's Greatest Arcade Hits - Volume 1 (USA)",
-      "core_path": "DETECT",
-      "core_name": "DETECT",
+      "core_path": "/nix/store/pcrzznj1i8salnadwdvxn18azr4ych1z-libretro-mupen64plus-next-0-unstable-2025-11-14/lib/retroarch/cores/mupen64plus_next_libretro.so",
+      "core_name": "Nintendo - Nintendo 64 (Mupen64Plus-Next)",
       "crc32": "E5C1FEDC|crc",
       "db_name": "Nintendo - Nintendo 64.lpl"
     },
@@ -1739,8 +1740,8 @@
     {
       "path": "/home/savolla/resource/games/games/n64/NBA in the Zone '99 (USA).zip#NBA in the Zone '99 (USA).z64",
       "label": "NBA in the Zone '99 (USA)",
-      "core_path": "DETECT",
-      "core_name": "DETECT",
+      "core_path": "/nix/store/pcrzznj1i8salnadwdvxn18azr4ych1z-libretro-mupen64plus-next-0-unstable-2025-11-14/lib/retroarch/cores/mupen64plus_next_libretro.so",
+      "core_name": "Nintendo - Nintendo 64 (Mupen64Plus-Next)",
       "crc32": "EAB083B8|crc",
       "db_name": "Nintendo - Nintendo 64.lpl"
     },
@@ -1995,8 +1996,8 @@
     {
       "path": "/home/savolla/resource/games/games/n64/Paper Mario (USA).zip#Paper Mario (USA).z64",
       "label": "Paper Mario (USA)",
-      "core_path": "DETECT",
-      "core_name": "DETECT",
+      "core_path": "/nix/store/pcrzznj1i8salnadwdvxn18azr4ych1z-libretro-mupen64plus-next-0-unstable-2025-11-14/lib/retroarch/cores/mupen64plus_next_libretro.so",
+      "core_name": "Nintendo - Nintendo 64 (Mupen64Plus-Next)",
       "crc32": "A7F5CD7E|crc",
       "db_name": "Nintendo - Nintendo 64.lpl"
     },
@@ -2427,8 +2428,8 @@
     {
       "path": "/home/savolla/resource/games/games/n64/Shadowgate 64 - Trials of the Four Towers (USA) (En,Es).zip#Shadowgate 64 - Trials of the Four Towers (USA) (En,Es).z64",
       "label": "Shadowgate 64 - Trials of the Four Towers (USA) (En,Es)",
-      "core_path": "DETECT",
-      "core_name": "DETECT",
+      "core_path": "/nix/store/pcrzznj1i8salnadwdvxn18azr4ych1z-libretro-mupen64plus-next-0-unstable-2025-11-14/lib/retroarch/cores/mupen64plus_next_libretro.so",
+      "core_name": "Nintendo - Nintendo 64 (Mupen64Plus-Next)",
       "crc32": "69983CC3|crc",
       "db_name": "Nintendo - Nintendo 64.lpl"
     },
@@ -2611,8 +2612,8 @@
     {
       "path": "/home/savolla/resource/games/games/n64/Super Mario 64 (USA).zip#Super Mario 64 (USA).z64",
       "label": "Super Mario 64 (USA)",
-      "core_path": "DETECT",
-      "core_name": "DETECT",
+      "core_path": "/nix/store/pcrzznj1i8salnadwdvxn18azr4ych1z-libretro-mupen64plus-next-0-unstable-2025-11-14/lib/retroarch/cores/mupen64plus_next_libretro.so",
+      "core_name": "Nintendo - Nintendo 64 (Mupen64Plus-Next)",
       "crc32": "3CE60709|crc",
       "db_name": "Nintendo - Nintendo 64.lpl"
     },
