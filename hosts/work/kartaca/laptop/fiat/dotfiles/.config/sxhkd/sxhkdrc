@@ -3,7 +3,10 @@ alt + g
     "$HOME"/project/repos/legolas/legolas
 
 alt + Escape
-    slock
+    lock-screen-xorg
+
+alt + shift + p
+    gopass-menu
 
 # alt + space; h
 #     zathura ~/resource/notes/org/savolla-keybindings.pdf

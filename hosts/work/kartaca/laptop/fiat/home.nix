@@ -25,7 +25,7 @@ let
     version = "6.8";
 
     src = builtins.path {
-      path = /home/kkoc/project/repos/one-ring/tools/suckless/dwm-flexipatch;
+      path = /home/kkoc/project/dev/nazg/tools/dwm-flexipatch;
       name = "dwm-flexipatch-src";
     };
 
@@ -57,7 +57,7 @@ let
     pname = "st-flexipatch";
     version = "9.3";
     src = builtins.path {
-      path = /home/kkoc/project/repos/one-ring/tools/suckless/st-flexipatch;
+      path = /home/kkoc/project/dev/nazg/tools/st-flexipatch;
       name = "st-flexipatch-src";
     };
     nativeBuildInputs = [
@@ -91,7 +91,7 @@ let
     pname = "slock-flexipatch";
     version = "1.6";
     src = builtins.path {
-      path = /home/kkoc/project/repos/one-ring/tools/suckless/slock-flexipatch;
+      path = /home/kkoc/project/dev/nazg/tools/slock-flexipatch;
       name = "slock-flexipatch-src";
     };
     nativeBuildInputs = [
@@ -155,10 +155,10 @@ in
         fi
       '';
 
-      stowDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        echo "stowing dotfiles"
-        ${pkgs.stow}/bin/stow -t $HOME -d "$HOME/project/dev/nazg/hosts/work/kartaca/laptop/fiat" dotfiles
-      '';
+      # stowDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      #   echo "stowing dotfiles"
+      #   ${pkgs.stow}/bin/stow -t $HOME -d "$HOME/project/dev/nazg/hosts/work/kartaca/laptop/fiat" dotfiles
+      # '';
 
   #     linkSystemd = let
   #       inherit (lib) hm;
@@ -224,6 +224,7 @@ in
   home.packages =
     with pkgs;
     [
+      unstable.pcsclite # for yubikey
       unstable.qutebrowser # qutebrowser with nixGL
       unstable.libnotify # for qutebrowser notification fix?
       unstable.oath-toolkit # get OTP from terminal
@@ -272,7 +273,6 @@ in
       stable.xorg.xbacklight # set brightness on laptop
       stable.pass # terminal passwork manager
       stable.gopass # pass on steroids
-      stable.tessen # dmenu that shows gopass entries
 
       stable.ssh-askpass-fullscreen
 
@@ -449,7 +449,6 @@ in
       browsr # browse remote file systems
       caligula # disk imaging (tui balena-etcher/rufus)
       carbon-now-cli # generate images from your code
-      turbovnc
       cariddi # crawl urls. good for discovery
       dstp # run networking tests to your site
       castero # podcasts in tui
@@ -459,7 +458,6 @@ in
       cpufetch # get cpu info fast
       croc # easily send files between hosts
       csvlens # pretty print your csv files
-      dua # better ncdu
       duf # free alternative
       fclones # remove file duplicates
       arandr # manage multiple monitors with gui
@@ -470,7 +468,6 @@ in
       tmuxp # declarative tmux sessions (disabled due to compilation errors..)
       tmux-xpanes # run multiple commands on multiple tmux panes at once
       tree # file trees
-      tabbed # make any tool tabbed
 
       # zsh
       zsh
@@ -492,12 +489,13 @@ in
       tiddlywiki
       rust-petname # generate random names (useful for server hostnames)
       syncthing
+      isync # for mbsync
+      mu # for emacs mu4e to work
       delta # bat like diff
       libx11 # for suckless tools to be compiled
       zoxide # cd on steroids
       translate-shell # needed for using rofi as translate engine
       virt-viewer # display spice vms from proxmox
-      rustdesk # better rdp
       moonlight-qt # sunshine client for superior RDP
       unstable.sunshine # better rdp
       terminal-parrot # wow
@@ -513,7 +511,6 @@ in
       libxml2 # for xmllint to installed (for soap cli)
       xsel # clipboard for xorg
       screenkey # display keys pressed
-      simplescreenrecorder # screen recorder
       gpu-screen-recorder-gtk # screen recorder using gpu with gui
       gpu-screen-recorder # screen recorder using gpu
       # go-jira # command line jira for my rofi script
@@ -524,7 +521,6 @@ in
       unp # archive agnostic uncompressor
       xsct # adjust screen temperature
       xournalpp # draw shapes
-      lunarvim # neovim ide
       neovim # better vim
       iamb # matrix client for terminal
       gdu # fancy ncdu
@@ -537,7 +533,6 @@ in
       insomnia # rest client
       slack-term # tui slack
       nethack # best roguelike
-      youtube-tui
       browsh # terminal browser that rocks
       firefox # okay browser
       mcfly # super ctrl+r

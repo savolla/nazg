@@ -4,6 +4,7 @@ set -x _JAVA_AWT_WM_NONREPARENTING 1
 set -x GOOGLE_APPLICATION_CREDENTIALS "$HOME/.config/gcloud/legacy_credentials/kuzey.koc@kartaca.com/adc.json"
 set -x FZF_DEFAULT_OPTS --height=10% --preview-window=top,1,wrap --preview-window=border-none --no-list-border --no-input-border --reverse --ansi "--bind=esc:abort" "--bind=tab:accept" "--bind=ctrl-space:toggle+down"
 set -U fish_history_limit 10000000
+set -x GPG_TTY (tty) # make sure gpg agent promts you in terminal when needed
 
 # settings for using GPG as SSH authentication
 set -e SSH_AGENT_PID

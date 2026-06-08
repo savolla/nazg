@@ -221,7 +221,7 @@
 (setq org-tags-exclude-from-inheritance '("crypt")) ;; prevent tag inheritance for "crypt" tag
 
 ;; org mode
-;; (add-hook 'auto-save-hook 'org-save-all-org-buffers)
+(add-hook 'auto-save-hook 'org-save-all-org-buffers)
 (after! org
   (setq org-id-update-id-locations-at-save nil) ;; prevent scanning org ids on every save (solve delay when saving)
   ;; (setq org-src--auto-save-timer 10)
@@ -573,6 +573,11 @@
   (setq corfu-auto-prefix 2)
   (setq corfu-count 8)
   (setq corfu-preselect t)
+
+  ;; instant completion in programming modes
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (setq-local corfu-auto-delay 0)))
 
   (map! :map corfu-map
         :i "TAB" #'corfu-complete

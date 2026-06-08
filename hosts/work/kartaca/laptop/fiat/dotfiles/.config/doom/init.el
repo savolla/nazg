@@ -46,7 +46,7 @@
        ;;smooth-scroll     ; So smooth you won't believe it's not butter
        ;; tabs              ; a tab bar for Emacs
        treemacs          ; a project drawer, like neotree but cooler
-       ;;unicode           ; extended unicode support for various languages
+       unicode           ; extended unicode support for various languages
        (vc-gutter +pretty) ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        ;;window-select     ; visually switch windows
@@ -82,7 +82,6 @@
        ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
        vterm             ; the best terminal emulation in Emacs
-       
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
@@ -91,7 +90,7 @@
 
        :tools
        ansible
-       biblio            ; Writes a PhD for you (citation needed)
+       ;;biblio            ; Writes a PhD for you (citation needed)
        ;;collab            ; buffers with friends
        debugger          ; FIXME stepping through code, to help you add bugs
        direnv
@@ -158,7 +157,7 @@
        ;;nim               ; python + lisp at the speed of c
        (nix +lsp +tree-sitter)               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +roam +noter +hugo +pandoc +present)               ; organize your plain life in plain text
+       (org +roam +noter +pandoc +present +dragndrop +crypt)               ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;graphviz          ; diagrams for confusing yourself even more
@@ -183,16 +182,16 @@
        ;;zig               ; C, but simpler
 
        :email
-       ;;(mu4e +org +gmail)
+       (mu4e +org +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 
        :app
        ;;calendar
-       ;;emms
+       emms
        ;;everywhere        ; *leave* Emacs!? You must be joking
-       ;;irc               ; how neckbeards socialize
-       ;;(rss +org)        ; emacs as an RSS reader
+       irc               ; how neckbeards socialize
+       (rss +org +youtube)        ; emacs as an RSS reader
 
        :config
        ;;literate

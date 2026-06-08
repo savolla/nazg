@@ -140,6 +140,7 @@ end
 
 # key bindings
 function fish_user_key_bindings
+    fish_vi_key_bindings # ← add this; initializes insert/normal modes
     bind -M insert \cr fzf_history_search
     bind -M normal \cr fzf_history_search
     bind -M insert \cf '__legolas; commandline -f repaint'

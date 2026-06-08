@@ -26,7 +26,7 @@
 (setq doom-theme 'doom-gruvbox)
 (setq display-line-numbers-type t)
 (setq org-directory "~/resource/notes/org")
-(setq org-attach-id-dir "~/resource/notes/org/attachments")
+(setq org-attach-id-dir "~/resource/notes/org/roam/assets")
 (add-hook 'org-mode-hook (lambda () (display-line-numbers-mode 0))) ;; disable line numbers in org
 (setq user-full-name "Kuzey Koç"
       user-mail-address "kuzey.koc@kartaca.com")
@@ -34,19 +34,18 @@
 (setq doom-font (font-spec :family "IosevkaTerm Nerd Font Mono" :size 18)
       doom-variable-pitch-font (font-spec :family "IosevkaTerm Nerd Font Mono" :size 18))
 
-;; coding system
-;; Always use UTF-8 everywhere
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(set-file-name-coding-system 'utf-8)
-(set-clipboard-coding-system 'utf-8)
-(set-buffer-file-coding-system 'utf-8)
+;; custom functions
+(defun my/project-ediff ()
+  "Ediff two files picked from the current project."
+  (interactive)
+  (let* ((project (project-current t))
+         (files (project-files project))
+         (file-a (completing-read "File A: " files nil t))
+         (file-b (completing-read "File B: " files nil t)))
+    (ediff file-a file-b)))
 
-;; Specifically handle Turkish input without prompting
-(define-coding-system-alias 'turkish-utf-8 'utf-8)
+(map! :leader
+      :desc "Ediff project files" "f E" #'my/project-ediff)
 
 ;; transparency
 ;; for gui
@@ -113,6 +112,7 @@
         "~/project/repos/sauron/"
         "~/project/repos/tolkien/"
         "~/project/repos/soup/"
+        "~/project/dev/nazg/"
 
         "~/project/kartaca/hopi/repos/bekci2"
         "~/project/kartaca/hopi/repos/bird-usy"
@@ -180,11 +180,49 @@
 (setq which-key-idle-delay 0.25) ;; reduce delay in which-key
 (setq which-key-idle-secondary-delay 0)
 
+;; mu4e
+(after! mu4e
+  ;; nixos: mu4e elisp lives in the Nix store, not a standard path.
+  ;; this dynamically resolves it so it survives package updates.
+  (add-to-list 'load-path
+               (expand-file-name
+                "../../share/emacs/site-lisp/mu4e"
+                (file-truename (executable-find "mu"))))
+
+  ;; core paths
+  (setq mu4e-maildir "~/area/mail"
+        mu4e-get-mail-command "mbsync -a"
+        mu4e-update-interval 300) ;; update mails every 5 minutes
+
+  (setq mu4e-drafts-folder "/personal/[Gmail]/Drafts"
+        mu4e-sent-folder   "/personal/[Gmail]/Sent Mail"
+        mu4e-trash-folder  "/personal/[Gmail]/Trash"
+        mu4e-refile-folder "/personal/[Gmail]/Archive")
+
+  ;; sending via msmtp
+  (setq sendmail-program (executable-find "msmtp")
+        send-mail-function             'sendmail-send-it
+        message-send-mail-function     'message-send-mail-with-sendmail
+        message-sendmail-f-is-evil     t
+        message-sendmail-extra-arguments '("--read-envelope-from"))
+
+  ;; quality of life
+  (setq mu4e-view-show-images t
+        mu4e-compose-signature-auto-include t
+        mu4e-sent-messages-behavior 'delete))  ; remove this line if not Gmail
+
+;; org crypt
+(setq org-crypt-disable-auto-save t) ;; disable auto-save for encrypted org mode entries
+;; (setq org-crypt-key "F5190B59F4E143E0") ;; encrypt entries with my GPG key
+(setq org-crypt-key "CB5A65C413A6AA63") ;; encrypt entries with my GPG key
+(setq org-tags-exclude-from-inheritance '("crypt")) ;; prevent tag inheritance for "crypt" tag
+
 ;; org mode
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
 (after! org
-  (setq org-src--auto-save-timer 10)
-  (setq org-ellipsis " ")
+  (setq org-id-update-id-locations-at-save nil) ;; prevent scanning org ids on every save (solve delay when saving)
+  ;; (setq org-src--auto-save-timer 10)
+  (setq org-ellipsis " ")
   (setq org-lowest-priority ?F) ;; set todo priorities from A to F
   (setq org-startup-with-inline-images nil)
   (setq org-image-actual-width nil)
@@ -395,7 +433,7 @@
            (org-agenda-start-day "0d") ; start from today
            (org-agenda-span 1) ; display current day only
            (org-deadline-warning-days 14) ; remind upcoming deadlines before 2 weeks
-           (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING"))) ;; skip if it's a DOING task
+           (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT")))
            ))
 
   (todo "READ" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Reading"))))
@@ -422,7 +460,7 @@
            (org-agenda-start-day "0d")
            (org-agenda-span 1)
            (org-deadline-warning-days 14)
-           (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING"))) ;; skip if it's a DOING task
+           (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT")))
            ))
 
   ;; open jobs
@@ -542,10 +580,60 @@
         :i "TAB" #'corfu-complete
         :i "C-j" #'corfu-next
         :i "C-k" #'corfu-previous
-        :i "SPC" #'corfu-insert-separator)
-  )
+        :i "SPC" #'corfu-insert-separator))
+
+(setq-hook! 'prog-mode-hook corfu-auto-delay 0)
+
+;; Directly remove the auto-completion timer hook in org buffers
+(add-hook 'org-mode-hook
+          (lambda ()
+            (remove-hook 'post-command-hook #'corfu-auto--post-command t)))
+
+;; flycheck
+(after! flycheck
+  (setq-default flycheck-disabled-checkers '(org-lint)))
+
+;; undo-tree
+;; (after! undo-tree
+;;   (setq undo-tree-auto-save-history nil))
+
+;; gc
+(setq gc-cons-threshold (* 100 1024 1024))
+(run-with-idle-timer 5 t #'garbage-collect)
 
 ;; org roam ql
+
+;; org-fc
+(use-package! org-fc
+  :custom
+  (org-fc-directories '("/home/kkoc/resource/notes/org/roam/zettels"
+                        "/home/kkoc/resource/notes/org/roam/biblio/notes"
+                        "/home/kkoc/resource/notes/org/roam/journal"))
+  :config
+  (require 'org-fc-hydra))
+
+;;; pre-made decks
+(defun my/fc-terraform () (interactive)
+  (org-fc-review '(:paths all :filter (tag "terraform"))))
+
+(defun my/fc-terraform-facts () (interactive)
+  (org-fc-review '(:paths all :filter (and (tag "terraform") (tag "_fact")))))
+
+;;; define keybindings for review session (evil-mode)
+(evil-define-minor-mode-key '(normal insert emacs) 'org-fc-review-flip-mode
+  (kbd "RET") 'org-fc-review-flip
+  (kbd "n") 'org-fc-review-flip
+  (kbd "s") 'org-fc-review-suspend-card
+  (kbd "q") 'org-fc-review-quit)
+
+(evil-define-minor-mode-key '(normal insert emacs) 'org-fc-review-rate-mode
+  (kbd "a") 'org-fc-review-rate-again
+  (kbd "h") 'org-fc-review-rate-hard
+  (kbd "g") 'org-fc-review-rate-good
+  (kbd "e") 'org-fc-review-rate-easy
+  (kbd "s") 'org-fc-review-suspend-card
+  (kbd "q") 'org-fc-review-quit)
+
 
 ;; org-noter
 (setq
@@ -560,6 +648,42 @@
 
 ;; ace window
 (setq aw-keys '(?j ?k ?l ?d ?f ?a ?i)) ;; select windows with chars instead of numbers
+
+;; flacscard entry
+(defun savolla/org-capture-flashcard (fc-type)
+  "Insert an org-fc flashcard heading of FC-TYPE.
+FC-TYPE can be: normal, double, cloze, input.
+Inherits the heading level from the previous heading."
+  (interactive "sFlashcard type (normal/double/cloze/input): ")
+  (goto-char (point-max))
+  (let* ((level (save-excursion
+                  (if (re-search-backward org-heading-regexp nil t)
+                      (org-current-level)
+                    1)))
+         (stars (make-string level ?*))
+         (timestamp (format-time-string "%Y%m%d%H%M%S")))
+    (insert (format "\n%s %s\n" stars timestamp)))
+  (forward-line -1)
+  (org-back-to-heading t)
+  (org-id-get-create)
+  (org-set-property "CREATED" (format-time-string "%Y-%m-%d %H:%M"))
+  (re-search-forward ":END:" nil t)
+  (forward-line 1)
+  ;; Initialize the org-fc card type AFTER the drawer is set up
+  (pcase fc-type
+    ("normal" (org-fc-type-normal-init))
+    ("double" (org-fc-type-double-init))
+    ("cloze"  (org-fc-type-cloze-init 'deletion))
+    ("input"  (org-fc-type-text-input-init))
+    (_        (message "Unknown fc-type: %s. Use normal/double/cloze/input." fc-type)))
+  (evil-insert-state))
+
+;; flashcard types
+(defun savolla/org-capture-fc-normal () (interactive) (savolla/org-capture-flashcard "normal"))
+(defun savolla/org-capture-fc-double () (interactive) (savolla/org-capture-flashcard "double"))
+(defun savolla/org-capture-fc-cloze  () (interactive) (savolla/org-capture-flashcard "cloze"))
+(defun savolla/org-capture-fc-input  () (interactive) (savolla/org-capture-flashcard "input"))
+
 
 ;; insert journal entry
 (defun savolla/org-insert-journal-entry ()
@@ -579,9 +703,31 @@
   (evil-insert-state))
 
 
+;; (defun savolla/org-capture-node (kind type)
+;;   "Insert a heading of TYPE with tag KIND (zettel or biblio)
+;;    inheriting previous level."
+;;   (interactive "sKind (zettel/biblio): \nsZettel type: ")
+;;   (goto-char (point-max))
+;;   (let* ((level (save-excursion
+;;                   (if (re-search-backward org-heading-regexp nil t)
+;;                       (org-current-level)
+;;                     1)))
+;;          (stars (make-string level ?*))
+;;          (timestamp (format-time-string "%Y%m%d%H%M%S")))
+;;     (insert (format "\n%s %s :@%s:%s:\n" stars timestamp kind type)))
+;;   (forward-line -1)
+;;   (org-back-to-heading t)
+;;   (org-id-get-create)
+;;   (org-set-property "CREATED" (format-time-string "%Y-%m-%d %H:%M"))
+;;   (re-search-forward ":END:" nil t)
+;;   (forward-line 1)
+;;   (evil-insert-state))
+
+
 (defun savolla/org-capture-node (kind type)
   "Insert a heading of TYPE with tag KIND (zettel or biblio)
-   inheriting previous level."
+   inheriting previous level. Also initializes an org-fc flashcard
+   based on TYPE."
   (interactive "sKind (zettel/biblio): \nsZettel type: ")
   (goto-char (point-max))
   (let* ((level (save-excursion
@@ -589,7 +735,7 @@
                       (org-current-level)
                     1)))
          (stars (make-string level ?*))
-         (timestamp (format-time-string "%Y%m%d%H%M")))
+         (timestamp (format-time-string "%Y%m%d%H%M%S")))
     (insert (format "\n%s %s :@%s:%s:\n" stars timestamp kind type)))
   (forward-line -1)
   (org-back-to-heading t)
@@ -597,7 +743,28 @@
   (org-set-property "CREATED" (format-time-string "%Y-%m-%d %H:%M"))
   (re-search-forward ":END:" nil t)
   (forward-line 1)
+  ;; Initialize org-fc card based on note type.
+  ;; Add/remove entries here to control which types get flashcards.
+  (pcase type
+    ("_term"         (org-fc-type-normal-init))
+    ("_abbr"         (org-fc-type-text-input-init))
+    ("_fact"         (org-fc-type-cloze-init 'deletion))
+    ("_usecase"      (org-fc-type-cloze-init 'deletion))
+    ("_mechanism"    (org-fc-type-cloze-init 'deletion))
+    ("_history"      (org-fc-type-cloze-init 'deletion))
+    ("_analogy"      (org-fc-type-cloze-init 'deletion))
+    ("_warning"      (org-fc-type-cloze-init 'deletion))
+    ("_bestpractice" (org-fc-type-cloze-init 'deletion))
+    ("_fact"         (org-fc-type-cloze-init 'deletion))
+    ("_tradeoff"     (org-fc-type-cloze-init 'deletion))
+    ("_comparison"   (org-fc-type-cloze-init 'deletion))
+    ("_comparison"   (org-fc-type-cloze-init 'deletion))
+    ("_usecase"      (org-fc-type-cloze-init 'deletion))
+    ("_mechanism"    (org-fc-type-cloze-init 'deletion))
+    ("_property"     (org-fc-type-cloze-init 'deletion))
+    (_            nil)) ; no flashcard for unrecognized types
   (evil-insert-state))
+
 
 ;; zettel variants
 (defun savolla/org-capture-zettel-term         () (interactive) (savolla/org-capture-node "zettel" "_term"))
@@ -606,6 +773,7 @@
 (defun savolla/org-capture-zettel-history      () (interactive) (savolla/org-capture-node "zettel" "_history"))
 (defun savolla/org-capture-zettel-analogy      () (interactive) (savolla/org-capture-node "zettel" "_analogy"))
 (defun savolla/org-capture-zettel-reference    () (interactive) (savolla/org-capture-node "zettel" "_reference"))
+(defun savolla/org-capture-zettel-bookmark     () (interactive) (savolla/org-capture-node "zettel" "_bookmark"))
 (defun savolla/org-capture-zettel-warning      () (interactive) (savolla/org-capture-node "zettel" "_warning"))
 (defun savolla/org-capture-zettel-bestpractice () (interactive) (savolla/org-capture-node "zettel" "_bestpractice"))
 (defun savolla/org-capture-zettel-fact         () (interactive) (savolla/org-capture-node "zettel" "_fact"))
@@ -633,6 +801,7 @@
 (defun savolla/org-capture-biblio-mechanism    () (interactive) (savolla/org-capture-node "biblio" "_mechanism"))
 (defun savolla/org-capture-biblio-property     () (interactive) (savolla/org-capture-node "biblio" "_property"))
 
+
 ;; key mappings/bindings
 (map! :leader :desc "go"           "j g")
 (map! :leader :desc "current day"  "j g c" #'org-roam-dailies-goto-today)
@@ -647,6 +816,12 @@
 (map! :leader :desc "kartaca"      "j g a k" (lambda () (interactive) (find-file "~/resource/notes/org/roam/agenda/kartaca.org")))
 
 (map! :leader :desc "insert"       "j i")
+(map! :leader :desc "flashcard"    "j i f")
+(map! :leader :desc "normal"       "j i f n"   #'savolla/org-capture-fc-normal)
+(map! :leader :desc "double"       "j i f d"   #'savolla/org-capture-fc-double)
+(map! :leader :desc "cloze"        "j i f c"   #'savolla/org-capture-fc-cloze)
+(map! :leader :desc "input"        "j i f i"   #'savolla/org-capture-fc-input)
+
 (map! :leader :desc "zettel"       "j i z")
 (map! :leader :desc "term"         "j i z t"   #'savolla/org-capture-zettel-term)
 (map! :leader :desc "abbr"         "j i z a"   #'savolla/org-capture-zettel-abbr)
@@ -663,6 +838,7 @@
 (map! :leader :desc "warning"      "j i z w"   #'savolla/org-capture-zettel-warning)
 (map! :leader :desc "fix"          "j i z F"   #'savolla/org-capture-zettel-fix)
 (map! :leader :desc "reference"    "j i z r"   #'savolla/org-capture-zettel-reference)
+(map! :leader :desc "bookmark"     "j i z B"   #'savolla/org-capture-zettel-bookmark)
 
 (map! :leader :desc "biblio"       "j i b")
 (map! :leader :desc "term"         "j i b t"   #'savolla/org-capture-biblio-term)

@@ -2,7 +2,7 @@
 [ -n "$XPROFILE_SOURCED" ] && return 0
 export XPROFILE_SOURCED=1
 
-export PATH="$HOME/project/scripts/linux/:$PATH"
+export PATH="$HOME/project/dev/nazg/tools/scripts:$PATH"
 export BROWSER="qutebrowser"
 export GNUPGHOME="$HOME/.gnupg"
 export EDITOR="nvim"
@@ -18,19 +18,19 @@ if command -v dbus-update-activation-environment >/dev/null 2>&1; then
   dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE PATH
 fi
 
-# Hardware / input
-setxkbmap -option caps:swapescape &
-xset r rate 150 90 &
-xset s off &
-xset -dpms &
-xset -b &
-
-# Apps (remove mpd & — managed by systemd now)
-sxhkd -m 1 &
-unclutter -idle 2 &
-picom -b &
+setxkbmap -option caps:swapescape & # swap esc with caps lock
+xset r rate 150 90 &                # increase speed of keyboard
+xset s off &                        # disable screen saver
+xset -dpms &                        # disable monitor shutdown
+xset -b &                           # disable annoying desktop bell sound
+sxhkd -m 1 &                        # keyboard shortcuts
+unclutter -idle 2 &                 # hide mouse cursor
+picom -b &                          # start compositor for opacity/fading stuff
+dunst &                             # start notification daemon
+mpd &                               # start mpd as normal user
+# adaptive-blue-light-filter &      # blue light filter
+sunshine &                          # start stream server
 xsct 3500 &
-dunst &
 syncthing --no-browser &
 slstatus &
 periodic-random-wallpaper-switcher &

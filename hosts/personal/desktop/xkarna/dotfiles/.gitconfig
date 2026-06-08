@@ -12,3 +12,6 @@
 	program = gpg
 [commit]
 	gpgSign = true
+[delta]
+  side-by-side = true
+	line-numbers = true

@@ -3,10 +3,15 @@
 [user]
 	email = kuzey.koc@kartaca.com
 	name = Kuzey Koç
+	signingKey = 0xCB5A65C413A6AA63
 [core]
-	editor = vim
+	editor = nvim
 [pager]
 	branch = false
+[gpg]
+	program = gpg
+[commit]
+	gpgSign = true
 [delta]
-    side-by-side = true
+  side-by-side = true
 	line-numbers = true
