@@ -1,1 +1,4 @@
 **/weechat/irc.conf filter=git-crypt diff=git-crypt
+tools/wtfutil/hopi-k8s.yaml filter=git-crypt diff=git-crypt
+tools/wtfutil/hopi-mysql.yaml filter=git-crypt diff=git-crypt
+tools/wtfutil/hopi-cassandra.yaml filter=git-crypt diff=git-crypt

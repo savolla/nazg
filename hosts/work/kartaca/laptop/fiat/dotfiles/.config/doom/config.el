@@ -213,7 +213,6 @@
 
 ;; org crypt
 (setq org-crypt-disable-auto-save t) ;; disable auto-save for encrypted org mode entries
-;; (setq org-crypt-key "F5190B59F4E143E0") ;; encrypt entries with my GPG key
 (setq org-crypt-key "CB5A65C413A6AA63") ;; encrypt entries with my GPG key
 (setq org-tags-exclude-from-inheritance '("crypt")) ;; prevent tag inheritance for "crypt" tag
 

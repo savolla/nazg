@@ -1,0 +1,358 @@
+wtf:
+  colors:
+    border:
+      focusable: darkslateblue
+      focused: yellow
+      normal: gray
+  grid:
+    columns: [69, 69, 69]
+    rows: [17, 12, 4, 7, 10, 40, 20, 20, 40, 40]
+  refreshInterval: 1
+  openFileUtil: "xdg-open"
+
+  # --- YAML ANCHORS ---
+  # Define default widget behaviors here
+  .widget_defaults: &widget_defaults
+    enabled: true
+    border: true
+    type: cmdrunner
+
+  .theme_test: &theme_test
+    title: blue
+    border: { focusable: blue }
+
+  .theme_stag: &theme_stag
+    title: orange
+    border: { focusable: orange }
+
+  .theme_prod: &theme_prod
+    title: red
+    border: { focusable: red }
+
+  mods:
+    # TEST
+    mysql_test_status:
+      <<: *widget_defaults
+      title: "MYSQL STATUS"
+      colors: *theme_test
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 0, left: 0, height: 1, width: 1 }
+      cmd: "./scripts/mysql_status.sh"
+      args: [
+        "sednawireless",
+        "10.36.32.3",
+        "zvRXqVvELkRWQHesoTNWYnty4X6oU7z7"
+      ]
+
+    mysql_test_active_queries:
+      <<: *widget_defaults
+      title: "SLOW / STUCK QUERIES"
+      colors: *theme_test
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 1, left: 0, height: 1, width: 1 }
+      cmd: "./scripts/mysql_active_queries.sh"
+      args: [
+        "sednawireless",
+        "10.36.32.3",
+        "zvRXqVvELkRWQHesoTNWYnty4X6oU7z7"
+      ]
+
+    mysql_test_replication_lag:
+      <<: *widget_defaults
+      title: "REPLICATION LAG"
+      colors: *theme_test
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 2, left: 0, height: 1, width: 1 }
+      cmd: "./scripts/mysql_replication_lag.sh"
+      args: [
+        "sednawireless",
+        "10.36.32.3",
+        "zvRXqVvELkRWQHesoTNWYnty4X6oU7z7"
+      ]
+
+    # mysql_test_innodb_lock_contention:
+    #   <<: *widget_defaults
+    #   title: "LOCK CONTENTION"
+    #   colors: *theme_test
+    #   type: cmdrunner
+    #   enabled: true
+    #   border: true
+    #   refreshInterval: 60
+    #   position: { top: 3, left: 0, height: 1, width: 1 }
+    #   cmd: "./scripts/mysql_innodb_lock_contention.sh"
+    #   args: [
+    #     "sednawireless",
+    #     "10.36.32.3",
+    #     "zvRXqVvELkRWQHesoTNWYnty4X6oU7z7"
+    #   ]
+
+    mysql_test_binlog_and_disk_pressure:
+      <<: *widget_defaults
+      title: "BINLOG & DISK PRESSURE"
+      colors: *theme_test
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 3, left: 0, height: 1, width: 1 }
+      cmd: "./scripts/mysql_binlog_and_disk_pressure.sh"
+      args: [
+        "sednawireless",
+        "10.36.32.3",
+        "zvRXqVvELkRWQHesoTNWYnty4X6oU7z7"
+      ]
+
+    # STAG
+    mysql_stag_status:
+      <<: *widget_defaults
+      title: "MYSQL STATUS"
+      colors: *theme_stag
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 0, left: 1, height: 1, width: 1 }
+      cmd: "./scripts/mysql_status.sh"
+      args: [
+        "admazely",
+        "10.198.80.3",
+        "3rEVxM6enTy6LAyd9YsfkhcD2C6BLi"
+      ]
+
+    mysql_stag_active_queries:
+      <<: *widget_defaults
+      title: "SLOW / STUCK QUERIES"
+      colors: *theme_stag
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 1, left: 1, height: 1, width: 1 }
+      cmd: "./scripts/mysql_active_queries.sh"
+      args: [
+        "admazely",
+        "10.198.80.3",
+        "3rEVxM6enTy6LAyd9YsfkhcD2C6BLi"
+      ]
+
+    mysql_stag_replication_lag:
+      <<: *widget_defaults
+      title: "REPLICATION LAG"
+      colors: *theme_stag
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 2, left: 1, height: 1, width: 1 }
+      cmd: "./scripts/mysql_replication_lag.sh"
+      args: [
+        "admazely",
+        "10.198.80.3",
+        "3rEVxM6enTy6LAyd9YsfkhcD2C6BLi"
+      ]
+
+    # mysql_stag_innodb_lock_contention:
+    #   <<: *widget_defaults
+    #   title: "LOCK CONTENTION"
+    #   colors: *theme_stag
+    #   type: cmdrunner
+    #   enabled: true
+    #   border: true
+    #   refreshInterval: 60
+    #   position: { top: 3, left: 1, height: 1, width: 1 }
+    #   cmd: "./scripts/mysql_innodb_lock_contention.sh"
+      # args: [
+      #   "admazely",
+      #   "10.198.80.3",
+      #   "3rEVxM6enTy6LAyd9YsfkhcD2C6BLi"
+      # ]
+
+    mysql_stag_binlog_and_disk_pressure:
+      <<: *widget_defaults
+      title: "BINLOG & DISK PRESSURE"
+      colors: *theme_stag
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 3, left: 1, height: 1, width: 1 }
+      cmd: "./scripts/mysql_binlog_and_disk_pressure.sh"
+      args: [
+        "admazely",
+        "10.198.80.3",
+        "3rEVxM6enTy6LAyd9YsfkhcD2C6BLi"
+      ]
+
+    # PROD
+    mysql_prod_status:
+      <<: *widget_defaults
+      title: "MYSQL STATUS"
+      colors: *theme_prod
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 0, left: 2, height: 1, width: 1 }
+      cmd: "./scripts/mysql_status.sh"
+      args: [
+        "rivetsway",
+        "balanced",
+        "YLZl1S31xIyVP47ZoUS9B6z3DQom2AfCC3HtpR9K3o8R"
+      ]
+
+    mysql_prod_active_queries:
+      <<: *widget_defaults
+      title: "SLOW / STUCK QUERIES"
+      colors: *theme_prod
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 1, left: 2, height: 1, width: 1 }
+      cmd: "./scripts/mysql_active_queries.sh"
+      args: [
+        "rivetsway",
+        "balanced",
+        "YLZl1S31xIyVP47ZoUS9B6z3DQom2AfCC3HtpR9K3o8R"
+      ]
+
+    mysql_prod_replication_lag:
+      <<: *widget_defaults
+      title: "REPLICATION LAG"
+      colors: *theme_prod
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 2, left: 2, height: 1, width: 1 }
+      cmd: "./scripts/mysql_replication_lag.sh"
+      args: [
+        "rivetsway",
+        "balanced",
+        "YLZl1S31xIyVP47ZoUS9B6z3DQom2AfCC3HtpR9K3o8R"
+      ]
+
+    # mysql_prod_innodb_lock_contention:
+    #   <<: *widget_defaults
+    #   title: "LOCK CONTENTION"
+    #   colors: *theme_prod
+    #   type: cmdrunner
+    #   enabled: true
+    #   border: true
+    #   refreshInterval: 60
+    #   position: { top: 3, left: 2, height: 1, width: 1 }
+    #   cmd: "./scripts/mysql_innodb_lock_contention.sh"
+      # args: [
+      #   "rivetsway",
+      #   "balanced",
+      #   "YLZl1S31xIyVP47ZoUS9B6z3DQom2AfCC3HtpR9K3o8R"
+      # ]
+
+    mysql_prod_binlog_and_disk_pressure:
+      <<: *widget_defaults
+      title: "BINLOG & DISK PRESSURE"
+      colors: *theme_prod
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 3, left: 2, height: 1, width: 1 }
+      cmd: "./scripts/mysql_binlog_and_disk_pressure.sh"
+      args: [
+        "admazely",
+        "10.198.80.3",
+        "3rEVxM6enTy6LAyd9YsfkhcD2C6BLi"
+      ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # STAG
+    # mysql_stag_status:
+    #   <<: *widget_defaults
+    #   title: "MYSQL STATUS"
+    #   colors: *theme_stag
+    #   type: cmdrunner
+    #   enabled: true
+    #   border: true
+    #   refreshInterval: 60
+    #   position: { top: 0, left: 1, height: 1, width: 1 }
+    #   cmd: "./scripts/mysql_status.sh"
+    #   args: [
+    #     "admazely",
+    #     "10.198.80.3",
+    #     "3rEVxM6enTy6LAyd9YsfkhcD2C6BLi"
+    #   ]
+
+    # mysql_stag_active_queries:
+    #   <<: *widget_defaults
+    #   title: "SLOW / STUCK QUERIES"
+    #   colors: *theme_stag
+    #   type: cmdrunner
+    #   enabled: true
+    #   border: true
+    #   refreshInterval: 60
+    #   position: { top: 1, left: 1, height: 1, width: 1 }
+    #   cmd: "./scripts/mysql_active_queries.sh"
+    #   args: [
+    #     "admazely",
+    #     "10.198.80.3",
+    #     "3rEVxM6enTy6LAyd9YsfkhcD2C6BLi"
+    #   ]
+
+    # PROD
+    # mysql_prod_status:
+    #   <<: *widget_defaults
+    #   title: "MYSQL STATUS"
+    #   colors: *theme_prod
+    #   type: cmdrunner
+    #   enabled: true
+    #   border: true
+    #   refreshInterval: 60
+    #   position: { top: 0, left: 2, height: 1, width: 1 }
+    #   cmd: "./scripts/mysql_status.sh"
+    #   args: [
+    #     "rivetsway",
+    #     "balanced",
+    #     "YLZl1S31xIyVP47ZoUS9B6z3DQom2AfCC3HtpR9K3o8R"
+    #   ]
+
+    # mysql_prod_active_queries:
+    #   <<: *widget_defaults
+    #   title: "SLOW / STUCK QUERIES"
+    #   colors: *theme_prod
+    #   type: cmdrunner
+    #   enabled: true
+    #   border: true
+    #   refreshInterval: 60
+    #   position: { top: 1, left: 2, height: 1, width: 1 }
+    #   cmd: "./scripts/mysql_active_queries.sh"
+    #   args: [
+    #     "rivetsway",
+    #     "balanced",
+    #     "YLZl1S31xIyVP47ZoUS9B6z3DQom2AfCC3HtpR9K3o8R"
+    #   ]

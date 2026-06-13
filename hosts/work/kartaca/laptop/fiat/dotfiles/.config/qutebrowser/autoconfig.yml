@@ -6,7 +6,5 @@
 
 config_version: 2
 settings:
-  content.desktop_capture:
-    https://meet.google.com: true
-  tabs.show:
-    global: always
+  colors.webpage.darkmode.enabled:
+    global: true

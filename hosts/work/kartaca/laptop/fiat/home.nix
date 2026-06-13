@@ -11,16 +11,7 @@
 
 # for android emulator
 let
-  android = pkgs.androidenv.composeAndroidPackages {
-    platformVersions = [ "34" ];
-    abiVersions = [ "x86_64" ];
-    systemImageTypes = [ "google_apis" ];
-
-    includeEmulator = true;
-    includeSystemImages = true;
-  };
-
-  dwmFlexipatch = pkgs.stdenv.mkDerivation {
+  dwmFlexipatch = stable.stdenv.mkDerivation {
     pname = "dwm-flexipatch";
     version = "6.8";
 
@@ -30,19 +21,19 @@ let
     };
 
     nativeBuildInputs = [
-      pkgs.gnumake
-      pkgs.gcc
-      pkgs.pkg-config
+      stable.gnumake
+      stable.gcc
+      stable.pkg-config
     ];
     buildInputs = [
-      pkgs.libx11
-      pkgs.imlib2
-      pkgs.libxcb
-      pkgs.libxft
-      pkgs.libxinerama
-      pkgs.libxrandr
-      pkgs.libxcursor
-      pkgs.libxrender
+      stable.libx11
+      stable.imlib2
+      stable.libxcb
+      stable.libxft
+      stable.libxinerama
+      stable.libxrandr
+      stable.libxcursor
+      stable.libxrender
     ];
     installPhase = ''
       mkdir -p $out/bin
@@ -53,7 +44,40 @@ let
     '';
   };
 
-  stFlexipatch = pkgs.stdenv.mkDerivation {
+  mySlstatus = stable.stdenv.mkDerivation {
+    pname = "mySlstatus";
+    version = "1.0";
+    src = builtins.path {
+      path = /home/kkoc/project/dev/nazg/tools/slstatus;
+      name = "slstatus-src";
+    };
+    nativeBuildInputs = [
+      stable.gnumake
+      stable.gcc
+      stable.pkg-config
+    ];
+    buildInputs = [
+      stable.libx11
+      stable.libxft
+      stable.libxinerama
+      stable.libxrandr
+      stable.libxcursor
+      stable.imlib2
+      stable.libsixel
+      stable.fontconfig
+      stable.freetype
+    ];
+    buildPhase = ''
+      make clean
+      make
+    '';
+    installPhase = ''
+      mkdir -p $out/bin
+      cp slstatus $out/bin/
+    '';
+  };
+
+  stFlexipatch = stable.stdenv.mkDerivation {
     pname = "st-flexipatch";
     version = "9.3";
     src = builtins.path {
@@ -61,69 +85,110 @@ let
       name = "st-flexipatch-src";
     };
     nativeBuildInputs = [
-      pkgs.gnumake
-      pkgs.gcc
-      pkgs.pkg-config
+      stable.gnumake
+      stable.gcc
+      stable.pkg-config
     ];
     buildInputs = [
-      pkgs.libx11
-      pkgs.libxft
-      pkgs.libxinerama
-      pkgs.libxrandr
-      pkgs.libxcursor
-      pkgs.imlib2
-      pkgs.libsixel
-      pkgs.fontconfig
-      pkgs.freetype
+      stable.libx11
+      stable.libxft
+      stable.libxinerama
+      stable.libxrandr
+      stable.libxcursor
+      stable.imlib2
+      stable.libsixel
+      stable.fontconfig
+      stable.freetype
     ];
     buildPhase = ''
-        cp config.def.h config.h
+      make clean
+      cp config.def.h config.h
       cp patches.def.h patches.h
       make
     '';
     installPhase = ''
-        mkdir -p $out/bin
+      mkdir -p $out/bin
       cp st $out/bin/
     '';
   };
 
-  slockFlexipatch = pkgs.stdenv.mkDerivation {
-    pname = "slock-flexipatch";
-    version = "1.6";
+  dmenuFlexipatch = stable.stdenv.mkDerivation {
+    pname = "dmenu-flexipatch";
+    version = "5.4";
     src = builtins.path {
-      path = /home/kkoc/project/dev/nazg/tools/slock-flexipatch;
+      path = /home/kkoc/project/dev/nazg/tools/dmenu-flexipatch;
       name = "slock-flexipatch-src";
     };
     nativeBuildInputs = [
-      pkgs.gnumake
-      pkgs.pkg-config
+      stable.gnumake
+      stable.pkg-config
     ];
     buildInputs = [
-      pkgs.xorg.libX11
-      pkgs.xorg.libXext
-      pkgs.xorg.libXinerama
-      pkgs.xorg.libXrandr
-      pkgs.imlib2
-      pkgs.xorg.libXScrnSaver
-      pkgs.libxcrypt
-      pkgs.pam
+      stable.libx11
+      stable.libxext
+      stable.libxinerama
+      stable.libxrandr
+      stable.libxft
+      stable.imlib2
+      stable.libxscrnsaver
+      stable.libxcrypt
+      stable.pam
     ];
-    postPatch = ''
-      sed -i 's/^LIBS =.*/LIBS = -lc -lcrypt -lX11 -lXext -lXrandr -lXinerama -lXss/' Makefile
-    '';
     buildPhase = ''
-        cp config.def.h config.h
+      make clean
+      cp config.def.h config.h
       cp patches.def.h patches.h
       make
     '';
     installPhase = ''
-        mkdir -p $out/bin
-      cp slock $out/bin/
+      mkdir -p $out/bin
+      cp dmenu $out/bin/
+      cp dmenu_path $out/bin/
+      cp dmenu_run $out/bin/
     '';
     meta = {
-      mainProgram = "slock";
+      mainProgram = "dmenu";
     };
   };
+
+  # slockFlexipatch = pkgs.stdenv.mkDerivation {
+  #   pname = "slock-flexipatch";
+  #   version = "1.6";
+  #   src = builtins.path {
+  #     path = /home/kkoc/project/dev/nazg/tools/slock-flexipatch;
+  #     name = "slock-flexipatch-src";
+  #   };
+  #   nativeBuildInputs = [
+  #     stable.gnumake
+  #     stable.pkg-config
+  #   ];
+  #   buildInputs = [
+  #     stable.libx11
+  #     stable.libxext
+  #     stable.libxinerama
+  #     stable.libxrandr
+  #     stable.imlib2
+  #     stable.libxscrnsaver
+  #     stable.libxcrypt
+  #     stable.pam
+  #   ];
+  #   postPatch = ''
+  #     sed -i 's/^LIBS =.*/LIBS = -lc -lcrypt -lX11 -lXext -lXrandr -lXinerama -lXss/' Makefile
+  #   '';
+  #   buildPhase = ''
+  #     make clean
+  #     cp config.def.h config.h
+  #     cp patches.def.h patches.h
+  #     make
+  #   '';
+  #   installPhase = ''
+  #     mkdir -p $out/bin
+  #     cp slock $out/bin/
+  #   '';
+  #   meta = {
+  #     mainProgram = "slock";
+  #   };
+  # };
 in
 {
 
@@ -177,6 +242,10 @@ in
 
   };
   programs = {
+    eww = {
+      enable = true;
+      package = unstable.eww;
+    };
     emacs = {
       enable = true;
       package = pkgs.emacs;
@@ -210,9 +279,7 @@ in
 
   # for android emulator
   home.sessionVariables = {
-    ANDROID_HOME = "${android.androidsdk}/libexec/android-sdk";
-    ANDROID_SDK_ROOT = "${android.androidsdk}/libexec/android-sdk";
-    LD_LIBRARY_PATH = "${pkgs.libnotify}/lib:${pkgs.xorg.libX11}/lib:${pkgs.dbus}/lib:\${LD_LIBRARY_PATH}";
+    LD_LIBRARY_PATH = "${pkgs.libnotify}/lib:${pkgs.libx11}/lib:${pkgs.dbus}/lib:\${LD_LIBRARY_PATH}";
   };
 
   # configure the NixGL targets
@@ -224,16 +291,25 @@ in
   home.packages =
     with pkgs;
     [
+
       unstable.pcsclite # for yubikey
       unstable.qutebrowser # qutebrowser with nixGL
       unstable.libnotify # for qutebrowser notification fix?
       unstable.oath-toolkit # get OTP from terminal
       unstable.conky # watch system state
-      slockFlexipatch # custom slock
+      unstable.sassc # for eww widgets to compile
+
+      unstable.charasay # cowsay good
+
+      # slockFlexipatch # installed native slock on uubntu since nix version has problems with PAM
       stFlexipatch # custom st
       dwmFlexipatch # custom dwm
+      mySlstatus # custom slstatus
+      dmenuFlexipatch # custom dmenu
+
+      stable.betterlockscreen
       unstable.vulkan-tools # display GPU info
-      # unstable.dunst # notifications
+      unstable.dunst # notifications
       stable.kitty # terminal emulator
       stable.autossh # watch and re-open ssh connections
       stable.sesh # session manager for tmux
@@ -246,13 +322,13 @@ in
       stable.emacs-lsp-booster # for eglot
       stable.rust-analyzer # doom emacs dependency
       stable.stylelint # doom emacs web module dep
-      stable.nodePackages.js-beautify # doom emacs web module dep
+      stable.js-beautify # doom emacs web module dep
       stable.rocmPackages.clang # for clang-format. doom emacs java and cc module dep
       stable.glslang # for glslangValidator. doom emacs cc module dep
       stable.nil # nix language server for doom emacs
       stable.iconv # fix emacs cannot find home directory on non-nixo distros (ubuntu)
       stable.fd # dependency for doom emacs and tmux session switcher
-      stable.nixfmt-rfc-style # doom emacs depENDENCY for nix buffer formatting
+      stable.nixfmt # doom emacs depENDENCY for nix buffer formatting
 
       # python modules (standalone)
       stable.python312Packages.pyflakes # doom emacs dependency
@@ -270,7 +346,7 @@ in
       stable.weechat # irc stuff
       stable.yazi # file manager that I use in neovim
       stable.lua # dep for lua neovim
-      stable.xorg.xbacklight # set brightness on laptop
+      stable.xbacklight # set brightness on laptop
       stable.pass # terminal passwork manager
       stable.gopass # pass on steroids
 
@@ -280,15 +356,12 @@ in
       stable.fish # better zsh (make it your daily driver one day)
       stable.fishPlugins.done # get notified when jobs finish
 
-      # for android emulator
-      stable.androidsdk
-      stable.libGL
-      stable.gtk3
-
       # devops
       ## devops/database
       dbeaver-bin
+      stable.harlequin # connect to mysql, cassandra and such from tui
       mysql84
+      unstable.sqlit-tui # better harlequin
       cassandra
       postgresql
 
@@ -434,7 +507,7 @@ in
 
       # misc
       fuse # some appimages require it
-      gccgo # gcc for go
+      # gccgo # gcc for go (I forgot why I needed it..)
       xcolor
       yt-dlp # to watch youtube from mpv
       wkhtmltopdf # convert webpages to pdf (for emacs note taking using pdf-tools and org-noter)
@@ -501,6 +574,8 @@ in
       terminal-parrot # wow
       p7zip # 7z
       gvfs
+      at # timer for linux
+      unstable.urlencode # decode url-encoded strings
       libmtp
       mtpfs # mount android filesystem
       nautilus # just in case file manager
@@ -591,7 +666,6 @@ in
 
   nixpkgs.config = {
     allowUnfree = true;
-    android_sdk.accept_license = true;
   };
 
   # services

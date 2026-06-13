@@ -33,24 +33,24 @@ let
     version = "6.8";
 
     src = builtins.path {
-      path = /home/savolla/project/repos/one-ring/tools/suckless/dwm-flexipatch;
+      path = /home/savolla/project/repos/one-ring/tools/dwm-flexipatch;
       name = "dwm-flexipatch-src";
     };
 
     nativeBuildInputs = [
-      pkgs.gnumake
-      pkgs.gcc
-      pkgs.pkg-config
+      stable.gnumake
+      stable.gcc
+      stable.pkg-config
     ];
     buildInputs = [
-      pkgs.libx11
-      pkgs.imlib2
-      pkgs.libxcb
-      pkgs.libxft
-      pkgs.libxinerama
-      pkgs.libxrandr
-      pkgs.libxcursor
-      pkgs.libxrender
+      stable.libx11
+      stable.imlib2
+      stable.libxcb
+      stable.libxft
+      stable.libxinerama
+      stable.libxrandr
+      stable.libxcursor
+      stable.libxrender
     ];
     installPhase = ''
       mkdir -p $out/bin
@@ -65,7 +65,7 @@ let
     pname = "mySlstatus";
     version = "1.0";
     src = builtins.path {
-      path = /home/savolla/project/repos/one-ring/tools/suckless/slstatus;
+      path = /home/savolla/project/dev/nazg/tools/slstatus;
       name = "slstatus-src";
     };
     nativeBuildInputs = [
@@ -106,15 +106,15 @@ let
       pkgs.pkg-config
     ];
     buildInputs = [
-      pkgs.libx11
-      pkgs.libxft
-      pkgs.libxinerama
-      pkgs.libxrandr
-      pkgs.libxcursor
-      pkgs.imlib2
-      pkgs.libsixel
-      pkgs.fontconfig
-      pkgs.freetype
+      stable.libx11
+      stable.libxft
+      stable.libxinerama
+      stable.libxrandr
+      stable.libxcursor
+      stable.imlib2
+      stable.libsixel
+      stable.fontconfig
+      stable.freetype
     ];
     buildPhase = ''
         cp config.def.h config.h
@@ -135,18 +135,18 @@ let
       name = "slock-flexipatch-src";
     };
     nativeBuildInputs = [
-      pkgs.gnumake
-      pkgs.pkg-config
+      stable.gnumake
+      stable.pkg-config
     ];
     buildInputs = [
-      pkgs.libX11
-      pkgs.libXext
-      pkgs.libXinerama
-      pkgs.libXrandr
-      pkgs.imlib2
-      pkgs.libXScrnSaver
-      pkgs.libxcrypt
-      pkgs.pam
+      stable.libx11
+      stable.libxext
+      stable.libxinerama
+      stable.libxrandr
+      stable.imlib2
+      stable.libxscrnsaver
+      stable.libxcrypt
+      stable.pam
     ];
     postPatch = ''
       sed -i 's/^LIBS =.*/LIBS = -lc -lcrypt -lX11 -lXext -lXrandr -lXinerama -lXss/' Makefile
@@ -447,6 +447,7 @@ in
       unstable.atmos # create folder structure for terraform, opentofu, packer etc.
       unstable.atuin # shell history on steroids
       unstable.audit # for crosstool-ng dep
+      unstable.urlencode # decode url-encoded strings
       unstable.autoconf # for crosstool-ng dep
       unstable.automake # for crosstool-ng dep
       unstable.autossh # watch and re-open ssh connections

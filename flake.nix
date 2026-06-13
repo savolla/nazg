@@ -6,18 +6,18 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
 
-    nixpkgs-25_11 = {
-      url = "github:NixOS/nixpkgs/nixos-25.11";
+    stable = {
+      url = "github:NixOS/nixpkgs/nixos-26.05";
     };
 
-    home-manager-25_11 = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs-25_11";
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-26.05";
+      inputs.nixpkgs.follows = "stable";
     };
 
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs-25_11";
+      inputs.nixpkgs.follows = "stable";
     };
   };
 
@@ -25,8 +25,8 @@
     {
       self,
       nixpkgs-unstable,
-      nixpkgs-25_11,
-      home-manager-25_11,
+      stable,
+      home-manager-stable,
       nix-on-droid,
       ...
     }:
@@ -34,7 +34,7 @@
     let
       mkStable =
         system:
-        import nixpkgs-25_11 {
+        import stable {
           inherit system;
           config.allowUnfree = true;
         };
@@ -77,14 +77,14 @@
           extraSpecialArgs = {
             stable = mkStable "aarch64-linux";
           };
-          home-manager-path = home-manager-25_11.outPath;
+          home-manager-path = home-manager-stable.outPath;
         };
 
       };
 
       # fiat runs Ubuntu — standalone home-manager only
       homeConfigurations = {
-        fiat = home-manager-25_11.lib.homeManagerConfiguration {
+        fiat = home-manager-stable.lib.homeManagerConfiguration {
           pkgs = mkStable "x86_64-linux";
           extraSpecialArgs = {
             stable = mkStable "x86_64-linux";

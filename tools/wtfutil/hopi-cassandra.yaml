@@ -1,0 +1,180 @@
+wtf:
+  colors:
+    border:
+      focusable: darkslateblue
+      focused: yellow
+      normal: gray
+  grid:
+    columns: [69, 69, 69]
+    rows: [11, 10, 40, 7, 10, 40, 20, 20, 40, 40]
+  refreshInterval: 1
+  openFileUtil: "xdg-open"
+
+  # --- YAML ANCHORS ---
+  # Define default widget behaviors here
+  .widget_defaults: &widget_defaults
+    enabled: true
+    border: true
+    type: cmdrunner
+
+  .theme_test: &theme_test
+    title: blue
+    border: { focusable: blue }
+
+  .theme_stag: &theme_stag
+    title: orange
+    border: { focusable: orange }
+
+  .theme_prod: &theme_prod
+    title: red
+    border: { focusable: red }
+
+  mods:
+    # TEST
+    cassandra_ring:
+      <<: *widget_defaults
+      title: "CLUSTER RING STATUS"
+      colors: *theme_test
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 0, left: 0, height: 1, width: 1 }
+      cmd: "./scripts/hopi-cassandra-ring.sh"
+      args: [
+        "diesel",
+        "monitorRole",
+        "91jvhOxYbB512QQss5gc"
+      ]
+
+    cassandra_dropped:
+      <<: *widget_defaults
+      title: "DROPPED MESSAGES"
+      colors: *theme_test
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 120
+      position: { top: 1, left: 0, height: 1, width: 1 }
+      cmd: "./scripts/hopi-cassandra-dropped.sh"
+      args: [
+        "diesel",
+        "monitorRole",
+        "91jvhOxYbB512QQss5gc"
+      ]
+
+    cassandra_health:
+      <<: *widget_defaults
+      title: "NODE HEALTH & COMPACTION"
+      colors: *theme_test
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 300
+      position: { top: 2, left: 0, height: 1, width: 1 }
+      cmd: "./scripts/hopi-cassandra-health.sh"
+      args: [
+        "diesel",
+        "monitorRole",
+        "91jvhOxYbB512QQss5gc"
+      ]
+
+
+    # STAG
+    cassandra_stag_ring:
+      <<: *widget_defaults
+      title: "CLUSTER RING STATUS"
+      colors: *theme_stag
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 0, left: 1, height: 1, width: 1 }
+      cmd: "./scripts/hopi-cassandra-ring.sh"
+      args: [
+        "inbloom",
+        "monitorRole",
+        "91jAPSTEW12dd2QQss5gc"
+      ]
+
+    cassandra_stag_dropped:
+      <<: *widget_defaults
+      title: "DROPPED MESSAGES"
+      colors: *theme_stag
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 120
+      position: { top: 1, left: 1, height: 1, width: 1 }
+      cmd: "./scripts/hopi-cassandra-dropped.sh"
+      args: [
+        "inbloom",
+        "monitorRole",
+        "91jAPSTEW12dd2QQss5gc"
+      ]
+
+    cassandra_stag_health:
+      <<: *widget_defaults
+      title: "NODE HEALTH & COMPACTION"
+      colors: *theme_stag
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 300
+      position: { top: 2, left: 1, height: 1, width: 1 }
+      cmd: "./scripts/hopi-cassandra-health.sh"
+      args: [
+        "inbloom",
+        "monitorRole",
+        "91jAPSTEW12dd2QQss5gc"
+      ]
+
+
+    # PROD
+    cassandra_prod_ring:
+      <<: *widget_defaults
+      title: "CLUSTER RING STATUS"
+      colors: *theme_prod
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 60
+      position: { top: 0, left: 2, height: 1, width: 1 }
+      cmd: "./scripts/hopi-cassandra-ring.sh"
+      args: [
+        "backchat",
+        "monitorRole",
+        "VxqtEn2WKfSMNqVxKNyKcj426qFvdV6e"
+      ]
+
+    cassandra_prod_dropped:
+      <<: *widget_defaults
+      title: "DROPPED MESSAGES"
+      colors: *theme_prod
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 120
+      position: { top: 1, left: 2, height: 1, width: 1 }
+      cmd: "./scripts/hopi-cassandra-dropped.sh"
+      args: [
+        "backchat",
+        "monitorRole",
+        "VxqtEn2WKfSMNqVxKNyKcj426qFvdV6e"
+      ]
+
+    cassandra_prod_health:
+      <<: *widget_defaults
+      title: "NODE HEALTH & COMPACTION"
+      colors: *theme_prod
+      type: cmdrunner
+      enabled: true
+      border: true
+      refreshInterval: 300
+      position: { top: 2, left: 2, height: 1, width: 1 }
+      cmd: "./scripts/hopi-cassandra-health.sh"
+      args: [
+        "backchat",
+        "monitorRole",
+        "VxqtEn2WKfSMNqVxKNyKcj426qFvdV6e"
+      ]

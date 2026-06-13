@@ -570,11 +570,68 @@ config.bind("<Space>8", "tab-select 8")
 config.bind("<Space>9", "tab-select 9")
 config.bind("<Space>G", "tab-focus -1")
 
+# config.bind('n',  'open -t about:blank') # open a blank
+
 # password manager
-config.bind('<Space><j><l>', 'spawn --userscript qute-pass')
-config.bind('<Space><j><u><l>', 'spawn --userscript qute-pass --username-only')
-config.bind('<Space><j><p><l>', 'spawn --userscript qute-pass --password-only')
-config.bind('<Space><j><o><l>', 'spawn --userscript qute-pass --otp-only')
+config.bind(
+    '<Space><l>',
+    'spawn --userscript qute-pass '
+    '--username-target secret '
+    '--username-pattern "username: (.+)" '
+    '--mode gopass '
+    '--unfiltered '
+    '--always-show-selection '
+    '--dmenu-invocation \'dmenu -i -fn "IosevkaTerm NF:size=12:style=Regular" -nb "#282828" -nf "#a89984" -sb "#a89984" -sf "#282828"\''
+)
+
+# kartaca spesific keychords
+## jenkins
+config.bind('<Space>okjhA',  'open https://uretimbandi.kartaca.com/view/Bird/job/bird-usy/')
+### preprod
+config.bind('<Space>okjhpb', 'open https://uretimbandi.kartaca.com/job/bird-usy/job/pretest-be-deploy/')
+config.bind('<Space>okjhpf', 'open https://uretimbandi.kartaca.com/job/bird-usy/job/pretest-fe-deploy/')
+
+### test
+config.bind('<Space>okjhtb', 'open https://uretimbandi.kartaca.com/job/bird-usy/job/test-be-deploy/')
+config.bind('<Space>okjhtf', 'open https://uretimbandi.kartaca.com/job/bird-usy/job/test-fe-deploy/')
+
+### staging
+config.bind('<Space>okjhsb', 'open https://uretimbandi.kartaca.com/job/bird-usy/job/staging-be-deploy/')
+config.bind('<Space>okjhsf', 'open https://uretimbandi.kartaca.com/job/bird-usy/job/staging-fe-deploy/')
+
+### prod
+config.bind('<Space>okjhPb', 'open https://uretimbandi.kartaca.com/job/bird-usy/job/prod-be-deploy/')
+config.bind('<Space>okjhPf', 'open https://uretimbandi.kartaca.com/job/bird-usy/job/prod-fe-deploy/')
+
+## vault
+config.bind('<Space>okv', 'open https://parola.kartaca.com/ui/vault/secrets')
+
+## b2b
+### dashboards
+config.bind('<Space>okhp2d', 'open https://bird-pretest.test.kartaca.com/user/login?destination=admin/dashboard')
+config.bind('<Space>okht2d', 'open https://bird.test.kartaca.com/user/login?destination=admin/dashboard')
+config.bind('<Space>okhs2d', 'open https://bird.staging.kartaca.com/user/login?destination=admin/dashboard')
+config.bind('<Space>okhP2d', 'open https://b2b.hopi.com.tr/user/login?destination=admin/dashboard')
+
+### updates
+config.bind('<Space>okhp2u', 'open https://bird-pretest.test.kartaca.com/update.php')
+config.bind('<Space>okht2u', 'open https://bird.test.kartaca.com/update.php')
+config.bind('<Space>okhs2u', 'open https://bird.staging.kartaca.com/update.php')
+config.bind('<Space>okhP2u', 'open https://b2b.hopi.com.tr/update.php')
+
+## rabbitmq
+## cassandra reaper
+## karbus
+config.bind('<Space>okK', 'open https://karbus.kartaca.com/')
+config.bind('<Space>okkrwr', 'open https://karbus.kartaca.com/remote-work-request')
+config.bind('<Space>okkrwl', 'open https://karbus.kartaca.com/remote-works')
+
+## atlassian
+### timetracker
+config.bind('<Space>okaT', 'open https://kartaca.atlassian.net/jira/apps/d95630c7-9fd4-495d-8988-b55637f4f8e9/1e298677-4dfa-4966-9486-544a5b279ca7')
+
+### confluence
+config.bind('<Space>okaj', 'open https://kartaca.atlassian.net/wiki/home')
 
 # Files
 config.bind("<Space>fh", "history --tab")
@@ -608,6 +665,7 @@ c.hints.chars = "asdfjkl"
 # search
 config.bind("<Space>ss", "cmd-set-text /")
 config.bind("<Space>sog", "cmd-set-text :open -t https://www.google.com/search?q=")
+config.bind("<Space>soj", "cmd-set-text :open -t https://kartaca.atlassian.net/browse/")
 config.bind("<Space>soy", "cmd-set-text :open -t https://www.youtube.com/results?search_query=")
 config.bind("<Space>sod", "cmd-set-text :open -t https://duckduckgo.com/?q=")
 config.bind("<Space>soR", "cmd-set-text :open -t https://rutracker.org/forum/tracker.php?nm=")

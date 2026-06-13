@@ -151,10 +151,9 @@ function fish_user_key_bindings
 end
 
 # done plugin settings
-# set -U __done_min_cmd_duration 1200000  # notify if process finished after 30 mins
-set -U __done_min_cmd_duration 5000 # notify if process finished after 30 mins
+set -U __done_min_cmd_duration 1800000 # notify if process finished after 30 mins
 set -U __done_notify_sound 1 # play sound when process finishes
-set -U __done_notification_urgency_level critical
+set -U __done_notification_urgency_level normal
 set -U __done_notification_urgency_level_failure critical
 set -U __done_notification_duration -1 # never expire the notification
 

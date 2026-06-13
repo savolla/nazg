@@ -1,40 +1,189 @@
 #!/usr/bin/env bash
 
-DMENU=(dmenu -i -fn 'IosevkaTerm NF:size=12:style=Regular' -nb '#282828' -nf '#a89984' -sb '#a89984' -sf '#282828')
+DMENU=(
+    dmenu
+    -i
+    -fn 'IosevkaTerm NF:size=12:style=Regular'
+    -nb '#282828'
+    -nf '#a89984'
+    -sb '#a89984'
+    -sf '#282828'
+    -S
+)
 
-# 1. Select the account/entry
-entry=$(gopass list --flat | "${DMENU[@]}" -p "Select Account:")
+cachedir="${XDG_CACHE_HOME:-$HOME/.cache}"
+mkdir -p "$cachedir"
+
+account_history="$cachedir/gopass-account-history"
+
+dmenu_history() {
+    local prompt="$1"
+    local histfile="$2"
+    local mrufile="${histfile}-mru" # Her histfile için otomatik bir mru dosyası oluştur
+
+    awk -v histfile="$histfile" -v mrufile="$mrufile" '
+        BEGIN {
+            # 1. Önce MRU (en son kullanılan) dosyasını oku ve en başa koy
+            if ((getline < mrufile) > 0) {
+                print
+                seen[$0] = 1
+            }
+            close(mrufile)
+
+            # 2. Sonra geçmiş dosyasını (frekansa göre) oku
+            while ((getline < histfile) > 0) {
+                sub("^[0-9]+\t","")
+                if (!seen[$0]) {
+                    print
+                    seen[$0] = 1
+                }
+            }
+            close(histfile)
+        }
+        !seen[$0]++
+    ' |
+    "${DMENU[@]}" -p "$prompt" |
+    awk -v histfile="$histfile" -v mrufile="$mrufile" '
+        BEGIN {
+            FS = OFS = "\t"
+
+            while ((getline < histfile) > 0) {
+                count = $1
+                sub("^[0-9]+\t","")
+                history[$0] = count
+            }
+            close(histfile)
+        }
+
+        {
+            # Seçilen öğeyi mrufile içine yaz (üzerine yazarak)
+            print $0 > mrufile
+
+            history[$0]++
+            print
+        }
+
+        END {
+            if (!NR)
+                exit
+
+            for (item in history)
+                print history[item], item | "sort -t '\''\t'\'' -k1,1rn > " histfile
+        }
+    '
+}
+
+# 1. Select account
+entry=$(
+    gopass list --flat |
+    dmenu_history "󰌆 " "$account_history"
+)
+
 [ -n "$entry" ] || exit
 
-# 2. Extract the raw secret file
+# 2. Get raw secret
 raw_output=$(gopass show --unsafe --noparsing "$entry")
 [ -n "$raw_output" ] || exit
 
-# 3. Parse keys — only match "word: " (colon followed by space)
-fields=$(echo "$raw_output" | grep -oP '^[a-zA-Z0-9_-]+(?=:\s)')
+# DÜZELTME: field_history değişkenini entry belli olduktan SONRA tanımlıyoruz
+field_history="$cachedir/gopass-field-history-$(printf '%s' "$entry" | tr '/' '_')"
 
-# 4. Prepend "password" if first line is not a key-value pair
-first_line=$(echo "$raw_output" | head -1)
-if echo "$first_line" | grep -qP '^[a-zA-Z0-9_-]+:\s'; then
-  menu_options=$(printf "%s\n" "$fields")
+# 3. Extract field names
+fields=$(printf '%s\n' "$raw_output" | grep -oP '^[a-zA-Z0-9_-]+(?=:\s)')
+
+# 4. Add password option if first line isn't key:value
+first_line=$(printf '%s\n' "$raw_output" | head -n1)
+
+if printf '%s\n' "$first_line" | grep -qP '^[a-zA-Z0-9_-]+:\s'; then
+    menu_options="$fields"
 else
-  menu_options=$(printf "password\n%s\n" "$fields")
+    menu_options=$(printf "password\n%s\n" "$fields")
 fi
 
-# 5. Select which field to copy
-selected_field=$(echo "$menu_options" | "${DMENU[@]}" -p "$entry:")
+# 5. Select field
+selected_field=$(
+    printf '%s\n' "$menu_options" |
+    dmenu_history "$entry:" "$field_history"
+)
+
 [ -n "$selected_field" ] || exit
 
-# 6. Copy to clipboard
-if [ "$selected_field" = "password" ]; then
-  gopass show --clip "$entry"
-elif [ "$selected_field" = "otp" ]; then
-  otp_uri=$(echo "$raw_output" | grep -oP "(?<=^otp:\s).*" | tr -d '\n')
-  otp_code=$(oathtool --base32 --totp "$(echo "$otp_uri" | grep -oP '(?<=secret=)[^&]+')")
-  echo -n "$otp_code" | xclip -selection clipboard
-  notify-send "gopass" "Copied OTP to clipboard."
-else
-  value=$(echo "$raw_output" | grep -oP "(?<=^${selected_field}:\s).*" | tr -d '\n')
-  echo -n "$value" | xclip -selection clipboard
-  notify-send "gopass" "Copied $selected_field to clipboard."
-fi
+# 6. Copy selected value
+# case "$selected_field" in
+#     password)
+#         gopass show --clip "$entry"
+#         ;;
+
+#     otp)
+#         otp_uri=$(
+#             printf '%s\n' "$raw_output" |
+#             grep -oP '(?<=^otp:\s).*' |
+#             tr -d '\n'
+#         )
+
+#         otp_code=$(
+#             oathtool --base32 --totp "$(
+#                 printf '%s\n' "$otp_uri" |
+#                 grep -oP '(?<=secret=)[^&]+'
+#             )"
+#         )
+
+#         printf '%s' "$otp_code" | xclip -selection clipboard
+#         notify-send "gopass" "Copied OTP to clipboard."
+#         ;;
+
+#     *)
+#         value=$(
+#             printf '%s\n' "$raw_output" |
+#             grep -oP "(?<=^${selected_field}:\s).*" |
+#             tr -d '\n'
+#         )
+
+#         printf '%s' "$value" | xclip -selection clipboard
+#         notify-send "gopass" "Copied $selected_field to clipboard."
+#         ;;
+# esac
+
+# 7. type out the value (dangerous but less friction)
+case "$selected_field" in
+    password)
+        value=$(gopass show --unsafe --noparsing "$entry" | head -n1)
+        xdotool type --clearmodifiers --delay 20 "$value"
+        ;;
+
+    url)
+        url=$(
+            printf '%s\n' "$raw_output" |
+            grep -oP "(?<=^${selected_field}:\s).*" |
+            tr -d '\n'
+        )
+        $BROWSER "$url"
+        ;;
+
+    otp)
+        otp_uri=$(
+            printf '%s\n' "$raw_output" |
+            grep -oP '(?<=^otp:\s).*' |
+            tr -d '\n'
+        )
+
+        otp_code=$(
+            oathtool --base32 --totp "$(
+                printf '%s\n' "$otp_uri" |
+                grep -oP '(?<=secret=)[^&]+'
+            )"
+        )
+
+        xdotool type --clearmodifiers --delay 20 "$otp_code"
+        ;;
+
+    *)
+        value=$(
+            printf '%s\n' "$raw_output" |
+            grep -oP "(?<=^${selected_field}:\s).*" |
+            tr -d '\n'
+        )
+
+        xdotool type --clearmodifiers --delay 20 "$value"
+        ;;
+esac

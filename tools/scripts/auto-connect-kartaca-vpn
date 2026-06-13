@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+while true; do
+    if ! ip link show tun0 &>/dev/null; then
+        sudo vpnc-disconnect 2>/dev/null
+        sleep 10
+
+        raw=$(gopass show kartaca/ldap/kkoc 2>/dev/null)
+        password=$(echo "$raw" | head -n1)
+        otp_secret=$(echo "$raw" | grep -oP '(?<=^otp:\s).*')
+        otp_code=$(oathtool --base32 --totp "$otp_secret")
+
+        tmp=$(sudo mktemp /tmp/vpnc-XXXXXX.conf)
+        sudo cat /etc/vpnc/default.conf | sudo tee "$tmp" > /dev/null
+        echo "Xauth username kkoc" | sudo tee -a "$tmp" > /dev/null
+        echo "Xauth password ${password}${otp_code}" | sudo tee -a "$tmp" > /dev/null
+        echo "Enable weak encryption yes" | sudo tee -a "$tmp" > /dev/null
+
+        sudo vpnc "$tmp"
+        sudo rm -f "$tmp"
+
+        sudo tee /etc/resolv.conf > /dev/null <<EOF
+search kartaca.net
+nameserver 1.1.1.1
+nameserver 8.8.8.8
+nameserver 195.226.196.11
+EOF
+    fi
+    sleep 30
+done

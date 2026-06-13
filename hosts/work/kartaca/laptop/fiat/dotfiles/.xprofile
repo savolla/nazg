@@ -31,6 +31,7 @@ mpd &                               # start mpd as normal user
 # adaptive-blue-light-filter &      # blue light filter
 sunshine &                          # start stream server
 xsct 3500 &
+auto-connect-kartaca-vpn &
 syncthing --no-browser &
 slstatus &
 periodic-random-wallpaper-switcher &

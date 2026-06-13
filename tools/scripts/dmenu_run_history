@@ -1,0 +1,73 @@
+#!/bin/sh
+
+DMENU="dmenu -i -S \
+    -fn 'IosevkaTerm NF:size=12:style=Regular' \
+    -nb '#282828' \
+    -nf '#a89984' \
+    -sb '#a89984' \
+    -sf '#282828'"
+
+cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
+if [ -d "$cachedir" ]; then
+    cache=$cachedir/dmenu_run
+    historyfile=$cachedir/dmenu_history
+    mrufile=$cachedir/dmenu_mru
+else
+    cache=$HOME/.dmenu_cache
+    historyfile=$HOME/.dmenu_history
+    mrufile=$HOME/.dmenu_mru
+fi
+
+IFS=:
+if stest -dqr -n "$cache" $PATH; then
+    stest -flx $PATH | sort -u > "$cache"
+fi
+unset IFS
+
+awk -v histfile="$historyfile" -v mrufile="$mrufile" '
+    BEGIN {
+        # 1. İstisna: En son çalıştırılan komutu oku ve en başa yaz
+        if ( (getline < mrufile) > 0 ) {
+            print
+            x[$0]=1
+        }
+        close(mrufile)
+
+        # 2. Geçmişi (frekansa göre) ekle. Eğer MRU olarak eklendiyse es geç.
+        while( (getline < histfile) > 0 ) {
+            sub("^[0-9]+\t","")
+            if (!x[$0]) {
+                print
+                x[$0]=1
+            }
+        }
+        close(histfile)
+    } !x[$0]++ ' "$cache" \
+    | eval "$DMENU $*" \
+    | awk -v histfile="$historyfile" -v mrufile="$mrufile" '
+        BEGIN {
+            FS=OFS="\t"
+            while ( (getline < histfile) > 0 ) {
+                count=$1
+                sub("^[0-9]+\t","")
+                fname=$0
+                history[fname]=count
+            }
+            close(histfile)
+        }
+
+        {
+            history[$0]++
+            print $0 > mrufile # Seçilen komutu mrufile içine yaz (eskinin üzerine yazar)
+            print
+        }
+
+        END {
+            if(!NR) exit
+            for (f in history)
+                print history[f],f | "sort -t '\''\t'\'' -k1rn >" histfile
+        }
+    ' \
+    | while read -r cmd; do
+        ${SHELL:-/bin/sh} -c "$cmd" &
+    done

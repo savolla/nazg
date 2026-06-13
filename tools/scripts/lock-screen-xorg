@@ -2,5 +2,5 @@
 
 toggle-picom # disable picom
 xset dpms force off # shutdown monitor
-slock
+/usr/bin/slock
 toggle-picom # re-enable picom
