@@ -33,7 +33,7 @@ let
     version = "6.8";
 
     src = builtins.path {
-      path = /home/savolla/project/repos/one-ring/tools/dwm-flexipatch;
+      path = /home/savolla/project/dev/nazg/tools/dwm-flexipatch;
       name = "dwm-flexipatch-src";
     };
 
@@ -97,7 +97,7 @@ let
     pname = "st-flexipatch";
     version = "9.3";
     src = builtins.path {
-      path = /home/savolla/project/repos/one-ring/tools/suckless/st-flexipatch;
+      path = /home/savolla/project/dev/nazg/tools/st-flexipatch;
       name = "st-flexipatch-src";
     };
     nativeBuildInputs = [
@@ -131,7 +131,7 @@ let
     pname = "slock-flexipatch";
     version = "1.6";
     src = builtins.path {
-      path = /home/savolla/project/repos/one-ring/tools/suckless/slock-flexipatch;
+      path = /home/savolla/project/dev/nazg/tools/slock-flexipatch;
       name = "slock-flexipatch-src";
     };
     nativeBuildInputs = [

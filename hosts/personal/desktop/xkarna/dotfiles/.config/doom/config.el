@@ -110,6 +110,8 @@
         "~/.config/emacs/"
 
         ;; personal projects
+        "~/project/dev/nazg"
+
         "~/project/repos/one-ring/"
         "~/project/repos/legolas/"
         "~/project/repos/gimly/"
