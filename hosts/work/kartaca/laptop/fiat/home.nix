@@ -467,6 +467,7 @@ in
       ## devops/git
       bfg-repo-cleaner # delete files from git history
       lazygit # git but lazy
+      git-crypt # encrypt files in git
 
       ## devops/misc
       php85Packages.composer # task runner
