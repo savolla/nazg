@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# this script uses gopass to auto type passwords
+# handles otp both with otp: address or otp: secret
 
 DMENU=(
     dmenu
@@ -161,19 +163,20 @@ case "$selected_field" in
         ;;
 
     otp)
-        otp_uri=$(
+        otp_raw=$(
             printf '%s\n' "$raw_output" |
-            grep -oP '(?<=^otp:\s).*' |
-            tr -d '\n'
-        )
+                grep -oP '(?<=^otp:\s).*' |
+                tr -d '\n'
+               )
 
-        otp_code=$(
-            oathtool --base32 --totp "$(
-                printf '%s\n' "$otp_uri" |
-                grep -oP '(?<=secret=)[^&]+'
-            )"
-        )
+        # If it's a full otpauth URI, extract the secret= param; otherwise use it directly
+        if printf '%s\n' "$otp_raw" | grep -q '^otpauth://'; then
+            otp_secret=$(printf '%s\n' "$otp_raw" | grep -oP '(?<=secret=)[^&]+')
+        else
+            otp_secret="$otp_raw"
+        fi
 
+        otp_code=$(oathtool --base32 --totp "$otp_secret")
         xdotool type --clearmodifiers --delay 20 "$otp_code"
         ;;
 
@@ -181,7 +184,7 @@ case "$selected_field" in
         value=$(
             printf '%s\n' "$raw_output" |
             grep -oP "(?<=^${selected_field}:\s).*" |
-            tr -d '\n'
+            tr -d '\r\n'
         )
 
         xdotool type --clearmodifiers --delay 20 "$value"

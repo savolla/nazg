@@ -349,6 +349,12 @@ in
       stable.xbacklight # set brightness on laptop
       stable.pass # terminal passwork manager
       stable.gopass # pass on steroids
+      stable.qtpass # ui for gopass (pass)
+      stable.pwgen # create secure passwords
+
+      # other
+      stable.qrencode
+      stable.mc # midnight commander (mostly because it supports sftp, ftp, smb etc.)
 
       stable.ssh-askpass-fullscreen
 
@@ -468,6 +474,7 @@ in
       bfg-repo-cleaner # delete files from git history
       lazygit # git but lazy
       git-crypt # encrypt files in git
+      cowsay
 
       ## devops/misc
       php85Packages.composer # task runner
@@ -489,7 +496,20 @@ in
       gonzo # log inspecting
 
       # dolphie # watch your mysql node (disabled due to nixpkgs don't have this yet)
-      soapui # xml based apis
+
+      # soapui # xml based apis
+      (pkgs.soapui.overrideAttrs (old: {
+        nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ pkgs.makeWrapper ];
+        postInstall = (old.postInstall or "") + ''
+          wrapProgram $out/bin/soapui \
+        --prefix LD_LIBRARY_PATH : "${pkgs.lib.makeLibraryPath [
+          pkgs.libxxf86vm
+          pkgs.glib
+        ]}"
+        '';
+      }))
+
+      steam-run # fhs for programs
       k6 # test
       ggh # ssh session manager
 
@@ -543,6 +563,12 @@ in
       tmux-xpanes # run multiple commands on multiple tmux panes at once
       tree # file trees
 
+      # zellij (trying to migrate to this gem)
+      zellij # tmux alternative
+      # zellijPlugins.zjstatus # awesome status bar for zellij
+      # zellijPlugins.zframes # awesome status bar for zellij
+      sampler # better wtfutil
+
       # zsh
       zsh
       zsh-autosuggestions
@@ -581,6 +607,7 @@ in
       mtpfs # mount android filesystem
       nautilus # just in case file manager
       wtfutil # build customized tui dashboards
+      stable.netdata # watch your infrastructure collapse
       qalculate-gtk # dependency for rofi-calc
       xdotool # autotype things (requirement for legolas script)
       libqalculate # awesome calculator qalculate
@@ -632,6 +659,11 @@ in
 
       # programming/languages
       go
+      gocode-gomod # go code completion (doom emacs go module dep)
+      gore # go repl
+      gotools # go tools for development
+      gotests
+      gomodifytags
 
     ]
     ++ (with stable; [

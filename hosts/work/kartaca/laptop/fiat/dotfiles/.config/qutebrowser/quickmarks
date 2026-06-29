@@ -183,3 +183,12 @@ kartaca.enizam.deneme-süreci-hedefler https://kartaca.atlassian.net/wiki/spaces
 kartaca.hopi.jenkins.apm https://uretimbandi.kartaca.com/view/Bird/job/bird-usy/job/apm/
 hopi.jira.scrum-board https://bnrteknoloji.atlassian.net/jira/core/projects/HP/board?filter=&groupBy=status
 savolla.troubleshooting.speed-test https://fast.com/
+kartaca.hopi.release-notes.4.62.0 https://kartaca.atlassian.net/wiki/spaces/BIRD/pages/5385388046/4.62.0+S+r+m+Notlar
+savolla.devops.system.cronjob-guru https://crontab.guru/#
+kartaca.hopi.test.address.sme.be https://bird.test.kartaca.com/bird-sme-be/
+kartaca.hopi.test.address.sme.api https://bird.test.kartaca.com/bird-sme-api/
+kartaca.hopi.test.address.sme.fe https://bird-sme.test.kartaca.com/
+kartaca.hopi.test.address.ai-assistant-cms https://bird-ai-assistant.test.kartaca.com/admin
+kartaca.hopi.test.address.ai-assistant https://bird-ai-assistant.test.kartaca.com
+kartaca.hopi.gcp.prod.load-balancer.mobile-service.promotion-code https://console.cloud.google.com/logs/query;query=resource.type%3D%22http_load_balancer%22%0Aresource.labels.forwarding_rule_name%3D%22k8s2-fs-49o0c7rp-default-gke-lb-ingress-nqvnk64z%22%0Aresource.labels.url_map_name%3D%22k8s2-um-49o0c7rp-default-gke-lb-ingress-nqvnk64z%22%0AhttpRequest.requestUrl%3D~%22https:%2F%2Fmobile.hopi.com.tr%2Fcampaigns%2F%5B0-9%5D%2B%2Fpromotion-code%22;summaryFields=httpRequest%252FremoteIp:false:32:beginning;lfeCustomFields=httpRequest%252FremoteIp,httpRequest%252FrequestUrl;cursorTimestamp=2026-06-26T11:21:16.453653Z;duration=PT1H?project=hopi-program
+savolla.security.how-securte-is-my-password https://www.security.org/how-secure-is-my-password/
