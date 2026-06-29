@@ -1,0 +1,28 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/tales-of-majeyal/drive_c/GOG Games/Tales
+    of Maj'Eyal/Launch Tales of Maj'Eyal.lnk
+  prefix: /home/savolla/resource/games/pc/tales-of-majeyal
+game_slug: tales-of-majeyal
+name: Tales of Maj'Eyal
+script:
+  files:
+  - setupfile: N/A:Select the setup file
+  game:
+    exe: _xXx_AUTO_WIN32_xXx_
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win64
+      env:
+        LC_ALL: ''
+      executable: /home/savolla/resource/games/pc/Tales_of_majeyal_1.7.6_(65702)_win_gog/setup_tales_of_majeyal_1.7.6_(65702).exe
+      prefix: /home/savolla/resource/games/pc/tales-of-majeyal
+      wine_path: /home/savolla/.local/share/lutris/runners/wine/wine-ge-8-26-x86_64/bin/wine
+  system:
+    env:
+      LC_ALL: ''
+slug: tales-of-majeyal-setup
+system:
+  env:
+    LC_ALL: ''
+version: Setup file

@@ -1,0 +1,5 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/risk-of-rain-2/RiskOfRain2/start.sh
+system:
+  disable_runtime: true
+  prefer_system_libs: false

@@ -1,0 +1,29 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/dead-cells/drive_c/GOG Games/Dead Cells/deadcells.exe
+  prefix: /home/savolla/resource/games/games/pc/dead-cells
+game_slug: dead-cells
+name: Dead Cells
+script:
+  files:
+  - setupfile: N/A:Select the setup file
+  game:
+    exe: _xXx_AUTO_WIN32_xXx_
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win64
+      env:
+        LC_ALL: ''
+      executable: /home/savolla/resource/games/pc/Dead_Cells_1.26.0_(75677)_win_gog/setup_dead_cells_1.26.0_(75677).exe
+      prefix: /home/savolla/resource/games/pc/dead-cells
+      wine_path: /home/savolla/.local/share/lutris/runners/wine/wine-ge-8-26-x86_64/bin/wine
+  system:
+    env:
+      LC_ALL: ''
+slug: dead-cells-setup
+system:
+  disable_runtime: true
+  env:
+    LC_ALL: ''
+  prefer_system_libs: false
+version: Setup file

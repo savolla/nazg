@@ -1,0 +1,31 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/assassins-creed/drive_c/GOG Games/Assassins
+    Creed/AssassinsCreed_Game.exe
+  prefix: /home/savolla/resource/games/games/pc/assassins-creed
+game_slug: assassins-creed
+name: Assassin's Creed
+script:
+  files:
+  - setupfile: N/A:Select the setup file
+  game:
+    exe: _xXx_AUTO_WIN32_xXx_
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win64
+      env:
+        LC_ALL: ''
+      executable: /home/savolla/resource/games/pc/Assassins_Creed_Directors_Cut_1.02
+        v2_(28524)_win_gog/setup_assassins_creed_1.02_v2_(28524).exe
+      prefix: /home/savolla/resource/games/pc/assassins-creed
+      wine_path: /home/savolla/.local/share/lutris/runners/wine/wine-ge-8-26-x86_64/bin/wine
+  system:
+    env:
+      LC_ALL: ''
+slug: assassins-creed-setup
+system:
+  disable_runtime: true
+  env:
+    LC_ALL: ''
+  prefer_system_libs: false
+version: Setup file

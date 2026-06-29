@@ -1,0 +1,8 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/the-witcher/start.sh
+system:
+  antimicro_config: /home/savolla/resource/games/ps4-controller-profiles/witcher1-antimicro.gamecontroller.xml
+  gamescope: true
+  gamescope_fps_limiter: ''
+  gamescope_hdr: true
+  gamescope_window_mode: -f

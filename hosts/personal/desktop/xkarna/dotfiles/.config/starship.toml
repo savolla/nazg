@@ -57,6 +57,9 @@ conflicted = '[  $count](#ff0000) '
 diverged = ' '
 up_to_date = ''
 
+[direnv]
+disabled = false
+
 [directory]
 format = '[$read_only]($read_only_style) [$path]($style) '
 # style = "#00d7d7"

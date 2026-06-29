@@ -1,0 +1,7 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/darkest-dungeon/_windowsnosteam/win64/Darkest.exe
+system:
+  disable_runtime: true
+  prefer_system_libs: false
+wine:
+  version: wine-ge-8-26-x86_64

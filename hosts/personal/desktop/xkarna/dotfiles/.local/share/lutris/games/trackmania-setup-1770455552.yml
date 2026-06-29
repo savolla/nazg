@@ -1,0 +1,30 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/trackmania/drive_c/Games/Trackmania 2020/Trackmania.exe
+  prefix: /home/savolla/resource/games/games/pc/trackmania
+game_slug: trackmania
+name: Trackmania
+script:
+  files:
+  - setupfile: N/A:Select the setup file
+  game:
+    exe: _xXx_AUTO_WIN32_xXx_
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win64
+      env:
+        LC_ALL: ''
+      executable: /home/savolla/Desktop/Trackmania 2020 [MULTi-ENG-RUS] [R] [TN]/Trackmania
+        2020.exe
+      prefix: /home/savolla/resource/games/games/pc/trackmania
+      wine_path: /home/savolla/.local/share/lutris/runners/wine/wine-ge-8-26-x86_64/bin/wine
+  system:
+    env:
+      LC_ALL: ''
+slug: trackmania-setup
+system:
+  env:
+    LC_ALL: ''
+  gamescope: true
+  gamescope_window_mode: -b
+version: Setup file

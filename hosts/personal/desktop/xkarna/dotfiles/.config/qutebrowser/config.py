@@ -570,10 +570,16 @@ config.bind("<Space>9", "tab-select 9")
 config.bind("<Space>G", "tab-focus -1")
 
 # password manager
-config.bind('<Space><j><l>', 'spawn --userscript qute-pass')
-config.bind('<Space><j><u><l>', 'spawn --userscript qute-pass --username-only')
-config.bind('<Space><j><p><l>', 'spawn --userscript qute-pass --password-only')
-config.bind('<Space><j><o><l>', 'spawn --userscript qute-pass --otp-only')
+config.bind(
+    '<Space><l>',
+    'spawn --userscript qute-pass '
+    '--username-target secret '
+    '--username-pattern "username: (.+)" '
+    '--mode gopass '
+    '--unfiltered '
+    '--always-show-selection '
+    '--dmenu-invocation \'dmenu -i -fn "IosevkaTerm NF:size=12:style=Regular" -nb "#282828" -nf "#a89984" -sb "#a89984" -sf "#282828"\''
+)
 
 # Files
 config.bind("<Space>fh", "history --tab")

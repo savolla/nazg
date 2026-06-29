@@ -8,6 +8,8 @@
 }:
 
 let
+  musnix = import (fetchTarball "https://github.com/musnix/musnix/archive/master.tar.gz");
+
   # eilmeldung-src = builtins.fetchTarball {
   #   url = "https://github.com/christo-auer/eilmeldung/archive/refs/heads/main.tar.gz";
   #   sha256 = "sha256:10d9qf7kxsyp2irjxpn3y1j7nbxm40cphb2700gqman576rv6fs7";
@@ -206,7 +208,15 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    musnix
   ];
+
+  musnix = {
+    enable = true;
+    kernel.realtime = true;   # uses RT-patched kernel
+    rtirq.enable = true;      # raises IRQ thread priorities for audio devices
+    das_watchdog.enable = true;
+  };
 
   boot.initrd.systemd.enable = true; # ask password for encrypted LUKS devices (graphically)
 
@@ -245,8 +255,8 @@ in
   };
 
   # Bootloader.
-  boot.kernelPackages = pkgs.linuxPackages_zen; # this kernel is the only one that sees my eno1 ethernet interface on gmktek g10
-  # boot.kernelPackages = pkgs.linuxPackages-rt_latest; # linux realtime kernel
+  # NOTE: kernel packages are disabled due to musnix. musnix has its own kernel.
+  # boot.kernelPackages = pkgs.linuxPackages_zen; # this kernel is the only one that sees my eno1 ethernet interface on gmktek g10 (WORKS PERFECTLY)
   # boot.kernelPackages = pkgs.linuxPackages_latest; # fix type-c and eno1 interfaces on nix machine GMKTek Nucbox G10
   # boot.kernelPackages = pkgs.linuxPackages; # LTS (for stability)
 
@@ -348,6 +358,7 @@ in
           "input" # xorg
           "video" # xorg
           "audio" # pipewire
+          "jackaudio" # for jack
           "libvirtd" # virtualization
           "docker" # run docker commands withour sudo
           "podman" # run podman commmands without sudo
@@ -408,6 +419,13 @@ in
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/savolla/.steam/root/compatibilitytools.d";
       GTK_THEME = "Adwaita:dark";
+      LV2_PATH = "/run/current-system/sw/lib/lv2";
+
+      # plugins paths (for music production (reaper))
+      VST_PATH = "$HOME/.vst/yabridge";
+      VST3_PATH = "$HOME/.vst3/yabridge";
+      LXVST_PATH = "$HOME/.vst/yabridge";
+      CLAP_PATH = "$HOME/.clap/yabridge";
     };
 
     systemPackages = with pkgs; [
@@ -419,6 +437,28 @@ in
       slockFlexipatch
       dmenuFlexipatch
 
+      # music production
+      stable.carla                    # route jack outputs/inputs
+      unstable.drumgizmo              # drums
+      unstable.neural-amp-modeler-lv2 # guitar tone
+      unstable.guitarix-vst           # for loading nam and other irs
+      unstable.zlequalizer            # fabfilter pro alternative
+      unstable.tonelib-gfx            # good guitar amp
+      unstable.tonelib-jam            # 3d tab editor (paid)
+      unstable.tonelib-metal          # all in one guitar rig
+      unstable.yabridge               # use windows vsts on linux wine is requirement here
+      unstable.yabridgectl            # yabridge control utility
+
+      unstable.reaper
+      unstable.qjackctl               # patchbay / routing GUI, works against pipewire-jack
+      unstable.crosspipe              # modern jack ui (using this instead helvum)
+      unstable.pavucontrol            # pipewire buffer size and latency settings can be done from there
+      unstable.calf                   # high quality music production plugins and vsts
+      unstable.lsp-plugins            # collection of open-source audio plugins
+      unstable.x42-plugins            # collection of lv2 plugins by Robin Gareus
+      unstable.distrho-ports          # audio plugins
+
+      stable.linuxConsoleTools
       # nixos-unstable packages
       # unstable.emacs-pgtk # transparency works in wayland
       unstable.OVMFFull
@@ -472,7 +512,6 @@ in
       unstable.busybox # bunch of utilities (need)
       unstable.cabextract # installed this to install Age of Empires Online (prefix that was created by Kron4ek)
       unstable.cadvisor # kubernetes daemonset for resource usage monitoring
-      unstable.calf # high quality music production plugins and vsts
       unstable.caligula # disk imaging (tui balena-etcher/rufus)
       unstable.camunda-modeler # business modeling tool
       unstable.carbon-now-cli # generate images from your code
@@ -498,7 +537,6 @@ in
       unstable.cpuinfo
       unstable.crc # locally install openshift
       unstable.croc # easily send files between hosts
-      unstable.crosspipe # modern jack ui (using this instead helvum)
       unstable.cryptomator # access encrypted vaults
       unstable.cryptomator-cli # access encrypted vaults ( not in stable channel yet )
       unstable.csvlens # pretty print your csv files
@@ -631,14 +669,13 @@ in
       unstable.k6 # test
       unstable.k8sgpt # llm for k8s
       unstable.k9s # tui kubernetes manager
-      unstable.kazam # record screen
       unstable.kdePackages.isoimagewriter # balena etcher alternative
       unstable.kdePackages.kdenlive # open source video editing software
       unstable.keepassxc # password manager
       unstable.kitty # fallback terminal
       unstable.klick # cli metronom
       unstable.koreader # awesome book reader
-      unstable.kraft # build unikernels
+      # unstable.kraft # build unikernels
       unstable.krita # digital art in linux? also comfyui integration using comfyui plugins
       unstable.ktop # monitor kubernetes node usage
       unstable.kube-bench # security scanner for kubernetes
@@ -687,18 +724,17 @@ in
       # unstable.logseq # note taking tool (electron issues. disabled temporarily)
       unstable.lolcat
       unstable.love # awesome 2d game engine written in lua
-      unstable.lsp-plugins # collection of open-source audio plugins
       unstable.lua # dep for lua neovim
       unstable.lxappearance # style gtk applications
       unstable.lxsession # session manager
-      unstable.mako # wayland notification daemon (for niri)
+      # unstable.mako # wayland notification daemon (for niri)
       unstable.mangohud # display fps, temperature etc.
-      unstable.mapscii # google maps in tui
-      unstable.mcfly # super ctrl+r
-      unstable.mcfly-fzf # super ctrl+r with fzf (you must install mcfly first)
+      # unstable.mapscii # google maps in tui
+      # unstable.mcfly # super ctrl+r
+      # unstable.mcfly-fzf # super ctrl+r with fzf (you must install mcfly first)
       unstable.mediainfo # for displaying audio metadata (dirvish)
       unstable.mermaid-cli # for org-babel mermaid diagrams support (doom emacs)
-      unstable.mkpasswd # gene rate hashes
+      unstable.mkpasswd # generate hashes
       unstable.moonlight-qt # sunshine client for superior RDP
       unstable.mp3blaster # auto tag mp3 files using mp3tag tool
       unstable.mpc # control mpd from terminal
@@ -739,7 +775,6 @@ in
       unstable.optipng # optimize png
       unstable.p7zip # 7z great archiving tool
       unstable.pandoc # emacs's markdown compiler and org-mode dep
-      unstable.pavucontrol # pipewire buffer size and latency settings can be done from there
       unstable.pcmanfm # lightweight file manager
       unstable.peek # record desktop gifs
       unstable.picom # xorg compositor with animation support
@@ -770,7 +805,6 @@ in
       unstable.pywal16 # generate colorschemes
       unstable.qalculate-gtk # dependency for rofi-calc
       unstable.qemu # virtualization for good + all supported architectures like arm, mips, powerpc etc.
-      unstable.qjackctl # reduce latency
       unstable.qjoypad # play ryujinx games with mouse and keyboard
       unstable.qpwgraph
       unstable.quickemu # installed for installing macos sonoma (for react-native dev)
@@ -782,7 +816,6 @@ in
       unstable.ranger # tui file manager
       unstable.react-native-debugger # official react-native debugger
       unstable.reader # render curl output better
-      unstable.reaper
       unstable.regex-tui # try regex interactively
       unstable.ripgrep # doom emacs dep
       unstable.rmpc # mpd client better than ncmpcpp
@@ -850,7 +883,7 @@ in
       unstable.kustomize-sops # use sops with kustomize (very neat)
       unstable.gopass # better pass alternative with multi user support
       unstable.pre-commit-hook-ensure-sops # check if sops is enabled before pushing
-      unstable.chezmoi # encrypt values in dotfiles
+      # unstable.chezmoi # encrypt values in dotfiles
       unstable.timidity # play midi files usin mpd
       unstable.git-crypt # encrypt sensitive files using git
       unstable.tldr # too long didn't read the manual
@@ -859,9 +892,6 @@ in
       unstable.tmux-xpanes # run multiple commands on multiple tmux panes at once
       unstable.tmuxp # declarative tmux sessions (disabled due to compilation errors..)
       unstable.tofu-ls # opentofu lsp server (for emacs eglot)
-      unstable.tonelib-gfx # good guitar amp
-      unstable.tonelib-jam # 3d tab editor (paid)
-      unstable.tonelib-metal # all in one guitar rig
       unstable.toolong # inspect logs like a pro
       unstable.tor-browser # just in case
       unstable.translate-shell # needed for using rofi as translate engine
@@ -906,7 +936,6 @@ in
       unstable.woff2 # convert .tcc files to .woff
       unstable.wtfutil # build customized tui dashboards
       unstable.x42-gmsynth
-      unstable.x42-plugins # collection of lv2 plugins by Robin Gareus
       unstable.xbacklight # set brightness on laptop
       unstable.xcalib # invert colors of x
       unstable.xclip # clipboard for xorg
@@ -922,8 +951,6 @@ in
       unstable.xsel # clipboard for xorg
       unstable.xwayland-satellite # for niri
       unstable.xwinwrap # gif wallpapers on xorg
-      unstable.yabridge # use windows vsts on linux wine is requirement here
-      unstable.yabridgectl # yabridge control utility
       unstable.yarn
       unstable.yazi # new ranger
       unstable.ydotool # xdotool for wayland
@@ -986,6 +1013,7 @@ in
       enable = true;
       enableSSHSupport = true; # use gpg key as your ssh key
       pinentryPackage = stable.pinentry-gnome3;
+      # package = stable.gnupg;
     };
 
     tmux = {
@@ -1075,6 +1103,7 @@ in
 
     };
     gamemode.enable = true; # temporarily apply optimizations to os and gaming process
+    gamescope.enable = true; # reduce framerate for games
 
     appimage = {
       enable = true;
@@ -1085,6 +1114,40 @@ in
           # add other libs AppImage needs here
         ];
       };
+    };
+  };
+
+  containers = {
+    i2pd-container = {
+      autoStart = true;
+      config =
+        { ... }:
+        {
+          system.stateVersion = "23.05"; # If you don't add a state version, nix will complain at every rebuild
+          # Exposing the nessecary ports in order to interact with i2p from outside the container
+          networking.firewall.allowedTCPPorts = [
+            7656 # default sam port
+            7654 # default i2cp port
+            7070 # default web interface port
+            4447 # default socks proxy port
+            4444 # default http proxy port
+          ];
+          services.i2pd = {
+            enable = true;
+            address = "127.0.0.1"; # you may want to set this to 0.0.0.0 if you are planning to use an ssh tunnel
+            proto = {
+              http.enable = true;
+              socksProxy.enable = true;
+              httpProxy.enable = true;
+              sam.enable = true;
+              i2cp = {
+                enable = true; # for I2P torrenting
+                address = "127.0.0.1";
+                port = 7654;
+              };
+            };
+          };
+        };
     };
   };
 
@@ -1143,22 +1206,11 @@ in
     };
 
     pipewire = {
-      # sound (pipewire)
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
-
-      # fix retroarch playstation audio cracklings
-      extraConfig.pipewire."92-low-latency" = {
-        context.properties = {
-          default.clock.rate = 48000;
-          default.clock.quantum = 512;
-          default.clock.min-quantum = 512;
-          default.clock.max-quantum = 512;
-        };
-      };
     };
 
     openssh.enable = true;
@@ -1211,6 +1263,14 @@ in
   security = {
     protectKernelImage = false; # sometimes required if lockdown mode interferes (for hibernation)
     rtkit.enable = true;
+    pam = {
+      loginLimits = [
+        # realtime limits for the audio group
+        { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
+        { domain = "@audio"; item = "rtprio";  type = "-"; value = "99"; }
+        { domain = "@audio"; item = "nofile";  type = "-"; value = "99999"; }
+      ];
+    };
   };
 
   nix = {

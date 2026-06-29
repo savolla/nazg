@@ -1,0 +1,13 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/diablo-2-resurrected/D2R.exe
+system:
+  disable_runtime: true
+  gamescope: false
+  gamescope_fps_limiter: '45'
+  gamescope_window_mode: -f
+  prefer_system_libs: false
+wine:
+  dgvoodoo2: true
+  dxvk: true
+  version: ge-proton
+  vkd3d: true

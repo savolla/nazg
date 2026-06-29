@@ -1,0 +1,5 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/grimdawn/GrimDawn_Linux/start.sh
+system:
+  disable_runtime: true
+  prefer_system_libs: false

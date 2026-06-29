@@ -1,0 +1,29 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/bad-north/drive_c/GOG Games/BadNorth/BadNorth.exe
+  prefix: /home/savolla/resource/games/games/pc/bad-north
+game_slug: bad-north
+name: Bad North
+script:
+  files:
+  - setupfile: N/A:Select the setup file
+  game:
+    exe: _xXx_AUTO_WIN32_xXx_
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win64
+      env:
+        LC_ALL: ''
+      executable: /home/savolla/resource/games/pc/Bad_North_db0bf17_(33227)_win_gog/setup_bad_north_db0bf17_(33227).exe
+      prefix: /home/savolla/resource/games/pc/bad-north
+      wine_path: /home/savolla/.local/share/lutris/runners/wine/wine-ge-8-26-x86_64/bin/wine
+  system:
+    env:
+      LC_ALL: ''
+slug: bad-north-setup
+system:
+  disable_runtime: true
+  env:
+    LC_ALL: ''
+  prefer_system_libs: false
+version: Setup file

@@ -1,0 +1,5 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/europa-universalis-4/eu4-1.37.4/EuropaUniversalisIV/start.sh
+system:
+  disable_runtime: false
+  prefer_system_libs: true

@@ -1,0 +1,28 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/he-is-coming/drive_c/GOG Games/He is
+    Coming/Launch He is Coming.lnk
+  prefix: /home/savolla/resource/games/pc/he-is-coming
+game_slug: he-is-coming
+name: he-is-coming
+script:
+  files:
+  - setupfile: N/A:Select the setup file
+  game:
+    exe: _xXx_AUTO_WIN32_xXx_
+    prefix: $GAMEDIR
+  installer:
+  - task:
+      arch: win64
+      env:
+        LC_ALL: ''
+      executable: /home/savolla/resource/games/pc/setup_he_is_coming_0.8.33_(85619).exe
+      prefix: /home/savolla/resource/games/pc/he-is-coming
+      wine_path: /home/savolla/.local/share/lutris/runners/wine/wine-ge-8-26-x86_64/bin/wine
+  system:
+    env:
+      LC_ALL: ''
+slug: he-is-coming-setup
+system:
+  env:
+    LC_ALL: ''
+version: Setup file

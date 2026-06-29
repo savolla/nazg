@@ -1,0 +1,6 @@
+game:
+  exe: /home/savolla/resource/games/games/pc/gta-5/start.sh
+system:
+  antimicro_config: ''
+  disable_runtime: true
+  prefer_system_libs: false
