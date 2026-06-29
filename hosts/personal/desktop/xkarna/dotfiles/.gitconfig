@@ -15,3 +15,5 @@
 [delta]
   side-by-side = true
 	line-numbers = true
+[pull]
+	rebase = false
