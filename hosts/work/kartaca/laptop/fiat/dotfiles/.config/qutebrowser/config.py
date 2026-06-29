@@ -674,6 +674,8 @@ config.bind("<Space>soG", "cmd-set-text :open -t https://github.com/search?q=")
 config.bind("<Space>sos", "cmd-set-text :open -t https://stackoverflow.com/search?q=")
 config.bind("<Space>sor", "cmd-set-text :open -t https://www.reddit.com/search/?q=")
 config.bind("<Space>soc", "cmd-set-text :open -t https://chat.openai.com/?q=")
+config.bind("<Space>son", "cmd-set-text :open -t https://search.nixos.org/packages?channel=unstable&query=")
+
 
 ## toggles
 config.bind("<Space>tt", "config-cycle tabs.show always never")

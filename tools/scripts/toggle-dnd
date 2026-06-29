@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if dunstctl is-paused | grep -q "true"; then
+    dunstctl set-paused false
+    notify-send "🔔 Notifications enabled"
+else
+    dunstctl set-paused true
+    dunstify -u low "🔕 Do Not Disturb enabled"
+fi

@@ -1,9 +1,9 @@
 # environment
 set fish_greeting
 set -x _JAVA_AWT_WM_NONREPARENTING 1
-set -x FZF_DEFAULT_OPTS --height=10% --preview-window=top,1,wrap --preview-window=border-none --no-list-border --no-input-border --reverse --ansi "--bind=esc:abort" "--bind=tab:accept" "--bind=ctrl-space:toggle+down"
 set -U fish_history_limit 10000000
 set -x GPG_TTY (tty) # make sure gpg agent promts you in terminal when needed
+set -gx FZF_DEFAULT_OPTS "--height=10% --layout=reverse --preview-window=top,1,wrap --preview-window=border-none --no-list-border --no-input-border --ansi --bind=esc:abort --bind=tab:accept --bind=ctrl-space:toggle+down"
 
 # settings for using GPG as SSH authentication
 set -e SSH_AGENT_PID
@@ -147,6 +147,8 @@ function fish_user_key_bindings
     bind -M normal \cf '__legolas; commandline -f repaint'
     bind -M insert \cl accept-autosuggestion
     bind -M insert \ck clear-screen
+    bind -M insert shift-tab fzf_complete
+    bind -M insert tab complete
 end
 
 # done plugin settings
@@ -159,3 +161,4 @@ set -U __done_notification_duration -1 # never expire the notification
 # init
 zoxide init fish | source
 starship init fish | source
+fzf --fish | source # shift+tab opens up fzf menu
