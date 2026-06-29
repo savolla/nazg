@@ -13,7 +13,9 @@
 [commit]
 	gpgSign = true
 [delta]
-  side-by-side = true
+    side-by-side = true
 	line-numbers = true
 [push]
 	autoSetupRemote = true
+[pull]
+	rebase = false
