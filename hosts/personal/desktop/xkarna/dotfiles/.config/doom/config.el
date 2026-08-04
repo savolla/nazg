@@ -708,6 +708,7 @@
 (setq org-latex-src-block-backend 'engraved) ;; syntax highlighting for code blocks in pdfs
 
 ;; org-agenda
+(setq org-scheduled-past-days 7) ;; stop displaying scheduled tasks after 7 days..
 
 (defun savolla--org-dailies-file-p ()
   "Return non-nil if the current buffer's file lives under org-roam-dailies-directory."
@@ -894,13 +895,6 @@ Returns 1 if A should sort above B, -1 if below, nil if equal/missing."
             '(or (org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT" "IN-PROGRESS"))
                  (org-agenda-skip-entry-if 'notregexp ":\\(@agenda\\|kartaca\\|_work\\):")))
            ))
-
-  ;; open jobs
-  (tags "+_job/JOB" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰌃  Open Jobs"))))
-
-  ;; open tasks
-  (tags "-_job/TODO" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Open Tasks"))))
-
   )
 
  ;; 3. GENERAL SETTINGS
@@ -1240,6 +1234,7 @@ If the typed value doesn't match an existing node, insert plain text instead."
 ;; org-roam
 (after! org-roam
   (require 'org-roam-ql) ;; load org-roam-ql after org-roam loads
+)
 
 ;; d2 org mode
 (use-package! d2-mode
