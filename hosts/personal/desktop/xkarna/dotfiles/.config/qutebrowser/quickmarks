@@ -165,3 +165,5 @@ savolla.mail.protonmail https://mail.proton.me/u/1/inbox
 savolla.piracy.audio.music.flac-quality-music-download https://qobuz.squid.wtf/
 savolla.piracy.book.libgen-servers https://open-slum.org/
 savolla.audio.guitar.tone3000 https://www.tone3000.com/
+kartaca.sumer.paycore.gitlab http://10.91.23.146/
+kartaca.sumer.paycore.jenkins http://10.91.23.142:8080/job/sumer-usy/
