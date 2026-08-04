@@ -14,9 +14,7 @@ export XDG_SESSION_TYPE=x11
 export XDG_CURRENT_DESKTOP=dwm
 export DESKTOP_SESSION=dwm
 
-# =====================================================================
-# THE CURE: Tell Systemd & D-Bus about your X11 display context
-# =====================================================================
+# tell systemd & d-bus about x11 display context
 if [ -n "$DISPLAY" ]; then
     systemctl --user import-environment DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 fi
@@ -24,7 +22,6 @@ fi
 if command -v dbus-update-activation-environment >/dev/null 2>&1; then
     dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 fi
-# =====================================================================
 
 setxkbmap -option caps:swapescape & # swap esc with caps lock
 xset r rate 150 90 &                # increase speed of keyboard
@@ -43,7 +40,7 @@ xsct 3500 &
 syncthing --no-browser &              # start synching files
 slstatus &                            # dwm status bar
 periodic-random-wallpaper-switcher &  # wallpaper service
-personal-website-periodic-update.sh & # auto push changes to github for savolla.github.io
+# personal-website-periodic-update.sh & # auto push changes to github for savolla.github.io
 song-change-notification.sh &         # display album art and song information
 udiskie &                             # auto mount drives
 st sh -c 'tmux-session-creator' &     # run tmux session

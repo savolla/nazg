@@ -5,6 +5,7 @@
 (package! org-roam-ql)
 (package! org-habit-stats) ;; display stats for habits
 (package! org-transclusion)
+(package! calibredb)
 
 (package! eat
   :recipe (:host codeberg
@@ -19,3 +20,9 @@
   :recipe (:host nil
            :repo "https://git.sr.ht/~l3kn/org-fc"
            :files (:defaults "awk" "demo.org")))
+
+;; ;; elfeed packages
+;; (package! elfeed)
+;; (package! elfeed-org)
+;; (package! elfeed-tube)
+;; (package! elfeed-tube-mpv)

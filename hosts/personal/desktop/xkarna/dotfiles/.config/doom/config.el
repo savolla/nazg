@@ -1,5 +1,4 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 (add-hook! '+doom-dashboard-functions :append
   (insert "\n" (+doom-dashboard--center +doom-dashboard--width "")))
@@ -13,7 +12,6 @@
                    ))
          (longest-line (apply #'max (mapcar #'length banner))))
     (put-text-property
-
      (point)
      (dolist (line banner (point))
        (insert (+doom-dashboard--center
@@ -110,14 +108,13 @@
         "~/.config/emacs/"
 
         ;; personal projects
-        "~/project/dev/nazg"
-
         "~/project/repos/one-ring/"
         "~/project/repos/legolas/"
         "~/project/repos/gimly/"
         "~/project/repos/sauron/"
         "~/project/repos/tolkien/"
         "~/project/repos/soup/"
+        "~/project/dev/nazg/"
 
         "~/project/kartaca/hopi/repos/bekci2"
         "~/project/kartaca/hopi/repos/bird-usy"
@@ -218,9 +215,242 @@
 
 ;; org crypt
 (setq org-crypt-disable-auto-save t) ;; disable auto-save for encrypted org mode entries
-;; (setq org-crypt-key "F5190B59F4E143E0") ;; encrypt entries with my GPG key
 (setq org-crypt-key "CB5A65C413A6AA63") ;; encrypt entries with my GPG key
 (setq org-tags-exclude-from-inheritance '("crypt")) ;; prevent tag inheritance for "crypt" tag
+
+;; calibre
+(use-package! calibredb
+  :commands calibredb
+  :config
+  (setq calibredb-root-dir "~/resource/books"
+        calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir)
+        calibredb-library-alist '(("~/resource/books"))
+        calibredb-format-all-the-icons t)
+
+  ;; Set up key bindings for calibredb-search-mode
+  (map! :map calibredb-search-mode-map
+        :n "RET" #'calibredb-find-file
+        :n "?" #'calibredb-dispatch
+        :n "a" #'calibredb-add
+        :n "d" #'calibredb-remove
+        :n "j" #'calibredb-next-entry
+        :n "k" #'calibredb-previous-entry
+        :n "l" #'calibredb-open-file-with-default-tool
+        :n "s" #'calibredb-set-metadata-dispatch
+        :n "S" #'calibredb-switch-library
+        :n "q" #'calibredb-search-quit))
+
+;; emms
+(after! emms
+  (require 'emms-setup)
+  (require 'emms-player-mpd)
+  (emms-all)
+  (setq emms-player-list '(emms-player-mpd))
+  (add-to-list 'emms-info-functions 'emms-info-mpd)
+
+  ;; mpd settings (make sure it matches your mpd.conf exactly)
+  (setq emms-player-mpd-server-name "localhost")
+  (setq emms-player-mpd-server-port "6600")
+  (setq emms-player-mpd-music-directory "~/resource/music")
+
+  ;; vim keybinds
+  (require 'evil-collection-emms)
+  (evil-collection-emms-setup)   ; gives you the full default vim binding set
+
+  ;; makes the following keybinding work
+  (evil-set-initial-state 'emms-browser-mode 'normal)
+
+  ;; custom overrides for emms-browser-mode
+  (map! :map emms-browser-mode-map
+        :n "j"      #'evil-next-line
+        :n "k"      #'evil-previous-line
+        :n [tab]    #'emms-browser-toggle-subitems      ; single-level fold/unfold
+        :n [return] #'emms-browser-add-tracks           ; unchanged, kept explicit for clarity
+        ;; browse-by-structure shortcuts
+        ;; ga/gA/gb/gy/gc/gp already come from evil-collection-emms:
+        ;;   ga artist | gA album | gb genre | gy year | gc composer | gp performer
+        ;; adding the one type evil-collection didn't cover:
+        :n "go"     #'emms-browse-by-albumartist)
+
+  ;; open the browser defaulting to album view instead of emms-smart-browse's default
+  (defun my/emms-browse-albums ()
+    "Open the EMMS browser, listing music by album."
+    (interactive)
+    (emms-browse-by-album))
+
+  ;; bind it wherever you currently invoke the browser, e.g.:
+  (map! :leader
+        (:prefix-map ("m" . "music")
+         :desc "Browse music (by album)" "m" #'my/emms-browse-albums
+         :desc "Browse by artist"        "a" #'emms-browse-by-artist
+         :desc "Browse by album"         "A" #'emms-browse-by-album
+         :desc "Browse by genre"         "g" #'emms-browse-by-genre
+         :desc "Browse by year"          "y" #'emms-browse-by-year
+         :desc "Browse by composer"      "c" #'emms-browse-by-composer
+         :desc "Browse by performer"     "p" #'emms-browse-by-performer
+         :desc "Browse by album artist"  "o" #'emms-browse-by-albumartist
+         :desc "Playlist"                "P" #'emms-playlist-mode-go))
+
+  ;; connect to mpd
+  (emms-player-mpd-connect)
+
+  ;; setup caching mechanism to prevent running mpd sync on every emacs startup
+  (setq emms-cache-file (expand-file-name "emms/cache" doom-cache-dir))
+  (emms-cache 1)
+  (emms-cache-restore)
+
+  ;; album covers
+  (setq emms-browser-covers 'emms-browser-cache-thumbnail-async)
+  ;; (setq emms-browser-default-covers
+  ;;       (list "~/.config/doom/emms/no-cover-small.jpg" nil nil))
+
+  ;; cosmetic
+  (emms-mode-line-mode 1)
+  (emms-playing-time-mode 1)
+  )
+
+;; dirvish
+(use-package! dirvish
+  :init
+  (require 'dired-x) ;; needed for dired-omit-mode
+
+  :config
+  ;; Make omit-mode actually hide dotfiles (by default it only hides
+  ;; backup/autosave/lock files and `.`/`..`, not things like `.config`)
+  (setq dired-omit-files
+        (concat dired-omit-files "\\|^\\..*$"))
+
+  ;; Start every Dired/Dirvish buffer with hidden files... hidden
+  (add-hook 'dired-mode-hook #'dired-omit-mode)
+
+  (map! :map dired-mode-map
+        :n "DEL" #'dired-omit-mode        ; backspace = toggle hidden files
+        ))
+
+;; irc
+(with-eval-after-load 'circe
+  (set-irc-server! "irc.libera.chat"
+    `(:tls t
+      :port 6697
+      :nick "savolla"
+      :sasl-username ,(+pass-get-user   "savolla/social/irc/libera/savolla")
+      :sasl-password (lambda (&rest _) (+pass-get-secret "savolla/social/irc/libera/savolla"))
+      :channels ("#emacs" "#linux")))
+
+  (set-irc-server! "irc.oftc.net"
+    `(:tls t
+      :port 6697
+      :nick "inferi"
+      :sasl-username ,(+pass-get-user   "savolla/social/irc/oftc/inferi")
+      :sasl-password (lambda (&rest _) (+pass-get-secret "savolla/social/irc/oftc/inferi"))
+      :channels ("#debian" "#tor" "#suckless"))))
+
+;; elfeed
+(after! elfeed
+  (elfeed-update)
+  (setq elfeed-search-filter "@6-months-ago")
+  (setq elfeed-search-face-alist
+        '(
+          (reddit . (:foreground "orange"))
+          (turkey . (:foreground "red"))
+          (youtube . (:foreground "white" :background "red" :weight bold))
+          (favorite . (:background "gold"))
+          ))
+  (map! :map elfeed-search-mode-map :n "o" #'elfeed-search-browse-url)
+  )
+
+(require 'elfeed-goodies)
+(elfeed-goodies/setup)
+
+(custom-set-variables
+ '(elfeed-feeds
+   (quote
+    (
+     ("https://dindi.garjola.net/rss.xml"                          emacs favorite)
+     ("https://www.reddit.com/r/linux.rss"                         reddit)
+     ("https://www.gamingonlinux.com/article_rss.php"              gaming)
+     ("https://hackaday.com/blog/feed/"                            hackaday)
+     ("https://linux.softpedia.com/backend.xml"                    softpedia)
+     ("https://www.zdnet.com/topic/linux/rss.xml"                  zdnet)
+     ("http://feeds.feedburner.com/d0od"                           omgubuntu)
+     ("https://www.computerworld.com/index.rss"                    computerworld)
+     ("https://www.networkworld.com/category/linux/index.rss"      networkworld)
+     ("https://www.techrepublic.com/rssfeeds/topic/open-source/"   techrepublic)
+     ("https://betanews.com/feed"                                  betanews)
+     ("http://lxer.com/module/newswire/headlines.rss"              lxer)
+
+     ("https://news.ycombinator.com/rss"                          news)
+     ("https://lobste.rs/rss"                                     news)
+     ("https://www.theverge.com/rss/index.xml"                    news)
+     ("https://feeds.arstechnica.com/arstechnica/index"           news)
+     ("https://www.wired.com/feed/rss"                            news)
+
+     ("https://this-week-in-rust.org/rss.xml"                     programming)
+     ("https://blog.rust-lang.org/feed.xml"                       programming)
+     ("https://go.dev/blog/feed.atom"                             programming)
+     ("https://www.python.org/dev/peps/peps.rss/"                 programming)
+     ("https://planetpython.org/rss20.xml"                        programming)
+     ("https://martinfowler.com/feed.atom"                        programming)
+     ("https://www.joelonsoftware.com/feed/"                      programming)
+     ("https://nullprogram.com/feed/"                             programming)
+     ("https://danluu.com/atom.xml"                               programming)
+     ("https://blog.regehr.org/feed"                              programming)
+     ("https://www.joshwcomeau.com/rss.xml"                       programming)
+     ("https://overreacted.io/rss.xml"                            programming)
+     ("https://stackoverflow.blog/feed/"                          programming)
+
+     ("https://fedoramagazine.org/feed/"                          linux)
+     ("https://www.omgubuntu.co.uk/feed"                          linux)
+     ("https://www.phoronix.com/rss.php"                          linux)
+     ("https://itsfoss.com/feed/"                                 linux)
+     ("https://distrowatch.com/news/dwd.xml"                      linux)
+     ("https://www.debian.org/News/news"                          linux)
+     ("https://opensource.com/feed"                               linux)
+
+     ("http://planet.emacsen.org/atom.xml"                        emacs)
+     ("https://sachachua.com/blog/feed/"                          emacs)
+     ("https://emacsredux.com/atom.xml"                           emacs)
+     ("https://irreal.org/blog/?feed=rss2"                        emacs)
+     ("https://www.masteringemacs.org/feed"                       emacs)
+
+     ("https://krebsonsecurity.com/feed/"                         security privacy)
+     ("https://www.schneier.com/feed/atom/"                       security privacy)
+     ("https://googleprojectzero.blogspot.com/feeds/posts/default" security privacy)
+     ("https://feeds.feedburner.com/TheHackersNews"               security privacy)
+     ("https://www.darkreading.com/rss.xml"                       security privacy)
+
+     ("https://stratechery.com/feed/"                             bigtech industry)
+     ("https://www.theinformation.com/feed"                       bigtech industry)
+     ("https://spectrum.ieee.org/feeds/feed.rss"                  bigtech industry)
+
+
+     ("https://netflixtechblog.com/feed" engineering)
+     ("https://engineering.fb.com/feed/" engineering)
+     ("https://github.blog/feed/" engineering)
+     ("https://blog.cloudflare.com/rss/" engineering)
+     ("https://aws.amazon.com/blogs/aws/feed/" engineering)
+     ("https://stackoverflow.blog/engineering/feed/" engineering)
+
+     ("https://openai.com/news/rss.xml" ai)
+     ("https://www.anthropic.com/rss.xml" ai)
+     ("https://ai.googleblog.com/feeds/posts/default" ai)
+     ("https://huggingface.co/blog/feed.xml" ai)
+     ("https://www.deeplearning.ai/the-batch/feed/" ai)
+
+     ;; youtube
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCsBjURrPoezykLs9EqgamOA" youtube news) ;; # Fireship
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw" youtube rust neovim) ;; ThePrimeagen
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCbRP3c757lWg9M-U7TyEkXA" youtube) ;; Theo
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCZgt6AzoyjslHTC9dz0UoTw" youtube system-design) ;; ByteByteGo
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCUMwY9iS8oMyWDYIe6_RmoA" youtube) ;; No Boilerplate
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ" youtube emacs) ;; System Crafters
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" youtube emacs linux) ;; DistroTube
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA" youtube computers) ;; Computerphile
+
+     ;; politics
+     ("https://www.reddit.com/r/Turkey.rss"                reddit turkey news)
+     ))))
+
 
 ;; org mode
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
@@ -246,7 +476,7 @@
   (setq org-todo-keywords
         '((sequence
            "TODO(t)" "READ(r)" "DOING(o!)" "NEXT(n)" "LATER(l@/!)" "WAIT(w@/!)" "EVENT(e)" "JOB(j)" "BIRTHDAY(b)" "HABIT(h)" "|"
-           "DONE(d@/!)" "CANCEL(c@/!)"
+           "DONE(d@/!)" "CANCEL(c@/!)" "HOLD(H!)"
            )))
 
   (setq org-todo-keyword-faces
@@ -275,74 +505,125 @@
     '(org-level-8 :foreground "#a89984" :weight normal)
     )
 
+;; this function is needed for capturing weekend tasks
+(defun savolla--org-next-saturday-timestamp ()
+  "Return an Org active timestamp string for the coming Saturday."
+  (let* ((now (current-time))
+         (dow (string-to-number (format-time-string "%u" now)))
+         (days-to-sat (mod (- 6 dow) 7)))
+    (format-time-string "<%Y-%m-%d>" (time-add now (days-to-time days-to-sat)))))
+
 (setq org-capture-templates
-      '(
+      `(
         ;; ---------------- PERSONAL ----------------
-        ("1" "personal todo" entry (file+headline "roam/agenda/personal.org" "tasks")
-         "* TODO %?\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
+        ("1" "personal todo" entry (file+headline "roam/agenda/tasks/personal.org" "tasks")
+         ,(concat
+           "* TODO %?\n"
+           ":PROPERTIES:\n"
+           ":ID: %(org-id-new)\n"
+           ":CREATED: %U\n"
+           ":END:\n"))
 
-        ("9" "todo (today)" entry (file+headline "roam/agenda/personal.org" "tasks")
-         "* TODO %?\nSCHEDULED: %(format-time-string \"<%Y-%m-%d>\")\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
+        ("9" "todo (today)" entry (file+headline "roam/agenda/tasks/personal.org" "tasks")
+         ,(concat
+           "* TODO %?\n"
+           "SCHEDULED: %(format-time-string \"<%Y-%m-%d>\")\n"
+           ":PROPERTIES:\n"
+           ":ID: %(org-id-new)\n"
+           ":CREATED: %U\n"
+           ":END:\n"))
 
-        ("t" "todo (scheduled)" entry (file+headline "roam/agenda/personal.org" "tasks")
-         "* TODO %?\nSCHEDULED: %^t\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
+        ("t" "todo (scheduled)" entry (file+headline "roam/agenda/tasks/personal.org" "tasks")
+         ,(concat
+           "* TODO %?\n"
+           "SCHEDULED: %^t\n"
+           ":PROPERTIES:\n"
+           ":ID: %(org-id-new)\n"
+           ":CREATED: %U\n"
+           ":END:\n"))
 
-        ("w" "todo (weekend)" entry (file+headline "roam/agenda/personal.org" "tasks")
-         "* TODO %?\nSCHEDULED: %(let* ((now (current-time))
-                                       (dow (string-to-number (format-time-string \"%u\" now)))
-                                       (days-to-sat (mod (- 6 dow) 7)))
-                                  (format-time-string \"<%Y-%m-%d>\"
-                                                      (time-add now (days-to-time days-to-sat))))
-:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
+        ("w" "todo (weekend)" entry (file+headline "roam/agenda/tasks/personal.org" "tasks")
+         ,(concat
+           "* TODO %?\n"
+           "SCHEDULED: %(savolla--org-next-saturday-timestamp)\n"
+           ":PROPERTIES:\n"
+           ":ID: %(org-id-new)\n"
+           ":CREATED: %U\n"
+           ":END:\n"))
 
-        ("d" "todo (deadline)" entry (file+headline "roam/agenda/personal.org" "tasks")
-         "* TODO %?\nDEADLINE: %^t\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
+        ("d" "todo (deadline)" entry (file+headline "roam/agenda/tasks/personal.org" "tasks")
+         ,(concat
+           "* TODO %?\n"
+           "DEADLINE: %^t\n"
+           ":PROPERTIES:\n"
+           ":ID: %(org-id-new)\n"
+           ":CREATED: %U\n"
+           ":END:\n"))
 
         ;; ---------------- META ----------------
-        ("4" "birthday" entry (file+headline "roam/agenda/personal.org" "birthdays")
-         "* BIRTHDAY %?\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
+        ("4" "birthday" entry (file+headline "roam/agenda/tasks/personal.org" "birthdays")
+         ,(concat
+           "* BIRTHDAY %?\n"
+           ":PROPERTIES:\n"
+           ":ID: %(org-id-new)\n"
+           ":CREATED: %U\n"
+           ":END:\n"))
 
-        ("5" "habit" entry (file+headline "roam/agenda/personal.org" "habits")
-         "* HABIT %?\n:PROPERTIES:\n:REPEAT_TO_STATE: HABIT\n:STYLE: habit\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
-
-        ("6" "person" entry (file+headline "roam/agenda/personal.org" "people")
-         "* %?\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:PHONE:\n:EMAIL:\n:JOB:\n:COMPANY:\n:DEPARTMENT:\n:CITY:\n:ADDRESS:\n:RELATIONSHIP:\n:END:\n")
-
-        ("7" "location" entry (file+headline "roam/agenda/personal.org" "location")
-         "* %?\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:CITY:\n:END:\n")
-
-        ("8" "phone" entry (file+headline "roam/agenda/personal.org" "phones")
-         "* %?\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
+        ("5" "habit" entry (file+headline "roam/agenda/tasks/personal.org" "habits")
+         ,(concat
+           "* HABIT %?\n"
+           ":PROPERTIES:\n"
+           ":ID: %(org-id-new)\n"
+           ":REPEAT_TO_STATE: HABIT\n"
+           ":STYLE: habit\n"
+           ":CREATED: %U\n"
+           ":END:\n"))
 
         ;; ---------------- WORK ----------------
-        ("2" "job" entry (file+headline "roam/agenda/kartaca.org" "jobs")
-         "* JOB %?\n:PROPERTIES:\n:REPEAT_TO_STATE: JOB\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:JIRA_URL:\n:END:\n")
+        ("3" "work todo" entry (file+headline "roam/agenda/tasks/kartaca/kartaca.org" "tasks")
+         ,(concat
+           "* TODO %?\n"
+           ":PROPERTIES:\n"
+           ":ID: %(org-id-new)\n"
+           ":CREATED: %U\n"
+           ":END:\n"))
 
-        ("3" "work todo" entry (file+headline "roam/agenda/kartaca.org" "tasks")
-         "* TODO %?\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
+        ("T" "work todo (today)" entry (file+headline "roam/agenda/tasks/kartaca/kartaca.org" "tasks")
+         ,(concat
+           "* TODO %?\n"
+           "SCHEDULED: %(format-time-string \"<%Y-%m-%d>\")\n"
+           ":PROPERTIES:\n"
+           ":ID: %(org-id-new)\n"
+           ":CREATED: %U\n"
+           ":END:\n"))
 
-        ("T" "work todo (today)" entry (file+headline "roam/agenda/kartaca.org" "tasks")
-         "* TODO %?\nSCHEDULED: %(format-time-string \"<%Y-%m-%d>\")\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
+        ("s" "work todo (scheduled)" entry (file+headline "roam/agenda/tasks/kartaca/kartaca.org" "tasks")
+         ,(concat
+           "* TODO %?\n"
+           "SCHEDULED: %^t\n"
+           ":PROPERTIES:\n"
+           ":ID: %(org-id-new)\n"
+           ":CREATED: %U\n"
+           ":END:\n"))
 
-        ("s" "work todo (scheduled)" entry (file+headline "roam/agenda/kartaca.org" "tasks")
-         "* TODO %?\nSCHEDULED: %^t\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
-
-        ("D" "work todo (deadline)" entry (file+headline "roam/agenda/kartaca.org" "tasks")
-         "* TODO %?\nDEADLINE: %^t\n:PROPERTIES:\n:ID: %(org-id-new)\n:CREATED: %(format-time-string \"%Y-%m-%d %H:%M\")\n:END:\n")
+        ("D" "work todo (deadline)" entry (file+headline "roam/agenda/tasks/kartaca/kartaca.org" "tasks")
+         ,(concat
+           "* TODO %?\n"
+           "DEADLINE: %^t\n"
+           ":PROPERTIES:\n"
+           ":ID: %(org-id-new)\n"
+           ":CREATED: %U\n"
+           ":END:\n"))
         ))
 
   (defun savolla/org-insert-agenda-personal-birthday              () (interactive) (org-capture nil "4"))
   (defun savolla/org-insert-agenda-personal-habit                 () (interactive) (org-capture nil "5"))
-  (defun savolla/org-insert-agenda-personal-person                () (interactive) (org-capture nil "6"))
-  (defun savolla/org-insert-agenda-personal-location              () (interactive) (org-capture nil "7"))
-  (defun savolla/org-insert-agenda-personal-phone                 () (interactive) (org-capture nil "8"))
   (defun savolla/org-insert-agenda-personal-todo                  () (interactive) (org-capture nil "1"))
   (defun savolla/org-insert-agenda-personal-todo-today            () (interactive) (org-capture nil "9"))
   (defun savolla/org-insert-agenda-personal-todo-weekend          () (interactive) (org-capture nil "10"))
   (defun savolla/org-insert-agenda-personal-todo-scheduled        () (interactive) (org-capture nil "t"))
   (defun savolla/org-insert-agenda-personal-todo-deadline         () (interactive) (org-capture nil "d"))
 
-  (defun savolla/org-insert-agenda-work-job                       () (interactive) (org-capture nil "2"))
   (defun savolla/org-insert-agenda-work-todo                      () (interactive) (org-capture nil "3"))
   (defun savolla/org-insert-agenda-work-today                     () (interactive) (org-capture nil "T"))
   (defun savolla/org-insert-agenda-work-scheduled                 () (interactive) (org-capture nil "s"))
@@ -367,6 +648,72 @@
 
 ;; org-agenda
 
+(defun savolla--org-dailies-file-p ()
+  "Return non-nil if the current buffer's file lives under org-roam-dailies-directory."
+  (and buffer-file-name
+       (bound-and-true-p org-roam-directory)
+       (bound-and-true-p org-roam-dailies-directory)
+       (file-in-directory-p
+        buffer-file-name
+        (expand-file-name org-roam-dailies-directory org-roam-directory))))
+
+(defun savolla--org-dailies-update-clocktables ()
+  "Update all dynamic blocks (e.g. clocktables) in the current buffer.
+Only runs for org-roam-dailies files, and only if the buffer already
+has at least one dynamic block, to avoid needless work elsewhere."
+  (when (and (derived-mode-p 'org-mode)
+             (savolla--org-dailies-file-p))
+    (save-excursion
+      (ignore-errors
+        (org-update-all-dblocks)))))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (when (savolla--org-dailies-file-p)
+              (add-hook 'before-save-hook #'savolla--org-dailies-update-clocktables nil t))))
+
+;;; sort function for backlog items to be shown on top
+(defun savolla--org-entry-priority-value (marker)
+  "Return a numeric priority value for the heading at MARKER.
+Lower number = higher priority (matches Org's own convention: A < B < C).
+Entries with no PRIORITY property get org-default-priority (lowest priority)."
+  (if marker
+      (let ((p (org-entry-get marker "PRIORITY")))
+        (if p
+            (string-to-char p)
+          org-default-priority))
+    org-default-priority))
+
+(defun savolla/org-agenda-cmp-created (a b)
+  "Compare two agenda entries A and B, priority first, then CREATED.
+Higher-priority items ([#A] etc.) always sort above lower-priority ones.
+Within the same priority, newer CREATED sorts above older.
+Returns 1 if A should sort above B, -1 if below, nil if equal/missing."
+  (let* ((ma (or (get-text-property 0 'org-marker a)
+                 (get-text-property 0 'org-hd-marker a)))
+         (mb (or (get-text-property 0 'org-marker b)
+                 (get-text-property 0 'org-hd-marker b)))
+         (pa (savolla--org-entry-priority-value ma))
+         (pb (savolla--org-entry-priority-value mb)))
+    (cond
+     ;; --- priority differs: lower char value (e.g. ?A) wins, sorts first ---
+     ((< pa pb) 1)
+     ((> pa pb) -1)
+     ;; --- priority equal (or both absent): fall back to CREATED comparison ---
+     (t
+      (let* ((ca (and ma (org-entry-get ma "CREATED")))
+             (cb (and mb (org-entry-get mb "CREATED"))))
+        (cond
+         ((and ca cb)
+          (let ((ta (org-time-string-to-time ca))
+                (tb (org-time-string-to-time cb)))
+            (cond ((time-less-p tb ta) 1)
+                  ((time-less-p ta tb) -1)
+                  (t nil))))
+         (ca 1)
+         (cb -1)
+         (t nil)))))))
+
 ;; remove scheduled timestampt from task item when tagging them as LATER
 (defun my/org-remove-scheduled-when-later ()
   "Remove SCHEDULED timestamp when task is marked LATER."
@@ -379,6 +726,8 @@
 
 (setq org-clock-in-switch-to-state "DOING") ;; mark tasks as DOING when clocked-in
 
+(setq org-scheduled-past-days 7) ;; only display scheduled items for last 7 days
+
 (custom-set-faces!
   '(org-agenda-clocking :background "gold" :foreground "black" :weight bold)
   '(org-agenda-scheduled-today  :foreground "orange")
@@ -386,7 +735,7 @@
 
 ;; (setq org-agenda-start-with-log-mode t) ;; creates too much noice in agenda. (maybe enable later)
 ;; (setq org-agenda-start-with-clockreport-mode t)
-(setq org-agenda-files '("~/resource/notes/org/roam/agenda/"))
+(setq org-agenda-files '("~/resource/notes/org/roam/agenda/tasks"))
 (setq org-log-into-drawer t)
 (setq system-time-locale "C")
 (setq org-agenda-current-time-string " 🔴 NOW ")
@@ -441,10 +790,16 @@
            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT")))
            ))
 
-  (todo "READ" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Reading"))))
-  (todo "TODO" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Todo"))))
-  (todo "DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Done"))))
-  (todo "CANCEL" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰜺  Canceled"))))
+  ;; (todo "READ" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Reading"))))
+  (todo "TODO"
+        ((org-agenda-overriding-header (savolla/org-agenda-centered-header "Backlog (Latest on Top)"))
+         (org-agenda-cmp-user-defined #'savolla/org-agenda-cmp-created)
+         (org-agenda-sorting-strategy '(user-defined-down))
+         (org-agenda-skip-function
+          '(org-agenda-skip-entry-if 'scheduled 'deadline))
+         ))
+  ;; (todo "DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Done"))))
+  ;; (todo "CANCEL" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰜺  Canceled"))))
   )
  ((org-agenda-tag-filter-preset '("+_personal")))
  )
@@ -491,6 +846,44 @@
   '(org-block-background :background unspecified)
   '(org-src :background unspecified))
 
+;; custom functions for capture templates in org-roam
+(defun savolla--org-roam-nodes-with-tags (tags &optional match-all)
+  "Return org-roam nodes matching TAGS.
+If MATCH-ALL is non-nil, node must have every tag in TAGS (AND).
+Otherwise, node must have at least one tag in TAGS (OR)."
+  (seq-filter
+   (lambda (node)
+     (let ((node-tags (org-roam-node-tags node)))
+       (if match-all
+           (seq-every-p (lambda (tag) (member tag node-tags)) tags)
+         (seq-some (lambda (tag) (member tag node-tags)) tags))))
+   (org-roam-node-list)))
+
+(defun savolla--org-roam-link-by-tags (tags prompt &optional match-all)
+  "Prompt with completion among nodes matching TAGS, return an id: link string.
+TAGS can be a single tag string or a list of tags.
+If the typed value doesn't match an existing node, insert plain text instead."
+  (let* ((tags (if (listp tags) tags (list tags)))
+         (nodes (savolla--org-roam-nodes-with-tags tags match-all))
+         (candidates (mapcar #'org-roam-node-title nodes))
+         (choice (completing-read (format "%s: " prompt) candidates))
+         (node (seq-find (lambda (n) (string= (org-roam-node-title n) choice))
+                          nodes)))
+    (if node
+        (format "[[id:%s][%s]]" (org-roam-node-id node) choice)
+      choice)))
+
+(defun savolla--org-roam-tag-candidates ()
+  "Return all distinct tags used across the org-roam DB."
+  (let (tags)
+    (dolist (node (org-roam-node-list))
+      (setq tags (append (org-roam-node-tags node) tags)))
+    (delete-dups tags)))
+
+(defun savolla--org-capture-read-tag (prompt)
+  "Prompt for a tag with completion against existing org-roam tags."
+  (completing-read (format "%s: " prompt) (savolla--org-roam-tag-candidates)))
+
 ;; optimize node search buffer by only giving it title and tags
 (after! org-roam
   (setq org-roam-node-display-template
@@ -499,12 +892,177 @@
          " "
          (propertize "${doom-tags}" 'face '(:inherit org-tag :box nil))))
 
+  (setq org-roam-dailies-capture-templates
+        `(
+          ("d" "default" entry "* %?"
+           :target (file+head
+                    "%<%Y-%m-%d>.org"
+                    ,(concat
+                      "#+title: %<%Y-%m-%d>\n\n"
+                      ;; "#+BEGIN: clocktable :scope agenda :tstart \"<%<%Y-%m-%d> 00:00>\" :tend \"<%<%Y-%m-%d> 23:59>\" :maxlevel 2 :link t\n"
+                      ;; "#+END:\n\n"
+                      "* WORK\n"
+                      "#+BEGIN: clocktable :scope (\"~/area/sync/roam/agenda/tasks/kartaca/kartaca.org\") :hidefiles t :compact nil :formula nil :tstart \"<2026-08-02 00:00>\" :tend \"<2026-08-02 23:59>\" :maxlevel 2 :link t :narrow 80\n"
+                      "#+END:\n"
+                      "* PERSONAL\n"
+                      "#+BEGIN: clocktable :scope (\"~/area/sync/roam/agenda/tasks/personal.org\") :hidefiles t :compact nil :formula nil :tstart \"<2026-08-02 00:00>\" :tend \"<2026-08-02 23:59>\" :maxlevel 2 :link t :narrow 80\n"
+                      "#+END:\n"
+                      ))
+           :add-id t)
+          ))
+
   (setq org-roam-capture-templates
-        '(("d" "default" plain "%?"
-           :target (file+head "zettels/%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n")
-           :unnarrowed t)))
+        `(
+        ("a" "agenda") ;; category
+
+        ("ap" "person" plain "%?"
+         :target (file+head
+                  "agenda/people/%<%Y%m%d%H%M%S>-${slug}.org"
+                  ,(concat
+                    ":PROPERTIES:\n"
+                    ":ID:       %(org-id-new)\n"
+                    ":CREATED: %U\n"
+                    ":ROAM_ALIASES: %^{Alias}\n"
+                    ":PHONE: %^{Phone}\n"
+                    ":JOB: %^{Job||devops|qa|developer|barber|teacher|designer|}\n"
+                    ":ORGANIZATION: %(savolla--org-roam-link-by-tags '(\"@agenda\" \"_organization\") \"Organization/Company\" t)\n"
+                    ":CITY: %(savolla--org-roam-link-by-tags '(\"@agenda\" \"_city\") \"City\" t)\n"
+                    ":ADDRESS: %^{Address}\n"
+                    ":GENDER: %^{Gender||male|female}\n"
+                    ":BIRTHDAY: %^{Birthday}\n"
+                    ":PERSONAL_MAIL: %^{Personal mail}\n"
+                    ":WORK_MAIL: %^{Work mail}\n"
+                    ":IBAN: %^{IBAN}\n"
+                    ":END:\n"
+                    "#+filetags: :@agenda:_person:%^{Extra tag||_family|_work|_other}:\n"
+                    "#+title: ${title}\n"))
+         :unnarrowed t)
+
+        ("al" "location") ;; category
+
+        ("alo" "organization" plain "%?"
+         :target (file+head
+                  "agenda/location/organization/%<%Y%m%d%H%M%S>-${slug}.org"
+                  ,(concat
+                    ":PROPERTIES:\n"
+                    ":ID:       %(org-id-new)\n"
+                    ":CREATED: %U\n"
+                    ":ROAM_ALIASES: %^{Alias}\n"
+                    ":PHONE: %^{Phone}\n"
+                    ":CITY: %(savolla--org-roam-link-by-tags '(\"@agenda\" \"_location\" \"_city\") \"City\" t)\n"
+                    ":ADDRESS: %^{Address}\n"
+                    ":GEOLOCATION: %^{Lat/Long}\n"
+                    ":WEBSITE: %^{Website}\n"
+                    ":END:\n"
+                    "#+filetags: :@agenda:_location:_organization:\n"
+                    "#+title: ${title}\n"))
+         :unnarrowed t)
+
+        ("alc" "city" plain "%?"
+         :target (file+head
+                  "agenda/location/city/%<%Y%m%d%H%M%S>-${slug}.org"
+                  ,(concat
+                    ":PROPERTIES:\n"
+                    ":ID:       %(org-id-new)\n"
+                    ":CREATED: %U\n"
+                    ":ROAM_ALIASES: %^{Alias}\n"
+                    ":END:\n"
+                    "#+filetags: :@agenda:_location:_city:\n"
+                    "#+title: ${title}\n"))
+         :unnarrowed t)
+
+        ("d" "dotfile" plain "%?"
+         :target (file+head
+                  "dotfiles/%<%Y%m%d%H%M%S>-${slug}.org"
+                  ,(concat
+                    ":PROPERTIES:\n"
+                    ":ID:       %(org-id-new)\n"
+                    ":CREATED: %U\n"
+                    ":END:\n"
+                    "#+filetags: :@dotfile:%(savolla--org-capture-read-tag \"Extra tag\"):\n"
+                    "#+title: ${title}\n"))
+         :unnarrowed t)
+
+        ("b" "biblio") ;; category
+
+        ("bb" "book" plain "%?"
+         :target (file+head
+                  "biblio/notes/book/%<%Y%m%d%H%M%S>-${slug}.org"
+                  ,(concat
+                    ":PROPERTIES:\n"
+                    ":ID:       %(org-id-new)\n"
+                    ":CREATED: %U\n"
+                    ":ROAM_REFS: %^{}\n"
+                    ":END:\n"
+                    "#+filetags: :@biblio:_book:%(savolla--org-capture-read-tag \"Extra tag\"):\n"
+                    "#+title: ${title}\n"))
+         :unnarrowed t)
+
+        ("bv" "video" plain "%?"
+         :target (file+head
+                  "biblio/notes/video/%<%Y%m%d%H%M%S>-${slug}.org"
+                  ,(concat
+                    ":PROPERTIES:\n"
+                    ":ID:       %(org-id-new)\n"
+                    ":CREATED: %U\n"
+                    ":ROAM_REFS: %^{Video URL}\n"
+                    ":END:\n"
+                    "#+filetags: :@biblio:_video:%(savolla--org-capture-read-tag \"Extra tag\"):\n"
+                    "#+title: ${title}\n\n"
+                    "#+begin_export html\n"
+                    "COPY AND PASTE EMBED VIDEO URL HERE\n"
+                    "#+end_export\n"
+
+                    ))
+         :unnarrowed t)
+
+        ("ba" "web article" plain "%?"
+         :target (file+head
+                  "biblio/notes/article/%<%Y%m%d%H%M%S>-${slug}.org"
+                  ,(concat
+                    ":PROPERTIES:\n"
+                    ":ID:       %(org-id-new)\n"
+                    ":CREATED: %U\n"
+                    ":ROAM_REFS: %^{URL}\n"
+                    ":END:\n"
+                    "#+filetags: :@biblio:_article:%(savolla--org-capture-read-tag \"Extra tag\"):\n"
+                    "#+title: ${title}\n\n"
+                    ))
+         :unnarrowed t)
+
+        ("bc" "course" plain "%?"
+         :target (file+head
+                  "biblio/notes/course/%<%Y%m%d%H%M%S>-${slug}.org"
+                  ,(concat
+                    ":PROPERTIES:\n"
+                    ":ID:       %(org-id-new)\n"
+                    ":CREATED: %U\n"
+                    ":ROAM_REFS: %^{Course URL}\n"
+                    ":END:\n"
+                    "#+filetags: :@biblio:_course:%(savolla--org-capture-read-tag \"Extra tag\"):\n"
+                    "#+title: ${title}\n\n"
+                    ))
+         :unnarrowed t)
+
+        ("p" "post" plain "%?"
+         :target (file+head
+                  "posts/%<%Y%m%d%H%M%S>-${slug}.org"
+                  ,(concat
+                    ":PROPERTIES:\n"
+                    ":ID:       %(org-id-new)\n"
+                    ":CREATED: %U\n"
+                    ":END:\n"
+                    "#+filetags: :@post:%(savolla--org-capture-read-tag \"Extra tag\"):\n"
+                    "#+title: ${title}\n\n"
+                    ))
+         :unnarrowed t)
+
+        ))
   )
+
+
+
+
 (setq org-roam-dailies-directory "journal/")
 
 
@@ -606,6 +1164,12 @@
 (setq gc-cons-threshold (* 100 1024 1024))
 (run-with-idle-timer 5 t #'garbage-collect)
 
+;; org-roam
+(after! org-roam
+  (require 'org-roam-ql) ;; load org-roam-ql after org-roam loads
+
+  )
+
 ;; org roam ql
 
 ;; org-fc
@@ -618,11 +1182,11 @@
   (require 'org-fc-hydra))
 
 ;;; pre-made decks
-(defun my/fc-terraform () (interactive)
-  (org-fc-review '(:paths all :filter (tag "terraform"))))
+(defun my/fc-redis () (interactive)
+  (org-fc-review '(:paths all :filter (tag "redis"))))
 
-(defun my/fc-terraform-facts () (interactive)
-  (org-fc-review '(:paths all :filter (and (tag "terraform") (tag "_fact")))))
+(defun my/fc-redis-facts () (interactive)
+  (org-fc-review '(:paths all :filter (and (tag "redis") (tag "_fact")))))
 
 ;;; define keybindings for review session (evil-mode)
 (evil-define-minor-mode-key '(normal insert emacs) 'org-fc-review-flip-mode
@@ -701,10 +1265,12 @@ Inherits the heading level from the previous heading."
                       (org-current-level)
                     1)))
          (stars (make-string level ?*)))
-    (insert (format "\n%s %s\n" stars ts)))
+    (insert (format "\n%s %s :@journal:\n" stars ts)))
   (forward-line -1)
   (org-back-to-heading t)
-  (forward-line 1)
+  (org-id-get-create)
+  (org-set-property "CREATED" (format-time-string "%Y-%m-%d %H:%M"))
+  (forward-line 5 )
   (evil-insert-state))
 
 
@@ -806,104 +1372,137 @@ Inherits the heading level from the previous heading."
 (defun savolla/org-capture-biblio-mechanism    () (interactive) (savolla/org-capture-node "biblio" "_mechanism"))
 (defun savolla/org-capture-biblio-property     () (interactive) (savolla/org-capture-node "biblio" "_property"))
 
+;; commented because it was blocking my localleaders
+;; (map! :leader :desc "go to emms playlist"  "j m l" #'emms-playlist-mode-go
+;;       :leader :desc "browse music"         "j m b" #'emms-browser
+;;       :leader :desc "pause track"          "j m x" #'emms-pause
+;;       :leader :desc "stop track"           "j m s" #'emms-stop
+;;       :leader :desc "play previous track"  "j m p" #'emms-previous
+;;       :leader :desc "play next track"      "j m n" #'emms-next)
 
 ;; key mappings/bindings
-(map! :leader :desc "go"           "j g")
-(map! :leader :desc "current day"  "j g c" #'org-roam-dailies-goto-today)
-(map! :leader :desc "yesterday"    "j g y" #'org-roam-dailies-goto-yesterday)
-(map! :leader :desc "tomorrow"     "j g t" #'org-roam-dailies-goto-tomorrow)
-(map! :leader :desc "pick date"    "j g g" #'org-roam-dailies-goto-date)
-(map! :leader :desc "next day"     "j g n" #'org-roam-dailies-goto-next-note)
-(map! :leader :desc "previous day" "j g p" #'org-roam-dailies-goto-previous-note)
-(map! :leader :desc "index"        "j g i" (lambda () (interactive) (find-file "~/resource/notes/org/roam/index.org")))
-(map! :leader :desc "agenda"       "j g a")
-(map! :leader :desc "personal"     "j g a p" (lambda () (interactive) (find-file "~/resource/notes/org/roam/agenda/personal.org")))
-(map! :leader :desc "kartaca"      "j g a k" (lambda () (interactive) (find-file "~/resource/notes/org/roam/agenda/kartaca.org")))
+;; ---------- which-key labels for every prefix level ----------
+(after! which-key
+  (which-key-add-key-based-replacements
+    (concat doom-leader-key " j")         "savolla"
+    (concat doom-leader-key " j g")       "go"
+    (concat doom-leader-key " j g a")     "agenda"
+    (concat doom-leader-key " j i")       "insert"
+    (concat doom-leader-key " j i f")     "flashcard"
+    (concat doom-leader-key " j i z")     "zettel"
+    (concat doom-leader-key " j i b")     "biblio"
+    (concat doom-leader-key " j i h")     "pdf highlight"
+    (concat doom-leader-key " j i a")     "agenda"
+    (concat doom-leader-key " j i a t")   "task"
+    (concat doom-leader-key " j i a t p") "personal"
+    (concat doom-leader-key " j i a t w") "work"))
 
-(map! :leader :desc "insert"       "j i")
-(map! :leader :desc "flashcard"    "j i f")
-(map! :leader :desc "normal"       "j i f n"   #'savolla/org-capture-fc-normal)
-(map! :leader :desc "double"       "j i f d"   #'savolla/org-capture-fc-double)
-(map! :leader :desc "cloze"        "j i f c"   #'savolla/org-capture-fc-cloze)
-(map! :leader :desc "input"        "j i f i"   #'savolla/org-capture-fc-input)
+;; ---------- quick access keys ----------
+(map! :map global-map
+      "<f12>" #'savolla/org-insert-agenda-personal-todo
+      "<f11>" #'savolla/org-insert-agenda-work-todo)
 
-(map! :leader :desc "zettel"       "j i z")
-(map! :leader :desc "term"         "j i z t"   #'savolla/org-capture-zettel-term)
-(map! :leader :desc "abbr"         "j i z a"   #'savolla/org-capture-zettel-abbr)
-(map! :leader :desc "analogy"      "j i z A"   #'savolla/org-capture-zettel-analogy)
-(map! :leader :desc "history"      "j i z h"   #'savolla/org-capture-zettel-history)
-(map! :leader :desc "fact"         "j i z f"   #'savolla/org-capture-zettel-fact)
-(map! :leader :desc "property"     "j i z p"   #'savolla/org-capture-zettel-property)
-(map! :leader :desc "mechanism"    "j i z M"   #'savolla/org-capture-zettel-mechanism)
-(map! :leader :desc "method"       "j i z m"   #'savolla/org-capture-zettel-method)
-(map! :leader :desc "comparison"   "j i z c"   #'savolla/org-capture-zettel-comparison)
-(map! :leader :desc "usecase"      "j i z u"   #'savolla/org-capture-zettel-usecase)
-(map! :leader :desc "tradeoff"     "j i z T"   #'savolla/org-capture-zettel-tradeoff)
-(map! :leader :desc "bestpractice" "j i z b"   #'savolla/org-capture-zettel-bestpractice)
-(map! :leader :desc "warning"      "j i z w"   #'savolla/org-capture-zettel-warning)
-(map! :leader :desc "fix"          "j i z F"   #'savolla/org-capture-zettel-fix)
-(map! :leader :desc "reference"    "j i z r"   #'savolla/org-capture-zettel-reference)
-(map! :leader :desc "bookmark"     "j i z B"   #'savolla/org-capture-zettel-bookmark)
+;; ---------- go ----------
+(map! :leader
+      (:prefix "j g"
+       :desc "today"        "c" #'org-roam-dailies-goto-today
+       :desc "calendar"     "g" #'org-roam-dailies-goto-date
+       :desc "next day"     "n" #'org-roam-dailies-goto-next-note
+       :desc "prev day"     "p" #'org-roam-dailies-goto-previous-note
+       :desc "index"        "i" (lambda () (interactive) (find-file "~/resource/notes/org/roam/index.org"))
+       (:prefix "a"
+        :desc "personal" "p" (lambda () (interactive) (find-file "~/resource/notes/org/roam/agenda/tasks/personal.org"))
+        :desc "kartaca"  "k" (lambda () (interactive) (find-file "~/resource/notes/org/roam/agenda/tasks/kartaca/kartaca.org")))))
 
-(map! :leader :desc "biblio"       "j i b")
-(map! :leader :desc "term"         "j i b t"   #'savolla/org-capture-biblio-term)
-(map! :leader :desc "abbr"         "j i b a"   #'savolla/org-capture-biblio-abbr)
-(map! :leader :desc "analogy"      "j i b A"   #'savolla/org-capture-biblio-analogy)
-(map! :leader :desc "history"      "j i b h"   #'savolla/org-capture-biblio-history)
-(map! :leader :desc "fact"         "j i b f"   #'savolla/org-capture-biblio-fact)
-(map! :leader :desc "property"     "j i b p"   #'savolla/org-capture-biblio-property)
-(map! :leader :desc "mechanism"    "j i b M"   #'savolla/org-capture-biblio-mechanism)
-(map! :leader :desc "method"       "j i b m"   #'savolla/org-capture-biblio-method)
-(map! :leader :desc "comparison"   "j i b c"   #'savolla/org-capture-biblio-comparison)
-(map! :leader :desc "usecase"      "j i b u"   #'savolla/org-capture-biblio-usecase)
-(map! :leader :desc "tradeoff"     "j i b T"   #'savolla/org-capture-biblio-tradeoff)
-(map! :leader :desc "bestpractice" "j i b b"   #'savolla/org-capture-biblio-bestpractice)
-(map! :leader :desc "warning"      "j i b w"   #'savolla/org-capture-biblio-warning)
-(map! :leader :desc "fix"          "j i b F"   #'savolla/org-capture-biblio-fix)
-(map! :leader :desc "reference"    "j i b r"   #'savolla/org-capture-biblio-reference)
+;; ---------- insert : flashcard ----------
+(map! :leader
+      (:prefix "j i f"
+       :desc "normal" "n" #'savolla/org-capture-fc-normal
+       :desc "double" "d" #'savolla/org-capture-fc-double
+       :desc "cloze"  "c" #'savolla/org-capture-fc-cloze
+       :desc "input"  "i" #'savolla/org-capture-fc-input))
 
-(map! :leader :desc "highlight"    "j i h")
-(map! :leader :desc "term"         "j i h t"   #'savolla/pdf-highlight-term)
-(map! :leader :desc "abbr"         "j i h a"   #'savolla/pdf-highlight-abbr)
-(map! :leader :desc "analogy"      "j i h A"   #'savolla/pdf-highlight-analogy)
-(map! :leader :desc "history"      "j i h h"   #'savolla/pdf-highlight-history)
-(map! :leader :desc "fact"         "j i h f"   #'savolla/pdf-highlight-fact)
-(map! :leader :desc "property"     "j i h p"   #'savolla/pdf-highlight-property)
-(map! :leader :desc "mechanism"    "j i h M"   #'savolla/pdf-highlight-mechanism)
-(map! :leader :desc "method"       "j i h m"   #'savolla/pdf-highlight-method)
-(map! :leader :desc "comparison"   "j i h c"   #'savolla/pdf-highlight-comparison)
-(map! :leader :desc "usecase"      "j i h u"   #'savolla/pdf-highlight-usecase)
-(map! :leader :desc "tradeoff"     "j i h T"   #'savolla/pdf-highlight-tradeoff)
-(map! :leader :desc "bestpractice" "j i h b"   #'savolla/pdf-highlight-bestpractice)
-(map! :leader :desc "warning"      "j i h w"   #'savolla/pdf-highlight-warning)
-(map! :leader :desc "fix"          "j i h F"   #'savolla/pdf-highlight-fix)
-(map! :leader :desc "reference"    "j i h r"   #'savolla/pdf-highlight-reference)
+;; ---------- insert : zettel ----------
+(map! :leader
+      (:prefix "j i z"
+       :desc "term"         "t" #'savolla/org-capture-zettel-term
+       :desc "abbr"         "a" #'savolla/org-capture-zettel-abbr
+       :desc "analogy"      "A" #'savolla/org-capture-zettel-analogy
+       :desc "history"      "h" #'savolla/org-capture-zettel-history
+       :desc "fact"         "f" #'savolla/org-capture-zettel-fact
+       :desc "property"     "p" #'savolla/org-capture-zettel-property
+       :desc "mechanism"    "M" #'savolla/org-capture-zettel-mechanism
+       :desc "method"       "m" #'savolla/org-capture-zettel-method
+       :desc "comparison"   "c" #'savolla/org-capture-zettel-comparison
+       :desc "usecase"      "u" #'savolla/org-capture-zettel-usecase
+       :desc "tradeoff"     "T" #'savolla/org-capture-zettel-tradeoff
+       :desc "bestpractice" "b" #'savolla/org-capture-zettel-bestpractice
+       :desc "warning"      "w" #'savolla/org-capture-zettel-warning
+       :desc "fix"          "F" #'savolla/org-capture-zettel-fix
+       :desc "reference"    "r" #'savolla/org-capture-zettel-reference
+       :desc "bookmark"     "B" #'savolla/org-capture-zettel-bookmark))
 
-(map! :leader :desc "agenda"       "j i a")
-(map! :leader :desc "personal"     "j i a p")
-(map! :leader :desc "birthday"     "j i a p b" #'savolla/org-insert-agenda-personal-birthday)
-(map! :leader :desc "habit"        "j i a p h" #'savolla/org-insert-agenda-personal-habit)
-(map! :leader :desc "person"       "j i a p p" #'savolla/org-insert-agenda-personal-person)
-(map! :leader :desc "location"     "j i a p l" #'savolla/org-insert-agenda-personal-location)
-(map! :leader :desc "phone"        "j i a p n" #'savolla/org-insert-agenda-personal-phone)
-(map! :leader :desc "task"         "j i a p t" #'savolla/org-insert-agenda-personal-todo)
-(map! :leader :desc "today"        "j i a p y" #'savolla/org-insert-agenda-personal-todo-today)
-(map! :leader :desc "weekend"      "j i a p w" #'savolla/org-insert-agenda-personal-todo-weekend)
-(map! :leader :desc "scheduled"    "j i a p s" #'savolla/org-insert-agenda-personal-todo-scheduled)
-(map! :leader :desc "deadline"     "j i a p d" #'savolla/org-insert-agenda-personal-todo-deadline)
+;; ---------- insert : biblio ----------
+(map! :leader
+      (:prefix "j i b"
+       :desc "term"         "t" #'savolla/org-capture-biblio-term
+       :desc "abbr"         "a" #'savolla/org-capture-biblio-abbr
+       :desc "analogy"      "A" #'savolla/org-capture-biblio-analogy
+       :desc "history"      "h" #'savolla/org-capture-biblio-history
+       :desc "fact"         "f" #'savolla/org-capture-biblio-fact
+       :desc "property"     "p" #'savolla/org-capture-biblio-property
+       :desc "mechanism"    "M" #'savolla/org-capture-biblio-mechanism
+       :desc "method"       "m" #'savolla/org-capture-biblio-method
+       :desc "comparison"   "c" #'savolla/org-capture-biblio-comparison
+       :desc "usecase"      "u" #'savolla/org-capture-biblio-usecase
+       :desc "tradeoff"     "T" #'savolla/org-capture-biblio-tradeoff
+       :desc "bestpractice" "b" #'savolla/org-capture-biblio-bestpractice
+       :desc "warning"      "w" #'savolla/org-capture-biblio-warning
+       :desc "fix"          "F" #'savolla/org-capture-biblio-fix
+       :desc "reference"    "r" #'savolla/org-capture-biblio-reference))
 
-(map! :leader :desc "work"         "j i a w")
-(map! :leader :desc "task"         "j i a w t")
-(map! :leader :desc "todo"         "j i a w t t"  #'savolla/org-insert-agenda-work-todo)
-(map! :leader :desc "today"        "j i a w t y"  #'savolla/org-insert-agenda-work-today)
-(map! :leader :desc "job"          "j i a w t j"  #'savolla/org-insert-agenda-work-job)
-(map! :leader :desc "scheduled"    "j i a w t s"  #'savolla/org-insert-agenda-work-scheduled)
-(map! :leader :desc "deadline"     "j i a w t d"  #'savolla/org-insert-agenda-work-deadline)
+;; ---------- insert : pdf highlight ----------
+(map! :leader
+      (:prefix "j i h"
+       :desc "term"         "t" #'savolla/pdf-highlight-term
+       :desc "abbr"         "a" #'savolla/pdf-highlight-abbr
+       :desc "analogy"      "A" #'savolla/pdf-highlight-analogy
+       :desc "history"      "h" #'savolla/pdf-highlight-history
+       :desc "fact"         "f" #'savolla/pdf-highlight-fact
+       :desc "property"     "p" #'savolla/pdf-highlight-property
+       :desc "mechanism"    "M" #'savolla/pdf-highlight-mechanism
+       :desc "method"       "m" #'savolla/pdf-highlight-method
+       :desc "comparison"   "c" #'savolla/pdf-highlight-comparison
+       :desc "usecase"      "u" #'savolla/pdf-highlight-usecase
+       :desc "tradeoff"     "T" #'savolla/pdf-highlight-tradeoff
+       :desc "bestpractice" "b" #'savolla/pdf-highlight-bestpractice
+       :desc "warning"      "w" #'savolla/pdf-highlight-warning
+       :desc "fix"          "F" #'savolla/pdf-highlight-fix
+       :desc "reference"    "r" #'savolla/pdf-highlight-reference))
 
-(map! :leader :desc "sync position"  "j n" #'org-noter-sync-current-note)
-(map! :leader :desc "journal entry" "j j" #'savolla/org-insert-journal-entry)
-(map! :leader :desc "select window" "f w" #'ace-window)
-(map! :leader :desc "select window" "w w" #'evil-window-mru)
+;; ---------- insert : agenda : task ----------
+(map! :leader
+      (:prefix "j i a t"
+       (:prefix "p"
+        :desc "birthday"  "b" #'savolla/org-insert-agenda-personal-birthday
+        :desc "habit"     "h" #'savolla/org-insert-agenda-personal-habit
+        :desc "task"      "t" #'savolla/org-insert-agenda-personal-todo
+        :desc "today"     "y" #'savolla/org-insert-agenda-personal-todo-today
+        :desc "weekend"   "w" #'savolla/org-insert-agenda-personal-todo-weekend
+        :desc "scheduled" "s" #'savolla/org-insert-agenda-personal-todo-scheduled
+        :desc "deadline"  "d" #'savolla/org-insert-agenda-personal-todo-deadline)
+       (:prefix "w"
+        :desc "todo"      "t" #'savolla/org-insert-agenda-work-todo
+        :desc "today"     "y" #'savolla/org-insert-agenda-work-today
+        :desc "scheduled" "s" #'savolla/org-insert-agenda-work-scheduled
+        :desc "deadline"  "d" #'savolla/org-insert-agenda-work-deadline)))
+
+;; ---------- misc, top-level ----------
+(map! :leader
+      :desc "sync position" "j n" #'org-noter-sync-current-note
+      :desc "journal entry" "j j" #'savolla/org-insert-journal-entry
+      :desc "select window" "f w" #'ace-window
+      :desc "select window" "w w" #'evil-window-mru)
 
 ;; add new line on save (for sonarqube)
 (setq-default require-final-newline t)
@@ -914,21 +1513,51 @@ Inherits the heading level from the previous heading."
    (lambda ()
      (+workspace-rename "main" "journal")
      (delete-other-windows)
-
      ;; Left: journal
      (org-roam-dailies-goto-today)
      (let ((journal-window (selected-window))
            agenda-window)
-
        ;; Right: agenda
        (setq agenda-window (split-window-right))
        (select-window agenda-window)
        (org-agenda nil "p")
        (text-scale-set -1)
-
        ;; Back to journal
        (select-window journal-window)
        (cd "~/")
-       (goto-char (point-max))))))
+       (goto-char (point-max)))
 
+     ;; New workspace for IRC
+     (condition-case err
+         (progn
+           (+workspace-switch "irc" t)
+           (delete-other-windows)
+           (circe "irc.libera.chat")
+           (circe "irc.oftc.net"))
+       (error (message "startup: irc setup failed: %s" err)))
+
+     ;; New workspace for elfeed
+     (condition-case err
+         (progn
+           (+workspace-switch "elfeed" t)
+           (delete-other-windows)
+           (elfeed))
+       (error (message "startup: elfeed setup failed: %s" err)))
+
+     ;; New workspace for music player
+     (condition-case err
+         (progn
+           (+workspace-switch "music" t)
+           (delete-other-windows)
+           (emms-smart-browse))
+       (error (message "startup: emms setup failed: %s" err)))
+
+     ;; New workspace for mail client
+     ;; (condition-case err
+     ;;     (progn
+     ;;       (mu4e))
+     ;;   (error (message "startup: mu4e setup failed: %s" err)))
+
+     ;; Switch back to journal so that's what you see on startup
+     (+workspace-switch "journal" t))))
 (add-hook 'emacs-startup-hook #'my-startup-setup)

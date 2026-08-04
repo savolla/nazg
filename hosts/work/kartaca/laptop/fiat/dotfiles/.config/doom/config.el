@@ -1,5 +1,4 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 (add-hook! '+doom-dashboard-functions :append
   (insert "\n" (+doom-dashboard--center +doom-dashboard--width "")))
@@ -13,7 +12,6 @@
                    ))
          (longest-line (apply #'max (mapcar #'length banner))))
     (put-text-property
-
      (point)
      (dolist (line banner (point))
        (insert (+doom-dashboard--center
@@ -31,6 +29,7 @@
 (setq user-full-name "Kuzey Koç"
       user-mail-address "kuzey.koc@kartaca.com")
 
+(setq-default line-spacing 0)  ; remove extra line spacing
 (setq doom-font (font-spec :family "IosevkaTerm Nerd Font Mono" :size 18)
       doom-variable-pitch-font (font-spec :family "IosevkaTerm Nerd Font Mono" :size 18))
 
@@ -68,6 +67,9 @@
 (map! :n "C-<down>" #'evil-window-decrease-height)
 (map! :n "C-<right>" #'evil-window-decrease-width)
 (map! :n "C-<left>" #'evil-window-increase-width)
+
+;; fix horizontal gaps between block characters (iosevka)
+(setq frame-resize-pixelwise t)
 
 (map! :leader :desc "switch to previous workspace" "TAB h"   #'+workspace:switch-previous )
 (map! :leader :desc "switch to next workspace"     "TAB l"   #'+workspace:switch-next )
@@ -215,6 +217,240 @@
 (setq org-crypt-disable-auto-save t) ;; disable auto-save for encrypted org mode entries
 (setq org-crypt-key "CB5A65C413A6AA63") ;; encrypt entries with my GPG key
 (setq org-tags-exclude-from-inheritance '("crypt")) ;; prevent tag inheritance for "crypt" tag
+
+;; calibre
+(use-package! calibredb
+  :commands calibredb
+  :config
+  (setq calibredb-root-dir "~/resource/books"
+        calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir)
+        calibredb-library-alist '(("~/resource/books"))
+        calibredb-format-all-the-icons t)
+
+  ;; Set up key bindings for calibredb-search-mode
+  (map! :map calibredb-search-mode-map
+        :n "RET" #'calibredb-find-file
+        :n "?" #'calibredb-dispatch
+        :n "a" #'calibredb-add
+        :n "d" #'calibredb-remove
+        :n "j" #'calibredb-next-entry
+        :n "k" #'calibredb-previous-entry
+        :n "l" #'calibredb-open-file-with-default-tool
+        :n "s" #'calibredb-set-metadata-dispatch
+        :n "S" #'calibredb-switch-library
+        :n "q" #'calibredb-search-quit))
+
+;; emms
+(after! emms
+  (require 'emms-setup)
+  (require 'emms-player-mpd)
+  (emms-all)
+  (setq emms-player-list '(emms-player-mpd))
+  (add-to-list 'emms-info-functions 'emms-info-mpd)
+
+  ;; mpd settings (make sure it matches your mpd.conf exactly)
+  (setq emms-player-mpd-server-name "localhost")
+  (setq emms-player-mpd-server-port "6600")
+  (setq emms-player-mpd-music-directory "~/resource/music")
+
+  ;; vim keybinds
+  (require 'evil-collection-emms)
+  (evil-collection-emms-setup)   ; gives you the full default vim binding set
+
+  ;; makes the following keybinding work
+  (evil-set-initial-state 'emms-browser-mode 'normal)
+
+  ;; custom overrides for emms-browser-mode
+  (map! :map emms-browser-mode-map
+        :n "j"      #'evil-next-line
+        :n "k"      #'evil-previous-line
+        :n [tab]    #'emms-browser-toggle-subitems      ; single-level fold/unfold
+        :n [return] #'emms-browser-add-tracks           ; unchanged, kept explicit for clarity
+        ;; browse-by-structure shortcuts
+        ;; ga/gA/gb/gy/gc/gp already come from evil-collection-emms:
+        ;;   ga artist | gA album | gb genre | gy year | gc composer | gp performer
+        ;; adding the one type evil-collection didn't cover:
+        :n "go"     #'emms-browse-by-albumartist)
+
+  ;; open the browser defaulting to album view instead of emms-smart-browse's default
+  (defun my/emms-browse-albums ()
+    "Open the EMMS browser, listing music by album."
+    (interactive)
+    (emms-browse-by-album))
+
+  ;; bind it wherever you currently invoke the browser, e.g.:
+  (map! :leader
+        (:prefix-map ("m" . "music")
+         :desc "Browse music (by album)" "m" #'my/emms-browse-albums
+         :desc "Browse by artist"        "a" #'emms-browse-by-artist
+         :desc "Browse by album"         "A" #'emms-browse-by-album
+         :desc "Browse by genre"         "g" #'emms-browse-by-genre
+         :desc "Browse by year"          "y" #'emms-browse-by-year
+         :desc "Browse by composer"      "c" #'emms-browse-by-composer
+         :desc "Browse by performer"     "p" #'emms-browse-by-performer
+         :desc "Browse by album artist"  "o" #'emms-browse-by-albumartist
+         :desc "Playlist"                "P" #'emms-playlist-mode-go))
+
+  ;; connect to mpd
+  (emms-player-mpd-connect)
+
+  ;; setup caching mechanism to prevent running mpd sync on every emacs startup
+  (setq emms-cache-file (expand-file-name "emms/cache" doom-cache-dir))
+  (emms-cache 1)
+  (emms-cache-restore)
+
+  ;; album covers
+  (setq emms-browser-covers 'emms-browser-cache-thumbnail-async)
+  ;; (setq emms-browser-default-covers
+  ;;       (list "~/.config/doom/emms/no-cover-small.jpg" nil nil))
+
+  ;; cosmetic
+  (emms-mode-line-mode 1)
+  (emms-playing-time-mode 1)
+  )
+
+;; dirvish
+(use-package! dirvish
+  :init
+  (require 'dired-x) ;; needed for dired-omit-mode
+
+  :config
+  ;; Make omit-mode actually hide dotfiles (by default it only hides
+  ;; backup/autosave/lock files and `.`/`..`, not things like `.config`)
+  (setq dired-omit-files
+        (concat dired-omit-files "\\|^\\..*$"))
+
+  ;; Start every Dired/Dirvish buffer with hidden files... hidden
+  (add-hook 'dired-mode-hook #'dired-omit-mode)
+
+  (map! :map dired-mode-map
+        :n "DEL" #'dired-omit-mode        ; backspace = toggle hidden files
+        ))
+
+;; irc
+(with-eval-after-load 'circe
+  (set-irc-server! "irc.libera.chat"
+    `(:tls t
+      :port 6697
+      :nick "savolla"
+      :sasl-username ,(+pass-get-user   "savolla/social/irc/libera/savolla")
+      :sasl-password (lambda (&rest _) (+pass-get-secret "savolla/social/irc/libera/savolla"))
+      :channels ("#emacs" "#linux")))
+
+  (set-irc-server! "irc.oftc.net"
+    `(:tls t
+      :port 6697
+      :nick "inferi"
+      :sasl-username ,(+pass-get-user   "savolla/social/irc/oftc/inferi")
+      :sasl-password (lambda (&rest _) (+pass-get-secret "savolla/social/irc/oftc/inferi"))
+      :channels ("#debian" "#tor" "#suckless"))))
+
+;; elfeed
+(after! elfeed
+  (elfeed-update)
+  (setq elfeed-search-filter "@6-months-ago")
+  (setq elfeed-search-face-alist
+        '(
+          (reddit . (:foreground "orange"))
+          (turkey . (:foreground "red"))
+          (youtube . (:foreground "white" :background "red" :weight bold))
+          (favorite . (:background "gold"))
+          ))
+  (map! :map elfeed-search-mode-map :n "o" #'elfeed-search-browse-url)
+  )
+
+(require 'elfeed-goodies)
+(elfeed-goodies/setup)
+
+(custom-set-variables
+ '(elfeed-feeds
+   (quote
+    (
+     ("https://dindi.garjola.net/rss.xml"                          emacs favorite)
+     ("https://www.reddit.com/r/linux.rss"                         reddit)
+     ("https://www.gamingonlinux.com/article_rss.php"              gaming)
+     ("https://hackaday.com/blog/feed/"                            hackaday)
+     ("https://linux.softpedia.com/backend.xml"                    softpedia)
+     ("https://www.zdnet.com/topic/linux/rss.xml"                  zdnet)
+     ("http://feeds.feedburner.com/d0od"                           omgubuntu)
+     ("https://www.computerworld.com/index.rss"                    computerworld)
+     ("https://www.networkworld.com/category/linux/index.rss"      networkworld)
+     ("https://www.techrepublic.com/rssfeeds/topic/open-source/"   techrepublic)
+     ("https://betanews.com/feed"                                  betanews)
+     ("http://lxer.com/module/newswire/headlines.rss"              lxer)
+
+     ("https://news.ycombinator.com/rss"                          news)
+     ("https://lobste.rs/rss"                                     news)
+     ("https://www.theverge.com/rss/index.xml"                    news)
+     ("https://feeds.arstechnica.com/arstechnica/index"           news)
+     ("https://www.wired.com/feed/rss"                            news)
+
+     ("https://this-week-in-rust.org/rss.xml"                     programming)
+     ("https://blog.rust-lang.org/feed.xml"                       programming)
+     ("https://go.dev/blog/feed.atom"                             programming)
+     ("https://www.python.org/dev/peps/peps.rss/"                 programming)
+     ("https://planetpython.org/rss20.xml"                        programming)
+     ("https://martinfowler.com/feed.atom"                        programming)
+     ("https://www.joelonsoftware.com/feed/"                      programming)
+     ("https://nullprogram.com/feed/"                             programming)
+     ("https://danluu.com/atom.xml"                               programming)
+     ("https://blog.regehr.org/feed"                              programming)
+     ("https://www.joshwcomeau.com/rss.xml"                       programming)
+     ("https://overreacted.io/rss.xml"                            programming)
+     ("https://stackoverflow.blog/feed/"                          programming)
+
+     ("https://fedoramagazine.org/feed/"                          linux)
+     ("https://www.omgubuntu.co.uk/feed"                          linux)
+     ("https://www.phoronix.com/rss.php"                          linux)
+     ("https://itsfoss.com/feed/"                                 linux)
+     ("https://distrowatch.com/news/dwd.xml"                      linux)
+     ("https://www.debian.org/News/news"                          linux)
+     ("https://opensource.com/feed"                               linux)
+
+     ("http://planet.emacsen.org/atom.xml"                        emacs)
+     ("https://sachachua.com/blog/feed/"                          emacs)
+     ("https://emacsredux.com/atom.xml"                           emacs)
+     ("https://irreal.org/blog/?feed=rss2"                        emacs)
+     ("https://www.masteringemacs.org/feed"                       emacs)
+
+     ("https://krebsonsecurity.com/feed/"                         security privacy)
+     ("https://www.schneier.com/feed/atom/"                       security privacy)
+     ("https://googleprojectzero.blogspot.com/feeds/posts/default" security privacy)
+     ("https://feeds.feedburner.com/TheHackersNews"               security privacy)
+     ("https://www.darkreading.com/rss.xml"                       security privacy)
+
+     ("https://stratechery.com/feed/"                             bigtech industry)
+     ("https://www.theinformation.com/feed"                       bigtech industry)
+     ("https://spectrum.ieee.org/feeds/feed.rss"                  bigtech industry)
+
+
+     ("https://netflixtechblog.com/feed" engineering)
+     ("https://engineering.fb.com/feed/" engineering)
+     ("https://github.blog/feed/" engineering)
+     ("https://blog.cloudflare.com/rss/" engineering)
+     ("https://aws.amazon.com/blogs/aws/feed/" engineering)
+     ("https://stackoverflow.blog/engineering/feed/" engineering)
+
+     ("https://openai.com/news/rss.xml" ai)
+     ("https://www.anthropic.com/rss.xml" ai)
+     ("https://ai.googleblog.com/feeds/posts/default" ai)
+     ("https://huggingface.co/blog/feed.xml" ai)
+     ("https://www.deeplearning.ai/the-batch/feed/" ai)
+
+     ;; youtube
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCsBjURrPoezykLs9EqgamOA" youtube news) ;; # Fireship
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw" youtube rust neovim) ;; ThePrimeagen
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCbRP3c757lWg9M-U7TyEkXA" youtube) ;; Theo
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCZgt6AzoyjslHTC9dz0UoTw" youtube system-design) ;; ByteByteGo
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCUMwY9iS8oMyWDYIe6_RmoA" youtube) ;; No Boilerplate
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ" youtube emacs) ;; System Crafters
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" youtube emacs linux) ;; DistroTube
+     ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA" youtube computers) ;; Computerphile
+
+     ;; politics
+     ("https://www.reddit.com/r/Turkey.rss"                reddit turkey news)
+     ))))
+
 
 ;; org mode
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)

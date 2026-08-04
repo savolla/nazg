@@ -208,19 +208,64 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    musnix
   ];
 
-  musnix = {
-    enable = true;
-    kernel.realtime = true;   # uses RT-patched kernel
-    rtirq.enable = true;      # raises IRQ thread priorities for audio devices
-    das_watchdog.enable = true;
-  };
-
-  boot.initrd.systemd.enable = true; # ask password for encrypted LUKS devices (graphically)
-
   boot = {
+    # enable "silent boot"
+    consoleLogLevel = 3;
+    initrd = {
+      verbose = false;
+      systemd = {
+        enable = true; # ask password for encrypted LUKS devices (graphically)
+      };
+      luks = {
+        devices = {
+          "luks-51ca4097-c9b8-4d69-8f65-b62f20f910d0".device = "/dev/disk/by-uuid/51ca4097-c9b8-4d69-8f65-b62f20f910d0"; # nixos installation ssd 512GB
+          "savolla".device = "/dev/disk/by-uuid/ad7af5f0-e3a1-491e-ac65-4d366745b8f1"; # SAMSUNG EVO 990 NVME that contains my home folder /home/savolla
+        };
+      };
+      # kernelModules = [ "amdgpu" ]; # make the kernel use the correct driver early. fix those blury boot messages and hibernation problems
+    };
+
+    # kernel
+    # kernelPackages = pkgs.linuxPackages_zen; # this kernel is the only one that sees my eno1 ethernet interface on gmktek g10 (WORKS PERFECTLY)
+    # kernelPackages = pkgs.linuxPackages_latest; # fix type-c and eno1 interfaces on nix machine GMKTek Nucbox G10
+    # kernelPackages = pkgs.linuxPackages; # LTS (for stability)
+
+    kernelParams = [
+      "quiet"
+      "udev.log_level=3"
+      "systemd.show_status=auto"
+      "resume=UUID=2954f857-a502-4b6c-837c-4250349bd469" # swap UUID, not LUKS UUID (for hibernation to work)
+      "mitigations=off" # leave cpu alone! this is not a server macnine (spectre/meltdown vunls etc.)
+      # fix suspend problems
+      "mem_sleep_default=deep"
+      "amdgpu.sg_display=0"
+    ];
+
+    resumeDevice = "/dev/disk/by-uuid/2954f857-a502-4b6c-837c-4250349bd469"; # encrypted swap partition for hibernation to work
+
+    loader = {
+      systemd-boot.enable = false; # disabled this for grub
+      efi.canTouchEfiVariables = false;
+      timeout = 10; # grub timeout seconds
+
+      grub = {
+        enable = true;
+        efiSupport = true;
+        efiInstallAsRemovable = true;
+        device = "nodev";
+        extraEntries = ''
+          menuentry "Reboot" {
+                    reboot
+                }
+                menuentry "Poweroff" {
+                    halt
+                }
+        '';
+      };
+    };
+
     plymouth = {
       enable = true;
       theme = "abstract_ring";
@@ -231,54 +276,14 @@ in
         })
       ];
     };
-
-    # Enable "Silent boot"
-    consoleLogLevel = 3;
-    initrd.verbose = false;
-    kernelParams = [
-      "quiet"
-      "udev.log_level=3"
-      "systemd.show_status=auto"
-      "resume=UUID=2954f857-a502-4b6c-837c-4250349bd469" # swap UUID, not LUKS UUID (for hibernation to work)
-
-      "mitigations=off" # leave cpu alone! this is not a server macnine (spectre/meltdown vunls etc.)
-
-      # fix suspend problems
-      "mem_sleep_default=deep"
-      "amdgpu.sg_display=0"
-    ];
-    # Hide the OS choice for bootloaders.
-    # It's still possible to open the bootloader list by pressing any key
-    # It will just not appear on screen unless a key is pressed
-    loader.timeout = 0;
-
   };
 
-  # Bootloader.
-  # NOTE: kernel packages are disabled due to musnix. musnix has its own kernel.
-  # boot.kernelPackages = pkgs.linuxPackages_zen; # this kernel is the only one that sees my eno1 ethernet interface on gmktek g10 (WORKS PERFECTLY)
-  # boot.kernelPackages = pkgs.linuxPackages_latest; # fix type-c and eno1 interfaces on nix machine GMKTek Nucbox G10
-  # boot.kernelPackages = pkgs.linuxPackages; # LTS (for stability)
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # nix installation ssd 512GB
-  boot.initrd.luks.devices."luks-51ca4097-c9b8-4d69-8f65-b62f20f910d0".device =
-    "/dev/disk/by-uuid/51ca4097-c9b8-4d69-8f65-b62f20f910d0";
-
   # auto mount my SAMSUNG EVO 990 NVME that contains my home folder /home/savolla
-  boot.initrd.luks.devices."savolla".device =
-    "/dev/disk/by-uuid/ad7af5f0-e3a1-491e-ac65-4d366745b8f1";
   fileSystems."/home/savolla" = {
     device = "/dev/disk/by-uuid/9afcaaf0-49dd-4c51-bea4-9415c4c4292a";
     fsType = "ext4";
   };
 
-  # encrypted swap partition for hibernation to work
-  boot.resumeDevice = "/dev/disk/by-uuid/2954f857-a502-4b6c-837c-4250349bd469";
-
-  # boot.initrd.kernelModules = [ "amdgpu" ]; # make the kernel use the correct driver early. fix those blury boot messages and hibernation problems
 
   # improve performance for heavy tab usage in browsers (qutebrowser setting)
   zramSwap = {
@@ -290,8 +295,8 @@ in
   networking = {
     interfaces = {
 
-      # builtin ethernet interface
-      eno1 = {
+      # external ethernet interface
+      enp5s0f3u2u1 = {
         ipv4.addresses = [{
           address = "192.168.1.20";
           prefixLength = 24;
@@ -304,8 +309,8 @@ in
     ];
     networkmanager = {
       enable = true;
-      dns = "none"; # for dnscrypt
-      unmanaged = [ "eno1" ];  # don't touch my static ip on eno1 !!
+      dns = "none"; # required for dnscrypt
+      unmanaged = [ "enp5s0f3u2u1" ];  # don't touch my static ip on external ethernet interface !!
     };
     hostName = "xkarna";
   };
@@ -332,12 +337,6 @@ in
     LC_PAPER = "tr_TR.UTF-8";
     LC_TELEPHONE = "tr_TR.UTF-8";
     LC_TIME = "tr_TR.UTF-8";
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "tr";
-    variant = "";
   };
 
   # Configure console keymap
@@ -611,7 +610,7 @@ in
       unstable.git # version control
       unstable.glslang # for glslangValidator. doom emacs cc module dep
       unstable.gnumake # make for all
-      stable.gnupg # encryption and stuff
+      # unstable.gnupg # encryption and stuff
       unstable.go
       unstable.godot_4 # 3d and 2d game engine
       unstable.gonzo # log inspecting
@@ -802,6 +801,7 @@ in
       unstable.python313Packages.isort
       unstable.python313Packages.nose2
       unstable.python313Packages.pytest
+      unstable.python313Packages.librosa # needed for fee[db]ack to auto sync tabs with audio
       unstable.pywal16 # generate colorschemes
       unstable.qalculate-gtk # dependency for rofi-calc
       unstable.qemu # virtualization for good + all supported architectures like arm, mips, powerpc etc.
@@ -839,11 +839,11 @@ in
       unstable.shellcheck
       unstable.shfmt # doom emacs's dep for bash file formatter to work
       unstable.skim # skim instead of fzf
-      unstable.slack-term # tui slack
+      # unstable.slack-term # tui slack
       unstable.slurp # region select. combine it with grim to select region for screenshot
       unstable.smartmontools # check health of ssd drives
       unstable.soapui # xml based apis
-      unstable.socat # serial communication with quickemy headless hosts witout ssh
+      unstable.socat # serial communication with quickemu headless hosts witout ssh
       unstable.spice-vdagent # shared clipboard between qemu guests and host
       unstable.sqlite
       unstable.ssh-askpass-fullscreen
@@ -852,14 +852,14 @@ in
       unstable.stow # manage dotfiles
       unstable.stress # simulate high cpu load for testing
       unstable.stylelint # doom emacs web module dep
-      unstable.sunshine # better rdp
-      unstable.supercollider_scel # supercollider with emacs extension scel
+      unstable.sunshine # best rdp
+      # unstable.supercollider_scel # supercollider with emacs extension scel
       unstable.swaybg # set wallpapers in wayland
       unstable.swayidle # for wayland auto lock screen
       unstable.sxhkd # simple x11 hotkey daemon
       unstable.syncthing # I install the package instead of service because it gives permission issues. I start it from .xprofile
       unstable.sysstat # get system statistics (used for tmux status bar cpu usage)
-      unstable.tabbed # make any tool tabbed
+      # unstable.tabbed # make any tool tabbed
       unstable.tenacity # audaicty fork
       unstable.terminal-parrot # wow
       unstable.termscp # use SCP/SFTP/FTP/S3/SMB from tui
@@ -887,13 +887,13 @@ in
       unstable.timidity # play midi files usin mpd
       unstable.git-crypt # encrypt sensitive files using git
       unstable.tldr # too long didn't read the manual
-      unstable.tlock # 2FA tui
+      # unstable.tlock # 2FA tui
       unstable.tmux # life saver
       unstable.tmux-xpanes # run multiple commands on multiple tmux panes at once
       unstable.tmuxp # declarative tmux sessions (disabled due to compilation errors..)
       unstable.tofu-ls # opentofu lsp server (for emacs eglot)
       unstable.toolong # inspect logs like a pro
-      unstable.tor-browser # just in case
+      # unstable.tor-browser # just in case
       unstable.translate-shell # needed for using rofi as translate engine
       unstable.transmission_4-gtk # torrents and stuff
       unstable.tree # file trees
@@ -907,6 +907,7 @@ in
       unstable.unclutter-xfixes # hide mouse cursor after a time period
       unstable.undollar # you copy and paste code from internet? you simply need it
       unstable.unimatrix
+      unstable.efibootmgr # diagnose EFI (grub etc.)
       unstable.unp # archive agnostic uncompressor
       unstable.unrar # non-free but needed
       unstable.unzip # mendatory
@@ -921,13 +922,14 @@ in
       unstable.vulkan-tools # gpu info viewer (lutris needs it)
       unstable.w3m # image display for terminal
       unstable.yubikey-manager # manage hardware keys
+      stable.pam_u2f # for enabling passwordless sudo with yubikey
       unstable.walker # better application launcher for wayland with bunch of features
       unstable.waybar # status bar for wayland
       unstable.weechat # overlayed my custom weechat with plugins
       unstable.wget # download things
-      unstable.wineWow64Packages.staging # bleeding edge wine
       unstable.wineasio # for playing Rocksmith 2014 Remastered
-      unstable.winetricks # install dlls for windows games/apps
+      stable.wineWow64Packages.staging # bleeding edge wine
+      stable.winetricks # install dlls for windows games/apps
       unstable.wipe # securely wipe directories and files on hdd/ssd
       unstable.wireshark # network analizer
       unstable.wkhtmltopdf # convert webpages to pdf (for emacs note taking using pdf-tools and org-noter)
@@ -938,6 +940,7 @@ in
       unstable.x42-gmsynth
       unstable.xbacklight # set brightness on laptop
       unstable.xcalib # invert colors of x
+      unstable.calibre # book manager
       unstable.xclip # clipboard for xorg
       unstable.xcolor # color picker for xorg
       unstable.xd # i2p torrenting
@@ -991,7 +994,7 @@ in
         mesen              # nes
         snes9x             # snes
         beetle-psx-hw      # ps1
-        pcsx2              # ps2
+        # pcsx2            # ps2 (this hardware is too weak for ps2 emulation)
         fbneo              # arcade (MAME)
         mgba               # gba
         genesis-plus-gx    # sega genesis/megadrive
@@ -1009,11 +1012,13 @@ in
   programs = {
     mtr.enable = true;
 
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true; # use gpg key as your ssh key
-      pinentryPackage = stable.pinentry-gnome3;
-      # package = stable.gnupg;
+    gnupg = {
+      package = stable.gnupg;
+      agent = {
+        enable = true;
+        enableSSHSupport = true; # use gpg key as your ssh key
+        pinentryPackage = stable.pinentry-gnome3;
+      };
     };
 
     tmux = {
@@ -1151,13 +1156,35 @@ in
     };
   };
 
+  # systemd services and settings
+  systemd = {
+    services = {
+
+      # auto trust my bluetooth devices and connect
+      bluetooth-autotrust = {
+        description = "Auto-trust known Bluetooth devices";
+        after = [ "bluetooth.service" ];
+        requires = [ "bluetooth.service" ];
+        wantedBy = [ "bluetooth.service" ];
+        serviceConfig.Type = "oneshot";
+        script = ''
+          # give bluetoothd a moment to be ready
+      sleep 2
+      ${pkgs.bluez}/bin/bluetoothctl trust 74:45:CE:31:EF:4C # WF-XB700 (earbuds)
+      ${pkgs.bluez}/bin/bluetoothctl trust DC:2C:26:00:4D:E6 # Keychron K3 (keyboard)
+      ${pkgs.bluez}/bin/bluetoothctl trust D0:BC:C1:ED:AC:3D # Wireless Controller (dualshock joystick)
+        '';
+      };
+    };
+  };
+
   # List services that you want to enable:
   services = {
 
-    ## yubikey service but they fight with gpg for yubikey access. delete it later
-    # pcscd = {
-    #   enable = true;
-    # };
+    # yubikey service but they fight with gpg for yubikey access. delete it later
+    pcscd = {
+      enable = true;
+    };
 
     # silence the agetty "Welcome to NixOS" banner on tty
     getty = {
@@ -1219,6 +1246,12 @@ in
       enable = true;
       videoDrivers = [ "amdgpu" ];
 
+      # configure keymap in X11
+      xkb = {
+        layout = "tr";
+        variant = "";
+      };
+
       displayManager = {
         lightdm = {
           enable = true;
@@ -1258,18 +1291,35 @@ in
       enable = true; # enables support for Bluetooth
       powerOnBoot = true; # powers up the default Bl
     };
+    gpgSmartcards = {
+      enable = true;
+    };
   };
 
   security = {
     protectKernelImage = false; # sometimes required if lockdown mode interferes (for hibernation)
     rtkit.enable = true;
+    sudo.extraConfig = ''
+      Defaults timestamp_timeout=0 # never cache the sudo password. always ask for it
+    '';
     pam = {
-      loginLimits = [
-        # realtime limits for the audio group
-        { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
-        { domain = "@audio"; item = "rtprio";  type = "-"; value = "99"; }
-        { domain = "@audio"; item = "nofile";  type = "-"; value = "99999"; }
-      ];
+      # yubikey touch instead of sudo
+      u2f = {
+        enable = true;
+        control = "sufficient"; # fallback to password if yubikey is not present
+        # control = "required"; # require yubikey + password
+        settings = {
+          cue = true;
+        };
+      };
+      services = {
+        sudo = {
+          u2fAuth = true;
+        };
+        polkit-1 = {
+          u2fAuth = true;
+        };
+      };
     };
   };
 
@@ -1356,5 +1406,46 @@ in
       # cd /home/savolla/project/repos/one-ring/dotfiles/../tools || exit 1
       # ${pkgs.stow}/bin/stow --target=$HOME/project . --restow
     '';
+  };
+
+  specialisation = {
+    default = {
+      configuration = {
+        system.nixos.tags = [ "default" ];
+
+        boot = {
+          kernelPackages = pkgs.linuxPackages_zen; # this kernel is the only one that sees my eno1 ethernet interface on gmktek g10 (WORKS PERFECTLY)
+          # kernelPackages = pkgs.linuxPackages_latest; # fix type-c and eno1 interfaces on nix machine GMKTek Nucbox G10
+          # kernelPackages = pkgs.linuxPackages; # LTS (for stability)
+        };
+      };
+    };
+
+    music-production = {
+      configuration = {
+        imports = [
+          musnix
+        ];
+        system.nixos.tags = [ "music-production" ];
+
+        musnix = {
+          enable = true;
+          kernel.realtime = true;   # uses RT-patched kernel
+          rtirq.enable = true;      # raises IRQ thread priorities for audio devices
+          das_watchdog.enable = true;
+        };
+
+        security = {
+          pam = {
+            loginLimits = [
+              # realtime limits for the audio group
+              { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
+              { domain = "@audio"; item = "rtprio";  type = "-"; value = "99"; }
+              { domain = "@audio"; item = "nofile";  type = "-"; value = "99999"; }
+            ];
+          };
+        };
+      };
+    };
   };
 }
