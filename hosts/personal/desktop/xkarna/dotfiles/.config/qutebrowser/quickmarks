@@ -169,3 +169,5 @@ savolla.piracy.audio.tabs-download https://www.songsterr-downloader.com/
 savolla.audio.feedback-nightly-releases https://github.com/got-feedBack/feedBack-desktop/releases
 savolla.github.awesome-emacs https://github.com/emacs-tw/awesome-emacs#irc
 savolla.navigation.google-street-maps https://www.google.com/maps/@40.7004749,29.8723474,14.75z?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D
+kartaca.sumer.paycore.gitlab http://10.91.23.146/
+kartaca.sumer.paycore.jenkins http://10.91.23.142:8080/job/sumer-usy/
