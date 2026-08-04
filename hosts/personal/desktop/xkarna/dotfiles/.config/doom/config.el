@@ -116,8 +116,12 @@
         "~/project/repos/soup/"
         "~/project/dev/nazg/"
 
+        ;; kartaca
         "~/project/kartaca/hopi/repos/bekci2"
         "~/project/kartaca/hopi/repos/bird-usy"
+        "~/project/kartaca/sumer/repos/sumer-test/"
+        "~/project/kartaca/sumer/repos/sumer-usy-kartaca/"
+        "~/project/kartaca/sumer/repos/sumer-usy-paycore/"
         ))
 
 (after! treemacs
@@ -148,6 +152,60 @@
     (vterm-send-string (format "cd %s\n" (shell-quote-argument dir)))))
 
 (add-hook! 'vterm-mode-hook #'my/vterm-cd-to-buffer-dir)
+
+;; org-jira
+(use-package! org-jira
+  :init
+  (setq jiralib-url "https://kartaca.atlassian.net")
+  :config
+  ;; (setq org-jira-projects-list '("BIRD"))
+  (setq org-jira-working-dir "~/resource/notes/org/roam/agenda/tasks/kartaca/")
+  (setq org-jira-download-comments nil) ;; don't get comments for faster downloads and sync
+  (setq org-jira-deadline-duedate-sync-p nil) ;; don't get DEADLINE information (maybe enable later)
+  (setq org-jira-worklog-sync-p nil) ;; don't get worklogs for faster downloads
+  (setq org-jira-default-jql "") ;; disable the default query and use custom-jqls below
+
+  ;; prepend worklog author's name to the comment shown in CLOCK entries
+  (add-to-list 'jiralib-worklog-import--filters-alist
+    '(t "PrependAuthorName"
+        (lambda (wl)
+          (when wl
+            (let-alist wl
+              (let* ((author-name (or .author.displayName .author.name "Unknown"))
+                     (existing-comment (or .comment "")))
+                (setf (alist-get 'comment wl)
+                      (format "[%s] %s" author-name existing-comment))))
+            wl))))
+
+  ;; build headline as "ID [assignee] summary" instead of just "summary"
+  (defun my/org-jira-set-custom-headline (Issue)
+    "Rewrite ISSUE's headline as \"ISSUE-ID [assignee] summary\"."
+    (when (org-jira-sdk-isa-issue? Issue)
+      (let ((assignee (or (oref Issue assignee) "Unassigned")))
+        (oset Issue headline
+              (format "%s [%s] %s"
+                      (oref Issue issue-id)
+                      assignee
+                      (oref Issue summary))))))
+  (advice-add 'org-jira--render-issue :before #'my/org-jira-set-custom-headline)
+
+  ;; strip the "ID [assignee] " prefix before it's sent back to jira as summary
+  (defun my/org-jira-strip-custom-headline-prefix (orig-fn &rest args)
+    (let ((result (apply orig-fn args)))
+      (if (eq (car args) 'summary)
+          (replace-regexp-in-string
+           "\\`[A-Z][A-Z0-9]*-[0-9]+ \\[[^]]*\\] " "" result)
+        result)))
+  (advice-add 'org-jira-get-issue-val-from-org :around #'my/org-jira-strip-custom-headline-prefix)
+
+  ;; custom jira queries
+  (setq org-jira-custom-jqls
+        '(
+          (:jql "project = BIRD AND labels in (sprint_207, sprint_f141) OR assignee = currentUser()"
+           :limit 1000
+           :filename "jira")
+          ))
+  )
 
 ;; eat
 (after! eat
@@ -475,23 +533,26 @@
   ;; (setq org-habit-preceding-days 14)
   (setq org-todo-keywords
         '((sequence
-           "TODO(t)" "READ(r)" "DOING(o!)" "NEXT(n)" "LATER(l@/!)" "WAIT(w@/!)" "EVENT(e)" "JOB(j)" "BIRTHDAY(b)" "HABIT(h)" "|"
-           "DONE(d@/!)" "CANCEL(c@/!)" "HOLD(H!)"
+           ;; "TODO(t)" "READ(r)" "IN-PROGRESS" "DOING(o!)" "NEXT(n)" "LATER(l@/!)" "WAIT(w@/!)" "EVENT(e)" "JOB(j)" "BIRTHDAY(b)" "HABIT(h)" "|"
+           "LATER(l!)" "TODO(t)" "NEXT(n!)" "IN-PROGRESS(i!)" "DOING(o!)" "IN-BACKGROUND(b!)" "HABIT(h)" "WAIT(w!)" "|"
+           "DONE(d!)" "CANCEL(c!)"
            )))
 
   (setq org-todo-keyword-faces
-        '(("LATER"    . (:foreground "yellow"  :weight bold))
-          ("TODO"     . (:foreground "#00FF00" :weight bold))
-          ("READ"     . (:foreground "#D6BE87" :weight bold))
-          ("NEXT"     . (:foreground "#FF00FF" :weight bold))
-          ("DOING"    . (:foreground "#FF0000" :weight bold))
-          ("WAIT"     . (:foreground "yellow"  :weight bold))
-          ("DONE"     . (:foreground "#666666" :weight bold))
-          ("CANCEL"   . (:foreground "#666666" :weight bold))
-          ("EVENT"    . (:foreground "#e300d1" :weight bold))
-          ("JOB"      . (:foreground "#000000" :background "#ffffff" :weight bold))
-          ("HABIT"    . (:foreground "#00ffff" :weight bold))
-          ("BIRTHDAY" . (:foreground "#00ff00" :weight bold))
+        '(("LATER"           . (:foreground "#00FFFF" :weight bold)) ;; blue
+          ("TODO"            . (:foreground "#00FF00" :weight bold)) ;; green
+          ("NEXT"            . (:foreground "#FFF000" :weight bold)) ;; yellow
+          ("IN-PROGRESS"     . (:foreground "#FF8000" :weight bold)) ;; orange
+          ("IN-BACKGROUND"   . (:foreground "#FFFFFF" :background "#7F0000" :weight bold)) ;; dark red
+          ("DOING"           . (:foreground "#FFFFFF" :background "#FF0000" :weight bold)) ;; light red
+          ("WAIT"            . (:foreground "#FF00FF" :weight bold)) ;; magenta
+          ("HABIT"           . (:foreground "#00ffff" :weight bold))
+          ("DONE"            . (:foreground "#666666" :weight bold)) ;; gray
+          ("CANCEL"          . (:foreground "#666666" :weight bold)) ;; gray
+          ;; ("READ"            . (:foreground "#D6BE87" :weight bold))
+          ;; ("EVENT"           . (:foreground "#e300d1" :weight bold))
+          ;; ("JOB"             . (:foreground "#000000" :background "#ffffff" :weight bold))
+          ;; ("BIRTHDAY"        . (:foreground "#00ff00" :weight bold))
           ))
 
   (custom-set-faces!
@@ -725,11 +786,10 @@ Returns 1 if A should sort above B, -1 if below, nil if equal/missing."
 (setq org-agenda-sticky t)
 
 (setq org-clock-in-switch-to-state "DOING") ;; mark tasks as DOING when clocked-in
-
-(setq org-scheduled-past-days 7) ;; only display scheduled items for last 7 days
+(setq org-clock-out-switch-to-state "IN-PROGRESS") ;; mark tasks as DOING when clocked-in
 
 (custom-set-faces!
-  '(org-agenda-clocking :background "gold" :foreground "black" :weight bold)
+  '(org-agenda-clocking :background "#FF0000" :foreground "#FFFFFF" :weight bold)
   '(org-agenda-scheduled-today  :foreground "orange")
   )
 
@@ -806,21 +866,33 @@ Returns 1 if A should sort above B, -1 if below, nil if equal/missing."
 
 ("k" "kartaca work agenda"
  (
-  (tags "+_job/DOING" ((org-agenda-overriding-header "󰌃  Active Jobs")))
-  (tags "+_job/NEXT" ((org-agenda-overriding-header "")))
-  (tags "+_job/WAIT" ((org-agenda-overriding-header "")))
 
-  (tags "-_job/DOING" ((org-agenda-overriding-header "\n 󱌣  Active Tasks ")))
-  (tags "-_job/NEXT" ((org-agenda-overriding-header "")))
-  (tags "-_job/WAIT" ((org-agenda-overriding-header "")))
+  (todo "DOING|NEXT|IN-PROGRESS|IN-BACKGROUND"
+        (
+         (org-agenda-overriding-header " 󰣪  Work Stack (Today)")
+         (org-agenda-sorting-strategy '(todo-state-up))
+         (org-agenda-skip-function
+          '(org-agenda-skip-entry-if 'regexp ":filename: jira")
+          )
+         )
+        )
+
+  (todo "WAIT"
+        (
+         (org-agenda-overriding-header "\n 󰚭 Waiting (Today)")
+         (org-agenda-sorting-strategy '(todo-state-down))))
 
   (agenda ""
-          (
-           (org-agenda-overriding-header (savolla/org-agenda-centered-header "󰃶  Today"))
-           (org-agenda-start-day "0d")
+          ((org-agenda-overriding-header (savolla/org-agenda-centered-header " 󰃶  Schedule "))
+           (org-agenda-start-day nil)
            (org-agenda-span 1)
            (org-deadline-warning-days 14)
-           (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT")))
+           (org-agenda-files
+            (file-expand-wildcards
+             (expand-file-name "~/resource/notes/org/roam/agenda/tasks/personal.org")))
+           (org-agenda-skip-function
+            '(or (org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT" "IN-PROGRESS"))
+                 (org-agenda-skip-entry-if 'notregexp ":\\(@agenda\\|kartaca\\|_work\\):")))
            ))
 
   ;; open jobs
@@ -829,15 +901,16 @@ Returns 1 if A should sort above B, -1 if below, nil if equal/missing."
   ;; open tasks
   (tags "-_job/TODO" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Open Tasks"))))
 
-  ;; closed jobs
-  (tags "+_job/DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰌃  Closed Jobs"))))
-  (tags "+_job/CANCEL" ((org-agenda-overriding-header "")))
-
-  ;; closed tasks
-  (tags "-_job/DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Closed Tasks"))))
-  (tags "-_job/CANCEL" ((org-agenda-overriding-header "")))
   )
- ((org-agenda-tag-filter-preset '("+_work" "+kartaca")))
+
+ ;; 3. GENERAL SETTINGS
+ ;; FIX 2 & 3: Placed here, this applies to BOTH blocks above.
+ ;; `seq-filter` ensures it silently ignores the journal file if it doesn't exist yet.
+ ((org-agenda-files
+   (seq-filter #'file-exists-p
+               (list
+                (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca/jira.org")
+                (expand-file-name (format-time-string "~/resource/notes/org/roam/journal/%Y-%m-%d.org"))))))
  )
 ))
 
@@ -1168,6 +1241,12 @@ If the typed value doesn't match an existing node, insert plain text instead."
 (after! org-roam
   (require 'org-roam-ql) ;; load org-roam-ql after org-roam loads
 
+;; d2 org mode
+(use-package! d2-mode
+  :mode "\\.d2\\'"
+  :config
+  ;; only needed if d2 isn't on PATH
+  ;; (setq d2-location "/usr/local/bin/d2")
   )
 
 ;; org roam ql
@@ -1185,8 +1264,8 @@ If the typed value doesn't match an existing node, insert plain text instead."
 (defun my/fc-redis () (interactive)
   (org-fc-review '(:paths all :filter (tag "redis"))))
 
-(defun my/fc-redis-facts () (interactive)
-  (org-fc-review '(:paths all :filter (and (tag "redis") (tag "_fact")))))
+(defun my/fc-terraform-facts () (interactive)
+  (org-fc-review '(:paths all :filter (and (tag "terraform") (tag "_fact")))))
 
 ;;; define keybindings for review session (evil-mode)
 (evil-define-minor-mode-key '(normal insert emacs) 'org-fc-review-flip-mode
@@ -1513,15 +1592,18 @@ Inherits the heading level from the previous heading."
    (lambda ()
      (+workspace-rename "main" "journal")
      (delete-other-windows)
+
      ;; Left: journal
      (org-roam-dailies-goto-today)
      (let ((journal-window (selected-window))
            agenda-window)
+
        ;; Right: agenda
        (setq agenda-window (split-window-right))
        (select-window agenda-window)
        (org-agenda nil "p")
        (text-scale-set -1)
+
        ;; Back to journal
        (select-window journal-window)
        (cd "~/")

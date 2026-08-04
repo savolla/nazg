@@ -6,6 +6,7 @@
 (package! org-ql)
 (package! org-habit-stats) ;; display stats for habits
 (package! org-transclusion)
+(package! calibredb)
 
 (package! eat
   :recipe (:host codeberg

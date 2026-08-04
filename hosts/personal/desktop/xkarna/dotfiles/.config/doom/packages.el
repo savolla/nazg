@@ -3,6 +3,7 @@
 (package! solaire-mode :disable t)
 (package! engrave-faces) ;; latex export code blocks with highlight
 (package! org-roam-ql)
+(package! org-ql)
 (package! org-habit-stats) ;; display stats for habits
 (package! org-transclusion)
 (package! calibredb)
@@ -21,8 +22,9 @@
            :repo "https://git.sr.ht/~l3kn/org-fc"
            :files (:defaults "awk" "demo.org")))
 
-;; ;; elfeed packages
-;; (package! elfeed)
-;; (package! elfeed-org)
-;; (package! elfeed-tube)
-;; (package! elfeed-tube-mpv)
+;; d2 diagramming for org mode
+(package! d2-mode)
+(package! ob-d2 :recipe (:host github :repo "dmacvicar/ob-d2"))
+
+;; (package! jira)
+(package! org-jira)
