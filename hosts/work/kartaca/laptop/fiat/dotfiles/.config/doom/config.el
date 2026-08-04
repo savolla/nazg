@@ -114,8 +114,12 @@
         "~/project/repos/soup/"
         "~/project/dev/nazg/"
 
+        ;; kartaca
         "~/project/kartaca/hopi/repos/bekci2"
         "~/project/kartaca/hopi/repos/bird-usy"
+        "~/project/kartaca/sumer/repos/sumer-test/"
+        "~/project/kartaca/sumer/repos/sumer-usy-kartaca/"
+        "~/project/kartaca/sumer/repos/sumer-usy-paycore/"
         ))
 
 (after! treemacs
@@ -146,6 +150,60 @@
     (vterm-send-string (format "cd %s\n" (shell-quote-argument dir)))))
 
 (add-hook! 'vterm-mode-hook #'my/vterm-cd-to-buffer-dir)
+
+;; org-jira
+(use-package! org-jira
+  :init
+  (setq jiralib-url "https://kartaca.atlassian.net")
+  :config
+  ;; (setq org-jira-projects-list '("BIRD"))
+  (setq org-jira-working-dir "~/resource/notes/org/roam/agenda/tasks/kartaca/")
+  (setq org-jira-download-comments nil) ;; don't get comments for faster downloads and sync
+  (setq org-jira-deadline-duedate-sync-p nil) ;; don't get DEADLINE information (maybe enable later)
+  (setq org-jira-worklog-sync-p nil) ;; don't get worklogs for faster downloads
+  (setq org-jira-default-jql "") ;; disable the default query and use custom-jqls below
+
+  ;; prepend worklog author's name to the comment shown in CLOCK entries
+  (add-to-list 'jiralib-worklog-import--filters-alist
+    '(t "PrependAuthorName"
+        (lambda (wl)
+          (when wl
+            (let-alist wl
+              (let* ((author-name (or .author.displayName .author.name "Unknown"))
+                     (existing-comment (or .comment "")))
+                (setf (alist-get 'comment wl)
+                      (format "[%s] %s" author-name existing-comment))))
+            wl))))
+
+  ;; build headline as "ID [assignee] summary" instead of just "summary"
+  (defun my/org-jira-set-custom-headline (Issue)
+    "Rewrite ISSUE's headline as \"ISSUE-ID [assignee] summary\"."
+    (when (org-jira-sdk-isa-issue? Issue)
+      (let ((assignee (or (oref Issue assignee) "Unassigned")))
+        (oset Issue headline
+              (format "%s [%s] %s"
+                      (oref Issue issue-id)
+                      assignee
+                      (oref Issue summary))))))
+  (advice-add 'org-jira--render-issue :before #'my/org-jira-set-custom-headline)
+
+  ;; strip the "ID [assignee] " prefix before it's sent back to jira as summary
+  (defun my/org-jira-strip-custom-headline-prefix (orig-fn &rest args)
+    (let ((result (apply orig-fn args)))
+      (if (eq (car args) 'summary)
+          (replace-regexp-in-string
+           "\\`[A-Z][A-Z0-9]*-[0-9]+ \\[[^]]*\\] " "" result)
+        result)))
+  (advice-add 'org-jira-get-issue-val-from-org :around #'my/org-jira-strip-custom-headline-prefix)
+
+  ;; custom jira queries
+  (setq org-jira-custom-jqls
+        '(
+          (:jql "project = BIRD AND labels in (sprint_207, sprint_f141) OR assignee = currentUser()"
+           :limit 1000
+           :filename "jira")
+          ))
+  )
 
 ;; eat
 (after! eat
@@ -239,23 +297,26 @@
   ;; (setq org-habit-preceding-days 14)
   (setq org-todo-keywords
         '((sequence
-           "TODO(t)" "READ(r)" "DOING(o!)" "NEXT(n)" "LATER(l@/!)" "WAIT(w@/!)" "EVENT(e)" "JOB(j)" "BIRTHDAY(b)" "HABIT(h)" "|"
-           "DONE(d@/!)" "CANCEL(c@/!)"
+           ;; "TODO(t)" "READ(r)" "IN-PROGRESS" "DOING(o!)" "NEXT(n)" "LATER(l@/!)" "WAIT(w@/!)" "EVENT(e)" "JOB(j)" "BIRTHDAY(b)" "HABIT(h)" "|"
+           "LATER(l!)" "TODO(t)" "NEXT(n!)" "IN-PROGRESS(i!)" "DOING(o!)" "IN-BACKGROUND(b!)" "HABIT(h)" "WAIT(w!)" "|"
+           "DONE(d!)" "CANCEL(c!)"
            )))
 
   (setq org-todo-keyword-faces
-        '(("LATER"    . (:foreground "yellow"  :weight bold))
-          ("TODO"     . (:foreground "#00FF00" :weight bold))
-          ("READ"     . (:foreground "#D6BE87" :weight bold))
-          ("NEXT"     . (:foreground "#FF00FF" :weight bold))
-          ("DOING"    . (:foreground "#FF0000" :weight bold))
-          ("WAIT"     . (:foreground "yellow"  :weight bold))
-          ("DONE"     . (:foreground "#666666" :weight bold))
-          ("CANCEL"   . (:foreground "#666666" :weight bold))
-          ("EVENT"    . (:foreground "#e300d1" :weight bold))
-          ("JOB"      . (:foreground "#000000" :background "#ffffff" :weight bold))
-          ("HABIT"    . (:foreground "#00ffff" :weight bold))
-          ("BIRTHDAY" . (:foreground "#00ff00" :weight bold))
+        '(("LATER"           . (:foreground "#00FFFF" :weight bold)) ;; blue
+          ("TODO"            . (:foreground "#00FF00" :weight bold)) ;; green
+          ("NEXT"            . (:foreground "#FFF000" :weight bold)) ;; yellow
+          ("IN-PROGRESS"     . (:foreground "#FF8000" :weight bold)) ;; orange
+          ("IN-BACKGROUND"   . (:foreground "#FFFFFF" :background "#7F0000" :weight bold)) ;; dark red
+          ("DOING"           . (:foreground "#FFFFFF" :background "#FF0000" :weight bold)) ;; light red
+          ("WAIT"            . (:foreground "#FF00FF" :weight bold)) ;; magenta
+          ("HABIT"           . (:foreground "#00ffff" :weight bold))
+          ("DONE"            . (:foreground "#666666" :weight bold)) ;; gray
+          ("CANCEL"          . (:foreground "#666666" :weight bold)) ;; gray
+          ;; ("READ"            . (:foreground "#D6BE87" :weight bold))
+          ;; ("EVENT"           . (:foreground "#e300d1" :weight bold))
+          ;; ("JOB"             . (:foreground "#000000" :background "#ffffff" :weight bold))
+          ;; ("BIRTHDAY"        . (:foreground "#00ff00" :weight bold))
           ))
 
   (custom-set-faces!
@@ -359,7 +420,37 @@
 ;; latex
 (setq org-latex-src-block-backend 'engraved) ;; syntax highlighting for code blocks in pdfs
 
-;; org-agenda
+;;; create functions for filtering todo keywords using grep from org-roam journal files
+(defun my/org-todo-keywords-flat ()
+  "Flatten `org-todo-keywords' into a list of bare keyword strings,
+stripping fast-selection chars, e.g. \"TODO(t)\" -> \"TODO\"."
+  (thread-last org-todo-keywords
+               (mapcar #'cdr)          ; drop the sequence-type symbol (type/sequence)
+               (apply #'append)
+               (remove "|")            ; drop the DONE-separator token
+               (mapcar (lambda (kw) (replace-regexp-in-string "(.*)\\'" "" kw)))))
+
+(defun my/org-agenda--todo-regexp ()
+  (concat "^\\*+[[:space:]]+\\("
+          (mapconcat #'regexp-quote (my/org-todo-keywords-flat) "|")
+          "\\)[[:space:]]"))
+
+(defvar my/org-journal-root (expand-file-name "~/resource/notes/org/roam/journal")
+  "Directory tree to scan for journal files containing TODOs.")
+
+(defun my/org-agenda-files-with-todos (&optional directory)
+  "Return .org files under DIRECTORY containing any TODO-keyword headline."
+  (let* ((dir (expand-file-name (or directory my/org-journal-root)))
+         (regexp (my/org-agenda--todo-regexp))
+         (cmd (if (executable-find "rg")
+                  (format "rg -l -g '*.org' -e %s %s"
+                          (shell-quote-argument regexp)
+                          (shell-quote-argument dir))
+                (format "grep -rlE --include='*.org' -e %s %s"
+                        (shell-quote-argument regexp)
+                        (shell-quote-argument dir)))))
+    (split-string (shell-command-to-string cmd) "\n" t)))
+
 
 ;; remove scheduled timestampt from task item when tagging them as LATER
 (defun my/org-remove-scheduled-when-later ()
@@ -372,15 +463,17 @@
 (setq org-agenda-sticky t)
 
 (setq org-clock-in-switch-to-state "DOING") ;; mark tasks as DOING when clocked-in
+(setq org-clock-out-switch-to-state "IN-PROGRESS") ;; mark tasks as DOING when clocked-in
 
 (custom-set-faces!
-  '(org-agenda-clocking :background "gold" :foreground "black" :weight bold)
+  '(org-agenda-clocking :background "#FF0000" :foreground "#FFFFFF" :weight bold)
   '(org-agenda-scheduled-today  :foreground "orange")
   )
 
 ;; (setq org-agenda-start-with-log-mode t) ;; creates too much noice in agenda. (maybe enable later)
 ;; (setq org-agenda-start-with-clockreport-mode t)
-(setq org-agenda-files '("~/resource/notes/org/roam/agenda/"))
+
+;; (setq org-agenda-files '("~/resource/notes/org/roam/agenda/"))
 (setq org-log-into-drawer t)
 (setq system-time-locale "C")
 (setq org-agenda-current-time-string " 🔴 NOW ")
@@ -408,77 +501,391 @@
 (setq org-agenda-custom-commands
       '(
 
-("b" "agenda"
+        ;; ("b" "agenda"
+        ;;  (
+        ;;   (todo "DOING|NEXT|WAIT" ((org-agenda-overriding-header " 󱌣  Currently Working (ALL)")))
+        ;;   (agenda ""
+        ;;           ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰃶  Today"))
+        ;;            (org-agenda-start-day "0d")
+        ;;            (org-agenda-span 1)
+        ;;            (org-deadline-warning-days 14)
+        ;;            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING")))))
+        ;;   (todo "TODO" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Todo"))))
+        ;;   (todo "DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Done"))))
+        ;;   (todo "CANCEL" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰜺  Canceled"))))
+        ;;   )
+        ;;  ;; series-wide settings, re-evaluated on every run/refresh:
+        ;;  ((org-agenda-files (append (my/org-agenda-files-with-todos)
+        ;;                             '("~/resource/notes/org/roam/journal/")))))
+
+
+
+        ;; ("p" "personal agenda"
+        ;;  (
+        ;;   (todo "DOING|NEXT|WAIT" ((org-agenda-overriding-header " 󱌣  Currently Working (personal)")))
+        ;;   (agenda ""
+        ;;           ((org-agenda-overriding-header (savolla/org-agenda-centered-header "Today"))
+        ;;            (org-agenda-start-day "0d") ; start from today
+        ;;            (org-agenda-span 1) ; display current day only
+        ;;            (org-deadline-warning-days 14) ; remind upcoming deadlines before 2 weeks
+        ;;            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT")))
+        ;;            ))
+
+        ;;   ;; (todo "READ" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Reading"))))
+        ;;   (todo "TODO" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "Backlog"))))
+        ;;   ;; (todo "DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Done"))))
+        ;;   ;; (todo "CANCEL" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰜺  Canceled"))))
+        ;;   )
+        ;;  (
+        ;;   ;; (org-agenda-tag-filter-preset '("+_personal"))
+        ;;   (org-agenda-files (append (my/org-agenda-files-with-todos)
+        ;;                             '("~/resource/notes/org/roam/journal/")))
+        ;;   )
+        ;;  )
+
+        ;; ("k" "kartaca"
+        ;;  (
+        ;;   (todo "TODO" ((org-agenda-overriding-header " 󱌣  Currently Working (personal)")))
+        ;;   )
+        ;;  (
+        ;;   (org-agenda-files (append (my/org-agenda-files-with-todos)
+        ;;                             '("~/resource/notes/org/roam/agenda/kartaca/jira.org")))
+        ;;   )
+        ;;  )
+
+("k" "work.kartaca"
  (
-  (todo "DOING|NEXT|WAIT" ((org-agenda-overriding-header " 󱌣  Currently Working (ALL)")))
-  (agenda ""
-          ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰃶  Today"))
-           (org-agenda-start-day "0d") ; start from today
-           (org-agenda-span 1) ; display 2 weeks
-           (org-deadline-warning-days 14) ; remind upcoming deadlines before 2 weeks
-           (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING"))) ;; skip if it's a DOING task
-           ))
-  (todo "TODO" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Todo"))))
-  (todo "DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Done"))))
-  (todo "CANCEL" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰜺  Canceled"))))
-  )
- )
 
-("p" "personal agenda"
- (
-  (todo "DOING|NEXT|WAIT" ((org-agenda-overriding-header " 󱌣  Currently Working (personal)")))
-  (agenda ""
-          ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰃶  Today"))
-           (org-agenda-start-day "0d") ; start from today
-           (org-agenda-span 1) ; display current day only
-           (org-deadline-warning-days 14) ; remind upcoming deadlines before 2 weeks
-           (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT")))
-           ))
+  (todo "DOING|NEXT|IN-PROGRESS|IN-BACKGROUND"
+        (
+         (org-agenda-overriding-header " 󰣪  Work Stack (Today)")
+         (org-agenda-sorting-strategy '(todo-state-up))
+         (org-agenda-skip-function
+          '(org-agenda-skip-entry-if 'regexp ":filename: jira")
+          )
+         )
+        )
 
-  (todo "READ" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Reading"))))
-  (todo "TODO" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Todo"))))
-  (todo "DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Done"))))
-  (todo "CANCEL" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰜺  Canceled"))))
-  )
- ((org-agenda-tag-filter-preset '("+_personal")))
- )
-
-("k" "kartaca work agenda"
- (
-  (tags "+_job/DOING" ((org-agenda-overriding-header "󰌃  Active Jobs")))
-  (tags "+_job/NEXT" ((org-agenda-overriding-header "")))
-  (tags "+_job/WAIT" ((org-agenda-overriding-header "")))
-
-  (tags "-_job/DOING" ((org-agenda-overriding-header "\n 󱌣  Active Tasks ")))
-  (tags "-_job/NEXT" ((org-agenda-overriding-header "")))
-  (tags "-_job/WAIT" ((org-agenda-overriding-header "")))
+  (todo "WAIT"
+        (
+         (org-agenda-overriding-header "\n 󰚭 Waiting (Today)")
+         (org-agenda-sorting-strategy '(todo-state-down))))
 
   (agenda ""
-          (
-           (org-agenda-overriding-header (savolla/org-agenda-centered-header "󰃶  Today"))
-           (org-agenda-start-day "0d")
+          ((org-agenda-overriding-header (savolla/org-agenda-centered-header " 󰃶  Schedule "))
+           (org-agenda-start-day nil)
            (org-agenda-span 1)
            (org-deadline-warning-days 14)
-           (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT")))
+           (org-agenda-files
+            (file-expand-wildcards
+             (expand-file-name "~/resource/notes/org/roam/agenda/tasks/personal.org")))
+           (org-agenda-skip-function
+            '(or (org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT" "IN-PROGRESS"))
+                 (org-agenda-skip-entry-if 'notregexp ":\\(@agenda\\|kartaca\\|_work\\):")))
            ))
 
-  ;; open jobs
-  (tags "+_job/JOB" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰌃  Open Jobs"))))
+  ;; ((todo "NOTHINGMATCHESTHIS"
+  ;;        ((org-agenda-overriding-header "")
+  ;;         (org-agenda-sorting-strategy '(todo-state-down))))
+  ;;  (org-ql-block
+  ;;   '(and
+  ;;     (property "labels")
+  ;;     (regexp "^:labels:.*\\_<sprint_207\\_>"))
+  ;;   ((org-ql-block-header "\nCORE Sprint"))))
 
-  ;; open tasks
-  (tags "-_job/TODO" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Open Tasks"))))
+  ;; core sprint view
+  (tags "labels={\\_<sprint_207\\_>}"
+         ((org-agenda-overriding-header (savolla/org-agenda-centered-header " 󰑮  Core Sprint "))
+         (org-agenda-sorting-strategy '(todo-state-down))))
 
-  ;; closed jobs
-  (tags "+_job/DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰌃  Closed Jobs"))))
-  (tags "+_job/CANCEL" ((org-agenda-overriding-header "")))
+  ;; gold sprint view
+  (tags "labels={\\_<sprint_f141\\_>}"
+         ((org-agenda-overriding-header (savolla/org-agenda-centered-header " 󰑮  Gold Sprint "))
+         (org-agenda-sorting-strategy '(todo-state-down))))
 
-  ;; closed tasks
-  (tags "-_job/DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Closed Tasks"))))
-  (tags "-_job/CANCEL" ((org-agenda-overriding-header "")))
+  ;; assigned to me
+  (tags "assignee={\\_<Kuzey Koç\\_>}"
+         ((org-agenda-overriding-header (savolla/org-agenda-centered-header " 󰌃  Assigned to Me "))
+         (org-agenda-sorting-strategy '(todo-state-down))))
+
   )
- ((org-agenda-tag-filter-preset '("+_work" "+kartaca")))
+
+ ;; 3. GENERAL SETTINGS
+ ;; FIX 2 & 3: Placed here, this applies to BOTH blocks above.
+ ;; `seq-filter` ensures it silently ignores the journal file if it doesn't exist yet.
+ ((org-agenda-files
+   (seq-filter #'file-exists-p
+               (list
+                (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca/jira.org")
+                (expand-file-name (format-time-string "~/resource/notes/org/roam/journal/%Y-%m-%d.org"))))))
  )
-))
+
+;; ("C" "Jira"
+;;          ((org-ql-block
+;;            '(and
+;;              (property "labels")
+;;              (regexp "^:labels:.*\\_<sprint_207\\_>"))
+;;            ((org-ql-block-header "🍎 CORE Sprint 207")
+;;             ;; Disables standard trailing column alignment spacing for tags
+;;             (org-agenda-remove-tags t)))))
+
+;; ("G" "Jira"
+;;          ((org-ql-block
+;;            '(and
+;;              (property "labels")
+;;              (regexp "^:labels:.*\\_<sprint_207\\_>"))
+;;            ((org-ql-block-header "💰 GOLD Sprint 207")
+;;             ;; Disables standard trailing column alignment spacing for tags
+;;             (org-agenda-remove-tags t)))))
+
+;; ("s" "Sprint view"
+;;  ((todo "NOTHINGMATCHESTHIS"
+;;         ((org-agenda-overriding-header "")
+;;          (org-agenda-sorting-strategy '(todo-state-down))))
+;;   (org-ql-block
+;;    '(and
+;;      (property "labels")
+;;      (regexp "^:labels:.*\\_<sprint_207\\_>"))
+;;    ((org-ql-block-header "\nCORE Sprint 207")))))
+
+;; ("k" "kartaca"
+;;  (
+
+;;   (org-ql-block
+;;    '(and
+;;      (property "labels")
+;;      (regexp "^:labels:.*\\_<sprint_207\\_>")
+;;      (property "assignee" "Kuzey Koç"))
+;;    ((org-ql-block-header "\n🔨  Kuzey Koç")))
+
+;;   (org-ql-block
+;;    '(and
+;;      (property "labels")
+;;      (regexp "^:labels:.*\\_<sprint_207\\_>"))
+;;    ((org-ql-block-header "\nCORE Sprint 207")
+;;     (org-agenda-sorting-strategy '(todo-state-up)))) ;; sort by todo state. follows your task label order in org-todo-keywords variable
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>")
+  ;;    (property "assignee" "Uğur Doğan"))
+  ;;  ((org-ql-block-header "\nCORE: Uğur Doğan")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>")
+  ;;    (property "assignee" "Melih Kuru"))
+  ;;  ((org-ql-block-header "\nCORE: Melih Kuru")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>")
+  ;;    (property "assignee" "Ali Büyükmedar"))
+  ;;  ((org-ql-block-header "\nCORE: Ali Büyükmedar")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>")
+  ;;    (property "assignee" "Ali Büyükmedar"))
+  ;;  ((org-ql-block-header "\nCORE: Hüseyin Karagöz")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>")
+  ;;    (property "assignee" "Cüneyt Özbilen")
+  ;;    (not (property "components" "Toplantı"))
+  ;;    )
+  ;;  ((org-ql-block-header "\nCORE: Cüneyt Özbilen")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>")
+  ;;    (property "components" "Toplantı"))
+  ;;  ((org-ql-block-header "\nCORE: Meetings")))
+
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_f141\\_>"))
+  ;;  ((org-ql-block-header "\nGOLD Sprint 141")))
+
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_f141\\_>")
+  ;;    (property "assignee" "Halil Akkaynak"))
+  ;;  ((org-ql-block-header "\nGOLD: Halil Akkaynak")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_f141\\_>")
+  ;;    (property "assignee" "Burak Demiröz"))
+  ;;  ((org-ql-block-header "\nGOLD: Burak Demiröz")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_f141\\_>")
+  ;;    (property "assignee" "Cüneyt Özbilen")
+  ;;    (not (property "components" "Toplantı"))
+  ;;    )
+  ;;  ((org-ql-block-header "\nGOLD: Cüneyt Özbilen")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_f141\\_>")
+  ;;    (property "components" "Toplantı"))
+  ;;  ((org-ql-block-header "\nGOLD: Meetings")))
+
+  ;; (org-ql-block
+  ;;  '(property "assignee" "Kuzey Koç")
+  ;;  ((org-ql-block-header "\n🔨 Assigned to Me")))
+
+  ))
+
+;; ("j" "jira"
+;;  (
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>"))
+  ;;  ((org-ql-block-header "core sprint 207")
+  ;;   (org-agenda-prefix-format
+  ;;    '((todo . " %(my/org-agenda-assignee-prefix)")))))
+
+  ;; gold
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_f141\\_>")
+  ;;    (property "assignee" "john doe"))
+  ;;  ((org-ql-block-header "fintech sprint 141 (kuzey koç)")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_f141\\_>")
+  ;;    (not (property "assignee" "kuzey koç")))
+  ;;  ((org-ql-block-header "\nfintech sprint 141")))
+
+  ;; ;; core
+  ;; (org-ql-block
+  ;;  '(and (property "id") (not (property "id")))
+  ;;  ((org-ql-block-header "core sprint 207")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>")
+  ;;    (property "assignee" "kuzey koç"))
+  ;;  ((org-ql-block-header "  kuzey koç")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>")
+  ;;    (property "assignee" "uğur doğan"))
+  ;;  ((org-ql-block-header "  uğur doğan")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>")
+  ;;    (property "assignee" "melih kuru"))
+  ;;  ((org-ql-block-header "  melih kuru")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>")
+  ;;    (property "assignee" "hüseyin karagöz"))
+  ;;  ((org-ql-block-header "  hüseyin karagöz")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>")
+  ;;    (not (property "assignee" "kuzey koç")))
+  ;;  ((org-ql-block-header "core sprint 207")))
+
+ ;; (org-ql-block
+ ;;   '(property "assignee" "uğur doğan")
+ ;;   ((org-ql-block-header "uğur doğan")))
+
+  ;; (org-ql-block
+  ;;  '(property "assignee" "kuzey koç")
+  ;;  ((org-ql-block-header "kuzey koç")))
+
+  ;; (org-ql-block
+  ;;  '(property "assignee" "burak demiröz")
+  ;;  ((org-ql-block-header "burak demiröz"))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_207\\_>"))
+  ;;  ((org-ql-block-header "core sprint 207")))
+
+  ;; (org-ql-block
+  ;;  '(and
+  ;;    (property "labels")
+  ;;    (regexp "^:labels:.*\\_<sprint_f141\\_>"))
+  ;;  ((org-ql-block-header "\nfintech sprint 141")))
+
+  ;; (agenda ""
+  ;;         ((org-agenda-span 1)
+  ;;          (org-agenda-start-day "0d"))))
+ ;;  )
+ ;; )
+
+
+;; ("k" "kartaca work agenda"
+;;  (
+;;   (tags "+_job/DOING" ((org-agenda-overriding-header "󰌃  Active Jobs")))
+;;   (tags "+_job/NEXT" ((org-agenda-overriding-header "")))
+;;   (tags "+_job/WAIT" ((org-agenda-overriding-header "")))
+
+;;   (tags "-_job/DOING" ((org-agenda-overriding-header "\n 󱌣  Active Tasks ")))
+;;   (tags "-_job/NEXT" ((org-agenda-overriding-header "")))
+;;   (tags "-_job/WAIT" ((org-agenda-overriding-header "")))
+
+;;   (agenda ""
+;;           (
+;;            (org-agenda-overriding-header (savolla/org-agenda-centered-header "󰃶  Today"))
+;;            (org-agenda-start-day "0d")
+;;            (org-agenda-span 1)
+;;            (org-deadline-warning-days 14)
+;;            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT")))
+;;            ))
+
+;;   ;; open jobs
+;;   (tags "+_job/JOB" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰌃  Open Jobs"))))
+
+;;   ;; open tasks
+;;   (tags "-_job/TODO" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Open Tasks"))))
+
+;;   ;; closed jobs
+;;   (tags "+_job/DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰌃  Closed Jobs"))))
+;;   (tags "+_job/CANCEL" ((org-agenda-overriding-header "")))
+
+;;   ;; closed tasks
+;;   (tags "-_job/DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Closed Tasks"))))
+;;   (tags "-_job/CANCEL" ((org-agenda-overriding-header "")))
+;;   )
+;;  ((org-agenda-tag-filter-preset '("+_work" "+kartaca")))
+;;  )
+;; ))
 
 (custom-set-faces!
   '(org-block :background unspecified)
@@ -601,6 +1008,14 @@
 (run-with-idle-timer 5 t #'garbage-collect)
 
 ;; org roam ql
+
+;; d2 org mode
+(use-package! d2-mode
+  :mode "\\.d2\\'"
+  :config
+  ;; only needed if d2 isn't on PATH
+  ;; (setq d2-location "/usr/local/bin/d2")
+  )
 
 ;; org-fc
 (use-package! org-fc
@@ -894,10 +1309,14 @@ Inherits the heading level from the previous heading."
 (map! :leader :desc "scheduled"    "j i a w t s"  #'savolla/org-insert-agenda-work-scheduled)
 (map! :leader :desc "deadline"     "j i a w t d"  #'savolla/org-insert-agenda-work-deadline)
 
-(map! :leader :desc "sync position"  "j n" #'org-noter-sync-current-note)
-(map! :leader :desc "journal entry" "j j" #'savolla/org-insert-journal-entry)
+(map! :leader :desc "sync position" "j n" #'org-noter-sync-current-note)
+;; (map! :leader :desc "journal entry" "J" #'savolla/org-insert-journal-entry)
 (map! :leader :desc "select window" "f w" #'ace-window)
 (map! :leader :desc "select window" "w w" #'evil-window-mru)
+
+;; org-jira bindings
+(map! :leader :desc "browse issue" "j j o" #'org-jira-browse-issue)
+(map! :leader :desc "update issues" "j j U" #'org-jira-get-issues-from-custom-jql)
 
 ;; add new line on save (for sonarqube)
 (setq-default require-final-newline t)

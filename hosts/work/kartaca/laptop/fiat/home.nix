@@ -11,6 +11,7 @@
 
 # for android emulator
 let
+
   dwmFlexipatch = stable.stdenv.mkDerivation {
     pname = "dwm-flexipatch";
     version = "6.8";
@@ -220,6 +221,25 @@ in
         fi
       '';
 
+      # fix acli (atlassian-cli) command's ubuntu apparmor permissions when using bwrap.
+      # remove or comment out this if you remove "acli" command from system packages
+      fixUbuntuApparmorBwrap = let
+        bwrapProfile = pkgs.writeText "bwrap-apparmor-profile" ''
+          abi <abi/4.0>,
+          include <tunables/global>
+
+          profile bwrap /nix/store/*/bin/bwrap flags=(unconfined) {
+            userns,
+            include if exists <local/bwrap>
+          }
+        '';
+      in lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        if ! /usr/bin/sudo cmp -s ${bwrapProfile} /etc/apparmor.d/bwrap; then
+          /usr/bin/sudo cp ${bwrapProfile} /etc/apparmor.d/bwrap
+          /usr/bin/sudo apparmor_parser -r /etc/apparmor.d/bwrap
+        fi
+      '';
+
       # stowDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       #   echo "stowing dotfiles"
       #   ${pkgs.stow}/bin/stow -t $HOME -d "$HOME/project/dev/nazg/hosts/work/kartaca/laptop/fiat" dotfiles
@@ -292,6 +312,11 @@ in
     with pkgs;
     [
 
+      # install gcloud with some plugins enabled
+      (google-cloud-sdk.withExtraComponents [
+        google-cloud-sdk.components.gke-gcloud-auth-plugin
+      ])
+
       unstable.pcsclite # for yubikey
       unstable.qutebrowser # qutebrowser with nixGL
       unstable.libnotify # for qutebrowser notification fix?
@@ -317,6 +342,8 @@ in
       stable.skim # faster fzf written in rust
       stable.gum # tasty interactive script creator
       stable.psmisc # optional dependency for fzf-tmux
+
+      stable.thttpd # for encoding strings with bcrypt
 
       # doom emacs dependencies
       stable.emacs-lsp-booster # for eglot
@@ -353,6 +380,7 @@ in
       stable.pwgen # create secure passwords
 
       # other
+      stable.pandoc
       stable.qrencode
       stable.mc # midnight commander (mostly because it supports sftp, ftp, smb etc.)
 
@@ -361,6 +389,8 @@ in
       stable.direnv # execute commands once you enter into a directory
       stable.fish # better zsh (make it your daily driver one day)
       stable.fishPlugins.done # get notified when jobs finish
+      stable.fishPlugins.sponge # get rid of typos in history
+      stable.fishPlugins.autopair # pair quotes
 
       # devops
       ## devops/database
@@ -406,6 +436,12 @@ in
       # datree # ensure K8s manifests and Helm charts follow best practices
       kubectl-doctor # get k8s diagnostics
       k8sgpt # llm for k8s
+      headlamp # view k8s cluster
+      d2 # diagrams as code for terminal
+      playwright-driver # for d2 to compile from org mode
+
+      bubblewrap # nix bwrap
+
       dyff # better yaml file differ
       ktop # monitor kubernetes node usage
       kubeconform
@@ -483,7 +519,9 @@ in
       nixos-generators # create various images from nixos configuration files
       mkpasswd # gene rate hashes
       lazyssh # ssh but lazy
-      jiratui # tui version of jira
+      # jiratui # tui version of jira
+      # acli # atlassian's official command line tool for jira, confluence and bitbucket etc.
+      jira-cli-go
       regex-tui # try regex interactively
       cloudlens # k9s but for cloud aws gcp (broken at the time)
       yq # jq on steroids
@@ -512,6 +550,7 @@ in
       steam-run # fhs for programs
       k6 # test
       ggh # ssh session manager
+      lorien # infinite canvas drawing tool
 
       # devops/cac
       # ansible # installed from apt for kubespray to work...
@@ -565,8 +604,8 @@ in
 
       # zellij (trying to migrate to this gem)
       zellij # tmux alternative
-      # zellijPlugins.zjstatus # awesome status bar for zellij
-      # zellijPlugins.zframes # awesome status bar for zellij
+      # zellijplugins.zjframes # awesome status bar for zellij
+      # zellijplugins.zframes # awesome status bar for zellij
       sampler # better wtfutil
 
       # zsh
@@ -654,7 +693,6 @@ in
 
       banner
       # testing
-      jmeter # testing framework
       pulseaudioFull
 
       # programming/languages
@@ -664,6 +702,8 @@ in
       gotools # go tools for development
       gotests
       gomodifytags
+
+      appimage-run
 
     ]
     ++ (with stable; [
