@@ -201,9 +201,17 @@
   ;; custom jira queries
   (setq org-jira-custom-jqls
         '(
-          (:jql "project = BIRD AND labels in (sprint_207, sprint_f141) OR assignee = currentUser()"
+          (:jql "project = BIRD AND labels in (sprint_207, sprint_f141)"
            :limit 1000
            :filename "jira")
+
+          (:jql "assignee = 'Emrah Nizam'"
+           :limit 1000
+           :filename "emrah_nizam")
+
+          (:jql "assignee = currentUser()"
+           :limit 1000
+           :filename "kuzey_koc")
           ))
   )
 
@@ -383,6 +391,7 @@
 
   (map! :map dired-mode-map
         :n "DEL" #'dired-omit-mode        ; backspace = toggle hidden files
+        :n "SPC" #'dired-toggle-marks   ; space = select item
         ))
 
 ;; irc
@@ -527,15 +536,15 @@
   (add-to-list 'org-modules 'org-habit)
   ;; (setq org-habit-graph-column 100)
   ;; (setq org-habit-following-days 3)
-  (setq org-habit-show-all-today t)
+  (setq org-habit-show-all-today t) ;; show completed habits in agenda (for consistency graph)
   ;; (setq +org-habit-graph-window-ratio 0.3)
   ;; (setq +org-habit-graph-padding 0)
   ;; (setq org-habit-preceding-days 14)
   (setq org-todo-keywords
         '((sequence
            ;; "TODO(t)" "READ(r)" "IN-PROGRESS" "DOING(o!)" "NEXT(n)" "LATER(l@/!)" "WAIT(w@/!)" "EVENT(e)" "JOB(j)" "BIRTHDAY(b)" "HABIT(h)" "|"
-           "LATER(l!)" "TODO(t)" "NEXT(n!)" "IN-PROGRESS(i!)" "DOING(o!)" "IN-BACKGROUND(b!)" "HABIT(h)" "WAIT(w!)" "|"
-           "DONE(d!)" "CANCEL(c!)"
+           "TODO(t)" "NEXT(n!)" "IN-PROGRESS(i!)" "DOING(o!)" "IN-BACKGROUND(b!)" "HABIT(h)" "WAIT(w!@)" "WORKLOG(W)" "|"
+           "DONE(d!@)" "CANCEL(c!)" "LATER(l!)"
            )))
 
   (setq org-todo-keyword-faces
@@ -547,6 +556,7 @@
           ("DOING"           . (:foreground "#FFFFFF" :background "#FF0000" :weight bold)) ;; light red
           ("WAIT"            . (:foreground "#FF00FF" :weight bold)) ;; magenta
           ("HABIT"           . (:foreground "#00ffff" :weight bold))
+          ("WORKLOG"         . (:foreground "#6C8B3C" :weight bold)) ;; dollar green
           ("DONE"            . (:foreground "#666666" :weight bold)) ;; gray
           ("CANCEL"          . (:foreground "#666666" :weight bold)) ;; gray
           ;; ("READ"            . (:foreground "#D6BE87" :weight bold))
@@ -708,7 +718,18 @@
 (setq org-latex-src-block-backend 'engraved) ;; syntax highlighting for code blocks in pdfs
 
 ;; org-agenda
-(setq org-scheduled-past-days 7) ;; stop displaying scheduled tasks after 7 days..
+;; (setq org-scheduled-past-days 7) ;; stop displaying scheduled tasks after 7 days..
+(setq org-agenda-skip-scheduled-if-done t) ;; hide scheduled item from agenda if done
+
+(defun my/org-agenda-skip-non-repeating-non-habit ()
+  "Skip entry if it has no repeater, OR if it's a habit."
+  (let ((scheduled (org-entry-get nil "SCHEDULED"))
+        (deadline (org-entry-get nil "DEADLINE"))
+        (is-habit (string= (org-entry-get nil "STYLE") "habit")))
+    (if (or is-habit
+            (not (or (and scheduled (string-match-p org-repeat-re scheduled))
+                      (and deadline (string-match-p org-repeat-re deadline)))))
+        (org-end-of-subtree t))))
 
 (defun savolla--org-dailies-file-p ()
   "Return non-nil if the current buffer's file lives under org-roam-dailies-directory."
@@ -796,7 +817,7 @@ Returns 1 if A should sort above B, -1 if below, nil if equal/missing."
 
 ;; (setq org-agenda-start-with-log-mode t) ;; creates too much noice in agenda. (maybe enable later)
 ;; (setq org-agenda-start-with-clockreport-mode t)
-(setq org-agenda-files '("~/resource/notes/org/roam/agenda/tasks"))
+;; (setq org-agenda-files '("~/resource/notes/org/roam/agenda/tasks"))
 (setq org-log-into-drawer t)
 (setq system-time-locale "C")
 (setq org-agenda-current-time-string " 🔴 NOW ")
@@ -824,87 +845,213 @@ Returns 1 if A should sort above B, -1 if below, nil if equal/missing."
 (setq org-agenda-custom-commands
       '(
 
-("b" "agenda"
+ ("a" "all agendas at once"
  (
-  (todo "DOING|NEXT|WAIT" ((org-agenda-overriding-header " 󱌣  Currently Working (ALL)")))
-  (agenda ""
-          ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰃶  Today"))
-           (org-agenda-start-day "0d") ; start from today
-           (org-agenda-span 1) ; display 2 weeks
-           (org-deadline-warning-days 14) ; remind upcoming deadlines before 2 weeks
-           (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING"))) ;; skip if it's a DOING task
-           ))
-  (todo "TODO" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Todo"))))
-  (todo "DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Done"))))
-  (todo "CANCEL" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰜺  Canceled"))))
-  )
- )
+  ;; All Work Stacks
+  (todo "DOING|NEXT|IN-PROGRESS|IN-BACKGROUND"
+        (
+         (org-agenda-overriding-header " 󰣪  Work Stack (ALL)")
+         (org-agenda-sorting-strategy '(todo-state-up))
+         (org-agenda-files
+          (seq-filter #'file-exists-p
+                      (list
+                       (expand-file-name "~/resource/notes/org/roam/agenda/tasks")
+                       (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca")
+                       )))
+         )
+        )
 
-("p" "personal agenda"
- (
-  (todo "DOING|NEXT|WAIT" ((org-agenda-overriding-header " 󱌣  Currently Working (personal)")))
+  ;; all waiting tasks
+  (todo "WAIT"
+        (
+         (org-agenda-overriding-header "\n 󰚭 Waiting (ALL)")
+         (org-agenda-files
+          (seq-filter #'file-exists-p
+                      (list
+                       (expand-file-name "~/resource/notes/org/roam/agenda/tasks")
+                       (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca")
+                       )))
+         (org-agenda-sorting-strategy '(todo-state-down))))
+
+  ;; Agenda for All
   (agenda ""
           ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰃶  Today"))
            (org-agenda-start-day "0d") ; start from today
            (org-agenda-span 1) ; display current day only
            (org-deadline-warning-days 14) ; remind upcoming deadlines before 2 weeks
+           (org-agenda-files
+            (seq-filter #'file-exists-p
+                        (list
+                         (expand-file-name "~/resource/notes/org/roam/agenda/tasks")
+                         (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca")
+                         )))
            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT")))
            ))
 
-  ;; (todo "READ" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Reading"))))
+  ;; All Tasks
   (todo "TODO"
-        ((org-agenda-overriding-header (savolla/org-agenda-centered-header "Backlog (Latest on Top)"))
+        ((org-agenda-overriding-header "\n   All Tasks (Latest on Top)")
          (org-agenda-cmp-user-defined #'savolla/org-agenda-cmp-created)
-         (org-agenda-sorting-strategy '(user-defined-down))
+         (org-agenda-sorting-strategy '(user-defined-down todo-state-down))
          (org-agenda-skip-function
-          '(org-agenda-skip-entry-if 'scheduled 'deadline))
-         ))
-  ;; (todo "DONE" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "  Done"))))
-  ;; (todo "CANCEL" ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰜺  Canceled"))))
+          '(org-agenda-skip-entry-if 'scheduled 'deadline)) ;; hide all scheduled and deadline tasks
+         (org-agenda-files
+          (seq-filter #'file-exists-p
+                      (list
+                       (expand-file-name "~/resource/notes/org/roam/agenda/tasks")
+                       (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca"))))))
+
+  (todo "TODO"
+        ((org-agenda-overriding-header "\n   All Periodic Tasks")
+         (org-agenda-cmp-user-defined #'savolla/org-agenda-cmp-created)
+         (org-agenda-sorting-strategy '(user-defined-down todo-state-down))
+         (org-agenda-skip-function #'my/org-agenda-skip-non-repeating-non-habit)
+         (org-agenda-files
+          (seq-filter #'file-exists-p
+                      (list
+                       (expand-file-name "~/resource/notes/org/roam/agenda/tasks")
+                       (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca"))))))
+
   )
- ((org-agenda-tag-filter-preset '("+_personal")))
+ )
+
+("p" "personal work agenda"
+ (
+
+  ;; Personal Work Stack
+  (todo "DOING|NEXT|IN-PROGRESS|IN-BACKGROUND"
+        (
+         (org-agenda-overriding-header " 󰣪  Work Stack (PERSONAL)")
+         (org-agenda-sorting-strategy '(todo-state-up))
+         (org-agenda-files
+          (file-expand-wildcards
+           (expand-file-name "~/resource/notes/org/roam/agenda/tasks/personal.org")))
+         )
+        )
+
+  ;; Personal Waiting Tasks
+  (todo "WAIT"
+        (
+         (org-agenda-overriding-header "\n 󰚭 Waiting (Today)")
+         (org-agenda-files
+          (file-expand-wildcards
+           (expand-file-name "~/resource/notes/org/roam/agenda/tasks/personal.org")))
+         (org-agenda-sorting-strategy '(todo-state-down))))
+
+  ;; Personal Today
+  (agenda ""
+          ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰃶  Today"))
+           (org-agenda-start-day "0d") ; start from today
+           (org-agenda-span 1) ; display current day only
+           (org-deadline-warning-days 14) ; remind upcoming deadlines before 2 weeks
+           (org-agenda-files
+            (file-expand-wildcards
+             (expand-file-name "~/resource/notes/org/roam/agenda/tasks/personal.org")))
+           (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT")))
+           ))
+
+  ;; All Personal Tasks
+  (todo "TODO"
+        (
+         (org-agenda-overriding-header "\n   All Personal Tasks")
+         (org-agenda-cmp-user-defined #'savolla/org-agenda-cmp-created)
+         (org-agenda-sorting-strategy '(user-defined-down todo-state-down))
+         (org-agenda-skip-function
+          '(org-agenda-skip-entry-if 'scheduled 'deadline)) ;; hide all scheduled and deadline tasks
+         (org-agenda-files
+          (file-expand-wildcards
+           (expand-file-name "~/resource/notes/org/roam/agenda/tasks/personal.org")))
+         )
+        )
+
+  ;; deadlines and scheduled items
+  ;; All Personal Tasks
+  (todo "TODO"
+        (
+         (org-agenda-overriding-header "\n   All Scheduled Tasks")
+         (org-agenda-cmp-user-defined #'savolla/org-agenda-cmp-created)
+         (org-agenda-sorting-strategy '(user-defined-down todo-state-down))
+         (org-agenda-skip-function
+          '(org-agenda-skip-entry-if 'scheduled 'deadline)) ;; hide all scheduled and deadline tasks
+         (org-agenda-files
+          (file-expand-wildcards
+           (expand-file-name "~/resource/notes/org/roam/agenda/tasks/personal.org")))
+         )
+        )
+
+  (todo "TODO"
+        ((org-agenda-overriding-header "\n   Personal Periodic Tasks")
+         (org-agenda-cmp-user-defined #'savolla/org-agenda-cmp-created)
+         (org-agenda-sorting-strategy '(user-defined-down todo-state-down))
+         (org-agenda-skip-function #'my/org-agenda-skip-non-repeating-non-habit)
+         (org-agenda-files
+          (seq-filter #'file-exists-p
+                      (list
+                       (expand-file-name "~/resource/notes/org/roam/agenda/tasks")
+                       )))))
+  )
  )
 
 ("k" "kartaca work agenda"
  (
-
+  ;; Kartaca Work Stack
   (todo "DOING|NEXT|IN-PROGRESS|IN-BACKGROUND"
         (
-         (org-agenda-overriding-header " 󰣪  Work Stack (Today)")
+         (org-agenda-overriding-header " 󰣪  Work Stack (KARTACA)")
          (org-agenda-sorting-strategy '(todo-state-up))
-         (org-agenda-skip-function
-          '(org-agenda-skip-entry-if 'regexp ":filename: jira")
-          )
+         (org-agenda-files
+          (file-expand-wildcards
+           (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca")))
          )
         )
 
+  ;; Kartaca Wait
   (todo "WAIT"
         (
          (org-agenda-overriding-header "\n 󰚭 Waiting (Today)")
+         (org-agenda-files
+          (file-expand-wildcards
+           (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca")))
+           ;; (expand-file-name (format-time-string "~/resource/notes/org/roam/journal/%Y-%m-%d.org"))))
          (org-agenda-sorting-strategy '(todo-state-down))))
 
+  ;; Kartaca Today
   (agenda ""
-          ((org-agenda-overriding-header (savolla/org-agenda-centered-header " 󰃶  Schedule "))
-           (org-agenda-start-day nil)
-           (org-agenda-span 1)
-           (org-deadline-warning-days 14)
+          ((org-agenda-overriding-header (savolla/org-agenda-centered-header "󰃶  Today"))
+           (org-agenda-start-day "0d") ; start from today
+           (org-agenda-span 1) ; display current day only
+           (org-deadline-warning-days 14) ; remind upcoming deadlines before 2 weeks
            (org-agenda-files
             (file-expand-wildcards
-             (expand-file-name "~/resource/notes/org/roam/agenda/tasks/personal.org")))
-           (org-agenda-skip-function
-            '(or (org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT" "IN-PROGRESS"))
-                 (org-agenda-skip-entry-if 'notregexp ":\\(@agenda\\|kartaca\\|_work\\):")))
+             (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca/kartaca.org")))
+           (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DOING" "DONE" "CANCEL" "NEXT")))
            ))
-  )
 
- ;; 3. GENERAL SETTINGS
- ;; FIX 2 & 3: Placed here, this applies to BOTH blocks above.
- ;; `seq-filter` ensures it silently ignores the journal file if it doesn't exist yet.
- ((org-agenda-files
-   (seq-filter #'file-exists-p
-               (list
-                (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca/jira.org")
-                (expand-file-name (format-time-string "~/resource/notes/org/roam/journal/%Y-%m-%d.org"))))))
+  ;; All Kartaca Tasks
+  (todo "TODO"
+        (
+         (org-agenda-overriding-header "\n   All Kartaca Tasks")
+         (org-agenda-cmp-user-defined #'savolla/org-agenda-cmp-created)
+         (org-agenda-sorting-strategy '(user-defined-down todo-state-down))
+         (org-agenda-skip-function
+          '(org-agenda-skip-entry-if 'scheduled 'deadline)) ;; hide all scheduled and deadline tasks
+         (org-agenda-files
+          (file-expand-wildcards
+           (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca")))
+         )
+        )
+
+  (todo "TODO"
+        ((org-agenda-overriding-header "\n   Kartaca Periodic Tasks")
+         (org-agenda-cmp-user-defined #'savolla/org-agenda-cmp-created)
+         (org-agenda-sorting-strategy '(user-defined-down todo-state-down))
+         (org-agenda-skip-function #'my/org-agenda-skip-non-repeating-non-habit)
+         (org-agenda-files
+          (seq-filter #'file-exists-p
+                      (list
+                       (expand-file-name "~/resource/notes/org/roam/agenda/tasks/kartaca")
+                       )))))
+  )
  )
 ))
 
@@ -968,11 +1115,13 @@ If the typed value doesn't match an existing node, insert plain text instead."
                       "#+title: %<%Y-%m-%d>\n\n"
                       ;; "#+BEGIN: clocktable :scope agenda :tstart \"<%<%Y-%m-%d> 00:00>\" :tend \"<%<%Y-%m-%d> 23:59>\" :maxlevel 2 :link t\n"
                       ;; "#+END:\n\n"
+
                       "* WORK\n"
-                      "#+BEGIN: clocktable :scope (\"~/area/sync/roam/agenda/tasks/kartaca/kartaca.org\") :hidefiles t :compact nil :formula nil :tstart \"<2026-08-02 00:00>\" :tend \"<2026-08-02 23:59>\" :maxlevel 2 :link t :narrow 80\n"
+                      "#+BEGIN: clocktable :scope (lambda () (directory-files-recursively \"~/area/sync/roam/agenda/tasks/kartaca/\" \"\\.org$\")) :hidefiles t :compact nil :formula nil :tstart \"<%<%Y-%m-%d> 00:00>\" :tend \"<%<%Y-%m-%d> 23:59>\" :maxlevel 2 :link t :narrow 75"
                       "#+END:\n"
+
                       "* PERSONAL\n"
-                      "#+BEGIN: clocktable :scope (\"~/area/sync/roam/agenda/tasks/personal.org\") :hidefiles t :compact nil :formula nil :tstart \"<2026-08-02 00:00>\" :tend \"<2026-08-02 23:59>\" :maxlevel 2 :link t :narrow 80\n"
+                      "#+BEGIN: clocktable :scope (\"~/area/sync/roam/agenda/tasks/personal.org\") :hidefiles t :compact nil :formula nil :tstart \"<%<%Y-%m-%d> 00:00>\" :tend \"<%<%Y-%m-%d> 23:59>\" :maxlevel 2 :link t :narrow 75\n"
                       "#+END:\n"
                       ))
            :add-id t)
@@ -991,7 +1140,7 @@ If the typed value doesn't match an existing node, insert plain text instead."
                     ":CREATED: %U\n"
                     ":ROAM_ALIASES: %^{Alias}\n"
                     ":PHONE: %^{Phone}\n"
-                    ":JOB: %^{Job||devops|qa|developer|barber|teacher|designer|}\n"
+                    ":JOB: %^{Job||devops|qa|developer|barber|ba|teacher|designer|}\n"
                     ":ORGANIZATION: %(savolla--org-roam-link-by-tags '(\"@agenda\" \"_organization\") \"Organization/Company\" t)\n"
                     ":CITY: %(savolla--org-roam-link-by-tags '(\"@agenda\" \"_city\") \"City\" t)\n"
                     ":ADDRESS: %^{Address}\n"
@@ -1596,7 +1745,7 @@ Inherits the heading level from the previous heading."
        ;; Right: agenda
        (setq agenda-window (split-window-right))
        (select-window agenda-window)
-       (org-agenda nil "p")
+       (org-agenda nil "a") ;; open all agendas on startup for overview
        (text-scale-set -1)
 
        ;; Back to journal
